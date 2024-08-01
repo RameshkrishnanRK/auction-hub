@@ -9,7 +9,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import kpmgImage from '../../assets/images/Auction.KPMGLogo_1_.svg';
-import './Header.scss'
+import styles from './Header.module.scss'
 import { Breadcrumbs } from '@mui/material';
 import { useLocation } from 'react-router-dom'
 import { Link } from 'react-router-dom';
@@ -42,13 +42,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create('width'),
-        [theme.breakpoints.up('sm')]: {
-            width: '12ch',
-            '&:focus': {
-                width: '20ch',
-            },
-        },
+       
     },
 }));
 export default function Header() {
@@ -59,8 +53,8 @@ export default function Header() {
     return (
         <>
             <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="relative" className="header-color">
-                    <Toolbar sx={{ marginTop: '10px' }}>
+                <AppBar  position="relative" className={styles.headerColor}>
+                    <Toolbar mt={3}>
                         <img alt="kpmg" src={kpmgImage} />
                     </Toolbar>
                     <Toolbar>
@@ -68,7 +62,7 @@ export default function Header() {
                             variant="h6"
                             noWrap
                             component="div"
-                            sx={{ display: { xs: 'none', sm: 'block' } }}
+                            className={styles.link}
                         >
                             <Link to="/">
                                 Home
@@ -77,8 +71,9 @@ export default function Header() {
                         <Typography
                             variant="h6"
                             noWrap
+                            className={styles.link}
                             component="div"
-                            sx={{ display: { xs: 'none', sm: 'block' }, marginLeft: '30px', textDecoration: 'none !important' }}
+                            ml={8}
                         >
                             <Link to="/browse">
                                 Browse
@@ -88,7 +83,8 @@ export default function Header() {
                             variant="h6"
                             noWrap
                             component="div"
-                            sx={{ display: { xs: 'none', sm: 'block' }, marginLeft: '30px' }}
+                            className={styles.link}
+                            ml={8}
                         >
 
                             <Link to="/sell">
@@ -96,32 +92,27 @@ export default function Header() {
                             </Link>
                         </Typography>
                         <Box sx={{ flexGrow: 1 }} />
-                        <Button sx={{ marginRight: '20px' }} color="inherit"><Link to="/sign-up">
+                        <Button mr={4} className={styles.link} color="inherit"><Link to="/sign-up">
                                 SignUp
                             </Link></Button>
-                        <Button sx={{ marginRight: '20px' }} color="inherit">
+                        <Button mr={4}  className={styles.link} color="inherit">
                         <Link to="/register">
                                 Register
                             </Link>
                         </Button>
-                        <Button color="inherit">
+                        <Button color="inherit"  className={styles.link}>
                         <Link to="/login">
                                 Login
                             </Link>
                         </Button>
                     </Toolbar>
-                    <Divider sx={{
-                        marginRight: 3,
-                        marginLeft: 3,
-                        borderColor: 'grey',
-                        borderWidth: '1px'
-                    }} />
+                    <Divider   lassName={styles.divider} />
                     <Toolbar>
                         <Typography
                             variant="h6"
                             noWrap
                             component="div"
-                            sx={{ display: { xs: 'none', sm: 'block' } }}
+                            className={styles.link}
                         >
                             <Link to="/contact-us">
                                 Contact Us
@@ -131,7 +122,8 @@ export default function Header() {
                             variant="h6"
                             noWrap
                             component="div"
-                            sx={{ display: { xs: 'none', sm: 'block' }, marginLeft: '30px' }}
+                            className={styles.link}
+                            ml={9}
                         >
                             <Link to="/about-us">
                                 About Us
@@ -147,7 +139,7 @@ export default function Header() {
                                 inputProps={{ 'aria-label': 'search' }}
                             />
                         </Search>
-                        <Button variant="contained" color="primary" sx={{ marginLeft: '10px' }}>
+                        <Button variant="contained" color="primary" className={styles.searchBtn}>
                             Search
                         </Button>
                     </Toolbar>

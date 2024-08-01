@@ -4,6 +4,7 @@ import Browse from '../features/Dashboard/Browse/Browse';
 import Home from '../components/home/Home';
 import AboutUs from '../components/aboutUs/AboutUs';
 import Layout from './components/Layout';
+import ContactUs from '../components/contactUs/ContactUs';
 
 const routes = () => {
     return (
@@ -13,6 +14,8 @@ const routes = () => {
                     <Route path='/' element={<Home />} />
                     <Route path='/browse' element={<Browse />} />
                     <Route path='/about-us' element={<AboutUs />} />
+                    <Route path='/contact-us' element={<ContactUs />} />
+
                     </Route>
                 </Routes>
         </Router>
