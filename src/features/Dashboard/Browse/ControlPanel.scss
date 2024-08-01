@@ -1,61 +1,9 @@
 .controlPanel {
-    padding: 10px;
-    background-color: #e6e6e6;
-    border-radius: 5px;
-
-    .viewToggleGroup {
-        background-color: #1768ac;
-
-        // .MuiButtonBase-root-MuiToggleButton-root{
-        // &:global(.MuiToggleButtonGroup-root) {
-        .MuiToggleButton-root {
-            min-width: 50%;
-            height: 40px;
-            background-color: red;
-            // background-color: #fff;
-            // color: #000;
-
-            // &.Mui-selected {
-            //     background-color: #1768ac !important;
-            //     color: #fff;
-            // }
-            // &:not(.Mui-selected) {
-            //     background-color: #fff;
-            //     color: #000;
-            // }
-            &.active {
-                background-color: #1768ac;
-                color: #fff;
-
-                &:first-of-type {
-                    background-color: #1768ac;
-                    color: #fff;
-                }
-
-                &:last-of-type {
-                    background-color: #fff;
-                    color: #1768ac;
-                }
-            }
-
-            &:not(.active) {
-                &:first-of-type {
-                    background-color: #fff;
-                    color: #1768ac;
-
-                }
-
-                &:last-of-type {
-                    background-color: #1768ac;
-                    color: #fff;
-                }
-            }
-        }
-    }
-
-    
-}
-.controlPanelSelect {
-    margin-left: 10px;
-    min-width: 200px;
+  border-radius: 4px;
+  background-color: #e6e6e6;
+  height: 61px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }

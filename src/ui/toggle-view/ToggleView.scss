@@ -1,0 +1,8 @@
+.viewToggleGroup {
+  .MuiToggleButton-root {
+    &.active {
+      background-color: #007bff;
+      color: white;
+    }
+  }
+}
