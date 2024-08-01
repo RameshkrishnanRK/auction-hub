@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { Collapse, Divider, List, ListItem, ListItemText, Paper, Typography } from "@mui/material";
+import { Collapse, List, ListItem, ListItemText, Paper, Typography } from "@mui/material";
 import styles from './Sidebar.module.scss'
 
 

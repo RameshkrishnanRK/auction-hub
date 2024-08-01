@@ -10,7 +10,6 @@ import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import kpmgImage from '../../assets/images/Auction.KPMGLogo_1_.svg';
 import './Header.scss'
-import { MENUS_LIST } from '../../constants/constants';
 import { Breadcrumbs } from '@mui/material';
 import { useLocation } from 'react-router-dom'
 import { Link } from 'react-router-dom';
