@@ -106,7 +106,7 @@ export default function Header() {
                             </Link>
                         </Button>
                     </Toolbar>
-                    <Divider   lassName={styles.divider} />
+                    <Divider   className={styles.divider} />
                     <Toolbar>
                         <Typography
                             variant="h6"
