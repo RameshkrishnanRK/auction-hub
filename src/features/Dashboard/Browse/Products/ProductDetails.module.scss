@@ -1,3 +1,154 @@
 .ViewProductDetails {
+    margin: auto 150px;
+    padding: 20px;
 
+    .productDetailsWrapper {
+        border: 1px solid grey;
+        padding: 20px;
+        margin: 20px 0;
+        position: relative;
+
+        .watchListAlert {
+            position: absolute;
+            top: -20px;
+            left: 0;
+            right: 0;
+        }
+
+        .productMain {
+
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+
+            .productImage {
+                max-width: 300px;
+                margin-right: 20px;
+            }
+
+            .productDetails {
+                flex: 1;
+
+                .productTitle {
+                    margin-bottom: 10px;
+
+                }
+
+                .productInfo {
+                    display: flex;
+                    justify-content: space-between;
+
+                    .productInfoLeft {
+                        flex: 1;
+                        display: flex;
+                        flex-direction: column;
+
+                        .quickBidBtn {
+                            margin: 10px 0;
+
+                        }
+
+                        .bidSection {
+                            display: flex;
+                            align-items: center;
+                            margin-bottom: 10px;
+
+                            .bidInput {
+                                margin-right: 10px;
+
+                            }
+
+                            .submitBidBtn {
+                                height: fit-content;
+
+                            }
+                        }
+
+                        .orText {
+                            display: flex;
+                            align-items: center;
+                            margin: 10px 0;
+
+                        }
+
+                        .buyNowBtn {
+                            margin-bottom: 10px;
+
+                        }
+
+                        .makeOfferButton {
+                            margin-bottom: 10px;
+
+                        }
+
+                        .remainingTime {
+                            margin-top: 10px;
+                        }
+                    }
+
+                    .productInfoRight {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        margin-bottom: 20px;
+
+                        .watchListBox .highBidderBox {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: flex-start;
+                            margin-bottom: 10px;
+
+                            .addWatchListBtn {
+                                margin-top: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .productExtraInfo {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+
+            >* {
+                margin-bottom: 5px;
+            }
+
+        }
+    }
+}
+
+@media (max-width:768px) {
+    .productMain {
+        flex-direction: column;
+        
+        .product-image {
+            max-width: 100%;
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
+        .productInfo {
+            flex-direction: column;
+        }
+        .productInfoLeft .productInfoRight {
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
+        .or-text {
+            flex-direction: column;
+            text-align: center;
+
+            span {
+                margin: 10px 0;
+            }
+
+            hr {
+                display: none;
+            }
+        }
+    }
 }
