@@ -80,7 +80,7 @@ export default function Header() {
                             component="div"
                             sx={{ display: { xs: 'none', sm: 'block' }, marginLeft: '30px', textDecoration: 'none !important' }}
                         >
-                            <Link to="/browse">
+                            <Link to="/auction/dashboard">
                                 Browse
                             </Link>
                         </Typography>

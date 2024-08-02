@@ -1,6 +1,6 @@
 export const products = [
     {
-        id: 1,
+        id: 0,
         image: process.env.PUBLIC_URL + '/images/Car.png',
         title: '2017 Maruti Car',
         currentBid: 100000,
@@ -8,7 +8,7 @@ export const products = [
         isExpired: true
     },
     {
-        id: 2,
+        id: 1,
         image: process.env.PUBLIC_URL + '/images/Laptop.png',
         title: '2021 LG Laptop',
         currentBid: 2000,
@@ -16,7 +16,7 @@ export const products = [
         isExpired: false
     },
     {
-        id: 3,
+        id: 2,
         image: process.env.PUBLIC_URL + '/images/Mobile.png',
         title: '2015 Samsung Mobile',
         currentBid: 2500,
