@@ -6,6 +6,7 @@ import AboutUs from '../components/aboutUs/AboutUs';
 import Layout from './components/Layout';
 import { products } from '../features/Dashboard/Browse/data';
 import ProductDetails from '../features/Dashboard/Browse/Products/ProductDetails';
+import ContactUs from '../components/contactUs/ContactUs';
 
 const routes = () => {
     return (
@@ -16,6 +17,8 @@ const routes = () => {
                     <Route path='/auction/dashboard' element={<Browse products={products}/>} />
                     <Route path='/about-us' element={<AboutUs />} />
                     <Route path='/auction/product-details' element={<ProductDetails products={products}/>} />
+                    <Route path='/contact-us' element={<ContactUs />} />
+
                     </Route>
                 </Routes>
         </Router>
