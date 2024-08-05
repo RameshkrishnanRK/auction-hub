@@ -12,6 +12,7 @@ const routes = () => {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/auction/home" element={<Home />} />
         <Route path="/auction/login" element={<LoginPage />} />
         <Route path="/auction/dashboard" element={<Browse />} />

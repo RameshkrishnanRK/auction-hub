@@ -28,19 +28,19 @@ const Sidebar = ({ categories, regions }) => {
                                 </ListItem>
                                 {/* <Collapse in={expandedIndex === index} timeout="auto" unmountOnExit>
                                         <List component="div" disablePadding>
-                                            {category.subcatagories.map((subcatagory, subIndex) => (
+                                            {category.subcategories.map((subcategory, subIndex) => (
                                                 <ListItem key={subIndex}  style={{paddingLeft: 32}} className={styles.nested}>
-                                                    <ListItemText primary={subcatagory} />
+                                                    <ListItemText primary={subcategory} />
                                                 </ListItem>
                                             ))}
                                         </List>
                                     </Collapse> */}
-                                {category.subcatagories && (
+                                {category.subcategories && (
                                     <Collapse in={openCategories[category.name]} timeout="auto" unmountOnExit>
                                         <List component="div" disablePadding>
-                                            {category.subcatagories.map((subcatagory, subIndex) => (
+                                            {category.subcategories.map((subcategory, subIndex) => (
                                                 <ListItem key={subIndex} className={styles.nested}>
-                                                    <ListItemText primary={subcatagory} />
+                                                    <ListItemText primary={subcategory} />
                                                 </ListItem>
                                             ))}
                                         </List>
