@@ -18,7 +18,7 @@ const ContentContainer = styled(Container)({
 const About = () => {
   return (
     <MainContainer>
-      <ContentContainer>
+      <ContentContainer className={styles.mainContainer}>
         <Box mt={8}>
           <Typography p={2} className={styles.title} gutterBottom >
             About Us

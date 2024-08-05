@@ -6,6 +6,7 @@ import AboutUs from '../components/aboutUs/AboutUs';
 import Layout from './components/Layout';
 import ProductDetails from '../features/Dashboard/Browse/Products/ProductDetails';
 import ContactUs from '../components/contactUs/ContactUs';
+import Sell from '../components/sell/Sell'
 
 const routes = () => {
     return (
@@ -17,6 +18,8 @@ const routes = () => {
                     <Route path='/about-us' element={<AboutUs />} />
                     <Route path='/auction/product-details' element={<ProductDetails />} />
                     <Route path='/contact-us' element={<ContactUs />} />
+                    <Route path='/sell' element={<Sell />} />
+
 
                     </Route>
                 </Routes>
