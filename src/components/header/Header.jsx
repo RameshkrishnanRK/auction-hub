@@ -84,12 +84,6 @@ export default function Header() {
               <Link to="/auction/sell">Sell</Link>
             </Typography>
             <Box sx={{ flexGrow: 1 }} />
-            <Button mr={4} className={styles.link} color="inherit">
-              <Link to="/sign-up">SignUp</Link>
-            </Button>
-            <Button mr={4} className={styles.link} color="inherit">
-              <Link to="/register">Register</Link>
-            </Button>
             <Button color="inherit" className={styles.link}>
               <Link to="/auction/login">Login</Link>
             </Button>
@@ -119,7 +113,7 @@ export default function Header() {
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
-                placeholder="Enter keywords…"
+                placeholder="Enter keywords"
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>

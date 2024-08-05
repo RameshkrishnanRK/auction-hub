@@ -19,6 +19,7 @@ import { Slide, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import ReusableModal from "../../../../utils/reusableModal";
+import Layout from "../../../../routing/components/Layout";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -312,175 +313,177 @@ const ProductDetails = () => {
   );
 
   return (
-    <div className={Styles.ViewProductDetails}>
-      <Card className={Styles.productDetailsWrapper}>
-        {addedToWatchList && (
-          <Alert severity="success" className={Styles.watchListAlert}>
-            Added to watch list
-          </Alert>
-        )}
-        <Box className={Styles.productMain}>
-          <CardMedia
-            component="img"
-            height="140"
-            width="100%"
-            image={product.image}
-            alt={product.title}
-            className={Styles.productImage}
-          />
-          <CardContent className={Styles.productDetails}>
-            <Typography
-              variant="h5"
-              component="div"
-              className={Styles.productTitle}
-            >
-              {product.title}
-            </Typography>
-            <Divider />
-            <Box className={Styles.productInfo}>
-              <Box className={Styles.productInfoLeft}>
-                <Typography variant="h6" className={Styles.productPriceTitle}>
-                  Current Price{" "}
-                  <span className={Styles.productPrice}>₹{formattedBid}</span>
-                </Typography>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={Styles.quickBidBtn}
-                  onClick={handleQuickBid}
-                  // disabled={isExpired}
-                >
-                  Quick Bid ₹{formattedBid}
-                </Button>
-                <Box className={Styles.bidSection}>
-                  <TextField
-                    label={`Minimum Bid ₹${formattedBid}`}
-                    variant="outlined"
-                    size="small"
-                    className={Styles.bidInput}
-                    value={bidAmount}
-                    onChange={handleBidAmount}
-                  />
-
+    <>
+      <Layout />
+      <div className={Styles.ViewProductDetails}>
+        <Card className={Styles.productDetailsWrapper}>
+          {addedToWatchList && (
+            <Alert severity="success" className={Styles.watchListAlert}>
+              Added to watch list
+            </Alert>
+          )}
+          <Box className={Styles.productMain}>
+            <CardMedia
+              component="img"
+              height="140"
+              width="100%"
+              image={product.image}
+              alt={product.title}
+              className={Styles.productImage}
+            />
+            <CardContent className={Styles.productDetails}>
+              <Typography
+                variant="h5"
+                component="div"
+                className={Styles.productTitle}
+              >
+                {product.title}
+              </Typography>
+              <Divider />
+              <Box className={Styles.productInfo}>
+                <Box className={Styles.productInfoLeft}>
+                  <Typography variant="h6" className={Styles.productPriceTitle}>
+                    Current Price{" "}
+                    <span className={Styles.productPrice}>₹{formattedBid}</span>
+                  </Typography>
                   <Button
                     variant="contained"
-                    color="success"
-                    className={Styles.submitBidBtn}
-                    onClick={handleBidAmountSubmit}
+                    color="primary"
+                    className={Styles.quickBidBtn}
+                    onClick={handleQuickBid}
                     // disabled={isExpired}
                   >
-                    Submit Bid
+                    Quick Bid ₹{formattedBid}
                   </Button>
-                </Box>
-                <Typography variant="body2" className={Styles.orText}>
-                  <hr style={{ border: "1px solid grey", width: "200" }} />
-                  <span
-                    style={{
-                      whiteSpace: "nowrap",
-                      color: "#696969",
-                      fontSize: "16px",
-                      fontWeight: "bold",
-                      fontStyle: "italic",
-                    }}
-                  >
-                    OR
-                  </span>{" "}
-                  <hr style={{ border: "0", borderTop: "1px solid #000" }} />
-                </Typography>
-                <Button
-                  className={Styles.buyNowBtn}
-                  // disabled={isExpired}
-                >
-                  Buy Now ₹520,000.00
-                </Button>
-                <Typography variant="body2" className={Styles.orText}>
-                  <hr style={{ border: "1px solid grey", width: "200" }} />
-                  <span
-                    style={{
-                      whiteSpace: "nowrap",
-                      color: "#696969",
-                      fontSize: "16px",
-                      fontWeight: "bold",
-                      fontStyle: "italic",
-                    }}
-                  >
-                    OR
-                  </span>{" "}
-                  <hr style={{ border: "0", borderTop: "1px solid #000" }} />
-                </Typography>
-                <Button
-                  className={Styles.makeOfferButton}
-                  onClick={handleOfferAmountSubmit}
-                  // disabled={isExpired}
-                >
-                  Make Offer
-                </Button>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  className={Styles.remainingTime}
-                >
-                  Remaining Time <br />{" "}
-                  {product.isExpired ? "Expired" : product.timeRemaining}
-                </Typography>
-              </Box>
-              <Box className={Styles.productInfoRight}>
-                <Box className={Styles.watchListBox}>
-                  <Typography variant="body2">1Watching</Typography>
-                  <Button
-                    variant="outlined"
-                    className={Styles.addWatchListBtn}
-                    onClick={handleAddToWatchList}
-                    // disabled={isExpired}
-                  >
-                    + Add to watch list
-                  </Button>
-                </Box>
-                <Box className={Styles.highBidderBox}>
-                  <Typography className={Styles.highBidder}>
-                    <div>High Bidder:</div> <div>Bidder</div>
+                  <Box className={Styles.bidSection}>
+                    <TextField
+                      label={`Minimum Bid ₹${formattedBid}`}
+                      variant="outlined"
+                      size="small"
+                      className={Styles.bidInput}
+                      value={bidAmount}
+                      onChange={handleBidAmount}
+                    />
+
+                    <Button
+                      variant="contained"
+                      color="success"
+                      className={Styles.submitBidBtn}
+                      onClick={handleBidAmountSubmit}
+                      // disabled={isExpired}
+                    >
+                      Submit Bid
+                    </Button>
+                  </Box>
+                  <Typography variant="body2" className={Styles.orText}>
+                    <hr style={{ border: "1px solid grey", width: "200" }} />
+                    <span
+                      style={{
+                        whiteSpace: "nowrap",
+                        color: "#696969",
+                        fontSize: "16px",
+                        fontWeight: "bold",
+                        fontStyle: "italic",
+                      }}
+                    >
+                      OR
+                    </span>{" "}
+                    <hr style={{ border: "0", borderTop: "1px solid #000" }} />
                   </Typography>
-                  <Box className={Styles.highBidderSecond}>
-                    <Typography
-                      variant="body2"
-                      style={{ fontSize: "18px", fontWeight: "bold" }}
+                  <Button
+                    className={Styles.buyNowBtn}
+                    // disabled={isExpired}
+                  >
+                    Buy Now ₹520,000.00
+                  </Button>
+                  <Typography variant="body2" className={Styles.orText}>
+                    <hr style={{ border: "1px solid grey", width: "200" }} />
+                    <span
+                      style={{
+                        whiteSpace: "nowrap",
+                        color: "#696969",
+                        fontSize: "16px",
+                        fontWeight: "bold",
+                        fontStyle: "italic",
+                      }}
                     >
-                      1 Bid (s)
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      style={{ fontSize: "18px", fontWeight: "bold" }}
+                      OR
+                    </span>{" "}
+                    <hr style={{ border: "0", borderTop: "1px solid #000" }} />
+                  </Typography>
+                  <Button
+                    className={Styles.makeOfferButton}
+                    onClick={handleOfferAmountSubmit}
+                    // disabled={isExpired}
+                  >
+                    Make Offer
+                  </Button>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    className={Styles.remainingTime}
+                  >
+                    Remaining Time <br />{" "}
+                    {product.isExpired ? "Expired" : product.timeRemaining}
+                  </Typography>
+                </Box>
+                <Box className={Styles.productInfoRight}>
+                  <Box className={Styles.watchListBox}>
+                    <Typography variant="body2">1Watching</Typography>
+                    <Button
+                      variant="outlined"
+                      className={Styles.addWatchListBtn}
+                      onClick={handleAddToWatchList}
+                      // disabled={isExpired}
                     >
-                      Bid History {">"}
+                      + Add to watch list
+                    </Button>
+                  </Box>
+                  <Box className={Styles.highBidderBox}>
+                    <Typography className={Styles.highBidder}>
+                      <div>High Bidder:</div> <div>Bidder</div>
                     </Typography>
+                    <Box className={Styles.highBidderSecond}>
+                      <Typography
+                        variant="body2"
+                        style={{ fontSize: "18px", fontWeight: "bold" }}
+                      >
+                        1 Bid (s)
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        style={{ fontSize: "18px", fontWeight: "bold" }}
+                      >
+                        Bid History {">"}
+                      </Typography>
+                    </Box>
                   </Box>
                 </Box>
               </Box>
-            </Box>
-            <Box className={Styles.productExtraInfo}>
-              {/* <Box> */}
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                style={{ width: "125%", marginRight: "10px" }}
-              >
-                KPMG will bid incrementally for you upto your maximun bid. Your
-                maximum bid is kept a secret from other users.
-              </Typography>
-              {/* </Box>
+              <Box className={Styles.productExtraInfo}>
+                {/* <Box> */}
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  style={{ width: "125%", marginRight: "10px" }}
+                >
+                  KPMG will bid incrementally for you upto your maximun bid.
+                  Your maximum bid is kept a secret from other users.
+                </Typography>
+                {/* </Box>
                             <Box> */}
-              <Typography variant="body2" color="text.secondary">
-                Your bid is a contract between you and the listing creator. If
-                you have the highest bid, you will enter into a legally binding
-                purchase contract.
-              </Typography>
-              {/* </Box> */}
-            </Box>
-          </CardContent>
-        </Box>
-      </Card>
+                <Typography variant="body2" color="text.secondary">
+                  Your bid is a contract between you and the listing creator. If
+                  you have the highest bid, you will enter into a legally
+                  binding purchase contract.
+                </Typography>
+                {/* </Box> */}
+              </Box>
+            </CardContent>
+          </Box>
+        </Card>
 
-      {/* <Modal
+        {/* <Modal
                 open={openBidModal}
                 onClose={handleOutsideClick}
                 aria-labelledby="modal-modal-title"
@@ -502,22 +505,23 @@ const ProductDetails = () => {
                 </Box>
             </Modal> */}
 
-      <ReusableModal
-        open={openBidModal}
-        onClose={handleBidModalClose}
-        onSubmit={handleBidModalSuccess}
-        bodyContent={modalBidContent}
-      />
+        <ReusableModal
+          open={openBidModal}
+          onClose={handleBidModalClose}
+          onSubmit={handleBidModalSuccess}
+          bodyContent={modalBidContent}
+        />
 
-      <ReusableModal
-        open={openOfferModal}
-        onClose={handleOfferModalClose}
-        onSubmit={handleOfferModalSuccess}
-        bodyContent={modalOfferContent}
-      />
+        <ReusableModal
+          open={openOfferModal}
+          onClose={handleOfferModalClose}
+          onSubmit={handleOfferModalSuccess}
+          bodyContent={modalOfferContent}
+        />
 
-      <ToastContainer />
-    </div>
+        <ToastContainer />
+      </div>
+    </>
   );
 };
 
