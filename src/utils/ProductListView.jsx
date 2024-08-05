@@ -5,8 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const ProductListView = ({ id, image, title, currentBid, timeRemaining, isExpired }) => {
     const navigate = useNavigate();
-    
-    const handleViewDetails=()=>{
+
+    const handleViewDetails = () => {
         navigate(`/product-details?productId=${id}`)
     }
     const formattedBid = Number(currentBid).toLocaleString('en-IN');
@@ -21,8 +21,8 @@ const ProductListView = ({ id, image, title, currentBid, timeRemaining, isExpire
             />
             <CardContent className={styles.productListTitle}>
                 <Typography variant='h6' component='div' onClick={handleViewDetails}>
-                <Link to="/product-details">
-                    {title}
+                    <Link to="/product-details">
+                        {title}
                     </Link>
                 </Typography>
             </CardContent>
@@ -31,7 +31,7 @@ const ProductListView = ({ id, image, title, currentBid, timeRemaining, isExpire
                     variant='contained'
                     color='primary'
                     className={styles.quickBidBtn}
-                // disabled={isExpired}
+                    // disabled={isExpired}
                 >
                     Quick Bid ₹{formattedBid}
                 </Button>

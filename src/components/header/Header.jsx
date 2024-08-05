@@ -10,8 +10,6 @@ import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import kpmgImage from '../../assets/images/Auction.KPMGLogo_1_.svg';
 import styles from './Header.module.scss'
-import { Breadcrumbs } from '@mui/material';
-import { useLocation } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -46,10 +44,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 export default function Header() {
-    const location = useLocation();
-    const pathname = location.pathname;
-    const pathSegments = pathname.split('/').filter((segment) => segment);
-
     return (
         <>
             <Box sx={{ flexGrow: 1 }}>
@@ -145,20 +139,7 @@ export default function Header() {
                     </Toolbar>
                 </AppBar>
             </Box>
-            <Breadcrumbs className='breadcrumb' arial-label='breadcrumb'>
-                <Link to="/">
-                    Home
-                </Link>
-                {pathSegments.map((segment, index) => {
-                    const to = `/${pathSegments.slice(0, index + 1).join('/')}`;
-                    return (
-                        <Link to={to}>
-                            {segment.charAt(0).toUpperCase() + segment.slice(1)}
-                        </Link>
-                    )
-                })}
-                {/* <Typography color="text.primary" href="/browse">Browse</Typography> */}
-            </Breadcrumbs>
+            
         </>
     );
 }

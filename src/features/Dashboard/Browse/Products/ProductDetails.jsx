@@ -102,12 +102,23 @@ const ProductDetails = () => {
         setOpenOfferModal(true);
     }
 
-
     const handleAddToWatchList = () => {
-        setAddedToWatchList(true);
-        setTimeout(() => {
-            setAddedToWatchList(false);
-        }, 3000);
+        toast.success("Added to watch list", {
+            position: "top-center",
+            autoClose: 2000,
+            style: {
+                width: '430px',
+                backgroundColor: '#009933',
+                color: '#ffffff'
+            },
+            onClose: () => {
+                setTimeout(() => {
+                    navigate('/browse');
+                }, 1000)
+            },
+            transition: Slide
+        })
+
     };
 
     const handleQuickBid = () => {
@@ -233,6 +244,24 @@ const ProductDetails = () => {
         setOpenOfferModal(false)
     }
 
+    const handleBuyNow = () => {
+        toast.success("Congratulations! We will react out to you soon.", {
+            position: "top-center",
+            autoClose: 2000,
+            style: {
+                width: '430px',
+                backgroundColor: '#009933',
+                color: '#ffffff'
+            },
+            onClose: () => {
+                setTimeout(() => {
+                    navigate('/browse');
+                }, 1000)
+            },
+            transition: Slide
+        })
+    }
+
     // const styleBid = {
     //     position: 'absolute',
     //     top: '50%',
@@ -254,37 +283,39 @@ const ProductDetails = () => {
             Confirm your bid of INR {cleanedFormattedBid}
         </Typography></Box>);
 
-    const modalOfferContent = (<Box><Typography sx={{ padding: '4px', backgroundColor: '#337AB7', color: '#ffffff', fontSize: '14px', fontWeight: 'bold' }} id="modal-modal-title" variant="h6" component="h2">
-        {product.title}
-    </Typography>
-        <Box style={{ paddingTop: '10px' }}>
-            <label>Your Offer <span style={{ color: 'red' }}>*</span> </label> <br />
-            <TextField
-                label=''
-                variant='outlined'
-                size='small'
-                required
-                className={Styles.bidInput}
-                value={offerAmount}
-                onChange={handleOfferAmount}
-            />
-        </Box>
+    const modalOfferContent = (
+        <Box>
+            <Typography sx={{ padding: '4px', backgroundColor: '#337AB7', color: '#ffffff', fontSize: '14px', fontWeight: 'bold' }} id="modal-modal-title" variant="h6" component="h2">
+                {product.title}
+            </Typography>
+            <Box style={{ paddingTop: '10px' }}>
+                <label>Your Offer <span style={{ color: 'red' }}>*</span> </label> <br />
+                <TextField
+                    label=''
+                    variant='outlined'
+                    size='small'
+                    required
+                    className={Styles.bidInput}
+                    value={offerAmount}
+                    onChange={handleOfferAmount}
+                />
+            </Box>
 
-        <Box style={{ paddingTop: '10px' }}>
-            <label style={{ paddingTop: '20px' }}>Offer Message <span style={{ color: 'red' }}>*</span> </label>
-            <br />
-            <TextField
-                label=''
-                variant='outlined'
-                multiline
-                rows={4}
-                required
-                value={OfferMessage}
-                onChange={handleOfferMessage}
-            />
-        </Box>
+            <Box style={{ paddingTop: '10px' }}>
+                <label style={{ paddingTop: '20px' }}>Offer Message <span style={{ color: 'red' }}>*</span> </label>
+                <br />
+                <TextField
+                    label=''
+                    variant='outlined'
+                    multiline
+                    rows={4}
+                    required
+                    value={OfferMessage}
+                    onChange={handleOfferMessage}
+                />
+            </Box>
 
-    </Box>);
+        </Box>);
 
 
     return (
@@ -319,7 +350,7 @@ const ProductDetails = () => {
                                     color='primary'
                                     className={Styles.quickBidBtn}
                                     onClick={handleQuickBid}
-                                // disabled={isExpired}
+                                // disabled={product.isExpired}
                                 >
                                     Quick Bid ₹{formattedBid}
                                 </Button>
@@ -351,6 +382,7 @@ const ProductDetails = () => {
                                 <Button
 
                                     className={Styles.buyNowBtn}
+                                    onClick={handleBuyNow}
                                 // disabled={isExpired}
                                 >
                                     Buy Now ₹520,000.00
@@ -402,12 +434,12 @@ const ProductDetails = () => {
                         </Box>
                         <Box className={Styles.productExtraInfo}>
                             {/* <Box> */}
-                                <Typography variant='body2' color="text.secondary" style={{width: '125%', marginRight: '10px'}}>
+                            <Typography variant='body2' color="text.secondary" style={{ width: '125%', marginRight: '10px' }}>
                                 KPMG will bid incrementally for you upto your maximun bid. Your maximum bid is kept a secret from other users.
                             </Typography>
                             {/* </Box>
                             <Box> */}
-                                <Typography variant='body2' color="text.secondary">
+                            <Typography variant='body2' color="text.secondary">
                                 Your bid is a contract between you and the listing creator. If you have the highest bid, you will enter into a legally  binding purchase contract.
                             </Typography>
                             {/* </Box> */}
