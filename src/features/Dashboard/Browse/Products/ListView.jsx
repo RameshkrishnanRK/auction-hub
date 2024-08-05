@@ -1,8 +1,11 @@
 import React from 'react'
 import ProductListView from '../../../../utils/ProductListView'
 import styles from './ListView.module.scss'
+import { useSelector } from 'react-redux'
 
-const ListView = ({products}) => {
+const ListView = () => {
+
+  const products = useSelector((state) => state.products.products)
   return (
     <div className={styles.listViewProducts}>
       {products.map(product => (

@@ -7,7 +7,7 @@ import { filterByOptions, sortOptions } from './data';
 import GridView from './Products/GridView';
 import ListView from './Products/ListView';
 
-const ControlPanel = ({products}) => {
+const ControlPanel = () => {
     const [view, setView] = useState('grid');
     const [status, setStatus] = useState('active');
     const [filter, setFilter] = useState('');
@@ -89,7 +89,7 @@ const ControlPanel = ({products}) => {
                     </Select>
                 </Box>
             </Box>
-            {view === 'grid' ? <GridView products={products}/> : <ListView products={products}/>}
+            {view === 'grid' ? <GridView /> : <ListView />}
         </div>
     );
 };

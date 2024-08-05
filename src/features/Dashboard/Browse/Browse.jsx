@@ -5,7 +5,7 @@ import styles from './Browse.module.scss'
 import { categories, regions } from "./data";
 import ControlPanel from "./ControlPanel";
 
-const Browse = ({products}) => {
+const Browse = () => {
     return (
         <>
             <Box className={styles.container}>
@@ -14,7 +14,7 @@ const Browse = ({products}) => {
                         <Sidebar categories={categories} regions={regions} />
                     </Grid>
                     <Grid item xs={9}>
-                        <ControlPanel products={products}/>
+                        <ControlPanel />
                     </Grid>
                 </Grid>
             </Box>

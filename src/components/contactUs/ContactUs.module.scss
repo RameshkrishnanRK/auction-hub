@@ -10,11 +10,12 @@
 }
 .text{
     text-align: left;
+    span {
+        color:red;
+        margin-left:2px
+    }
 }
-span{
-    color:red;
-    margin-left:2px
-}
+
 .footer{
     margin:30px 0px 0px 80px
 }

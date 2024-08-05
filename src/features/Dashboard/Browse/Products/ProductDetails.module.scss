@@ -1,5 +1,5 @@
 .ViewProductDetails {
-    margin: auto 150px;
+    margin: auto 15px;
     padding: 20px;
 
     .productDetailsWrapper {
@@ -24,6 +24,9 @@
             .productImage {
                 max-width: 300px;
                 margin-right: 20px;
+                
+                padding-top: 10px;
+                height: 80%;
             }
 
             .productDetails {
@@ -31,36 +34,57 @@
 
                 .productTitle {
                     margin-bottom: 10px;
+                    font-size: 18px;
+                    text-align: left;
+                }
 
+                .productPriceTitle {
+                    text-align: left;
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+
+                .productPrice {
+                    font-size: 14px;
+                    font-weight: bold;
+                    color: #4CAE4C;
+                    margin-left: 20px;
                 }
 
                 .productInfo {
                     display: flex;
-                    justify-content: space-between;
+                    // justify-content: space-between;
+                    width: 100%;
 
                     .productInfoLeft {
-                        flex: 1;
+                        // flex: 1;
                         display: flex;
                         flex-direction: column;
+                        width: 50%;
 
                         .quickBidBtn {
                             margin: 10px 0;
-
+                            background-color: #C24242;
+                            height: 30px;
+                            text-transform: capitalize;
                         }
 
                         .bidSection {
                             display: flex;
                             align-items: center;
+                            justify-content: space-between;
                             margin-bottom: 10px;
 
                             .bidInput {
                                 margin-right: 10px;
-
+                               
                             }
 
                             .submitBidBtn {
                                 height: fit-content;
-
+                                background-color: #3CA93A;
+                                height: 30px;
+                                text-transform: capitalize;
                             }
                         }
 
@@ -73,12 +97,22 @@
 
                         .buyNowBtn {
                             margin-bottom: 10px;
-
+                            background-color: #ffffff;
+                            border: 1px solid grey;
+                            color: #1768AC;
+                            font-size: 16px;
+                            text-transform: capitalize;
+                            font-weight: 600;
                         }
 
                         .makeOfferButton {
                             margin-bottom: 10px;
-
+                            background-color: #ffffff;
+                            border: 1px solid grey;
+                            color: #222222;
+                            font-size: 16px;
+                            text-transform: capitalize;
+                            font-weight: normal;
                         }
 
                         .remainingTime {
@@ -91,15 +125,51 @@
                         flex-direction: column;
                         align-items: flex-start;
                         margin-bottom: 20px;
+                        width: 50%;
+                        margin-left: 25px;
 
-                        .watchListBox .highBidderBox {
+
+                        .watchListBox {
                             display: flex;
                             flex-direction: column;
                             align-items: flex-start;
+                            padding: 10px;
+                            width: 85%;
+                            border-radius: 4px;
                             margin-bottom: 10px;
-
+                            border: 1px solid rgb(206, 206, 206);
+                            margin-top: 35px;
+                            
                             .addWatchListBtn {
                                 margin-top: 10px;
+                                text-transform: capitalize;
+                            }
+                        }
+
+                        .highBidderBox {
+                            padding: 10px;
+                            width: 85%;
+                            border-radius: 4px;
+                            margin-bottom: 10px;
+                            border: 1px solid rgb(206, 206, 206);
+                            margin-top: 15px;
+
+                            
+                            .addWatchListBtn {
+                                margin-top: 10px;
+                            }
+
+                            .highBidder {
+                                display: flex;
+                                justify-content: flex-start;
+                                color: #272B30 !important;
+                                font-size: 14px;
+                            }
+
+                            .highBidderSecond {
+                                display: flex;
+                                justify-content: space-between;
+                                padding-top: 20px;
                             }
                         }
                     }
@@ -108,19 +178,52 @@
         }
 
         .productExtraInfo {
-            background-color: #f9f9f9;
+            width: 750px;
+            background-color: rgb(251 247 226);
+            border: 1px solid rgb(250, 235, 204);
+            float: right;
+
             padding: 10px;
             border-radius: 5px;
             display: flex;
-            flex-direction: column;
+            // justify-content: space-between;
+            text-align: left;
+            font-size: 12px;
 
-            >* {
-                margin-bottom: 5px;
-            }
+            // >* {
+            //     margin-bottom: 5px;
+            // }
+
+            
 
         }
+
+        
+        
     }
+
+    .modalBid {
+        background-color: red;
+
+        .modalBidBox {
+            background-color: red;
+
+            .modalButtonContainer {
+                display: flex;
+                justify-content: space-between;
+               
+        
+                .modalButtonSuccess {
+                    background-color: #3CA93A !important;
+                }
+            }
+        }
+    }
+
+   
 }
+
+
 
 @media (max-width:768px) {
     .productMain {

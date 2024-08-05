@@ -106,7 +106,7 @@ const ContactUs = () => {
                 <Grid container spacing={1}>
                     <Grid item xs={2}>
                     <Typography mt={2} className={styles.text}>First Name
-                    <span>*</span>
+                    <span >*</span>
                 </Typography>
                     </Grid>
                     <Grid item xs={5}> <TextField

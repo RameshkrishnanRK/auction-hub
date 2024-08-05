@@ -1,28 +1,68 @@
 export const products = [
     {
         id: 0,
-        image: process.env.PUBLIC_URL + '/images/Car.png',
-        title: '2017 Maruti Car',
-        currentBid: 100000,
+        image: process.env.PUBLIC_URL + '/images/FarmHouse.jpg',
+        title: '2024 Farm House ',
+        currentBid: 100000000,
         timeRemaining: 'Expired',
         isExpired: true
     },
     {
         id: 1,
+        image: process.env.PUBLIC_URL + '/images/villa.jfif',
+        title: '2018 Private Villa at Drass',
+        currentBid: 120000000,
+        timeRemaining: 'Expired',
+        isExpired: true
+    },
+    {
+        id: 2,
         image: process.env.PUBLIC_URL + '/images/Laptop.png',
         title: '2021 LG Laptop',
-        currentBid: 2000,
+        currentBid: 5000,
         timeRemaining: 'Expired',
         isExpired: false
     },
     {
-        id: 2,
+        id: 3,
         image: process.env.PUBLIC_URL + '/images/Mobile.png',
         title: '2015 Samsung Mobile',
-        currentBid: 2500,
+        currentBid: 3800,
         timeRemaining: 'Expired',
         isExpired: true
-    }
+    },
+    {
+        id: 4,
+        image: process.env.PUBLIC_URL + '/images/Home.png',
+        title: '2024 Luxury Home',
+        currentBid: 3000000,
+        timeRemaining: 'Expired',
+        isExpired: true
+    },
+    {
+        id: 5,
+        image: process.env.PUBLIC_URL + '/images/Coffee.jpg',
+        title: '2023 Coffe Estate',
+        currentBid: 25000000,
+        timeRemaining: 'Expired',
+        isExpired: true
+    },
+    {
+        id: 6,
+        image: process.env.PUBLIC_URL + '/images/HomeRealEstate.jpg',
+        title: '2000 House For Sale',
+        currentBid: 4000000,
+        timeRemaining: 'Expired',
+        isExpired: true
+    },
+    {
+        id: 16,
+        image: process.env.PUBLIC_URL + '/images/Car.png',
+        title: '2021 Maruti Car',
+        currentBid: 175000,
+        timeRemaining: 'Expired',
+        isExpired: false
+    },
 ];
 
 export const categories = [
@@ -40,12 +80,12 @@ export const categories = [
     { name: 'Goverment', quantity: 0, subcategories: ['Excise & Fitness', 'Golf', 'Indoor Games', 'Others', 'Outdoor Sports', 'Team Sports', 'Tennis & Raquets', 'Water sports', 'Winter Sports'] },
     { name: 'Governmen-Owned Enterprises', quantity: 0, subcategories: ['Antiquities(classical)', 'Architectural', 'Asian Antiques', 'Books,Manuscripts', 'Decorative Arts', 'Ethnographic Arts', 'Furniture', 'Maps,Atlasses,Globes', 'Maritime', 'Musical Instruments', 'Other Antiques', 'Periods, Styles', 'Primitives', 'Reproductions', 'Rugs,Carpets', 'Science&Medicine', 'Sewing', 'Silver', 'Textiles & Linens'] },
     { name: 'Health & Beauty', quantity: 0, subcategories: ['Airline', 'Car Rentals', 'Cruises', 'Lodging', 'Luggages', 'Other Travel', 'Vacation Packages'] },
-    { name: 'Home & Garden', quantity: 0, subcategories: ['Advertising', 'Animal', 'Animation Arts', 'Arcades', 'Autographs', 'Banks & Vendings', 'Barwares', 'Beads', 'Bottles & Insulators', 'Breweriana & Beer', 'Casino', 'Clocks', 'Comics', 'Cultures & Ethnicity', 'Decoratives', 'Disnyana', 'Fantacy', 'Furnture', 'Historical Memoribilia', 'Holiday Seasonals', 'Housewares', 'Knives & Blades', 'Lamps & Lighting', 'Linens & Fabric', 'Metalwear', 'Militaria', 'Paper', 'Pens & Writings', 'Pez & Keychains', 'Photographic Images', 'Pinbacks & Bobbles', 'Postcards', 'Radio & TVs', 'Religions & Spirituality', 'Rocks & Fossils', 'Science fiction', 'Science-Medical', 'sewing', 'Tobbaciana', 'Tools & Locks', 'Trading Cards', 'Transporation', 'Vanity', 'Vintage', 'Wholesale Lots'] },
-    { name: 'Real Estate', quantity: 0, subcategories: ['Bath & Body', 'Coupons', 'Dietary & Nutrition', 'Fragrances', 'HairCare', 'Helath Care', 'Makeup', 'Massage', 'Medical & Mobility', 'Nails & Polish', 'Natural Remedies', 'Oral Care', 'OTC Medicine', 'Others', 'Shaving', 'SkinCare', 'Tanning Beds', 'tattos & Body Art', 'Vision care', 'Weight Management', 'Wholesale Lot'] },
-    { name: 'Speciality services', quantity: 0, subcategories: ['Commercial', 'Land', 'Manufactured Homes', 'Other Real estate', 'Residential', 'Timeshares for sale'] },
-    { name: 'Sporting goods', quantity: 0, subcategories: ['Bluetooth', 'CellPhone &PDA Accessories', 'Others', 'PDA & Pocket PCs', 'Phone & Sim cards', 'Wholesale Lots'] },
-    { name: 'Tickets', quantity: 0, subcategories: ['Boys', 'costumes', 'Cultural & ethnic', 'Dancewear', 'Girls', 'Infants & Toddlers', 'Mens accessories', 'Mens Clothing', 'Mens Accessories', 'Mens shoes', 'Uniforms', 'Unisex Clothing', 'Vintage', 'Wedding Apparel', 'Wholesale', 'womens accessories', 'womens clothing', 'womens shoes'] },
-    { name: 'Travel', quantity: 0, subcategories: ['Advertisement', 'Education & Learning', 'Funeral & Cementary', 'Genealogy', 'Information Products', 'Memberships', 'MetaPhysical', 'Mystery Auctions', 'Others', 'Personal Security', 'Religious', 'Rewards & Incentives', 'Test Auctions', 'Unused'] }
+    { name: 'Home & Garden', quantity: 44, subcategories: ['Advertising', 'Animal', 'Animation Arts', 'Arcades', 'Autographs', 'Banks & Vendings', 'Barwares', 'Beads', 'Bottles & Insulators', 'Breweriana & Beer', 'Casino', 'Clocks', 'Comics', 'Cultures & Ethnicity', 'Decoratives', 'Disnyana', 'Fantacy', 'Furnture', 'Historical Memoribilia', 'Holiday Seasonals', 'Housewares', 'Knives & Blades', 'Lamps & Lighting', 'Linens & Fabric', 'Metalwear', 'Militaria', 'Paper', 'Pens & Writings', 'Pez & Keychains', 'Photographic Images', 'Pinbacks & Bobbles', 'Postcards', 'Radio & TVs', 'Religions & Spirituality', 'Rocks & Fossils', 'Science fiction', 'Science-Medical', 'sewing', 'Tobbaciana', 'Tools & Locks', 'Trading Cards', 'Transporation', 'Vanity', 'Vintage', 'Wholesale Lots'] },
+    { name: 'Real Estate', quantity: 21, subcategories: ['Bath & Body', 'Coupons', 'Dietary & Nutrition', 'Fragrances', 'HairCare', 'Helath Care', 'Makeup', 'Massage', 'Medical & Mobility', 'Nails & Polish', 'Natural Remedies', 'Oral Care', 'OTC Medicine', 'Others', 'Shaving', 'SkinCare', 'Tanning Beds', 'tattos & Body Art', 'Vision care', 'Weight Management', 'Wholesale Lot'] },
+    { name: 'Speciality services', quantity: 6, subcategories: ['Commercial', 'Land', 'Manufactured Homes', 'Other Real estate', 'Residential', 'Timeshares for sale'] },
+    { name: 'Sporting goods', quantity: 6, subcategories: ['Bluetooth', 'CellPhone &PDA Accessories', 'Others', 'PDA & Pocket PCs', 'Phone & Sim cards', 'Wholesale Lots'] },
+    { name: 'Tickets', quantity: 18, subcategories: ['Boys', 'costumes', 'Cultural & ethnic', 'Dancewear', 'Girls', 'Infants & Toddlers', 'Mens accessories', 'Mens Clothing', 'Mens Accessories', 'Mens shoes', 'Uniforms', 'Unisex Clothing', 'Vintage', 'Wedding Apparel', 'Wholesale', 'womens accessories', 'womens clothing', 'womens shoes'] },
+    { name: 'Travel', quantity: 14, subcategories: ['Advertisement', 'Education & Learning', 'Funeral & Cementary', 'Genealogy', 'Information Products', 'Memberships', 'MetaPhysical', 'Mystery Auctions', 'Others', 'Personal Security', 'Religious', 'Rewards & Incentives', 'Test Auctions', 'Unused'] }
 ];
 
 export const regions = [
