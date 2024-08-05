@@ -1,101 +1,105 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react'
-import Styles from './ProductDetails.module.scss'
-import { Alert, Box, Button, Card, CardContent, CardMedia, Divider, TextField, Typography, Modal } from '@mui/material';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchProducts } from '../../../../redux/slices/productSlice'
-import { Slide, ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
-import axios from 'axios';
-import ReusableModal from '../../../../utils/reusableModal';
+import React, { useState, useEffect, useRef, useMemo } from "react";
+import Styles from "./ProductDetails.module.scss";
+import {
+  Alert,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Divider,
+  TextField,
+  Typography,
+  Modal,
+} from "@mui/material";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../../../../redux/slices/productSlice";
+import { Slide, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import ReusableModal from "../../../../utils/reusableModal";
+import Layout from "../../../../routing/components/Layout";
 
 const useQuery = () => {
-    return new URLSearchParams(useLocation().search);
-}
+  return new URLSearchParams(useLocation().search);
+};
 
 const ProductDetails = () => {
-    const dispatch = useDispatch();
-    const query = useQuery();
-    const productId = query.get('productId');
+  const dispatch = useDispatch();
+  const query = useQuery();
+  const productId = query.get("productId");
 
-    const navigate = useNavigate();
-    const modalRef = useRef(null);
-    const [openBidModal, setOpenBidModal] = useState(false);
-    const [openOfferModal, setOpenOfferModal] = useState(false);
+  const navigate = useNavigate();
+  const modalRef = useRef(null);
+  const [openBidModal, setOpenBidModal] = useState(false);
+  const [openOfferModal, setOpenOfferModal] = useState(false);
 
+  const products = useSelector((state) => state.products.products);
 
-    const products = useSelector((state) => state.products.products)
-
-
-    useEffect(() => {
-        if (products.length === 0) {
-            dispatch(fetchProducts());
-        }
-    }, [dispatch, products.length]);
-
-    console.log("products ", products)
-
-    const product = products.length > 0 && products.find(product => product.id === parseInt(productId));
-    console.log('product details: ', productId, product.currentBid)
-
-    const formattedBid = Number(product.currentBid).toLocaleString('en-IN');
-    const [cleanedFormattedBid, setCleanedFormattedBid] = useState(formattedBid);
-    //const [cleanedFormattedBid, setCleanedFormattedBid] = useState(formattedBid.replace(/,/g, ''));
-
-    const [addedToWatchList, setAddedToWatchList] = useState(false);
-
-    const cleanedFormattedBidMemo = useMemo(() => {
-        setCleanedFormattedBid(formattedBid.replace(/,/g, ''))
-        return formattedBid.replace(/,/g, '');
-    }, [formattedBid])
-
-    //const cleanedFormattedBid = formattedBid && Number(formattedBid.replace(/,/g, ''));
-
-    const [bidAmount, setBidAmount] = useState('');
-    const [offerAmount, setOfferAmount] = useState('');
-    const [OfferMessage, setOfferMessage] = useState('');
-
-    const handleBidAmount = (event) => {
-        console.log("event value ", event.target.value)
-        setBidAmount(event.target.value)
-
+  useEffect(() => {
+    if (products.length === 0) {
+      dispatch(fetchProducts());
     }
+  }, [dispatch, products.length]);
 
-    const handleOfferAmount = (event) => {
-        //console.log("event value ", event.target.value)
-        setOfferAmount(event.target.value)
+  const product =
+    products.length > 0 &&
+    products.find((product) => product.id === parseInt(productId));
+
+  const formattedBid = Number(product.currentBid).toLocaleString("en-IN");
+  const [cleanedFormattedBid, setCleanedFormattedBid] = useState(formattedBid);
+  //const [cleanedFormattedBid, setCleanedFormattedBid] = useState(formattedBid.replace(/,/g, ''));
+
+  const [addedToWatchList, setAddedToWatchList] = useState(false);
+
+  const cleanedFormattedBidMemo = useMemo(() => {
+    setCleanedFormattedBid(formattedBid.replace(/,/g, ""));
+    return formattedBid.replace(/,/g, "");
+  }, [formattedBid]);
+
+  //const cleanedFormattedBid = formattedBid && Number(formattedBid.replace(/,/g, ''));
+
+  const [bidAmount, setBidAmount] = useState("");
+  const [offerAmount, setOfferAmount] = useState("");
+  const [OfferMessage, setOfferMessage] = useState("");
+
+  const handleBidAmount = (event) => {
+    setBidAmount(event.target.value);
+  };
+
+  const handleOfferAmount = (event) => {
+    //console.log("event value ", event.target.value)
+    setOfferAmount(event.target.value);
+  };
+
+  const handleOfferMessage = (event) => {
+    //console.log("event value ", event.target.value)
+    setOfferMessage(event.target.value);
+  };
+
+  const handleBidAmountSubmit = () => {
+    //setCleanedFormattedBid(formattedBid)
+    let formattedBidValue = Number(cleanedFormattedBid);
+    let bidAmountValue = Number(bidAmount);
+
+    if (bidAmountValue < formattedBidValue) {
+      toast.error("Bid Amount Cannot be lesser than Current Bid", {
+        position: "top-center",
+        autoClose: 3000,
+        style: {
+          width: "430px",
+          backgroundColor: "#DC2020",
+          color: "#ffffff",
+        },
+        transition: Slide,
+      });
+    } else {
+      setCleanedFormattedBid(bidAmountValue);
+      setOpenBidModal(true);
     }
+  };
 
-    const handleOfferMessage = (event) => {
-        //console.log("event value ", event.target.value)
-        setOfferMessage(event.target.value)
-    }
-
-    const handleBidAmountSubmit = () => {
-        //setCleanedFormattedBid(formattedBid)
-        console.log("cleanedFormattedBid ", formattedBid, cleanedFormattedBid)
-        let formattedBidValue = Number(cleanedFormattedBid);
-        let bidAmountValue = Number(bidAmount)
-        console.log("formattedBid value ", typeof bidAmountValue, typeof formattedBidValue, typeof formattedBid)
-
-        if (bidAmountValue < formattedBidValue) {
-
-            toast.error("Bid Amount Cannot be lesser than Current Bid", {
-                position: "top-center",
-                autoClose: 3000,
-                style: {
-                    width: '430px',
-                    backgroundColor: '#DC2020',
-                    color: '#ffffff'
-                },
-                transition: Slide
-            })
-        } else {
-            setCleanedFormattedBid(bidAmountValue)
-            console.log("else inside ", bidAmountValue, formattedBidValue, bidAmountValue < formattedBidValue)
-            setOpenBidModal(true)
-        }
-    }
 
     const handleOfferAmountSubmit = () => {
         //setCleanedFormattedBid(formattedBid)
@@ -121,81 +125,73 @@ const ProductDetails = () => {
 
     };
 
-    const handleQuickBid = () => {
-        setOpenBidModal(true)
-    }
+  const handleQuickBid = () => {
+    setOpenBidModal(true);
+  };
 
-    const handleBidModalSuccess = async () => {
-        setOpenBidModal(false)
+  const handleBidModalSuccess = async () => {
+    setOpenBidModal(false);
 
-        // const payload = {
-        //     "versionInfo": {
-        //         "hasModuleVersionChanged": false,
-        //         "hasApiVersionChanged": false
-        //     },
-        //     "data": {
-        //         "Out1": "0"
-        //     }
-        // }
+    // const payload = {
+    //     "versionInfo": {
+    //         "hasModuleVersionChanged": false,
+    //         "hasApiVersionChanged": false
+    //     },
+    //     "data": {
+    //         "Out1": "0"
+    //     }
+    // }
 
         // const url = 'https://kisl-dev.outsystemscloud.com/Auction/screenservices/Auction/MainFlow/ProductDetails/ActionAddBid';
 
-        // try {
-        //     const response = await axios.post(url, payload, {
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //     });
-        //     console.log('response ', response)
-        // } catch (error) {
-        //     console.log("error ", error)
-        // }
+    // try {
+    //     const response = await axios.post(url, payload, {
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //     });
+    //     console.log('response ', response)
+    // } catch (error) {
+    //     console.log("error ", error)
+    // }
 
-        toast.success("Your Bid has been successfully Submitted", {
-            position: "top-center",
-            autoClose: 2000,
-            style: {
-                width: '430px',
-                backgroundColor: '#009933',
-                color: '#ffffff'
-            },
-            onClose: () => {
-                setTimeout(() => {
-                    navigate('/browse');
-                }, 1000)
-            },
-            transition: Slide
-        })
-        console.log("navigate(-1);")
+    toast.success("Your Bid has been successfully Submitted", {
+      position: "top-center",
+      autoClose: 2000,
+      style: {
+        width: "430px",
+        backgroundColor: "#009933",
+        color: "#ffffff",
+      },
+      onClose: () => {
+        setTimeout(() => {
+          navigate("/auction/dashboard");
+        }, 1000);
+      },
+      transition: Slide,
+    });
+  };
 
-    }
+  const handleOfferModalSuccess = async () => {
+    //setOpenOfferModal(false)
+    if (offerAmount.length > 0 && OfferMessage.length > 0) {
+      let formattedBidValue = Number(cleanedFormattedBid);
+      let offerAmountValue = Number(offerAmount);
 
-
-
-    const handleOfferModalSuccess = async () => {
-        //setOpenOfferModal(false)
-        if (offerAmount.length > 0 && OfferMessage.length > 0) {
-            console.log("cleanedFormattedBid ", offerAmount, cleanedFormattedBid)
-            let formattedBidValue = Number(cleanedFormattedBid);
-            let offerAmountValue = Number(offerAmount)
-            console.log("formattedBid value ", typeof bidAmountValue, typeof formattedBidValue, typeof formattedBid)
-
-            if (offerAmountValue < formattedBidValue) {
-
-                toast.error("Bid Amount Cannot be lesser than Current Bid", {
-                    position: "top-center",
-                    autoClose: 3000,
-                    style: {
-                        width: '430px',
-                        backgroundColor: '#DC2020',
-                        color: '#ffffff'
-                    },
-                    transition: Slide
-                })
-            } else {
-                setCleanedFormattedBid(offerAmountValue)
-                console.log("else inside ", offerAmountValue, formattedBidValue, offerAmountValue < formattedBidValue)
-                setOpenOfferModal(false)
+      if (offerAmountValue < formattedBidValue) {
+        toast.error("Bid Amount Cannot be lesser than Current Bid", {
+          position: "top-center",
+          autoClose: 3000,
+          style: {
+            width: "430px",
+            backgroundColor: "#DC2020",
+            color: "#ffffff",
+          },
+          transition: Slide,
+        });
+      } else {
+        setCleanedFormattedBid(offerAmountValue);
+        setOpenOfferModal(false);
 
                 toast.success("Your Bid has been successfully Submitted", {
                     position: "top-center",
@@ -278,10 +274,15 @@ const ProductDetails = () => {
 
     const modalBidContent = (<Box><Typography sx={{ padding: '4px', backgroundColor: '#337AB7', color: '#ffffff', fontSize: '14px', fontWeight: 'bold' }} id="modal-modal-title" variant="h6" component="h2">
         {product.title}
-    </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2, color: '#3C763D', fontSize: '14px', fontWeight: 'bold' }}>
-            Confirm your bid of INR {cleanedFormattedBid}
-        </Typography></Box>);
+      </Typography>
+      <Typography
+        id="modal-modal-description"
+        sx={{ mt: 2, color: "#3C763D", fontSize: "14px", fontWeight: "bold" }}
+      >
+        Confirm your bid of INR {cleanedFormattedBid}
+      </Typography>
+    </Box>
+  );
 
     const modalOfferContent = (
         <Box>
@@ -319,6 +320,7 @@ const ProductDetails = () => {
 
 
     return (
+        <>
         <div className={Styles.ViewProductDetails}>
             <Card className={Styles.productDetailsWrapper}>
                 {addedToWatchList && (
@@ -453,7 +455,7 @@ const ProductDetails = () => {
 
             </Card>
 
-            {/* <Modal
+        {/* <Modal
                 open={openBidModal}
                 onClose={handleOutsideClick}
                 aria-labelledby="modal-modal-title"
@@ -475,23 +477,24 @@ const ProductDetails = () => {
                 </Box>
             </Modal> */}
 
-            <ReusableModal
-                open={openBidModal}
-                onClose={handleBidModalClose}
-                onSubmit={handleBidModalSuccess}
-                bodyContent={modalBidContent}
-            />
+        <ReusableModal
+          open={openBidModal}
+          onClose={handleBidModalClose}
+          onSubmit={handleBidModalSuccess}
+          bodyContent={modalBidContent}
+        />
 
-            <ReusableModal
-                open={openOfferModal}
-                onClose={handleOfferModalClose}
-                onSubmit={handleOfferModalSuccess}
-                bodyContent={modalOfferContent}
-            />
+        <ReusableModal
+          open={openOfferModal}
+          onClose={handleOfferModalClose}
+          onSubmit={handleOfferModalSuccess}
+          bodyContent={modalOfferContent}
+        />
 
-            <ToastContainer />
-        </div>
-    );
-}
+        <ToastContainer />
+      </div>
+    </>
+  );
+};
 
 export default ProductDetails;

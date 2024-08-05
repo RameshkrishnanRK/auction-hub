@@ -25,23 +25,22 @@ const Search = styled('div')(({ theme }) => ({
         width: 'auto',
     },
 }));
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 }));
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    width: '100%',
-    '& .MuiInputBase-input': {
-        padding: theme.spacing(1, 1, 1, 0),
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-       
-    },
+  color: "inherit",
+  width: "100%",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+  },
 }));
 export default function Header() {
     return (
@@ -69,7 +68,7 @@ export default function Header() {
                             component="div"
                             ml={8}
                         >
-                            <Link to="/browse">
+                            <Link to="/auction/dashboard">
                                 Browse
                             </Link>
                         </Typography>
@@ -81,7 +80,7 @@ export default function Header() {
                             ml={8}
                         >
 
-                            <Link to="/sell">
+                            <Link to="/auction/sell">
                                 Sell
                             </Link>
                         </Typography>
@@ -95,7 +94,7 @@ export default function Header() {
                             </Link>
                         </Button>
                         <Button color="inherit"  className={styles.link}>
-                        <Link to="/login">
+                        <Link to="/auction/login">
                                 Login
                             </Link>
                         </Button>
@@ -108,7 +107,7 @@ export default function Header() {
                             component="div"
                             className={styles.link}
                         >
-                            <Link to="/contact-us">
+                            <Link to="/auction/contact-us">
                                 Contact Us
                             </Link>
                         </Typography>
@@ -119,7 +118,7 @@ export default function Header() {
                             className={styles.link}
                             ml={9}
                         >
-                            <Link to="/about-us">
+                            <Link to="/auction/about-us">
                                 About Us
                             </Link>
                         </Typography>

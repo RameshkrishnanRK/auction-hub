@@ -1,10 +1,11 @@
 import React from "react";
 import { Box, Breadcrumbs, Grid } from "@mui/material";
 import Sidebar from "./Sidebar";
-import styles from './Browse.module.scss'
+import styles from "./Browse.module.scss";
 import { categories, regions } from "./data";
 import ControlPanel from "./ControlPanel";
 import { Link, useLocation } from "react-router-dom";
+import Layout from "../../../routing/components/Layout";
 
 const Browse = () => {
 
@@ -14,6 +15,7 @@ const Browse = () => {
     
     return (
         <>
+        <Layout/>
             <Box className={styles.container}>
                 <Box className={styles.breadcrumbs}>
                     <Breadcrumbs className='breadcrumb' arial-label='breadcrumb'>
