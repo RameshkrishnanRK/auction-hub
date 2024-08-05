@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
-import { Box, Typography, Container, TextField, Button, Grid,Snackbar, Alert } from '@mui/material';
-import { styled } from '@mui/system';
-import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize';
-import styles from './ContactUs.module.scss';
+import React, { useState } from "react";
+import {
+  Box,
+  Typography,
+  Container,
+  TextField,
+  Button,
+  Grid,
+  Snackbar,
+  Alert,
+} from "@mui/material";
+import { styled } from "@mui/system";
+import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
+import styles from "./ContactUs.module.scss";
+import Layout from "../../routing/components/Layout";
 
 const MainContainer = styled(Box)({
-  display: 'flex',
-  flexDirection: 'column',
-  minHeight: '100vh',
+  display: "flex",
+  flexDirection: "column",
+  minHeight: "100vh",
 });
 
 const ContentContainer = styled(Container)({
-  flex: '1',
+  flex: "1",
 });
 
 const Textarea = styled(BaseTextareaAutosize)(
@@ -29,11 +39,11 @@ const Textarea = styled(BaseTextareaAutosize)(
 );
 
 const initialFormState = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  message: '',
-  captcha: '',
+  firstName: "",
+  lastName: "",
+  email: "",
+  message: "",
+  captcha: "",
 };
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -43,7 +53,7 @@ const ContactUs = () => {
 
   const [formState, setFormState] = useState(initialFormState);
   const [captchaCode, setCaptchaCode] = useState(generateCaptcha());
-  const [openSnackBar,setOpenSnackBar]=useState(false)
+  const [openSnackBar, setOpenSnackBar] = useState(false);
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -58,9 +68,9 @@ const ContactUs = () => {
     e.preventDefault();
     if (validateForm()) {
       // Handle form submission
-      setOpenSnackBar(true)
-      setFormState(initialFormState)
-      resetCaptcha()
+      setOpenSnackBar(true);
+      setFormState(initialFormState);
+      resetCaptcha();
     }
   };
 
@@ -69,21 +79,21 @@ const ContactUs = () => {
     const newErrors = {};
 
     if (!firstName) {
-      newErrors.firstName = 'First Name is required.';
+      newErrors.firstName = "First Name is required.";
     }
 
     if (!lastName) {
-      newErrors.lastName = 'Last Name is required.';
+      newErrors.lastName = "Last Name is required.";
     }
 
     if (!email) {
-      newErrors.email = 'Email is required.';
+      newErrors.email = "Email is required.";
     } else if (!emailRegex.test(email)) {
-      newErrors.email = 'Enter a valid email address.';
+      newErrors.email = "Enter a valid email address.";
     }
 
     if (captcha !== captchaCode) {
-      newErrors.captcha = 'Please solve the CAPTCHA correctly.';
+      newErrors.captcha = "Please solve the CAPTCHA correctly.";
     }
 
     setErrors(newErrors);
@@ -95,33 +105,37 @@ const ContactUs = () => {
     setCaptchaCode(newCaptcha);
   };
 
-  const handleCloseSnackBar=()=>{
-    setOpenSnackBar(false)
-  }
-
+  const handleCloseSnackBar = () => {
+    setOpenSnackBar(false);
+  };
 
   return (
     <MainContainer>
-      <ContentContainer className= {styles.mainContainer }>
+      <Layout />
+      <ContentContainer className={styles.mainContainer}>
         <Box mt={8}>
           <Typography p={3} gutterBottom className={styles.title}>
             Contact Us
           </Typography>
           <Box mt={8} className={styles.container}>
             <Box p={5}>
-              <Typography variant="body1" gutterBottom className={styles.disclaimer}>
+              <Typography
+                variant="body1"
+                gutterBottom
+                className={styles.disclaimer}
+              >
                 All fields marked with "*" are required.
               </Typography>
               <Box
                 component="form"
                 sx={{
-                  '& .MuiTextField-root': { mb: 2, width: '100%' },
+                  "& .MuiTextField-root": { mb: 2, width: "100%" },
                 }}
                 noValidate
                 autoComplete="off"
                 onSubmit={handleSubmit}
               >
-                <Grid container spacing={1} sx={{alignItems:'center'}} >
+                <Grid container spacing={1} sx={{ alignItems: "center" }}>
                   <Grid item xs={2}>
                     <Typography variant="body2" className={styles.text}>
                       First Name <span>*</span>
@@ -138,13 +152,13 @@ const ContactUs = () => {
                     />
                   </Grid>
                 </Grid>
-                <Grid container spacing={1} sx={{alignItems:'center'}}>
+                <Grid container spacing={1} sx={{ alignItems: "center" }}>
                   <Grid item xs={2}>
                     <Typography variant="body2" className={styles.text}>
                       Last Name <span>*</span>
                     </Typography>
                   </Grid>
-                  <Grid item xs={5} >
+                  <Grid item xs={5}>
                     <TextField
                       required
                       id="lastName"
@@ -228,14 +242,20 @@ const ContactUs = () => {
           </Box>
         </Box>
       </ContentContainer>
-      <Snackbar open={openSnackBar} autoHideDuration={6000} onClose={handleCloseSnackBar} anchorOrigin={{vertical:'top',horizontal:'right'}} >
-        <Alert onClose={handleCloseSnackBar} severity='success' >
+      <Snackbar
+        open={openSnackBar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackBar}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert onClose={handleCloseSnackBar} severity="success">
           Form Submitted Successfully
         </Alert>
       </Snackbar>
       <Box className={styles.footer}>
         <Typography className={styles.footerText}>
-          All Rights Reserved. No part of this web page may be reproduced in any way without the prior written permission of KPMG India.
+          All Rights Reserved. No part of this web page may be reproduced in any
+          way without the prior written permission of KPMG India.
         </Typography>
       </Box>
     </MainContainer>
