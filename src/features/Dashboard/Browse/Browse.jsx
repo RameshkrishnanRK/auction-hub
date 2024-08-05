@@ -2,8 +2,7 @@ import React from "react";
 import { Box, Grid } from "@mui/material";
 import Sidebar from "./Sidebar";
 import styles from './Browse.module.scss'
-import { categories, products, regions } from "./data";
-import ProductDetails from '../../../utils/ProductGridView'
+import { categories, regions } from "./data";
 import ControlPanel from "./ControlPanel";
 
 const Browse = () => {
@@ -16,18 +15,6 @@ const Browse = () => {
                     </Grid>
                     <Grid item xs={9}>
                         <ControlPanel />
-                        <div className={styles.productLists}>
-                            {products.map(product => (
-                                <ProductDetails
-                                    key={product.id}
-                                    image={product.image}
-                                    title={product.title}
-                                    currentBid={product.currentBid}
-                                    timeRemaining={product.timeRemaining}
-                                    isExpired={product.isExpired}
-                                />
-                            ))}
-                        </div>
                     </Grid>
                 </Grid>
             </Box>

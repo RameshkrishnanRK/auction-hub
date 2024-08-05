@@ -5,6 +5,7 @@
 
     .viewToggleGroup {
         background-color: #1768ac;
+        color: red !important;
 
         // .MuiButtonBase-root-MuiToggleButton-root{
         // &:global(.MuiToggleButtonGroup-root) {
@@ -53,9 +54,9 @@
         }
     }
 
-    
-}
-.controlPanelSelect {
-    margin-left: 10px;
-    min-width: 200px;
+    .controlPanelSelect {
+        margin-left: 10px;
+        min-width: 200px;
+        margin-right: 15px;
+    }
 }
