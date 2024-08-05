@@ -75,7 +75,7 @@ export default function Header() {
                             component="div"
                             ml={8}
                         >
-                            <Link to="/auction/dashboard">
+                            <Link to="/browse">
                                 Browse
                             </Link>
                         </Typography>

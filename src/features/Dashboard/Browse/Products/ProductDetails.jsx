@@ -150,7 +150,7 @@ const ProductDetails = () => {
             },
             onClose: () => {
                 setTimeout(() => {
-                    navigate('/auction/dashboard');
+                    navigate('/browse');
                 }, 1000)
             },
             transition: Slide
@@ -196,7 +196,7 @@ const ProductDetails = () => {
                     },
                     onClose: () => {
                         setTimeout(() => {
-                            navigate('/auction/dashboard');
+                            navigate('/browse');
                         }, 1000)
                     },
                     transition: Slide

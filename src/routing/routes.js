@@ -14,9 +14,9 @@ const routes = () => {
                 <Routes>
                     <Route path='/' element={<Layout />}>
                     <Route path='/' element={<Home />} />
-                    <Route path='/auction/dashboard' element={<Browse />} />
+                    <Route path='/browse' element={<Browse />} />
                     <Route path='/about-us' element={<AboutUs />} />
-                    <Route path='/auction/product-details' element={<ProductDetails />} />
+                    <Route path='/product-details' element={<ProductDetails />} />
                     <Route path='/contact-us' element={<ContactUs />} />
                     <Route path='/sell' element={<Sell />} />
 

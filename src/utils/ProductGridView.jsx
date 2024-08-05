@@ -7,7 +7,7 @@ const ProductGridView = ({ id, image, title, currentBid, timeRemaining, isExpire
     const navigate = useNavigate();
     
     const handleViewDetails=()=>{
-        navigate(`/auction/product-details?productId=${id}`)
+        navigate(`/product-details?productId=${id}`)
     }
     const formattedBid = Number(currentBid).toLocaleString('en-IN');
     return (
@@ -21,7 +21,7 @@ const ProductGridView = ({ id, image, title, currentBid, timeRemaining, isExpire
             />
             <CardContent>
                 <Typography variant='h6' component='div' onClick={handleViewDetails}>
-                <Link to="/auction/product-details" style={{color:'#337AB7', fontSize:'14px', textAlign:'left'}}>
+                <Link to="/product-details" style={{color:'#337AB7', fontSize:'14px', textAlign:'left'}}>
                     {title}
                     </Link>
                 </Typography>

@@ -7,7 +7,7 @@ const ProductListView = ({ id, image, title, currentBid, timeRemaining, isExpire
     const navigate = useNavigate();
     
     const handleViewDetails=()=>{
-        navigate(`/auction/product-details?productId=${id}`)
+        navigate(`/product-details?productId=${id}`)
     }
     const formattedBid = Number(currentBid).toLocaleString('en-IN');
     return (
@@ -21,7 +21,7 @@ const ProductListView = ({ id, image, title, currentBid, timeRemaining, isExpire
             />
             <CardContent className={styles.productListTitle}>
                 <Typography variant='h6' component='div' onClick={handleViewDetails}>
-                <Link to="/auction/product-details">
+                <Link to="/product-details">
                     {title}
                     </Link>
                 </Typography>
@@ -51,7 +51,7 @@ const ProductListView = ({ id, image, title, currentBid, timeRemaining, isExpire
                         className={styles.viewDetailsBtn}
                         onClick={handleViewDetails}
                     >
-                        <Link to="/auction/product-details">
+                        <Link to="/product-details">
                             View Details {'>'}
                         </Link>
                     </Button>
