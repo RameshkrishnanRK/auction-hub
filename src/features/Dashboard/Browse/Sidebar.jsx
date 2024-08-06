@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { Collapse, List, ListItem, ListItemText, Paper, Typography } from "@mui/material";
 import styles from './Sidebar.module.scss'
+import { useSelector } from "react-redux";
 
 
-const Sidebar = ({ categories, regions }) => {
+const Sidebar = () => {
     const [openCategories, setOpenCategories] = useState({});
+
+    const { data: categories, loading: categoryLoading, error: categoryError } = useSelector((state) => state.sidebar);
+    const { data: regions, loading: regionsLoading, error: regionsError } = useSelector((state) => state.sideBarRegion);
 
     const handleCategoryClick = (categoryName) => {
         setOpenCategories((prevOpencategories) => ({

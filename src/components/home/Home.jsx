@@ -14,11 +14,11 @@ const Home = () => {
         <Typography className={Styles.auctionDescription} component="p">
           KPMG Auction platform is a dynamic platform for buying and selling of
           Goods and Properties. It's a all in one Platform that provides users,
-          the ease of choosing and customised browsing options. It's the
+          the ease of choosing with customised browsing options. It's the
           ultimate destination for buyers and sellers to engage in competitive
           bidding for a wide range of exclusive items. Our user friendly
           interface ensures a seamless experience, allowing you to browsethrough
-          diverse catories from electronics and fashions to collectibles and
+          diverse catagories from electronics and fashions to collectibles and
           homegoods. Sellers can easily list their items with detailed
           descriptions and photos, attracting bidders with ease. Our real-time
           bidding system adds excitement, keeping you on the edge of your seat

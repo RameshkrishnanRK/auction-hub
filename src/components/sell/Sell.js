@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 import styles from "./Sell.module.scss";
-import { categories, regions } from "../../features/Dashboard/Browse/data";
+import { categoriesData, regionsData } from "../../features/Dashboard/Browse/data";
 import Layout from "../../routing/components/Layout";
 const MainContainer = styled(Box)({
   display: "flex",
@@ -46,7 +46,7 @@ const Sell = () => {
   const [subCategoryList, setSubCategoryList] = React.useState([]);
 
   useEffect(() => {
-    const selectedCategory = categories.filter(
+    const selectedCategory = categoriesData.filter(
       (data) => data.name === category
     );
 
@@ -114,7 +114,7 @@ const Sell = () => {
                       <em>Select Category</em>
                     </MenuItem>
 
-                    {categories.map((data, index) => (
+                    {categoriesData.map((data, index) => (
                       <MenuItem value={data.name} key={index}>
                         {data.name}
                       </MenuItem>
@@ -208,7 +208,7 @@ const Sell = () => {
                 <MenuItem value="">
                   <em>Select Region</em>
                 </MenuItem>
-                {regions.map((data, index) => (
+                {regionsData.map((data, index) => (
                   <MenuItem value={data.name} key={index}>
                     {data.name}
                   </MenuItem>

@@ -81,7 +81,6 @@
                             }
 
                             .submitBidBtn {
-                                height: fit-content;
                                 background-color: #3CA93A;
                                 height: 30px;
                                 text-transform: capitalize;
@@ -138,11 +137,13 @@
                             border-radius: 4px;
                             margin-bottom: 10px;
                             border: 1px solid rgb(206, 206, 206);
-                            margin-top: 35px;
+                            margin-top: 40px;
+                            
                             
                             .addWatchListBtn {
                                 margin-top: 10px;
                                 text-transform: capitalize;
+                                height: 30px;
                             }
                         }
 
@@ -178,24 +179,23 @@
         }
 
         .productExtraInfo {
-            width: 750px;
+            display: flex;
+            width: 93%;
             background-color: rgb(251 247 226);
-            border: 1px solid rgb(250, 235, 204);
-            float: right;
-
             padding: 10px;
             border-radius: 5px;
-            display: flex;
-            // justify-content: space-between;
-            text-align: left;
-            font-size: 12px;
+            margin-top: 10px;
 
-            // >* {
-            //     margin-bottom: 5px;
-            // }
-
-            
-
+            // width: 700px;
+            // background-color: rgb(251 247 226);
+            // border: 1px solid rgb(250, 235, 204);
+            // float: right;
+            // margin-top: 20px;
+            // padding: 10px;
+            // border-radius: 5px;
+            // display: flex;
+            // text-align: left;
+            // font-size: 12px;
         }
 
         

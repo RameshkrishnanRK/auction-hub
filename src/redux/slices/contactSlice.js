@@ -8,32 +8,29 @@ const initialState = {
     success: false
 };
 
-const productSlice = createSlice({
-    name: 'product',
-    initialState:  {
-        data: [],
-        loading: false,
-        error: null,
-        success: false
-    },
+const contactSlice = createSlice({
+    name: 'contact',
+    initialState: initialState,
     reducers: {
-        fetchProductsStart: (state) => {
+        submitContactStart: (state) => {
             state.loading = true;
             state.error = null;
             state.success = false
         },
-        fetchProductsSuccess: (state, action) => {
-            state.data = action.payload;
+        submitContactSuccess: (state) => {
             state.loading = false;
             state.success = true
         },
-        fetchProductsFailure: (state, action) => {
+        submitContactFailure: (state, action) => {
             state.loading = false;
             state.error = action.payload;
             state.success = false
         },
+        setContactInfo: (state, action) => {
+            state.data = {...state.data, ...action.payload}
+        }
     }
 });
 
-export const { fetchProductsStart, fetchProductsSuccess, fetchProductsFailure } = productSlice.actions;
-export default productSlice.reducer;
+export const { submitContactStart, submitContactSuccess, submitContactFailure, setContactInfo } = contactSlice.actions;
+export default contactSlice.reducer;
