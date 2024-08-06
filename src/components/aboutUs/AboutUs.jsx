@@ -19,7 +19,7 @@ const About = () => {
   return (
     <MainContainer>
       <ContentContainer className={styles.mainContainer}>
-        <Box mt={8}>
+        <Box mt={2}>
           <Typography p={2} className={styles.title} gutterBottom >
             About Us
           </Typography>

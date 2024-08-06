@@ -103,7 +103,7 @@ const ContactUs = () => {
   return (
     <MainContainer>
       <ContentContainer className= {styles.mainContainer }>
-        <Box mt={8}>
+        <Box mt={2}>
           <Typography p={3} gutterBottom className={styles.title}>
             Contact Us
           </Typography>
@@ -122,7 +122,7 @@ const ContactUs = () => {
                 onSubmit={handleSubmit}
               >
                 <Grid container spacing={1} sx={{alignItems:'center'}} >
-                  <Grid item xs={2}>
+                  <Grid xs={2}>
                     <Typography variant="body2" className={styles.text}>
                       First Name <span>*</span>
                     </Typography>
@@ -139,7 +139,7 @@ const ContactUs = () => {
                   </Grid>
                 </Grid>
                 <Grid container spacing={1} sx={{alignItems:'center'}}>
-                  <Grid item xs={2}>
+                  <Grid xs={2}>
                     <Typography variant="body2" className={styles.text}>
                       Last Name <span>*</span>
                     </Typography>
@@ -155,9 +155,9 @@ const ContactUs = () => {
                     />
                   </Grid>
                 </Grid>
-                <Grid container spacing={1}>
-                  <Grid item xs={2}>
-                    <Typography mt={2} className={styles.text}>
+                <Grid container spacing={1} sx={{alignItems:'center'}}>
+                  <Grid xs={2}>
+                    <Typography variant='body2' className={styles.text}>
                       Email <span>*</span>
                     </Typography>
                   </Grid>
@@ -172,8 +172,8 @@ const ContactUs = () => {
                     />
                   </Grid>
                 </Grid>
-                <Grid container spacing={1}>
-                  <Grid item xs={2}>
+                <Grid container spacing={1} sx={{alignItems:'center'}}>
+                  <Grid xs={2}>
                     <Typography mt={2} className={styles.text}>
                       Message
                     </Typography>
@@ -191,9 +191,9 @@ const ContactUs = () => {
                     />
                   </Grid>
                 </Grid>
-                <Grid container spacing={1} mt={3}>
-                  <Grid item xs={2}>
-                    <Typography mt={2} className={styles.text}>
+                <Grid container spacing={1} mt={3} sx={{alignItems:'center'}}>
+                  <Grid xs={2}>
+                    <Typography variant="body2" className={styles.text}>
                       Captcha
                     </Typography>
                   </Grid>

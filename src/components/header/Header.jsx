@@ -54,10 +54,10 @@ export default function Header() {
         <>
             <Box sx={{ flexGrow: 1 }}>
                 <AppBar  position="relative" className={styles.headerColor}>
-                    <Toolbar mt={3}>
+                    <Toolbar sx={{ minHeight: '55px !important' }} mt={3}>
                         <img alt="kpmg" src={kpmgImage} />
                     </Toolbar>
-                    <Toolbar>
+                    <Toolbar sx={{ minHeight: '55px !important' }}>
                         <Typography
                             variant="h6"
                             noWrap
@@ -107,7 +107,7 @@ export default function Header() {
                         </Button>
                     </Toolbar>
                     <Divider   className={styles.divider} />
-                    <Toolbar>
+                    <Toolbar sx={{ minHeight: '55px !important' }}>
                         <Typography
                             variant="h6"
                             noWrap
