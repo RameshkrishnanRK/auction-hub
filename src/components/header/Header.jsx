@@ -10,9 +10,11 @@ import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import kpmgImage from '../../assets/images/Auction.KPMGLogo_1_.svg';
 import styles from './Header.module.scss'
-import { Breadcrumbs } from '@mui/material';
-import { useLocation } from 'react-router-dom'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import { logout } from '../../redux/slices/loginSlice';
+
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -27,28 +29,37 @@ const Search = styled('div')(({ theme }) => ({
         width: 'auto',
     },
 }));
-const SearchIconWrapper = styled('div')(({ theme }) => ({
+const SearchIconWrapper = styled("div")(({ theme }) => ({
     padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
 }));
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    width: '100%',
-    '& .MuiInputBase-input': {
+    color: "inherit",
+    width: "100%",
+    "& .MuiInputBase-input": {
         padding: theme.spacing(1, 1, 1, 0),
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-       
     },
 }));
+
+
+
+
 export default function Header() {
-    const location = useLocation();
-    const pathname = location.pathname;
-    const pathSegments = pathname.split('/').filter((segment) => segment);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const userData = useSelector((state) => state.login.user);
+
+    const handleLogout = () => {
+        dispatch(logout());
+        navigate("/auction/login");
+    }
 
     return (
         <>
@@ -75,7 +86,7 @@ export default function Header() {
                             component="div"
                             ml={8}
                         >
-                            <Link to="/browse">
+                            <Link to="/auction/dashboard">
                                 Browse
                             </Link>
                         </Typography>
@@ -87,24 +98,33 @@ export default function Header() {
                             ml={8}
                         >
 
-                            <Link to="/sell">
+                            <Link to="/auction/sell">
                                 Sell
                             </Link>
                         </Typography>
                         <Box sx={{ flexGrow: 1 }} />
-                        <Button mr={4} className={styles.link} color="inherit"><Link to="/sign-up">
-                                SignUp
-                            </Link></Button>
-                        <Button mr={4}  className={styles.link} color="inherit">
-                        <Link to="/register">
-                                Register
-                            </Link>
-                        </Button>
-                        <Button color="inherit"  className={styles.link}>
-                        <Link to="/login">
-                                Login
-                            </Link>
-                        </Button>
+                        {
+                            userData ? <>
+
+                                Hello, {userData.user}
+                                <LogoutOutlinedIcon onClick={handleLogout} style={{fontSize:'15px', fontWeight:'bold', paddingLeft:'4px', cursor:'pointer'}} />
+                            </> : <>
+                                <Button mr={4} className={styles.link} color="inherit"><Link to="/sign-up">
+                                    SignUp
+                                </Link></Button>
+                                <Button mr={4} className={styles.link} color="inherit">
+                                    <Link to="/register">
+                                        Register
+                                    </Link>
+                                </Button>
+                                <Button color="inherit" className={styles.link}>
+                                    <Link to="/auction/login">
+                                        Login
+                                    </Link>
+                                </Button>
+                            </>
+                        }
+
                     </Toolbar>
                     <Divider   className={styles.divider} />
                     <Toolbar sx={{ minHeight: '55px !important' }}>
@@ -114,7 +134,7 @@ export default function Header() {
                             component="div"
                             className={styles.link}
                         >
-                            <Link to="/contact-us">
+                            <Link to="/auction/contact-us">
                                 Contact Us
                             </Link>
                         </Typography>
@@ -125,7 +145,7 @@ export default function Header() {
                             className={styles.link}
                             ml={9}
                         >
-                            <Link to="/about-us">
+                            <Link to="/auction/about-us">
                                 About Us
                             </Link>
                         </Typography>
@@ -145,20 +165,7 @@ export default function Header() {
                     </Toolbar>
                 </AppBar>
             </Box>
-            <Breadcrumbs className='breadcrumb' arial-label='breadcrumb'>
-                <Link to="/">
-                    Home
-                </Link>
-                {pathSegments.map((segment, index) => {
-                    const to = `/${pathSegments.slice(0, index + 1).join('/')}`;
-                    return (
-                        <Link to={to}>
-                            {segment.charAt(0).toUpperCase() + segment.slice(1)}
-                        </Link>
-                    )
-                })}
-                {/* <Typography color="text.primary" href="/browse">Browse</Typography> */}
-            </Breadcrumbs>
+
         </>
     );
 }

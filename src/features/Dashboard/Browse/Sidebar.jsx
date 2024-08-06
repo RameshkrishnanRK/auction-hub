@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { Collapse, List, ListItem, ListItemText, Paper, Typography } from "@mui/material";
 import styles from './Sidebar.module.scss'
+import { useSelector } from "react-redux";
 
 
-const Sidebar = ({ categories, regions }) => {
+const Sidebar = () => {
     const [openCategories, setOpenCategories] = useState({});
+
+    const { data: categories, loading: categoryLoading, error: categoryError } = useSelector((state) => state.sidebar);
+    const { data: regions, loading: regionsLoading, error: regionsError } = useSelector((state) => state.sideBarRegion);
 
     const handleCategoryClick = (categoryName) => {
         setOpenCategories((prevOpencategories) => ({
@@ -26,12 +30,21 @@ const Sidebar = ({ categories, regions }) => {
                                     <ListItemText primary={`${category.name} (${category.quantity})`} />
                                     {category.subcategories ? (openCategories[category.name] ? <ExpandLess /> : <ExpandMore />) : null}
                                 </ListItem>
-                                {category.subcatagories && (
+                                {/* <Collapse in={expandedIndex === index} timeout="auto" unmountOnExit>
+                                        <List component="div" disablePadding>
+                                            {category.subcategories.map((subcategory, subIndex) => (
+                                                <ListItem key={subIndex}  style={{paddingLeft: 32}} className={styles.nested}>
+                                                    <ListItemText primary={subcategory} />
+                                                </ListItem>
+                                            ))}
+                                        </List>
+                                    </Collapse> */}
+                                {category.subcategories && (
                                     <Collapse in={openCategories[category.name]} timeout="auto" unmountOnExit>
                                         <List component="div" disablePadding>
-                                            {category.subcatagories.map((subcatagory, subIndex) => (
+                                            {category.subcategories.map((subcategory, subIndex) => (
                                                 <ListItem key={subIndex} className={styles.nested}>
-                                                    <ListItemText primary={subcatagory} />
+                                                    <ListItemText primary={subcategory} />
                                                 </ListItem>
                                             ))}
                                         </List>
