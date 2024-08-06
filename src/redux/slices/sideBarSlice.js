@@ -8,32 +8,34 @@ const initialState = {
     success: false
 };
 
-const productSlice = createSlice({
-    name: 'product',
-    initialState:  {
+const sideBarSlice = createSlice({
+    name: 'sidebar',
+    initialState: {
         data: [],
         loading: false,
         error: null,
         success: false
     },
     reducers: {
-        fetchProductsStart: (state) => {
+        fetchSideBarStart: (state) => {
             state.loading = true;
             state.error = null;
             state.success = false
         },
-        fetchProductsSuccess: (state, action) => {
+        fetchSideBarSuccess: (state, action) => {
             state.data = action.payload;
             state.loading = false;
             state.success = true
         },
-        fetchProductsFailure: (state, action) => {
+        fetchSideBarFailure: (state, action) => {
             state.loading = false;
             state.error = action.payload;
             state.success = false
         },
+
+       
     }
 });
 
-export const { fetchProductsStart, fetchProductsSuccess, fetchProductsFailure } = productSlice.actions;
-export default productSlice.reducer;
+export const { fetchSideBarStart, fetchSideBarSuccess, fetchSideBarFailure } = sideBarSlice.actions;
+export default sideBarSlice.reducer;

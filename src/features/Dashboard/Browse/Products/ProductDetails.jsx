@@ -1,20 +1,20 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import Styles from "./ProductDetails.module.scss";
 import {
-  Alert,
-  Box,
-  Button,
-  Card,
-  CardContent,
-  CardMedia,
-  Divider,
-  TextField,
-  Typography,
-  Modal,
+    Alert,
+    Box,
+    Button,
+    Card,
+    CardContent,
+    CardMedia,
+    Divider,
+    TextField,
+    Typography,
+    Modal,
 } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../../../redux/slices/productSlice";
+//import { fetchProducts } from "../../../../redux/slices/productSlice";
 import { Slide, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
@@ -22,83 +22,85 @@ import ReusableModal from "../../../../utils/reusableModal";
 import Layout from "../../../../routing/components/Layout";
 
 const useQuery = () => {
-  return new URLSearchParams(useLocation().search);
+    return new URLSearchParams(useLocation().search);
 };
 
 const ProductDetails = () => {
-  const dispatch = useDispatch();
-  const query = useQuery();
-  const productId = query.get("productId");
+    const dispatch = useDispatch();
+    const query = useQuery();
+    const productId = query.get("productId");
 
-  const navigate = useNavigate();
-  const modalRef = useRef(null);
-  const [openBidModal, setOpenBidModal] = useState(false);
-  const [openOfferModal, setOpenOfferModal] = useState(false);
+    const navigate = useNavigate();
+    const modalRef = useRef(null);
+    const [openBidModal, setOpenBidModal] = useState(false);
+    const [openOfferModal, setOpenOfferModal] = useState(false);
 
-  const products = useSelector((state) => state.products.products);
+    //const products = useSelector((state) => state.products.products);
+    const { data: products, loading: productLoading, error: productError } = useSelector((state) => state.product);
+    
 
-  useEffect(() => {
-    if (products.length === 0) {
-      dispatch(fetchProducts());
-    }
-  }, [dispatch, products.length]);
+    //   useEffect(() => {
+    //     if (products.length === 0) {
+    //       dispatch(fetchProducts());
+    //     }
+    //   }, [dispatch, products.length]);
 
-  const product =
-    products.length > 0 &&
-    products.find((product) => product.id === parseInt(productId));
+    const product =
+        products.length > 0 &&
+        products.find((product) => product.id === parseInt(productId));
 
-  const formattedBid = Number(product.currentBid).toLocaleString("en-IN");
-  const [cleanedFormattedBid, setCleanedFormattedBid] = useState(formattedBid);
-  //const [cleanedFormattedBid, setCleanedFormattedBid] = useState(formattedBid.replace(/,/g, ''));
+    const formattedBid = Number(product.currentBid).toLocaleString("en-IN");
+    const [cleanedFormattedBid, setCleanedFormattedBid] = useState(formattedBid);
+    //const [cleanedFormattedBid, setCleanedFormattedBid] = useState(formattedBid.replace(/,/g, ''));
 
-  const [addedToWatchList, setAddedToWatchList] = useState(false);
+    const [addedToWatchList, setAddedToWatchList] = useState(false);
 
-  const cleanedFormattedBidMemo = useMemo(() => {
-    setCleanedFormattedBid(formattedBid.replace(/,/g, ""));
-    return formattedBid.replace(/,/g, "");
-  }, [formattedBid]);
+    const cleanedFormattedBidMemo = useMemo(() => {
+        setCleanedFormattedBid(formattedBid.replace(/,/g, ""));
+        return formattedBid.replace(/,/g, "");
+    }, [formattedBid]);
 
-  //const cleanedFormattedBid = formattedBid && Number(formattedBid.replace(/,/g, ''));
+    //const cleanedFormattedBid = formattedBid && Number(formattedBid.replace(/,/g, ''));
 
-  const [bidAmount, setBidAmount] = useState("");
-  const [offerAmount, setOfferAmount] = useState("");
-  const [OfferMessage, setOfferMessage] = useState("");
+    const [bidAmount, setBidAmount] = useState("");
+    const [offerAmount, setOfferAmount] = useState("");
+    const [OfferMessage, setOfferMessage] = useState("");
 
-  const handleBidAmount = (event) => {
-    setBidAmount(event.target.value);
-  };
+    const handleBidAmount = (event) => {
+        setBidAmount(event.target.value);
+    };
 
-  const handleOfferAmount = (event) => {
-    //console.log("event value ", event.target.value)
-    setOfferAmount(event.target.value);
-  };
+    const handleOfferAmount = (event) => {
+        //console.log("event value ", event.target.value)
+        setOfferAmount(event.target.value);
+    };
 
-  const handleOfferMessage = (event) => {
-    //console.log("event value ", event.target.value)
-    setOfferMessage(event.target.value);
-  };
+    const handleOfferMessage = (event) => {
+        //console.log("event value ", event.target.value)
+        setOfferMessage(event.target.value);
+    };
 
-  const handleBidAmountSubmit = () => {
-    //setCleanedFormattedBid(formattedBid)
-    let formattedBidValue = Number(cleanedFormattedBid);
-    let bidAmountValue = Number(bidAmount);
+    const handleBidAmountSubmit = () => {
+        //setCleanedFormattedBid(formattedBid)
+        let formattedBidValue = Number(cleanedFormattedBid);
+        let bidAmountValue = Number(bidAmount);
 
-    if (bidAmountValue < formattedBidValue) {
-      toast.error("Bid Amount Cannot be lesser than Current Bid", {
-        position: "top-center",
-        autoClose: 3000,
-        style: {
-          width: "430px",
-          backgroundColor: "#DC2020",
-          color: "#ffffff",
-        },
-        transition: Slide,
-      });
-    } else {
-      setCleanedFormattedBid(bidAmountValue);
-      setOpenBidModal(true);
-    }
-  };
+        if (bidAmountValue < formattedBidValue) {
+            toast.error("Bid Amount Cannot be lesser than Current Bid", {
+                position: "top-center",
+                autoClose: 3000,
+                style: {
+                    width: "430px",
+                    backgroundColor: "#DC2020",
+                    color: "#ffffff",
+                },
+                transition: Slide,
+            });
+        } else {
+            setCleanedFormattedBid(bidAmountValue);
+            setOpenBidModal(true);
+        }
+    };
 
 
     const handleOfferAmountSubmit = () => {
@@ -117,7 +119,7 @@ const ProductDetails = () => {
             },
             onClose: () => {
                 setTimeout(() => {
-                    navigate('/browse');
+                    navigate('/auction/dashboard');
                 }, 1000)
             },
             transition: Slide
@@ -125,73 +127,73 @@ const ProductDetails = () => {
 
     };
 
-  const handleQuickBid = () => {
-    setOpenBidModal(true);
-  };
+    const handleQuickBid = () => {
+        setOpenBidModal(true);
+    };
 
-  const handleBidModalSuccess = async () => {
-    setOpenBidModal(false);
+    const handleBidModalSuccess = async () => {
+        setOpenBidModal(false);
 
-    // const payload = {
-    //     "versionInfo": {
-    //         "hasModuleVersionChanged": false,
-    //         "hasApiVersionChanged": false
-    //     },
-    //     "data": {
-    //         "Out1": "0"
-    //     }
-    // }
+        // const payload = {
+        //     "versionInfo": {
+        //         "hasModuleVersionChanged": false,
+        //         "hasApiVersionChanged": false
+        //     },
+        //     "data": {
+        //         "Out1": "0"
+        //     }
+        // }
 
         // const url = 'https://kisl-dev.outsystemscloud.com/Auction/screenservices/Auction/MainFlow/ProductDetails/ActionAddBid';
 
-    // try {
-    //     const response = await axios.post(url, payload, {
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //     });
-    //     console.log('response ', response)
-    // } catch (error) {
-    //     console.log("error ", error)
-    // }
+        // try {
+        //     const response = await axios.post(url, payload, {
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //     });
+        //     console.log('response ', response)
+        // } catch (error) {
+        //     console.log("error ", error)
+        // }
 
-    toast.success("Your Bid has been successfully Submitted", {
-      position: "top-center",
-      autoClose: 2000,
-      style: {
-        width: "430px",
-        backgroundColor: "#009933",
-        color: "#ffffff",
-      },
-      onClose: () => {
-        setTimeout(() => {
-          navigate("/auction/dashboard");
-        }, 1000);
-      },
-      transition: Slide,
-    });
-  };
-
-  const handleOfferModalSuccess = async () => {
-    //setOpenOfferModal(false)
-    if (offerAmount.length > 0 && OfferMessage.length > 0) {
-      let formattedBidValue = Number(cleanedFormattedBid);
-      let offerAmountValue = Number(offerAmount);
-
-      if (offerAmountValue < formattedBidValue) {
-        toast.error("Bid Amount Cannot be lesser than Current Bid", {
-          position: "top-center",
-          autoClose: 3000,
-          style: {
-            width: "430px",
-            backgroundColor: "#DC2020",
-            color: "#ffffff",
-          },
-          transition: Slide,
+        toast.success("Your Bid has been successfully Submitted", {
+            position: "top-center",
+            autoClose: 2000,
+            style: {
+                width: "430px",
+                backgroundColor: "#009933",
+                color: "#ffffff",
+            },
+            onClose: () => {
+                setTimeout(() => {
+                    navigate("/auction/dashboard");
+                }, 1000);
+            },
+            transition: Slide,
         });
-      } else {
-        setCleanedFormattedBid(offerAmountValue);
-        setOpenOfferModal(false);
+    };
+
+    const handleOfferModalSuccess = async () => {
+        //setOpenOfferModal(false)
+        if (offerAmount.length > 0 && OfferMessage.length > 0) {
+            let formattedBidValue = Number(cleanedFormattedBid);
+            let offerAmountValue = Number(offerAmount);
+
+            if (offerAmountValue < formattedBidValue) {
+                toast.error("Bid Amount Cannot be lesser than Current Bid", {
+                    position: "top-center",
+                    autoClose: 3000,
+                    style: {
+                        width: "430px",
+                        backgroundColor: "#DC2020",
+                        color: "#ffffff",
+                    },
+                    transition: Slide,
+                });
+            } else {
+                setCleanedFormattedBid(offerAmountValue);
+                setOpenOfferModal(false);
 
                 toast.success("Your Bid has been successfully Submitted", {
                     position: "top-center",
@@ -203,7 +205,7 @@ const ProductDetails = () => {
                     },
                     onClose: () => {
                         setTimeout(() => {
-                            navigate('/browse');
+                            navigate('/auction/dashboard');
                         }, 1000)
                     },
                     transition: Slide
@@ -233,6 +235,8 @@ const ProductDetails = () => {
 
 
     const handleBidModalClose = (event) => {
+        const formattedBid = Number(product.currentBid).toLocaleString("en-IN");
+        setCleanedFormattedBid(formattedBid)
         setOpenBidModal(false)
     }
 
@@ -251,7 +255,7 @@ const ProductDetails = () => {
             },
             onClose: () => {
                 setTimeout(() => {
-                    navigate('/browse');
+                    navigate('/auction/dashboard');
                 }, 1000)
             },
             transition: Slide
@@ -274,15 +278,15 @@ const ProductDetails = () => {
 
     const modalBidContent = (<Box><Typography sx={{ padding: '4px', backgroundColor: '#337AB7', color: '#ffffff', fontSize: '14px', fontWeight: 'bold' }} id="modal-modal-title" variant="h6" component="h2">
         {product.title}
-      </Typography>
-      <Typography
-        id="modal-modal-description"
-        sx={{ mt: 2, color: "#3C763D", fontSize: "14px", fontWeight: "bold" }}
-      >
-        Confirm your bid of INR {cleanedFormattedBid}
-      </Typography>
+    </Typography>
+        <Typography
+            id="modal-modal-description"
+            sx={{ mt: 2, color: "#3C763D", fontSize: "14px", fontWeight: "bold" }}
+        >
+            Confirm your bid of INR {cleanedFormattedBid}
+        </Typography>
     </Box>
-  );
+    );
 
     const modalOfferContent = (
         <Box>
@@ -321,141 +325,158 @@ const ProductDetails = () => {
 
     return (
         <>
-        <div className={Styles.ViewProductDetails}>
-            <Card className={Styles.productDetailsWrapper}>
-                {addedToWatchList && (
-                    <Alert severity='success' className={Styles.watchListAlert}>
-                        Added to watch list
-                    </Alert>
-                )}
-                <Box className={Styles.productMain}>
-                    <CardMedia
-                        component='img'
-                        height='140'
-                        width='100%'
-                        image={product.image}
-                        alt={product.title}
-                        className={Styles.productImage}
-                    />
-                    <CardContent className={Styles.productDetails}>
-                        <Typography variant='h5' component='div' className={Styles.productTitle}>
-                            {product.title}
-                        </Typography>
-                        <Divider />
-                        <Box className={Styles.productInfo}>
-                            <Box className={Styles.productInfoLeft}>
-                                <Typography variant='h6' className={Styles.productPriceTitle} >
-                                    Current Price <span className={Styles.productPrice}>₹{formattedBid}</span>
-                                </Typography>
-                                <Button
-                                    variant='contained'
-                                    color='primary'
-                                    className={Styles.quickBidBtn}
-                                    onClick={handleQuickBid}
-                                // disabled={product.isExpired}
-                                >
-                                    Quick Bid ₹{formattedBid}
-                                </Button>
-                                <Box className={Styles.bidSection}>
-                                    <TextField
-
-                                        label={`Minimum Bid ₹${formattedBid}`}
-                                        variant='outlined'
-                                        size='small'
-                                        className={Styles.bidInput}
-                                        value={bidAmount}
-                                        onChange={handleBidAmount}
-                                    />
-
+            <Layout />
+            <div className={Styles.ViewProductDetails}>
+                
+                <Card className={Styles.productDetailsWrapper}>
+                    {addedToWatchList && (
+                        <Alert severity='success' className={Styles.watchListAlert}>
+                            Added to watch list
+                        </Alert>
+                    )}
+                    <Box className={Styles.productMain}>
+                        <CardMedia
+                            component='img'
+                            height='140'
+                            width='100%'
+                            image={product.image}
+                            alt={product.title}
+                            className={Styles.productImage}
+                        />
+                        <CardContent className={Styles.productDetails}>
+                            <Typography variant='h5' component='div' className={Styles.productTitle}>
+                                {product.title}
+                            </Typography>
+                            <Divider />
+                            <Box className={Styles.productInfo}>
+                                <Box className={Styles.productInfoLeft}>
+                                    <Typography variant='h6' className={Styles.productPriceTitle} >
+                                        Current Price <span className={Styles.productPrice}>₹{formattedBid}</span>
+                                    </Typography>
                                     <Button
                                         variant='contained'
-                                        color='success'
-                                        className={Styles.submitBidBtn}
-                                        onClick={handleBidAmountSubmit}
-                                    // disabled={isExpired}
+                                        color='primary'
+                                        className={Styles.quickBidBtn}
+                                        onClick={handleQuickBid}
+                                    // disabled={product.isExpired}
                                     >
-                                        Submit Bid
+                                        Quick Bid ₹{formattedBid}
                                     </Button>
-                                </Box>
-                                <Typography variant='body2' className={Styles.orText}>
+                                    <Box className={Styles.bidSection}>
+                                        <TextField
+                                            type="number"
+                                            label={`Minimum Bid ₹${formattedBid}`}
+                                            variant='outlined'
+                                            size='small'
+                                            className={Styles.bidInput}
+                                            value={bidAmount}
+                                            onChange={handleBidAmount}
+                                        />
 
-                                    <hr style={{ border: "1px solid grey", width: "200" }} /><span style={{ whiteSpace: "nowrap", color: "#696969", fontSize: "16px", fontWeight: "bold", fontStyle: "italic" }}>OR</span> <hr style={{ border: "0", borderTop: "1px solid #000" }} />
-                                </Typography>
-                                <Button
+                                        <Button
+                                            variant='contained'
+                                            color='success'
+                                            className={Styles.submitBidBtn}
+                                            onClick={handleBidAmountSubmit}
+                                        // disabled={isExpired}
+                                        >
+                                            Submit Bid
+                                        </Button>
+                                    </Box>
+                                    <Typography variant='body2' className={Styles.orText}>
 
-                                    className={Styles.buyNowBtn}
-                                    onClick={handleBuyNow}
-                                // disabled={isExpired}
-                                >
-                                    Buy Now ₹520,000.00
-                                </Button>
-                                <Typography variant='body2' className={Styles.orText}>
-                                    <hr style={{ border: "1px solid grey", width: "200" }} /><span style={{ whiteSpace: "nowrap", color: "#696969", fontSize: "16px", fontWeight: "bold", fontStyle: "italic" }}>OR</span> <hr style={{ border: "0", borderTop: "1px solid #000" }} />
-                                </Typography>
-                                <Button
-
-                                    className={Styles.makeOfferButton}
-                                    onClick={handleOfferAmountSubmit}
-                                // disabled={isExpired}
-                                >
-                                    Make Offer
-                                </Button>
-                                <Typography variant='body2' color="text.secondary" className={Styles.remainingTime}>
-                                    Remaining Time <br /> {product.isExpired ? 'Expired' : product.timeRemaining}
-                                </Typography>
-                            </Box>
-                            <Box className={Styles.productInfoRight}>
-                                <Box className={Styles.watchListBox}>
-                                    <Typography variant='body2'>
-                                        1Watching
+                                        <hr style={{ border: "1px solid grey", width: "200" }} /><span style={{ whiteSpace: "nowrap", color: "#696969", fontSize: "16px", fontWeight: "bold", fontStyle: "italic" }}>OR</span> <hr style={{ border: "0", borderTop: "1px solid #000" }} />
                                     </Typography>
                                     <Button
-                                        variant='outlined'
 
-                                        className={Styles.addWatchListBtn}
-                                        onClick={handleAddToWatchList}
+                                        className={Styles.buyNowBtn}
+                                        onClick={handleBuyNow}
                                     // disabled={isExpired}
                                     >
-                                        + Add to watch list
+                                        Buy Now ₹520,000.00
                                     </Button>
-                                </Box>
-                                <Box className={Styles.highBidderBox}>
-                                    <Typography className={Styles.highBidder}>
-                                        <div>High Bidder:</div> <div>Bidder</div>
+                                    <Typography variant='body2' className={Styles.orText}>
+                                        <hr style={{ border: "1px solid grey", width: "200" }} /><span style={{ whiteSpace: "nowrap", color: "#696969", fontSize: "16px", fontWeight: "bold", fontStyle: "italic" }}>OR</span> <hr style={{ border: "0", borderTop: "1px solid #000" }} />
                                     </Typography>
-                                    <Box className={Styles.highBidderSecond}>
-                                        <Typography variant='body2' style={{ fontSize: '18px', fontWeight: 'bold' }}>
-                                            1 Bid (s)
+                                    <Button
+
+                                        className={Styles.makeOfferButton}
+                                        onClick={handleOfferAmountSubmit}
+                                    // disabled={isExpired}
+                                    >
+                                        Make Offer
+                                    </Button>
+                                    <Typography variant='body2' color="text.secondary" className={Styles.remainingTime}>
+                                        Remaining Time :  {product.isExpired ? 'Expired' : `${product.timeRemaining} hrs`}
+                                    </Typography>
+                                </Box>
+                                <Box className={Styles.productInfoRight}>
+                                    <Box className={Styles.watchListBox}>
+                                        <Typography variant='body2'>
+                                            1Watching
                                         </Typography>
-                                        <Typography variant='body2' style={{ fontSize: '18px', fontWeight: 'bold' }}>
-                                            Bid History {'>'}
+                                        <Button
+                                            variant='contained'
+                                            color='primary'
+                                            className={Styles.addWatchListBtn}
+
+                                            onClick={handleAddToWatchList}
+                                        // disabled={isExpired}
+                                        >
+                                            + Add to watch list
+                                        </Button>
+                                    </Box>
+                                    <Box className={Styles.highBidderBox}>
+                                        <Typography className={Styles.highBidder}>
+                                            <div>High Bidder:</div> <div>Bidder</div>
                                         </Typography>
+                                        <Box className={Styles.highBidderSecond}>
+                                            <Typography variant='body2' style={{ fontSize: '18px', fontWeight: 'bold' }}>
+                                                1 Bid (s)
+                                            </Typography>
+                                            <Typography variant='body2' style={{ fontSize: '18px', fontWeight: 'bold' }}>
+                                                Bid History {'>'}
+                                            </Typography>
+                                        </Box>
                                     </Box>
                                 </Box>
                             </Box>
-                        </Box>
-                        <Box className={Styles.productExtraInfo}>
-                            {/* <Box> */}
+                            {/* <Box className={Styles.productExtraInfo}>
+                          
                             <Typography variant='body2' color="text.secondary" style={{ width: '125%', marginRight: '10px' }}>
                                 KPMG will bid incrementally for you upto your maximun bid. Your maximum bid is kept a secret from other users.
                             </Typography>
-                            {/* </Box>
-                            <Box> */}
+                           
                             <Typography variant='body2' color="text.secondary">
                                 Your bid is a contract between you and the listing creator. If you have the highest bid, you will enter into a legally  binding purchase contract.
                             </Typography>
-                            {/* </Box> */}
+                          
 
 
-                        </Box>
-                    </CardContent>
-                </Box>
+                        </Box> */}
+
+                            <Box className={Styles.productExtraInfo}>
+                                {/* <Box> */}
+                                <Typography variant='body2' color="text.secondary" style={{ width: '98%', textAlign:'justify' }}>
+                                    KPMG will bid incrementally for you upto your maximun bid. Your maximum bid is kept a secret from other users.
+                                </Typography>
+                                {/* </Box>
+                            <Box> */}
+                                <Typography variant='body2' color="text.secondary" style={{ width: '98%', paddingLeft:'25px', textAlign:'justify' }}>
+                                    Your bid is a contract between you and the listing creator. If you have the highest bid, you will enter into a legally  binding purchase contract.
+                                </Typography>
+                                {/* </Box> */}
+
+
+                            </Box>
+                        </CardContent>
+                    </Box>
 
 
 
-            </Card>
+                </Card>
 
-        {/* <Modal
+                {/* <Modal
                 open={openBidModal}
                 onClose={handleOutsideClick}
                 aria-labelledby="modal-modal-title"
@@ -477,24 +498,24 @@ const ProductDetails = () => {
                 </Box>
             </Modal> */}
 
-        <ReusableModal
-          open={openBidModal}
-          onClose={handleBidModalClose}
-          onSubmit={handleBidModalSuccess}
-          bodyContent={modalBidContent}
-        />
+                <ReusableModal
+                    open={openBidModal}
+                    onClose={handleBidModalClose}
+                    onSubmit={handleBidModalSuccess}
+                    bodyContent={modalBidContent}
+                />
 
-        <ReusableModal
-          open={openOfferModal}
-          onClose={handleOfferModalClose}
-          onSubmit={handleOfferModalSuccess}
-          bodyContent={modalOfferContent}
-        />
+                <ReusableModal
+                    open={openOfferModal}
+                    onClose={handleOfferModalClose}
+                    onSubmit={handleOfferModalSuccess}
+                    bodyContent={modalOfferContent}
+                />
 
-        <ToastContainer />
-      </div>
-    </>
-  );
+                <ToastContainer />
+            </div>
+        </>
+    );
 };
 
 export default ProductDetails;

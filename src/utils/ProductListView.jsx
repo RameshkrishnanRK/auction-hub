@@ -1,10 +1,10 @@
 import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
+    Box,
+    Button,
+    Card,
+    CardContent,
+    CardMedia,
+    Typography,
 } from "@mui/material";
 import React from "react";
 import styles from "./ProductListView.module.scss";
@@ -34,14 +34,20 @@ const ProductListView = ({ id, image, title, currentBid, timeRemaining, isExpire
                 </Typography>
             </CardContent>
             <Box className={styles.productListActions}>
-                <Button
+                {isExpired ? <Button
                     variant='contained'
-                    color='primary'
                     className={styles.quickBidBtn}
-                    // disabled={isExpired}
+                    disabled={isExpired}
                 >
                     Quick Bid ₹{formattedBid}
-                </Button>
+                </Button> : <Button
+                    variant='contained'
+                    className={styles.quickBidBtn}
+                // disabled={isExpired}
+                >
+                    Quick Bid ₹{formattedBid}
+                </Button>}
+
                 <Typography variant='body2' color='text.secondary' className={styles.expiredText}>
                     {isExpired ? 'Expired' : timeRemaining}
                 </Typography>

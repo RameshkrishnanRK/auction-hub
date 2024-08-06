@@ -12,6 +12,8 @@ import {
 } from "@mui/material";
 import kpmgLogo from "../../assets/images/Auction.KPMG_logo_blue.png";
 import kpmgLoginImage from "../../assets/images/Auction.png";
+import { useDispatch, useSelector } from "react-redux";
+import { loginStart, loginSuccess } from "../../redux/slices/loginSlice";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -19,10 +21,17 @@ const LoginPage = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+
+  const dispatch = useDispatch();
+
+  //const { loading, error} = useSelector((state)=> state.login);
+
+
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
+    
     let valid = true;
 
     if (username === "") {
@@ -41,7 +50,14 @@ const LoginPage = () => {
 
     if (!valid) {
       return;
+    } else {
+      const userData = {
+        user: username,
+      }
+      dispatch(loginSuccess(userData));
     }
+
+    
 
     navigate("/auction/home");
   };

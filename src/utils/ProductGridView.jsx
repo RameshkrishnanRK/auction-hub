@@ -2,15 +2,28 @@ import React from 'react';
 import { Box, Button, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import Styles from './ProductGridView.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const ProductGridView = ({ id, image, title, currentBid, timeRemaining, isExpired }) => {
     const navigate = useNavigate();
 
+    const userData = useSelector((state)=> state.login.user);
+
     const handleViewDetails = () => {
         navigate(`/auction/product-details?productId=${id}`)
     }
+
+    const handleBid = () => {
+        // const userName = userData && userData.user;
+        // console.log("userName ", userName)
+        if(userData !== null) {
+            navigate(`/auction/product-details?productId=${id}`)
+        } else {
+            navigate(`/auction/login`)
+        }
+    }
     const formattedBid = Number(currentBid).toLocaleString('en-IN');
-    return (
+    return ( 
         <Card className={Styles.productGridWrapper}>
             <CardMedia
                 component='img'
@@ -39,18 +52,25 @@ const ProductGridView = ({ id, image, title, currentBid, timeRemaining, isExpire
                             TIME REMAINING
                         </Typography>
                         <Typography variant='body2' color='text.secondary' style={{ fontSize: '12px' }}>
-                            {isExpired ? 'Expired' : timeRemaining}
+                            {isExpired ? 'Expired' : `${timeRemaining} Hrs`}
                         </Typography>
                     </Box>
                 </Box>
             </CardContent>
-            <Button
+            {isExpired ? <Button
                 variant='contained'
                 className={Styles.quickBidBtn}
+                disabled={isExpired}
+            >
+                Quick Bid ₹{formattedBid}
+            </Button> :<Button
+                variant='contained'
+                className={Styles.quickBidBtn}
+                onClick={handleBid}
                 // disabled={isExpired}
             >
                 Quick Bid ₹{formattedBid}
-            </Button>
+            </Button>}
         </Card>
     )
 };

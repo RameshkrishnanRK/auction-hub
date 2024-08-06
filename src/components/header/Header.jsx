@@ -10,7 +10,11 @@ import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import kpmgImage from '../../assets/images/Auction.KPMGLogo_1_.svg';
 import styles from './Header.module.scss'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import { logout } from '../../redux/slices/loginSlice';
+
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -26,27 +30,41 @@ const Search = styled('div')(({ theme }) => ({
     },
 }));
 const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
 }));
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  width: "100%",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-  },
+    color: "inherit",
+    width: "100%",
+    "& .MuiInputBase-input": {
+        padding: theme.spacing(1, 1, 1, 0),
+        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    },
 }));
+
+
+
+
 export default function Header() {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const userData = useSelector((state) => state.login.user);
+
+    const handleLogout = () => {
+        dispatch(logout());
+        navigate("/auction/login");
+    }
+
     return (
         <>
             <Box sx={{ flexGrow: 1 }}>
-                <AppBar  position="relative" className={styles.headerColor}>
+                <AppBar position="relative" className={styles.headerColor}>
                     <Toolbar mt={3}>
                         <img alt="kpmg" src={kpmgImage} />
                     </Toolbar>
@@ -85,21 +103,30 @@ export default function Header() {
                             </Link>
                         </Typography>
                         <Box sx={{ flexGrow: 1 }} />
-                        <Button mr={4} className={styles.link} color="inherit"><Link to="/sign-up">
-                                SignUp
-                            </Link></Button>
-                        <Button mr={4}  className={styles.link} color="inherit">
-                        <Link to="/register">
-                                Register
-                            </Link>
-                        </Button>
-                        <Button color="inherit"  className={styles.link}>
-                        <Link to="/auction/login">
-                                Login
-                            </Link>
-                        </Button>
+                        {
+                            userData ? <>
+
+                                Hello, {userData.user}
+                                <LogoutOutlinedIcon onClick={handleLogout} style={{fontSize:'15px', fontWeight:'bold', paddingLeft:'4px', cursor:'pointer'}} />
+                            </> : <>
+                                <Button mr={4} className={styles.link} color="inherit"><Link to="/sign-up">
+                                    SignUp
+                                </Link></Button>
+                                <Button mr={4} className={styles.link} color="inherit">
+                                    <Link to="/register">
+                                        Register
+                                    </Link>
+                                </Button>
+                                <Button color="inherit" className={styles.link}>
+                                    <Link to="/auction/login">
+                                        Login
+                                    </Link>
+                                </Button>
+                            </>
+                        }
+
                     </Toolbar>
-                    <Divider   className={styles.divider} />
+                    <Divider className={styles.divider} />
                     <Toolbar>
                         <Typography
                             variant="h6"
@@ -138,7 +165,7 @@ export default function Header() {
                     </Toolbar>
                 </AppBar>
             </Box>
-            
+
         </>
     );
 }

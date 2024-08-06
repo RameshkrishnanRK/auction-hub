@@ -10,8 +10,8 @@ import ListView from './Products/ListView';
 const ControlPanel = () => {
     const [view, setView] = useState('grid');
     const [status, setStatus] = useState('active');
-    const [filter, setFilter] = useState('');
-    const [sort, setSort] = useState('');
+    const [filter, setFilter] = useState('all');
+    const [sortData, setSortData] = useState('');
 
     const handleViewChange = (event, newView) => {
         if (newView !== null) {
@@ -20,6 +20,7 @@ const ControlPanel = () => {
     };
 
     const handleStatusChange = (event, newStatus) => {
+        console.log("newStatus ", newStatus)
         setStatus(newStatus);
     };
 
@@ -28,7 +29,7 @@ const ControlPanel = () => {
     };
 
     const handleSortChange = (event) => {
-        setSort(event.target.value);
+        setSortData(event.target.value);
     };
     return (
         <div>
@@ -74,14 +75,14 @@ const ControlPanel = () => {
                         ))}
                     </Select>
                     <Select
-                        value={sort}
+                        value={sortData}
                         onChange={handleSortChange}
                         displayEmpty
                         // placeholder="Filter by"
                         className={styles.controlPanelSelect}
                     >
                         <MenuItem value='' disabled>
-                            Ending soon
+                            Sort By
                         </MenuItem>
                         {sortOptions.map((option) => (
                             <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
@@ -89,7 +90,7 @@ const ControlPanel = () => {
                     </Select>
                 </Box>
             </Box>
-            {view === 'grid' ? <GridView /> : <ListView />}
+            {view === 'grid' ? <GridView status={status} filter={filter} sortData={sortData} /> : <ListView status={status} filter={filter} sortData={sortData}  />}
         </div>
     );
 };
