@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, Container, TextField, Button, Grid,Snackbar, Alert } from '@mui/material';
+import { Box, Typography, Container, TextField, Button, Grid, Snackbar, Alert } from '@mui/material';
 import { styled } from '@mui/system';
 import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize';
 import styles from './ContactUs.module.scss';
@@ -43,7 +43,7 @@ const ContactUs = () => {
 
   const [formState, setFormState] = useState(initialFormState);
   const [captchaCode, setCaptchaCode] = useState(generateCaptcha());
-  const [openSnackBar,setOpenSnackBar]=useState(false)
+  const [openSnackBar, setOpenSnackBar] = useState(false)
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -95,16 +95,15 @@ const ContactUs = () => {
     setCaptchaCode(newCaptcha);
   };
 
-  const handleCloseSnackBar=()=>{
+  const handleCloseSnackBar = () => {
     setOpenSnackBar(false)
   }
 
-
   return (
     <MainContainer>
-      <ContentContainer className= {styles.mainContainer }>
+      <ContentContainer className={styles.mainContainer}>
         <Box mt={2}>
-          <Typography p={3} gutterBottom className={styles.title}>
+          <Typography p={2} gutterBottom className={styles.title}>
             Contact Us
           </Typography>
           <Box mt={8} className={styles.container}>
@@ -121,7 +120,7 @@ const ContactUs = () => {
                 autoComplete="off"
                 onSubmit={handleSubmit}
               >
-                <Grid container spacing={1} sx={{alignItems:'center'}} >
+                <Grid container spacing={1} sx={{ alignItems: 'center' }} >
                   <Grid xs={2}>
                     <Typography variant="body2" className={styles.text}>
                       First Name <span>*</span>
@@ -138,7 +137,7 @@ const ContactUs = () => {
                     />
                   </Grid>
                 </Grid>
-                <Grid container spacing={1} sx={{alignItems:'center'}}>
+                <Grid container spacing={1} sx={{ alignItems: 'center' }}>
                   <Grid xs={2}>
                     <Typography variant="body2" className={styles.text}>
                       Last Name <span>*</span>
@@ -155,7 +154,7 @@ const ContactUs = () => {
                     />
                   </Grid>
                 </Grid>
-                <Grid container spacing={1} sx={{alignItems:'center'}}>
+                <Grid container spacing={1} sx={{ alignItems: 'center' }}>
                   <Grid xs={2}>
                     <Typography variant='body2' className={styles.text}>
                       Email <span>*</span>
@@ -172,7 +171,7 @@ const ContactUs = () => {
                     />
                   </Grid>
                 </Grid>
-                <Grid container spacing={1} sx={{alignItems:'center'}}>
+                <Grid container spacing={1} sx={{ alignItems: 'center' }}>
                   <Grid xs={2}>
                     <Typography mt={2} className={styles.text}>
                       Message
@@ -191,7 +190,7 @@ const ContactUs = () => {
                     />
                   </Grid>
                 </Grid>
-                <Grid container spacing={1} mt={3} sx={{alignItems:'center'}}>
+                <Grid container spacing={1} mt={3} sx={{ alignItems: 'center' }}>
                   <Grid xs={2}>
                     <Typography variant="body2" className={styles.text}>
                       Captcha
@@ -228,7 +227,7 @@ const ContactUs = () => {
           </Box>
         </Box>
       </ContentContainer>
-      <Snackbar open={openSnackBar} autoHideDuration={6000} onClose={handleCloseSnackBar} anchorOrigin={{vertical:'top',horizontal:'right'}} >
+      <Snackbar open={openSnackBar} autoHideDuration={6000} onClose={handleCloseSnackBar} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} >
         <Alert onClose={handleCloseSnackBar} severity='success' >
           Form Submitted Successfully
         </Alert>

@@ -284,7 +284,7 @@ const Sell = () => {
                                         <Grid container alignItems="center">
                                             <Grid item xs={2}>
                                                 <Typography sx={{ marginBottom: 0, textAlign: 'right' }} variant="body1" gutterBottom>
-                                                    SubTitle <span>*</span> :
+                                                    SubTitle :
                                                 </Typography>
                                             </Grid>
                                             <Grid item xs={10} sx={{ paddingRight: '20px' }}>

@@ -30,15 +30,16 @@ const About = () => {
             <Typography mt={2} className={styles.subTitle} variant="body1" gutterBottom>
               The major objective of Barbados Auctions is to provide a mechanism to enable businesses and individuals to use Information and Communications Technology to efficiently conduct business. It is part of the efforts aimed to improve our global competitiveness where we are cited as being very slow at doing business in Barbados.
             </Typography>
-            <Typography mt={2}  className={styles.subTitle} variant="body1" gutterBottom >
+            <Typography mt={2} className={styles.subTitle} variant="body1" gutterBottom >
               Ian Collymore, the sponsor of the website has substantial knowledge and experience in many areas. These include Accounting, Finance, Project Management, Procurement, Creating and Managing Financing Structures, Transportation, Retail, Importation, Real Estate and Electronic Commerce. This is in addition to post graduate qualifications in Electronic Commerce.
+            </Typography>
+            <Typography className={styles.subTitleFooter} variant="body1">
+              © Copyright 2023 http://barbadosauctions.com. All Rights Reserved. No part of this web page may be reproduced in any way without the prior written permission of http://barbadosauctions.com.
             </Typography>
           </Box>
         </Box>
       </ContentContainer>
-        <Typography  className={styles.footer}>
-          © Copyright 2023 http://barbadosauctions.com. All Rights Reserved. No part of this web page may be reproduced in any way without the prior written permission of http://barbadosauctions.com.
-        </Typography>
+
     </MainContainer>
   );
 };
