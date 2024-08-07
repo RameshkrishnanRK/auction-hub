@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Grid } from '@mui/material'
 //import { productsData } from '../data'
 
-const GridView = ({ status, filter, sortData }) => {
+const GridView = ({ searchTerm, status, filter, sortData }) => {
   const dispatch = useDispatch();
 
   //const products = useSelector((state) => state.products.products)
@@ -45,8 +45,8 @@ const GridView = ({ status, filter, sortData }) => {
     (product) => {
       const matchStatusFilter = (status === 'active' && product.status === 'active' && product.isExpired === false) || (status === 'completed' && product.status === 'completed' && product.isExpired === true)
       const matchTypeFilter = (product.type === filter || filter === 'all');
-
-      return matchStatusFilter && matchTypeFilter
+      const matchTermFilter = (product.title === searchTerm || searchTerm == (null || ''))
+      return matchStatusFilter && matchTypeFilter && matchTermFilter
     }).sort((a, b) => {
       const timeComparison = getTimeValue(a.timeRemaining) - getTimeValue(b.timeRemaining);
       const nameComparison = a.title.localeCompare(b.title);

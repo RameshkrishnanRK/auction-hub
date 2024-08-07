@@ -3,20 +3,6 @@ import { Box, Typography, Container, TextField, Button, Grid, Snackbar, Alert } 
 import { styled } from '@mui/system';
 import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize';
 import styles from './ContactUs.module.scss';
-import React, { useState } from "react";
-import {
-  Box,
-  Typography,
-  Container,
-  TextField,
-  Button,
-  Grid,
-  Snackbar,
-  Alert,
-} from "@mui/material";
-import { styled } from "@mui/system";
-import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
-import styles from "./ContactUs.module.scss";
 import Layout from "../../routing/components/Layout";
 
 const MainContainer = styled(Box)({
@@ -115,149 +101,151 @@ const ContactUs = () => {
   }
 
   return (
-    <MainContainer>
-      <ContentContainer className={styles.mainContainer}>
-        <Box mt={2}>
-          <Typography p={2} gutterBottom className={styles.title}>
-            Contact Us
-          </Typography>
-          <Box mt={8} className={styles.container}>
-            <Box p={5}>
-              <Typography
-                variant="body1"
-                gutterBottom
-                className={styles.disclaimer}
-              >
-                All fields marked with "*" are required.
-              </Typography>
-              <Box
-                component="form"
-                sx={{
-                  "& .MuiTextField-root": { mb: 2, width: "100%" },
-                }}
-                noValidate
-                autoComplete="off"
-                onSubmit={handleSubmit}
-              >
-                <Grid container spacing={1} sx={{ alignItems: 'center' }} >
-                  <Grid xs={2}>
-                    <Typography variant="body2" className={styles.text}>
-                      First Name <span>*</span>
-                    </Typography>
+    <><Layout />
+      <MainContainer>
+        <ContentContainer className={styles.mainContainer}>
+          <Box mt={2}>
+            <Typography p={2} gutterBottom className={styles.title}>
+              Contact Us
+            </Typography>
+            <Box mt={8} className={styles.container}>
+              <Box p={5}>
+                <Typography
+                  variant="body1"
+                  gutterBottom
+                  className={styles.disclaimer}
+                >
+                  All fields marked with "*" are required.
+                </Typography>
+                <Box
+                  component="form"
+                  sx={{
+                    "& .MuiTextField-root": { mb: 2, width: "100%" },
+                  }}
+                  noValidate
+                  autoComplete="off"
+                  onSubmit={handleSubmit}
+                >
+                  <Grid container spacing={1} sx={{ alignItems: 'center' }} >
+                    <Grid xs={2}>
+                      <Typography variant="body2" className={styles.text}>
+                        First Name <span>*</span>
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={5}>
+                      <TextField
+                        required
+                        id="firstName"
+                        value={formState.firstName}
+                        onChange={handleChange}
+                        error={Boolean(errors.firstName)}
+                        helperText={errors.firstName}
+                      />
+                    </Grid>
                   </Grid>
-                  <Grid item xs={5}>
-                    <TextField
-                      required
-                      id="firstName"
-                      value={formState.firstName}
-                      onChange={handleChange}
-                      error={Boolean(errors.firstName)}
-                      helperText={errors.firstName}
-                    />
+                  <Grid container spacing={1} sx={{ alignItems: 'center' }}>
+                    <Grid xs={2}>
+                      <Typography variant="body2" className={styles.text}>
+                        Last Name <span>*</span>
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={5}>
+                      <TextField
+                        required
+                        id="lastName"
+                        value={formState.lastName}
+                        onChange={handleChange}
+                        error={Boolean(errors.lastName)}
+                        helperText={errors.lastName}
+                      />
+                    </Grid>
                   </Grid>
-                </Grid>
-                <Grid container spacing={1} sx={{ alignItems: 'center' }}>
-                  <Grid xs={2}>
-                    <Typography variant="body2" className={styles.text}>
-                      Last Name <span>*</span>
-                    </Typography>
+                  <Grid container spacing={1} sx={{ alignItems: 'center' }}>
+                    <Grid xs={2}>
+                      <Typography variant='body2' className={styles.text}>
+                        Email <span>*</span>
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={5}>
+                      <TextField
+                        required
+                        id="email"
+                        value={formState.email}
+                        onChange={handleChange}
+                        error={Boolean(errors.email)}
+                        helperText={errors.email}
+                      />
+                    </Grid>
                   </Grid>
-                  <Grid item xs={5}>
-                    <TextField
-                      required
-                      id="lastName"
-                      value={formState.lastName}
-                      onChange={handleChange}
-                      error={Boolean(errors.lastName)}
-                      helperText={errors.lastName}
-                    />
+                  <Grid container spacing={1} sx={{ alignItems: 'center' }}>
+                    <Grid xs={2}>
+                      <Typography mt={2} className={styles.text}>
+                        Message
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={5}>
+                      <Textarea
+                        minRows={3}
+                        value={formState.message}
+                        onChange={(e) =>
+                          setFormState((prevState) => ({
+                            ...prevState,
+                            message: e.target.value,
+                          }))
+                        }
+                      />
+                    </Grid>
                   </Grid>
-                </Grid>
-                <Grid container spacing={1} sx={{ alignItems: 'center' }}>
-                  <Grid xs={2}>
-                    <Typography variant='body2' className={styles.text}>
-                      Email <span>*</span>
-                    </Typography>
+                  <Grid container spacing={1} mt={3} sx={{ alignItems: 'center' }}>
+                    <Grid xs={2}>
+                      <Typography variant="body2" className={styles.text}>
+                        Captcha
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={5}>
+                      <TextField
+                        required
+                        id="captcha"
+                        value={formState.captcha}
+                        onChange={handleChange}
+                        error={Boolean(errors.captcha)}
+                        helperText={errors.captcha}
+                      />
+                    </Grid>
+                    <Grid item xs={4} mt={2}>
+                      <Box display="flex" alignItems="center">
+                        <Grid item xs={2}>
+                          <Typography>{captchaCode}</Typography>
+                        </Grid>
+                        <Grid item xs={2}>
+                          <Button onClick={resetCaptcha}>Reset</Button>
+                        </Grid>
+                      </Box>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={5}>
-                    <TextField
-                      required
-                      id="email"
-                      value={formState.email}
-                      onChange={handleChange}
-                      error={Boolean(errors.email)}
-                      helperText={errors.email}
-                    />
-                  </Grid>
-                </Grid>
-                <Grid container spacing={1} sx={{ alignItems: 'center' }}>
-                  <Grid xs={2}>
-                    <Typography mt={2} className={styles.text}>
-                      Message
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={5}>
-                    <Textarea
-                      minRows={3}
-                      value={formState.message}
-                      onChange={(e) =>
-                        setFormState((prevState) => ({
-                          ...prevState,
-                          message: e.target.value,
-                        }))
-                      }
-                    />
-                  </Grid>
-                </Grid>
-                <Grid container spacing={1} mt={3} sx={{ alignItems: 'center' }}>
-                  <Grid xs={2}>
-                    <Typography variant="body2" className={styles.text}>
-                      Captcha
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={5}>
-                    <TextField
-                      required
-                      id="captcha"
-                      value={formState.captcha}
-                      onChange={handleChange}
-                      error={Boolean(errors.captcha)}
-                      helperText={errors.captcha}
-                    />
-                  </Grid>
-                  <Grid item xs={4} mt={2}>
-                    <Box display="flex" alignItems="center">
-                      <Grid item xs={2}>
-                        <Typography>{captchaCode}</Typography>
-                      </Grid>
-                      <Grid item xs={2}>
-                        <Button onClick={resetCaptcha}>Reset</Button>
-                      </Grid>
-                    </Box>
-                  </Grid>
-                </Grid>
-                <Box display="flex" justifyContent="flex-end" mt={2}>
-                  <Button type="submit" variant="contained" color="primary">
-                    Send
-                  </Button>
+                  <Box display="flex" justifyContent="flex-end" mt={2}>
+                    <Button type="submit" variant="contained" color="primary">
+                      Send
+                    </Button>
+                  </Box>
                 </Box>
               </Box>
             </Box>
           </Box>
+        </ContentContainer>
+        <Snackbar open={openSnackBar} autoHideDuration={6000} onClose={handleCloseSnackBar} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} >
+          <Alert onClose={handleCloseSnackBar} severity='success' >
+            Form Submitted Successfully
+          </Alert>
+        </Snackbar>
+        <Box className={styles.footer}>
+          <Typography className={styles.footerText}>
+            All Rights Reserved. No part of this web page may be reproduced in any
+            way without the prior written permission of KPMG India.
+          </Typography>
         </Box>
-      </ContentContainer>
-      <Snackbar open={openSnackBar} autoHideDuration={6000} onClose={handleCloseSnackBar} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} >
-        <Alert onClose={handleCloseSnackBar} severity='success' >
-          Form Submitted Successfully
-        </Alert>
-      </Snackbar>
-      <Box className={styles.footer}>
-        <Typography className={styles.footerText}>
-          All Rights Reserved. No part of this web page may be reproduced in any
-          way without the prior written permission of KPMG India.
-        </Typography>
-      </Box>
-    </MainContainer>
+      </MainContainer>
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Breadcrumbs, Grid } from "@mui/material";
 import Sidebar from "./Sidebar";
 import styles from "./Browse.module.scss";
@@ -15,6 +15,7 @@ const Browse = () => {
     const location = useLocation();
     const pathname = location.pathname;
     const pathSegments = pathname.split('/').filter((segment) => segment);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const dispatch = useDispatch();
 
@@ -48,11 +49,12 @@ const Browse = () => {
 
         fetchCategories();
         fetchRegions();
-    }, [dispatch]);
+        console.log(searchTerm)
+    }, [dispatch, searchTerm]);
 
     return (
         <>
-            <Layout />
+            <Layout setSearchTerm={setSearchTerm}/>
             <Box className={styles.container}>
                 <Box className={styles.breadcrumbs}>
                     {/* <Breadcrumbs className='breadcrumb' arial-label='breadcrumb'>
@@ -87,7 +89,7 @@ const Browse = () => {
                         <Sidebar />
                     </Grid>
                     <Grid item xs={9}>
-                        <ControlPanel />
+                        <ControlPanel searchTerm={searchTerm} />
                     </Grid>
                 </Grid>
             </Box>
