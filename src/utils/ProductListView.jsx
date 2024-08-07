@@ -49,7 +49,7 @@ const ProductListView = ({ id, image, title, currentBid, timeRemaining, isExpire
                 </Button>}
 
                 <Typography variant='body2' color='text.secondary' className={styles.expiredText}>
-                    {isExpired ? 'Expired' : timeRemaining}
+                    {isExpired ? 'Expired' : ` Time Remaining : ${timeRemaining} Hrs`}
                 </Typography>
                 <Box className={styles.productListDetails}>
                     <Typography variant='h6' color='text.secondary'>
@@ -64,8 +64,8 @@ const ProductListView = ({ id, image, title, currentBid, timeRemaining, isExpire
                         className={styles.viewDetailsBtn}
                         onClick={handleViewDetails}
                     >
-                        <Link to="/auction/product-detailss">
-                            View Details {'>'}
+                        <Link to="/auction/product-detailss" style={{textDecoration:'none'}}>
+                            View Details 
                         </Link>
                     </Button>
                 </Box>
