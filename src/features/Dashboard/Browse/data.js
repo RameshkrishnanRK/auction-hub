@@ -145,7 +145,7 @@ export const sortOptions = [
 ];
 
 export const filterByOptions = [
-    { value: 'all', label: 'All' },
+    { value: 'all', label: 'Filter By' },
     { value: 'auction', label: 'Auction' },
     { value: 'fixed-price', label: 'Fixed Price' },
     { value: 'classified', label: 'Classified' },

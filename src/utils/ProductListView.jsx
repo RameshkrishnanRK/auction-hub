@@ -76,7 +76,7 @@ const ProductListView = ({ id, image, title, currentBid, timeRemaining, isExpire
                         className={styles.viewDetailsBtn}
                         onClick={handleViewDetails}
                     >
-                        <Link to="/auction/product-detailss" style={{textDecoration:'none'}}>
+                        <Link to="/auction/product-details" style={{textDecoration:'none'}}>
                             View Details 
                         </Link>
                     </Button>
