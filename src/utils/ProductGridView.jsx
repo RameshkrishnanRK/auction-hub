@@ -43,7 +43,7 @@ const ProductGridView = ({ id, image, title, currentBid, timeRemaining, isExpire
                         <Typography variant='body2' style={{ fontSize: '12px' }}>
                             CURRENT BID
                         </Typography>
-                        <Typography variant='h6' color='text.secondary' style={{ fontSize: '12px' }}>
+                        <Typography variant='h6' color='green' fontWeight='bold' style={{ fontSize: '12px' }}>
                             ₹{formattedBid}
                         </Typography>
                     </Box>

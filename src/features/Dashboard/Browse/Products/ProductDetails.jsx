@@ -300,6 +300,7 @@ const ProductDetails = () => {
                     variant='outlined'
                     size='small'
                     required
+                    type="number"
                     className={Styles.bidInput}
                     value={offerAmount}
                     onChange={handleOfferAmount}

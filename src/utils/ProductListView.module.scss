@@ -8,10 +8,14 @@
     .productListImage{
         width: 150px;
         height: 150px;
+        margin: 5px;
     }
     .productListTitle{
         flex: 1;
-        margin-left: 20px;
+        margin-left: 10px;
+        padding-top: 5px;
+      
+        
 
         // justify-content: space-between;
     }
@@ -36,6 +40,8 @@
             display: flex;
             align-items: center;
             margin-top: 40px;
+            margin-right: 10px;
+            
 
             .verticalDottedLine{
                 width: 4px;
