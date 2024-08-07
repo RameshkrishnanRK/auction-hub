@@ -1,0 +1,31 @@
+
+
+.productGridWrapper{
+    max-width: 345px;
+    margin: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+    border: 1px solid #dee2e6;
+}
+.productDetails{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+    justify-content: start;
+    margin: 0;
+}
+.productInfo{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin: 0;
+    // align-items: center;
+}
+.quickBidBtn{
+    width: 100%;
+    background-color: #c24242 !important;
+    // border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
