@@ -115,14 +115,14 @@ export default function Header({ setSearchTerm }) {
                                 Hello, {userData.user}
                                 <LogoutOutlinedIcon onClick={handleLogout} style={{fontSize:'15px', fontWeight:'bold', paddingLeft:'4px', cursor:'pointer'}} />
                             </> : <>
-                                <Button mr={4} className={styles.link} color="inherit"><Link to="/sign-up">
+                                {/* <Button mr={4} className={styles.link} color="inherit"><Link to="/sign-up">
                                     SignUp
                                 </Link></Button>
                                 <Button mr={4} className={styles.link} color="inherit">
                                     <Link to="/register">
                                         Register
                                     </Link>
-                                </Button>
+                                </Button> */}
                                 <Button color="inherit" className={styles.link}>
                                     <Link to="/auction/login">
                                         Login

@@ -71,7 +71,7 @@ const Browse = () => {
                         })}
                        
                     </Breadcrumbs> */}
-                    <Breadcrumbs className='breadcrumb' arial-label='breadcrumb'>
+                    <Breadcrumbs className={styles.breadcrumb} arial-label='breadcrumb'>
                         <Link to="/" style={{textDecoration:'none'}}>
                             Home
                         </Link>

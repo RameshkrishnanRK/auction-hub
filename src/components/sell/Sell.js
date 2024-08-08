@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
-import { Box, Container, Typography, Button, FormControl, Select, MenuItem, InputLabel, RadioGroup, FormControlLabel, Radio, Grid, OutlinedInput } from '@mui/material';
+import { Box, Container, Typography, Button, FormControl, Select, MenuItem, InputLabel, RadioGroup, FormControlLabel, Radio, Grid, OutlinedInput, Breadcrumbs, FormHelperText } from '@mui/material';
 import { styled } from '@mui/system';
 import styles from './Sell.module.scss'
 import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize';
 import { ChevronLeft } from '@mui/icons-material';
 import { categoriesData, regionsData } from '../../features/Dashboard/Browse/data';
 import Layout from "../../routing/components/Layout";
+import { Link } from 'react-router-dom';
 
 const MainContainer = styled(Box)({
     display: 'flex',
     flexDirection: 'column',
     // minHeight: '100vh',
-    padding: '20px',
+    padding: '10px 0',
 });
 const FormSection = styled(Box)({
     marginBottom: '20px',
@@ -87,6 +88,12 @@ const Sell = () => {
     const [subCategoryList, setSubCategoryList] = React.useState([]);
     const [title, setTitle] = React.useState('');
     const [description, setDescription] = React.useState('');
+    const [errors, setErrors] = React.useState({
+        category: false,
+        subCategory: false,
+        listingType: false,
+        region: false,
+    });
 
     useEffect(() => {
         const selectedCategory = categoriesData.filter(data => (data.name === category))
@@ -124,10 +131,24 @@ const Sell = () => {
         // console.log('Step', category, subCategory, listingType, region)
         if (step === 1) {
             if (category && subCategory && listingType && region) {
+                // setErrors(prevState => ({ ...prevState, category: false, subCategory: false }))
+                // setErrors(prevstate => ({ ...prevState, listingType: false, re}))
                 setStep(2)
             } else {
+                if (!category) {
+                    setErrors(prevState => ({ ...prevState, category: true }))
+                }
+                if (!subCategory) {
+                    setErrors(prevState => ({ ...prevState, subCategory: true }))
+                }
+                if (!listingType) {
+                    setErrors(prevState => ({ ...prevState, listingType: true }))
+                }
+                if (!region) {
+                    setErrors(prevState => ({ ...prevState, region: true }))
+                }
                 return;
-            }
+            } 
         } else {
             console.log(category, subCategory, listingType, region, title, description)
         }
@@ -138,6 +159,34 @@ const Sell = () => {
     return (
         <>
             <Layout />
+            <Box className={styles.breadcrumbs}>
+                {/* <Breadcrumbs className='breadcrumb' arial-label='breadcrumb'>
+                        <Link to="/">
+                            Home
+                        </Link>
+                        {pathSegments.map((segment, index) => {
+                            const to = `/${pathSegments.slice(0, index + 1).join('/')}`;
+                            return (
+                                <Link to={to}>
+                                    {segment.charAt(0).toUpperCase() + segment.slice(1)}
+                                </Link>
+                            )
+                        })}
+                       
+                    </Breadcrumbs> */}
+                <Box sx={{ paddingLeft: '50px', paddingTop: '20px' }}>
+                    <Breadcrumbs className='breadcrumb' arial-label='breadcrumb'>
+                        <Link to="/" style={{ textDecoration: 'none' }}>
+                            Home
+                        </Link>
+                        <Link style={{ textDecoration: 'none' }}>
+                            Sell
+                        </Link>
+
+                        {/* <Typography color="text.primary" href="/browse">Browse</Typography> */}
+                    </Breadcrumbs>
+                </Box>
+            </Box>
             <MainContainer>
                 <Container className={styles.mainContainer}>
                     <Box className={styles.title}>
@@ -183,10 +232,11 @@ const Sell = () => {
 
                                             </Select>
                                         </FormControl>
+                                        {errors?.category && <div style={{ color: 'red', padding: '3px 5px',marginTop:'-5px',marginLeft:'7px' }}>Category is Required</div>}
                                     </Grid>
                                     <Grid item xs={4} sm={5}>
                                         <FormControl fullWidth margin="normal">
-                                            <InputLabel>Select Subcategory</InputLabel>
+                                            <InputLabel>Select Subcategory </InputLabel>
                                             <Select value={subCategory} onChange={handleSubCategoryChange} label="Select Sub Category">
                                                 <MenuItem value="">
                                                     <em>Select Subcategory</em>
@@ -196,9 +246,12 @@ const Sell = () => {
                                                 ))}
 
                                             </Select>
+
                                         </FormControl>
+                                        {errors?.category && <div style={{ color: 'red', padding: '3px 5px',marginTop:'-5px' }}>SubCategory is Required</div>}
                                     </Grid>
                                 </Grid>
+
                             </FormSection>
 
                             <FormSection className={styles.categoryContainer}>
@@ -219,6 +272,7 @@ const Sell = () => {
                                         <FormControlLabel value="fixedPrice" className={styles.radioColor} control={<Radio className={styles.radioColor} />} label="Fixed Price" />
                                         <FormControlLabel value="classified" className={styles.radioColor} control={<Radio className={styles.radioColor} />} label="Classified" />
                                     </RadioGroup>
+                                    {errors?.listingType && <div style={{ color: 'red', padding: '3px 5px' }}>Listing Type is required.</div>}
                                 </FormControl>
                             </FormSection>
 
@@ -238,6 +292,7 @@ const Sell = () => {
                                             <MenuItem value={data.name} key={index}>{data.name}</MenuItem>
                                         ))}
                                     </Select>
+                                    {errors?.region && <div style={{ color: 'red', padding: '3px 5px' }}>Region is required.</div>}
                                 </FormControl>
                             </FormSection>
 

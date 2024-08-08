@@ -1,8 +1,9 @@
 import React from 'react';
-import { Box, Typography, Container } from '@mui/material';
+import { Box, Typography, Container, Breadcrumbs } from '@mui/material';
 import { styled } from '@mui/system';
 import styles from './AboutUs.module.scss'
 import Layout from "../../routing/components/Layout";
+import { Link } from 'react-router-dom';
 
 const MainContainer = styled(Box)({
   display: 'flex',
@@ -18,9 +19,37 @@ const About = () => {
   return (
     <>
       <Layout />
+      <Box className={styles.breadcrumbs}>
+        {/* <Breadcrumbs className='breadcrumb' arial-label='breadcrumb'>
+                        <Link to="/">
+                            Home
+                        </Link>
+                        {pathSegments.map((segment, index) => {
+                            const to = `/${pathSegments.slice(0, index + 1).join('/')}`;
+                            return (
+                                <Link to={to}>
+                                    {segment.charAt(0).toUpperCase() + segment.slice(1)}
+                                </Link>
+                            )
+                        })}
+                       
+                    </Breadcrumbs> */}
+        <Box sx={{ paddingLeft: '57px', paddingTop: '20px' }}>
+          <Breadcrumbs className='breadcrumb' arial-label='breadcrumb'>
+            <Link to="/" style={{ textDecoration: 'none' }}>
+              Home
+            </Link>
+            <Link style={{ textDecoration: 'none' }}>
+              AboutUs
+            </Link>
+
+            {/* <Typography color="text.primary" href="/browse">Browse</Typography> */}
+          </Breadcrumbs>
+        </Box>
+      </Box>
       <MainContainer>
         <ContentContainer className={styles.mainContainer}>
-          <Box mt={2}>
+          <Box mt={1} >
             <Typography p={2} className={styles.title} gutterBottom >
               About Us
             </Typography>
