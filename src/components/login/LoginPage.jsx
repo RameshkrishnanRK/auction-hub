@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styles from './login.module.scss'
 import {
   Container,
   Paper,
@@ -123,8 +124,8 @@ const LoginPage = () => {
                 error={passwordError !== ""}
                 helperText={passwordError}
               />
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <FormControlLabel
+              <div style={{ display: "flex", justifyContent: "space-between"}}>
+                <FormControlLabel className={styles.rememberFont}
                   control={
                     <Checkbox
                       value={rememberMe}
@@ -132,9 +133,10 @@ const LoginPage = () => {
                       onChange={(e) => setRememberMe(e.target.checked)}
                     />
                   }
-                  label="Remember me"
+                  label="Remember me" 
                 />
-                <Link href="#" variant="body2">
+                
+                <Link href="#" variant="body2" sx={{marginTop:'14px'}}>
                   Forgot password?
                 </Link>
               </div>
