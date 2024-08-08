@@ -66,13 +66,22 @@ const ProductDetails = () => {
     const [offerAmount, setOfferAmount] = useState("");
     const [OfferMessage, setOfferMessage] = useState("");
 
+    useEffect(()=>{
+        if(bidAmount) localStorage.setItem('bidAmount', bidAmount)
+    }, [bidAmount])
     const handleBidAmount = (event) => {
-        setBidAmount(event.target.value);
+        const newValue = event.target.value;
+        if(/^\d*$/.test(newValue)){
+            setBidAmount(newValue);
+        }
     };
 
     const handleOfferAmount = (event) => {
         //console.log("event value ", event.target.value)
-        setOfferAmount(event.target.value);
+        const newValue = event.target.value;
+        if(/^\d*$/.test(newValue)){
+            setOfferAmount(newValue);
+        }
     };
 
     const handleOfferMessage = (event) => {
@@ -83,7 +92,8 @@ const ProductDetails = () => {
     const handleBidAmountSubmit = () => {
         //setCleanedFormattedBid(formattedBid)
         let formattedBidValue = Number(cleanedFormattedBid);
-        let bidAmountValue = Number(bidAmount);
+        let inputBidAmount = localStorage.getItem('bidAmount');
+        let bidAmountValue = Number(inputBidAmount);
 
         if (bidAmountValue < formattedBidValue) {
             toast.error("Bid Amount Cannot be lesser than Current Bid", {
@@ -117,11 +127,11 @@ const ProductDetails = () => {
                 backgroundColor: '#009933',
                 color: '#ffffff'
             },
-            onClose: () => {
-                setTimeout(() => {
-                    navigate('/auction/dashboard');
-                }, 1000)
-            },
+            // onClose: () => {
+            //     setTimeout(() => {
+            //         navigate('/auction/dashboard');
+            //     }, 1000)
+            // },
             transition: Slide
         })
 
@@ -165,11 +175,11 @@ const ProductDetails = () => {
                 backgroundColor: "#009933",
                 color: "#ffffff",
             },
-            onClose: () => {
-                setTimeout(() => {
-                    navigate("/auction/dashboard");
-                }, 1000);
-            },
+            // onClose: () => {
+            //     setTimeout(() => {
+            //         navigate("/auction/dashboard");
+            //     }, 1000);
+            // },
             transition: Slide,
         });
     };
@@ -203,11 +213,11 @@ const ProductDetails = () => {
                         backgroundColor: '#009933',
                         color: '#ffffff'
                     },
-                    onClose: () => {
-                        setTimeout(() => {
-                            navigate('/auction/dashboard');
-                        }, 1000)
-                    },
+                    // onClose: () => {
+                    //     setTimeout(() => {
+                    //         navigate('/auction/dashboard');
+                    //     }, 1000)
+                    // },
                     transition: Slide
                 })
                 console.log("navigate(-1);")
@@ -234,8 +244,9 @@ const ProductDetails = () => {
     }
 
 
-    const handleBidModalClose = (event) => {
+    const handleBidModalClose = () => {
         const formattedBid = Number(product.currentBid).toLocaleString("en-IN");
+        console.log('formattedBid: ',formattedBid)
         setCleanedFormattedBid(formattedBid)
         setOpenBidModal(false)
     }
@@ -253,11 +264,11 @@ const ProductDetails = () => {
                 backgroundColor: '#009933',
                 color: '#ffffff'
             },
-            onClose: () => {
-                setTimeout(() => {
-                    navigate('/auction/dashboard');
-                }, 1000)
-            },
+            // onClose: () => {
+            //     setTimeout(() => {
+            //         navigate('/auction/dashboard');
+            //     }, 1000)
+            // },
             transition: Slide
         })
     }
@@ -300,6 +311,8 @@ const ProductDetails = () => {
                     variant='outlined'
                     size='small'
                     required
+                    // type="number"
+                    inputProps={{inputMode: 'numeric', pattern: '[0-9]*'}}
                     className={Styles.bidInput}
                     value={offerAmount}
                     onChange={handleOfferAmount}
@@ -364,7 +377,8 @@ const ProductDetails = () => {
                                     </Button>
                                     <Box className={Styles.bidSection}>
                                         <TextField
-                                            type="number"
+                                            // type="number"
+                                            inputProps={{inputMode: 'numeric', pattern: '[0-9]*'}}
                                             label={`Minimum Bid ₹${formattedBid}`}
                                             variant='outlined'
                                             size='small'

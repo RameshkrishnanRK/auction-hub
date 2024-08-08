@@ -1,5 +1,5 @@
 import { GridViewOutlined } from '@mui/icons-material'
-import { Box, MenuItem, Select, Tab, Tabs, ToggleButton, ToggleButtonGroup } from '@mui/material'
+import { Box, FormControl, MenuItem, Select, Tab, Tabs, ToggleButton, ToggleButtonGroup } from '@mui/material'
 import React, { useState } from 'react'
 import ListIcon from "@mui/icons-material/List";
 import styles from './ControlPanel.scss'
@@ -60,37 +60,41 @@ const ControlPanel = () => {
                     <Tab value='completed' label='Completed' />
                 </Tabs>
                 <Box display='flex' alignItems='center'>
-                    <Select
-                        value={filter}
-                        onChange={handleFilterChange}
-                        displayEmpty
-                        // placeholder="Filter by"
-                        className={styles.controlPanelSelect}
-                    >
-                        <MenuItem value='' disabled>
+                    <FormControl sx={{ m: 1, minWidth: 190 }}>
+                        <Select
+                            value={filter}
+                            onChange={handleFilterChange}
+                            displayEmpty
+                            // placeholder="Filter by"
+                            className={styles.controlPanelSelect}
+                        >
+                            {/* <MenuItem value='' disabled>
                             Filter By
-                        </MenuItem>
-                        {filterByOptions.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
-                        ))}
-                    </Select>
-                    <Select
-                        value={sortData}
-                        onChange={handleSortChange}
-                        displayEmpty
-                        // placeholder="Filter by"
-                        className={styles.controlPanelSelect}
-                    >
-                        <MenuItem value='' disabled>
-                            Sort By
-                        </MenuItem>
-                        {sortOptions.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
-                        ))}
-                    </Select>
+                        </MenuItem> */}
+                            {filterByOptions.map((option) => (
+                                <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                    <FormControl sx={{ m: 1, minWidth: 190 }}>
+                        <Select
+                            value={sortData}
+                            onChange={handleSortChange}
+                            displayEmpty
+                            // placeholder="Filter by"
+                            className={styles.controlPanelSelect}
+                        >
+                            <MenuItem value=''>
+                                Sort By
+                            </MenuItem>
+                            {sortOptions.map((option) => (
+                                <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
                 </Box>
             </Box>
-            {view === 'grid' ? <GridView status={status} filter={filter} sortData={sortData} /> : <ListView status={status} filter={filter} sortData={sortData}  />}
+            {view === 'grid' ? <GridView status={status} filter={filter} sortData={sortData} /> : <ListView status={status} filter={filter} sortData={sortData} />}
         </div>
     );
 };

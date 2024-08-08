@@ -20,53 +20,46 @@ const Sidebar = () => {
     };
     return (
         <>
-            <Paper className={styles.sidebarxCategories}>
-                <Typography variant="h6" className={styles.sidebarCategoriesContent}>Categories</Typography>
-                <div className={styles.scrollable}>
-                    <List>
-                        {categories.map((category, index) => (
-                            <div key={index}>
-                                <ListItem button onClick={() => handleCategoryClick(category.name)}>
-                                    <ListItemText primary={`${category.name} (${category.quantity})`} />
-                                    {category.subcategories ? (openCategories[category.name] ? <ExpandLess /> : <ExpandMore />) : null}
+            <div className={styles.sideBarContainer}>
+                <Paper className={styles.sidebarxCategories}>
+                    <Typography variant="h6" className={styles.sidebarCategoriesContent}>Categories</Typography>
+                    <div className={styles.scrollable}>
+                        <List>
+                            {categories.map((category, index) => (
+                                <div key={index}>
+                                    <ListItem button onClick={() => handleCategoryClick(category.name)}>
+                                        <ListItemText primary={`${category.name} (${category.quantity})`} />
+                                        {category.subcategories ? (openCategories[category.name] ? <ExpandLess /> : <ExpandMore />) : null}
+                                    </ListItem>
+                                    {category.subcategories && (
+                                        <Collapse in={openCategories[category.name]} timeout="auto" unmountOnExit>
+                                            <List component="div" disablePadding>
+                                                {category.subcategories.map((subcategory, subIndex) => (
+                                                    <ListItem key={subIndex} className={styles.nested}>
+                                                        <ListItemText primary={subcategory} />
+                                                    </ListItem>
+                                                ))}
+                                            </List>
+                                        </Collapse>
+                                    )}
+                                </div>
+                            ))}
+                        </List>
+                    </div>
+                </Paper>
+                <Paper className={styles.sidebarxRegions}>
+                    <Typography variant="h6" className={styles.sidebarRegionsContent}>Regions</Typography>
+                    <div className={styles.scrollable}>
+                        <List>
+                            {regions.map((region, index) => (
+                                <ListItem key={index}>
+                                    <ListItemText primary={`${region.name} (${region.quantity})`} />
                                 </ListItem>
-                                {/* <Collapse in={expandedIndex === index} timeout="auto" unmountOnExit>
-                                        <List component="div" disablePadding>
-                                            {category.subcategories.map((subcategory, subIndex) => (
-                                                <ListItem key={subIndex}  style={{paddingLeft: 32}} className={styles.nested}>
-                                                    <ListItemText primary={subcategory} />
-                                                </ListItem>
-                                            ))}
-                                        </List>
-                                    </Collapse> */}
-                                {category.subcategories && (
-                                    <Collapse in={openCategories[category.name]} timeout="auto" unmountOnExit>
-                                        <List component="div" disablePadding>
-                                            {category.subcategories.map((subcategory, subIndex) => (
-                                                <ListItem key={subIndex} className={styles.nested}>
-                                                    <ListItemText primary={subcategory} />
-                                                </ListItem>
-                                            ))}
-                                        </List>
-                                    </Collapse>
-                                )}
-                            </div>
-                        ))}
-                    </List>
-                </div>
-            </Paper>
-            <Paper className={styles.sidebarxRegions}>
-                <Typography variant="h6" className={styles.sidebarRegionsContent}>Regions</Typography>
-                <div className={styles.scrollable}>
-                    <List>
-                        {regions.map((region, index) => (
-                            <ListItem key={index}>
-                                <ListItemText primary={`${region.name} (${region.quantity})`} />
-                            </ListItem>
-                        ))}
-                    </List>
-                </div>
-            </Paper>
+                            ))}
+                        </List>
+                    </div>
+                </Paper>
+            </div>
         </>
 
     );

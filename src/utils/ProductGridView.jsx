@@ -34,7 +34,7 @@ const ProductGridView = ({ id, image, title, currentBid, timeRemaining, isExpire
             />
             <CardContent>
                 <Typography variant='h6' component='div' onClick={handleViewDetails}>
-                    <Link to="/auction/product-details" style={{ color: '#337AB7', fontSize: '14px', textAlign: 'left' }}>
+                    <Link to="/auction/product-details" style={{ color: '#337AB7', fontSize: '14px', textAlign: 'left', textDecoration: 'none' }}>
                         {title}
                     </Link>
                 </Typography>
@@ -43,7 +43,7 @@ const ProductGridView = ({ id, image, title, currentBid, timeRemaining, isExpire
                         <Typography variant='body2' style={{ fontSize: '12px' }}>
                             CURRENT BID
                         </Typography>
-                        <Typography variant='h6' color='text.secondary' style={{ fontSize: '12px' }}>
+                        <Typography variant='h6' color='green' fontWeight='bold' style={{ fontSize: '12px' }}>
                             ₹{formattedBid}
                         </Typography>
                     </Box>
