@@ -33,7 +33,7 @@ const ControlPanel = () => {
     };
     return (
         <div>
-            <Box className={styles.controlPanel} display='flex' alignItems='center' justifyContent='space-evenly' style={{ borderRadius: '4px', backgroundColor: '#e6e6e6', height: '61px', padding: '10px' }}>
+            <Box className={styles.controlPanel} display='flex' alignItems='center' justifyContent='space-evenly' style={{ borderRadius: '4px', backgroundColor: '#e6e6e6', height: '40px', padding: '10px' }}>
                 <ToggleButtonGroup
                     color="primary"
                     value={view}
@@ -60,7 +60,7 @@ const ControlPanel = () => {
                     <Tab value='completed' label='Completed' />
                 </Tabs>
                 <Box display='flex' alignItems='center'>
-                    <FormControl sx={{ m: 1, minWidth: 190 }}>
+                    <FormControl sx={{ m: 1, minWidth: 120 }}>
                         <Select
                             value={filter}
                             onChange={handleFilterChange}
@@ -76,7 +76,7 @@ const ControlPanel = () => {
                             ))}
                         </Select>
                     </FormControl>
-                    <FormControl sx={{ m: 1, minWidth: 190 }}>
+                    <FormControl sx={{ m: 1, minWidth: 120 }}>
                         <Select
                             value={sortData}
                             onChange={handleSortChange}
