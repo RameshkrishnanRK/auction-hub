@@ -54,46 +54,30 @@ const Browse = () => {
 
     return (
         <>
-            <Layout setSearchTerm={setSearchTerm}/>
-            <Box className={styles.container}>
-                <Box className={styles.breadcrumbs}>
-                    {/* <Breadcrumbs className='breadcrumb' arial-label='breadcrumb'>
-                        <Link to="/">
-                            Home
-                        </Link>
-                        {pathSegments.map((segment, index) => {
-                            const to = `/${pathSegments.slice(0, index + 1).join('/')}`;
-                            return (
-                                <Link to={to}>
-                                    {segment.charAt(0).toUpperCase() + segment.slice(1)}
-                                </Link>
-                            )
-                        })}
-                       
-                    </Breadcrumbs> */}
-                    <Breadcrumbs className={styles.breadcrumb} arial-label='breadcrumb'>
-                        <Link to="/" style={{textDecoration:'none'}}>
-                            Home
-                        </Link>
-                        <Link style={{textDecoration:'none'}}>
-                            Browse
-                        </Link>
-                        
-                        {/* <Typography color="text.primary" href="/browse">Browse</Typography> */}
-                    </Breadcrumbs>
-                </Box>
-                <Grid container spacing={3}>
+            <Layout setSearchTerm={setSearchTerm}>
+                <>
+                    <Box className={styles.breadcrumbs}>
+                        <Breadcrumbs className={styles.breadcrumb} arial-label='breadcrumb'>
+                            <Link to="/" style={{ textDecoration: 'none' }}>
+                                Home
+                            </Link>
+                            <Link style={{ textDecoration: 'none' }}>
+                                Browse
+                            </Link>
+                        </Breadcrumbs>
+                    </Box>
+                    <Grid container spacing={3}>
 
-                    <Grid item xs={3}>
+                        <Grid item xs={3}>
 
-                        <Sidebar />
+                            <Sidebar />
+                        </Grid>
+                        <Grid item xs={9}>
+                            <ControlPanel searchTerm={searchTerm} />
+                        </Grid>
                     </Grid>
-                    <Grid item xs={9}>
-                        <ControlPanel searchTerm={searchTerm} />
-                    </Grid>
-                </Grid>
-            </Box>
-
+                </>
+            </Layout>
         </>
 
     );

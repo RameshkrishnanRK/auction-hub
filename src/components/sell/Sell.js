@@ -7,6 +7,8 @@ import { ChevronLeft } from '@mui/icons-material';
 import { categoriesData, regionsData } from '../../features/Dashboard/Browse/data';
 import Layout from "../../routing/components/Layout";
 import { Link } from 'react-router-dom';
+import { Slide, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const MainContainer = styled(Box)({
     display: 'flex',
@@ -95,6 +97,12 @@ const Sell = () => {
         region: false,
     });
 
+    const [error, setError] = React.useState({
+        title: false,
+        description: false,
+    })
+
+
     useEffect(() => {
         const selectedCategory = categoriesData.filter(data => (data.name === category))
         console.log(selectedCategory, "sel36")
@@ -104,23 +112,32 @@ const Sell = () => {
     }, [category])
 
     const handleCategoryChange = (event) => {
+        //error?.cat :false
         setCategory(event.target.value);
+        setErrors(prevState => ({ ...prevState, category: false }))
     };
 
     const handleSubCategoryChange = (event) => {
+        //error?.subcat :false
         setSubCategory(event.target.value);
+        setErrors(prevState => ({ ...prevState, subCategory: false }))
     };
 
     const handleListingTypeChange = (event) => {
+        //error?.Listing :false
         setListingType(event.target.value);
+        setErrors(prevState => ({ ...prevState, listingType: false }))
     };
 
     const handleRegionChange = (event) => {
+        //error?.Listing :false
         setRegion(event.target.value);
+        setErrors(prevState => ({ ...prevState, region: false }))
     };
 
     const handleTitleChange = (event) => {
         setTitle(event.target.value);
+        setError(prevState => ({ ...prevState, title: false }))
     };
 
     const handleDescriptionChange = (event) => {
@@ -148,7 +165,7 @@ const Sell = () => {
                     setErrors(prevState => ({ ...prevState, region: true }))
                 }
                 return;
-            } 
+            }
         } else {
             console.log(category, subCategory, listingType, region, title, description)
         }
@@ -156,248 +173,276 @@ const Sell = () => {
 
     console.log("sub57", subCategoryList)
 
+    const handleCreateListig = () => {
+        if (step === 2) {
+            if (title && description) {
+                setErrors({})
+                toast.success("Successfully created the listing.", {
+                    position: "top-center",
+                    autoClose: 2000,
+                    style: {
+                        width: '430px',
+                        backgroundColor: '#009933',
+                        color: '#ffffff'
+                    },
+                    // onClose: () => {
+                    //     setTimeout(() => {
+                    //         navigate('/auction/dashboard');
+                    //     }, 1000)
+                    // },
+                    transition: Slide
+                })
+            } else {
+                if (!title) {
+                    setErrors(prevState => ({ ...prevState, title: true }))
+                }
+                if (!description) {
+                    setErrors(prevState => ({ ...prevState, description: true }))
+                }
+                return;
+            }
+        } else {
+            console.log(title, description)
+        }
+    }
+
     return (
         <>
-            <Layout />
-            <Box className={styles.breadcrumbs}>
-                {/* <Breadcrumbs className='breadcrumb' arial-label='breadcrumb'>
-                        <Link to="/">
-                            Home
-                        </Link>
-                        {pathSegments.map((segment, index) => {
-                            const to = `/${pathSegments.slice(0, index + 1).join('/')}`;
-                            return (
-                                <Link to={to}>
-                                    {segment.charAt(0).toUpperCase() + segment.slice(1)}
+            <Layout>
+                <>
+                    <Box className={styles.breadcrumbs}>
+                        <Box sx={{ paddingLeft: '50px', paddingTop: '20px' }}>
+                            <Breadcrumbs className='breadcrumb' arial-label='breadcrumb'>
+                                <Link to="/" style={{ textDecoration: 'none' }}>
+                                    Home
                                 </Link>
-                            )
-                        })}
-                       
-                    </Breadcrumbs> */}
-                <Box sx={{ paddingLeft: '50px', paddingTop: '20px' }}>
-                    <Breadcrumbs className='breadcrumb' arial-label='breadcrumb'>
-                        <Link to="/" style={{ textDecoration: 'none' }}>
-                            Home
-                        </Link>
-                        <Link style={{ textDecoration: 'none' }}>
-                            Sell
-                        </Link>
-
-                        {/* <Typography color="text.primary" href="/browse">Browse</Typography> */}
-                    </Breadcrumbs>
-                </Box>
-            </Box>
-            <MainContainer>
-                <Container className={styles.mainContainer}>
-                    <Box className={styles.title}>
-                        <Grid container justifyContent="space-between" alignItems="center">
-                            <Grid item>
-                                <Typography variant="h5" gutterBottom>
-                                    Create Listing - Step {step} of 2
-                                </Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant="body2" gutterBottom >
-                                    All fields marked with "*" are required.
-                                </Typography>
-                            </Grid>
-                        </Grid>
+                                <Link style={{ textDecoration: 'none' }}>
+                                    Sell
+                                </Link>
+                            </Breadcrumbs>
+                        </Box>
                     </Box>
-
-                    {step === 1 &&
-                        <>
-                            <FormSection mt={2} className={styles.categoryContainer}>
-                                <Box className={styles.title}>
-                                    <Typography className={styles.typography} variant="body1" gutterBottom>
-                                        Category <span>*</span>
-                                    </Typography>
-                                </Box>
-                                <Grid container spacing={3}>
-                                    <Grid item xs={4} sm={5}>
-                                        <FormControl variant='outlined' className={styles.boxStyle} fullWidth margin="normal">
-                                            <InputLabel className={styles.boxStyle} >Select Category</InputLabel>
-                                            <Select value={category} onChange={handleCategoryChange} label="Select Category">
-                                                <MenuItem value="">
-                                                    <em>Select Category</em>
-                                                </MenuItem>
-
-                                                {
-                                                    categoriesData.map((data, index) => (
-                                                        <MenuItem value={data.name} key={index}>
-                                                            {data.name}
-                                                        </MenuItem>
-                                                    ))
-                                                }
-
-
-                                            </Select>
-                                        </FormControl>
-                                        {errors?.category && <div style={{ color: 'red', padding: '3px 5px',marginTop:'-5px',marginLeft:'7px' }}>Category is Required</div>}
-                                    </Grid>
-                                    <Grid item xs={4} sm={5}>
-                                        <FormControl fullWidth margin="normal">
-                                            <InputLabel>Select Subcategory </InputLabel>
-                                            <Select value={subCategory} onChange={handleSubCategoryChange} label="Select Sub Category">
-                                                <MenuItem value="">
-                                                    <em>Select Subcategory</em>
-                                                </MenuItem>
-                                                {subCategoryList && subCategoryList?.length > 0 && subCategoryList.map((data, index) => (
-                                                    <MenuItem value={data} key={index}>{data}</MenuItem>
-                                                ))}
-
-                                            </Select>
-
-                                        </FormControl>
-                                        {errors?.category && <div style={{ color: 'red', padding: '3px 5px',marginTop:'-5px' }}>SubCategory is Required</div>}
-                                    </Grid>
-                                </Grid>
-
-                            </FormSection>
-
-                            <FormSection className={styles.categoryContainer}>
-                                <Box className={styles.listtypetitle}>
-                                    <Typography p={2} className={styles.typography} variant="body1" gutterBottom>
-                                        Listing Type<span>*</span>
-                                    </Typography>
-                                </Box>
-                                <FormControl component="fieldset" className={styles.radio}>
-                                    <RadioGroup
-                                        aria-label="listingType"
-                                        name="listingType"
-                                        value={listingType}
-                                        onChange={handleListingTypeChange}
-                                        className={styles.radioGroup}
-                                    >
-                                        <FormControlLabel value="auction" className={styles.radioColor} control={<Radio className={styles.radioColor} />} label="Auction" style={{ justifyContent: 'flex-start', color: 'black' }} />
-                                        <FormControlLabel value="fixedPrice" className={styles.radioColor} control={<Radio className={styles.radioColor} />} label="Fixed Price" />
-                                        <FormControlLabel value="classified" className={styles.radioColor} control={<Radio className={styles.radioColor} />} label="Classified" />
-                                    </RadioGroup>
-                                    {errors?.listingType && <div style={{ color: 'red', padding: '3px 5px' }}>Listing Type is required.</div>}
-                                </FormControl>
-                            </FormSection>
-
-                            <FormSection className={styles.categoryContainer}>
-                                <Box className={styles.title}>
-                                    <Typography className={styles.typography} variant="body1" gutterBottom>
-                                        Region<span>*</span>
-                                    </Typography>
-                                </Box>
-                                <FormControl fullWidth margin="normal" className={styles.boxStyle}>
-                                    <InputLabel className={styles.boxStyle}>Select Region </InputLabel>
-                                    <Select className={styles.regionSelect} value={region} onChange={handleRegionChange} label="Select Region">
-                                        <MenuItem value="" >
-                                            <em>Select Region</em>
-                                        </MenuItem>
-                                        {regionsData.map((data, index) => (
-                                            <MenuItem value={data.name} key={index}>{data.name}</MenuItem>
-                                        ))}
-                                    </Select>
-                                    {errors?.region && <div style={{ color: 'red', padding: '3px 5px' }}>Region is required.</div>}
-                                </FormControl>
-                            </FormSection>
-
+                    <MainContainer>
+                        <Container className={styles.mainContainer}>
                             <Box className={styles.title}>
-                                <CustomButton variant="contained" color="primary" onClick={handleNext}>
-                                    Next
-                                </CustomButton>
-                            </Box>
-                        </>
-                    }
-
-                    {step === 2 &&
-                        <>
-                            <FormSection mt={2} className={styles.categoryContainer}>
-                                <Box className={styles.title}>
-                                    <Typography className={styles.typography} variant="body1" gutterBottom>
-                                        Standard Listing Fields
-                                    </Typography>
-                                </Box>
-                                <Grid container spacing={2}>
-                                    <Grid item xs={2}>
-
+                                <Grid container justifyContent="space-between" alignItems="center">
+                                    <Grid item>
+                                        <Typography variant="h5" gutterBottom>
+                                            Create Listing - Step {step} of 2
+                                        </Typography>
                                     </Grid>
-                                    <Grid item xs={10}>
-                                        <Box sx={{ marginLeft: 'auto' }}>
-                                            <Grid container alignItems="center">
-                                                <Grid item xs={2}>
-                                                    <Typography sx={{ marginBottom: 0, textAlign: 'right' }} variant="body1" gutterBottom>
-                                                        Title <span style={{ color: 'red' }}>*</span> :
-                                                    </Typography>
-                                                </Grid>
-                                                <Grid item xs={10} sx={{ paddingRight: '20px' }}>
-                                                    <FormControl sx={{ m: 1, width: '100%' }} variant="outlined">
-                                                        <OutlinedInput
-                                                            size='small'
-                                                            id="outlined-adornment-weight"
-                                                            aria-describedby="outlined-weight-helper-text"
-                                                            inputProps={{
-                                                                'aria-label': 'Title',
-                                                            }}
-                                                            value={title}
-                                                            onChange={(event) => handleTitleChange(event)}
-                                                        />
-                                                    </FormControl>
-                                                </Grid>
-                                            </Grid>
-
-                                            <Grid container alignItems="center">
-                                                <Grid item xs={2}>
-                                                    <Typography sx={{ marginBottom: 0, textAlign: 'right' }} variant="body1" gutterBottom>
-                                                        SubTitle :
-                                                    </Typography>
-                                                </Grid>
-                                                <Grid item xs={10} sx={{ paddingRight: '20px' }}>
-                                                    <FormControl sx={{ m: 1, width: '100%' }} variant="outlined">
-                                                        <OutlinedInput
-                                                            value={title}
-                                                            disabled
-                                                            size='small'
-                                                            id="outlined-adornment-weight"
-                                                            aria-describedby="outlined-weight-helper-text"
-                                                            inputProps={{
-                                                                'aria-label': 'SubTitle',
-                                                            }}
-                                                        />
-                                                    </FormControl>
-                                                </Grid>
-                                            </Grid>
-
-                                            <Grid container alignItems="center">
-                                                <Grid item xs={2}>
-                                                    <Typography sx={{ marginBottom: 0, textAlign: 'right' }} variant="body1" gutterBottom>
-                                                        Description <span style={{ color: 'red' }}>*</span> :
-                                                    </Typography>
-                                                </Grid>
-                                                <Grid item xs={10} sx={{ paddingLeft: '10px', paddingRight: '10px' }}>
-                                                    <Textarea value={description} onChange={(event) => { handleDescriptionChange(event) }} sx={{ width: '100%' }} aria-label="minimum height" minRows={3} />
-                                                </Grid>
-                                            </Grid>
-                                        </Box>
+                                    <Grid item>
+                                        <Typography variant="body2" gutterBottom >
+                                            All fields marked with "*" are required.
+                                        </Typography>
                                     </Grid>
                                 </Grid>
-                            </FormSection>
-
-                            <Box className={styles.title} sx={{ display: 'flex' }}>
-                                {/* <Button onClick={() => {setStep(1)}}>back</Button> */}
-                                <Button onClick={() => { setStep(1) }} startIcon={<ChevronLeft />}>
-                                    Back
-                                </Button>
-                                <Button variant='outlined' sx={{ mx: 5 }}>Save Draft</Button>
-                                <CustomButton variant="contained" color="primary" onClick={handleNext}>
-                                    Create Listing
-                                </CustomButton>
                             </Box>
-                        </>
-                    }
 
-                    <Box >
-                        <Typography className={styles.footer} >
-                            All Rights Reserved. No part of this web page may be reproduced in any way without the prior written permission of KPMG India.
-                        </Typography>
-                    </Box>
+                            {step === 1 &&
+                                <>
+                                    <FormSection mt={2} className={styles.categoryContainer}>
+                                        <Box className={styles.title}>
+                                            <Typography className={styles.typography} variant="body1" gutterBottom>
+                                                Category <span>*</span>
+                                            </Typography>
+                                        </Box>
+                                        <Grid container spacing={3}>
+                                            <Grid item xs={4} sm={5}>
+                                                <FormControl error={errors?.category} variant='outlined' className={styles.boxStyle} fullWidth margin="normal">
+                                                    <InputLabel className={styles.boxStyle} >Select Category</InputLabel>
+                                                    <Select value={category} onChange={handleCategoryChange} label="Select Category">
+                                                        <MenuItem value="">
+                                                            <em>Select Category</em>
+                                                        </MenuItem>
 
-                </Container>
-            </MainContainer>
+                                                        {
+                                                            categoriesData.map((data, index) => (
+                                                                <MenuItem value={data.name} key={index}>
+                                                                    {data.name}
+                                                                </MenuItem>
+                                                            ))
+                                                        }
+
+
+                                                    </Select>
+                                                </FormControl>
+                                                {errors?.category && <div style={{ color: 'red', padding: '3px 5px', marginTop: '-5px', marginLeft: '7px' }}>Category is Required</div>}
+                                            </Grid>
+                                            <Grid item xs={4} sm={5}>
+                                                <FormControl error={errors?.subCategory} fullWidth margin="normal">
+                                                    <InputLabel>Select Subcategory </InputLabel>
+                                                    <Select value={subCategory} onChange={handleSubCategoryChange} label="Select Sub Category">
+                                                        <MenuItem value="">
+                                                            <em>Select Subcategory</em>
+                                                        </MenuItem>
+                                                        {subCategoryList && subCategoryList?.length > 0 && subCategoryList.map((data, index) => (
+                                                            <MenuItem value={data} key={index}>{data}</MenuItem>
+                                                        ))}
+
+                                                    </Select>
+
+                                                </FormControl>
+                                                {errors?.category && <div style={{ color: 'red', padding: '3px 5px', marginTop: '-5px' }}>SubCategory is Required</div>}
+                                            </Grid>
+                                        </Grid>
+
+                                    </FormSection>
+
+                                    <FormSection className={styles.categoryContainer}>
+                                        <Box className={styles.listtypetitle}>
+                                            <Typography p={2} className={styles.typography} variant="body1" gutterBottom>
+                                                Listing Type<span>*</span>
+                                            </Typography>
+                                        </Box>
+                                        <FormControl error={errors?.listingType} component="fieldset" className={styles.radio}>
+                                            <RadioGroup
+                                                aria-label="listingType"
+                                                name="listingType"
+                                                value={listingType}
+                                                onChange={handleListingTypeChange}
+                                                className={styles.radioGroup}
+                                            >
+                                                <FormControlLabel value="auction" className={styles.radioColor} control={<Radio className={styles.radioColor} />} label="Auction" style={{ justifyContent: 'flex-start', color: 'black' }} />
+                                                <FormControlLabel value="fixedPrice" className={styles.radioColor} control={<Radio className={styles.radioColor} />} label="Fixed Price" />
+                                                <FormControlLabel value="classified" className={styles.radioColor} control={<Radio className={styles.radioColor} />} label="Classified" />
+                                            </RadioGroup>
+                                            {errors?.listingType && <div style={{ color: 'red', padding: '3px 5px' }}>Listing Type is required.</div>}
+                                        </FormControl>
+                                    </FormSection>
+
+                                    <FormSection className={styles.categoryContainer}>
+                                        <Box className={styles.title}>
+                                            <Typography className={styles.typography} variant="body1" gutterBottom>
+                                                Region<span>*</span>
+                                            </Typography>
+                                        </Box>
+                                        <FormControl error={errors?.region} fullWidth margin="normal" className={styles.boxStyle}>
+                                            <InputLabel className={styles.boxStyle}>Select Region </InputLabel>
+                                            <Select className={styles.regionSelect} value={region} onChange={handleRegionChange} label="Select Region">
+                                                <MenuItem value="" >
+                                                    <em>Select Region</em>
+                                                </MenuItem>
+                                                {regionsData.map((data, index) => (
+                                                    <MenuItem value={data.name} key={index}>{data.name}</MenuItem>
+                                                ))}
+                                            </Select>
+                                            {errors?.region && <div style={{ color: 'red', padding: '3px 5px' }}>Region is required.</div>}
+                                        </FormControl>
+                                    </FormSection>
+
+                                    <Box className={styles.title}>
+                                        <CustomButton variant="contained" color="primary" onClick={handleNext}>
+                                            Next
+                                        </CustomButton>
+                                    </Box>
+                                </>
+                            }
+
+                            {step === 2 &&
+                                <>
+                                    <FormSection mt={2} className={styles.categoryContainer}>
+                                        <Box className={styles.title}>
+                                            <Typography className={styles.typography} variant="body1" gutterBottom>
+                                                Standard Listing Fields
+                                            </Typography>
+                                        </Box>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs={2}>
+
+                                            </Grid>
+                                            <Grid item xs={10}>
+                                                <Box sx={{ marginLeft: 'auto' }}>
+                                                    <Grid container alignItems="center">
+                                                        <Grid item xs={2}>
+                                                            <Typography sx={{ marginBottom: 0, textAlign: 'right' }} variant="body1" gutterBottom>
+                                                                Title <span style={{ color: 'red' }}>*</span> :
+                                                            </Typography>
+                                                        </Grid>
+                                                        <Grid item xs={10} sx={{ paddingRight: '20px' }}>
+                                                            <FormControl error={error?.title} sx={{ m: 1, width: '100%' }} variant="outlined">
+                                                                <OutlinedInput
+                                                                    error={error?.title}
+                                                                    size='small'
+                                                                    id="outlined-adornment-weight"
+                                                                    aria-describedby="outlined-weight-helper-text"
+                                                                    inputProps={{
+                                                                        'aria-label': 'Title',
+                                                                    }}
+                                                                    value={title}
+                                                                    onChange={(event) => handleTitleChange(event)}
+                                                                />
+                                                            </FormControl>
+                                                            {errors?.title && <div style={{ color: 'red', padding: '3px 5px', marginTop: '-5px' }}>Title is required</div>}
+
+                                                        </Grid>
+                                                    </Grid>
+
+                                                    <Grid container alignItems="center">
+                                                        <Grid item xs={2}>
+                                                            <Typography sx={{ marginBottom: 0, textAlign: 'right' }} variant="body1" gutterBottom>
+                                                                SubTitle :
+                                                            </Typography>
+                                                        </Grid>
+                                                        <Grid item xs={10} sx={{ paddingRight: '20px' }}>
+                                                            <FormControl sx={{ m: 1, width: '100%' }} variant="outlined">
+                                                                <OutlinedInput
+                                                                    //value={title}
+                                                                    disabled
+                                                                    size='small'
+                                                                    id="outlined-adornment-weight"
+                                                                    aria-describedby="outlined-weight-helper-text"
+                                                                    inputProps={{
+                                                                        'aria-label': 'SubTitle',
+                                                                    }}
+                                                                />
+                                                            </FormControl>
+                                                        </Grid>
+                                                    </Grid>
+
+                                                    <Grid container alignItems="center" marginTop={'7px'}>
+                                                        <Grid item xs={2}>
+                                                            <FormControl error={error.description}>
+                                                                <Typography sx={{ marginBottom: 0, paddingLeft: '62px', textAlign: 'right' }} variant="body1" gutterBottom>
+                                                                    Description <span style={{ color: 'red' }}>*</span> :
+                                                                </Typography>
+                                                            </FormControl>
+                                                        </Grid>
+                                                        <Grid item xs={10} sx={{ paddingLeft: '7px', paddingRight: '10px' }}>
+                                                            <Textarea value={description} onChange={(event) => { handleDescriptionChange(event) }} sx={{ width: '100%' }} aria-label="minimum height" minRows={3} />
+                                                            {errors?.description && <div style={{ color: 'red', padding: '3px 5px', marginTop: '-5px' }}>Description is required</div>}
+                                                        </Grid>
+                                                    </Grid>
+                                                </Box>
+                                            </Grid>
+                                        </Grid>
+                                    </FormSection>
+
+                                    <Box className={styles.title} sx={{ display: 'flex' }}>
+                                        {/* <Button onClick={() => {setStep(1)}}>back</Button> */}
+                                        <Button onClick={() => { setStep(1) }} startIcon={<ChevronLeft />}>
+                                            Back
+                                        </Button>
+                                        <Button variant='outlined' sx={{ mx: 5 }}>Save Draft</Button>
+                                        <CustomButton variant="contained" color="primary" onClick={handleCreateListig}>
+                                            Create Listing
+                                        </CustomButton>
+                                    </Box>
+                                </>
+                            }
+
+                            <Box >
+                                <Typography className={styles.footer} >
+                                    All Rights Reserved. No part of this web page may be reproduced in any way without the prior written permission of KPMG India.
+                                </Typography>
+                            </Box>
+
+                        </Container>
+                        <ToastContainer />
+                    </MainContainer>
+                </>
+            </Layout>
+
         </>
     );
 };

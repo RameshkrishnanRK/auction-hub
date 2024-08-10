@@ -124,19 +124,20 @@ const LoginPage = () => {
                 error={passwordError !== ""}
                 helperText={passwordError}
               />
-              <div style={{ display: "flex", justifyContent: "space-between"}}>
-                <FormControlLabel className={styles.rememberFont}
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems:'center'}}>
+                <FormControlLabel
                   control={
                     <Checkbox
+                      size="small"
                       value={rememberMe}
                       color="primary"
                       onChange={(e) => setRememberMe(e.target.checked)}
                     />
                   }
-                  label="Remember me" 
+                  label={<Typography variant="body2">Remember me</Typography>} 
                 />
                 
-                <Link href="#" variant="body2" sx={{marginTop:'14px'}}>
+                <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
               </div>

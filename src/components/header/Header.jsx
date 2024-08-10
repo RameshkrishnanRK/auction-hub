@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { logout } from '../../redux/slices/loginSlice';
 import { FormControl, Input, InputAdornment, InputLabel } from '@mui/material';
+import { useLocation } from "react-router-dom";
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -57,6 +58,7 @@ export default function Header({ setSearchTerm }) {
     const navigate = useNavigate();
     const [inputValue, setInputValue] = React.useState('');
     const userData = useSelector((state) => state.login.user);
+    const location = useLocation();
 
     const handleLogout = () => {
         dispatch(logout());
@@ -69,53 +71,53 @@ export default function Header({ setSearchTerm }) {
 
     return (
         <>
-            <Box sx={{ flexGrow: 1 }}>
-                <AppBar  position="relative" className={styles.headerColor}>
-                    <Toolbar sx={{ minHeight: '55px !important' }} mt={3}>
-                        <img alt="kpmg" src={kpmgImage} />
-                    </Toolbar>
-                    <Toolbar sx={{ minHeight: '55px !important' }}>
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component="div"
-                            className={styles.link}
-                        >
-                            <Link to="/">
-                                Home
-                            </Link>
-                        </Typography>
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            className={styles.link}
-                            component="div"
-                            ml={8}
-                        >
-                            <Link to="/auction/dashboard">
-                                Browse
-                            </Link>
-                        </Typography>
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component="div"
-                            className={styles.link}
-                            ml={8}
-                        >
+            {/* <Box sx={{ flexGrow: 1 }}> */}
+            <AppBar position="sticky" className={styles.headerColor}>
+                <Toolbar sx={{ minHeight: '55px !important' }} mt={3}>
+                    <img alt="kpmg" src={kpmgImage} />
+                </Toolbar>
+                <Toolbar sx={{ minHeight: '55px !important' }}>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        className={styles.link}
+                    >
+                        <Link to="/">
+                            Home
+                        </Link>
+                    </Typography>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        className={styles.link}
+                        component="div"
+                        ml={8}
+                    >
+                        <Link to="/auction/dashboard">
+                            Browse
+                        </Link>
+                    </Typography>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        className={styles.link}
+                        ml={8}
+                    >
 
-                            <Link to="/auction/sell">
-                                Sell
-                            </Link>
-                        </Typography>
-                        <Box sx={{ flexGrow: 1 }} />
-                        {
-                            userData ? <>
+                        <Link to="/auction/sell">
+                            Sell
+                        </Link>
+                    </Typography>
+                    <Box sx={{ flexGrow: 1 }} />
+                    {
+                        userData ? <>
 
-                                Hello, {userData.user}
-                                <LogoutOutlinedIcon onClick={handleLogout} style={{fontSize:'15px', fontWeight:'bold', paddingLeft:'4px', cursor:'pointer'}} />
-                            </> : <>
-                                {/* <Button mr={4} className={styles.link} color="inherit"><Link to="/sign-up">
+                            Hello, {userData.user}
+                            <LogoutOutlinedIcon onClick={handleLogout} style={{ fontSize: '15px', fontWeight: 'bold', paddingLeft: '4px', cursor: 'pointer' }} />
+                        </> : <>
+                            {/* <Button mr={4} className={styles.link} color="inherit"><Link to="/sign-up">
                                     SignUp
                                 </Link></Button>
                                 <Button mr={4} className={styles.link} color="inherit">
@@ -123,71 +125,56 @@ export default function Header({ setSearchTerm }) {
                                         Register
                                     </Link>
                                 </Button> */}
-                                <Button color="inherit" className={styles.link}>
-                                    <Link to="/auction/login">
-                                        Login
-                                    </Link>
-                                </Button>
-                            </>
-                        }
+                            <Button color="inherit" className={styles.link}>
+                                <Link to="/auction/login">
+                                    Login
+                                </Link>
+                            </Button>
+                        </>
+                    }
 
-                    </Toolbar>
-                    <Divider   className={styles.divider} />
-                    <Toolbar sx={{ minHeight: '55px !important' }}>
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component="div"
-                            className={styles.link}
-                        >
-                            <Link to="/auction/contact-us">
-                                Contact Us
-                            </Link>
-                        </Typography>
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component="div"
-                            className={styles.link}
-                            ml={9}
-                        >
-                            <Link to="/auction/about-us">
-                                About Us
-                            </Link>
-                        </Typography>
-                        <Box sx={{ flexGrow: 1 }} />
-                        <Search>
-                            <SearchIconWrapper>
-                                <SearchIcon />
-                            </SearchIconWrapper>
-                            <StyledInputBase
-                                onChange={(event) => {setInputValue(event.target.value)}}
-                                value={inputValue}
-                                placeholder="Enter keywords…"
-                                inputProps={{ 'aria-label': 'search' }}
-                            />
-                        </Search>
-                        {/* <FormControl variant="standard">
-                            <InputLabel htmlFor="input-with-icon-adornment">
-                                With a start adornment
-                            </InputLabel>
-                            <Input
+                </Toolbar>
+                <Divider className={styles.divider} />
+                <Toolbar sx={{ minHeight: '55px !important' }}>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        className={styles.link}
+                    >
+                        <Link to="/auction/contact-us">
+                            Contact Us
+                        </Link>
+                    </Typography>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        className={styles.link}
+                        ml={9}
+                    >
+                        <Link to="/auction/about-us">
+                            About Us
+                        </Link>
+                    </Typography>
+                    <Box sx={{ flexGrow: 1 }} />
+                    {location.pathname.includes('/auction/dashboard') && (<><Search>
+                        <SearchIconWrapper>
+                            <SearchIcon />
+                        </SearchIconWrapper>
+                        <StyledInputBase
+                            onChange={(event) => { setInputValue(event.target.value) }}
                             value={inputValue}
-                            onChange={(e) => {setInputValue(e.target.value)}}
-                                id="input-with-icon-adornment"
-                                startAdornment={
-                                    <InputAdornment position="start">
-                                        <SearchIcon />
-                                    </InputAdornment>
-                                }
-                            />
-                        </FormControl> */}
+                            placeholder="Enter keywords…"
+                            inputProps={{ 'aria-label': 'search' }}
+                        />
+                    </Search>
                         <Button variant="contained" color="primary" onClick={handleSearch} className={styles.searchBtn}>
                             Search
-                        </Button>
-                    </Toolbar>
-                </AppBar>
-            </Box>
+                        </Button></>)}
+                </Toolbar>
+            </AppBar>
+            {/* </Box> */}
 
         </>
     );
