@@ -17,7 +17,6 @@ import { useDispatch, useSelector } from "react-redux";
 //import { fetchProducts } from "../../../../redux/slices/productSlice";
 import { Slide, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
 import ReusableModal from "../../../../utils/reusableModal";
 import Layout from "../../../../routing/components/Layout";
 
@@ -35,29 +34,35 @@ const ProductDetails = () => {
     const [openBidModal, setOpenBidModal] = useState(false);
     const [openOfferModal, setOpenOfferModal] = useState(false);
 
-    //const products = useSelector((state) => state.products.products);
+    // const products = useSelector((state) => state.products.products);
     const { data: products, loading: productLoading, error: productError } = useSelector((state) => state.product);
-    
 
-    //   useEffect(() => {
-    //     if (products.length === 0) {
-    //       dispatch(fetchProducts());
-    //     }
-    //   }, [dispatch, products.length]);
+    window.history.replaceState(null, '', '/auction/dashboard');
 
     const product =
         products.length > 0 &&
-        products.find((product) => product.id === parseInt(productId));
+        products.find((product) => product?.id === parseInt(productId));
+    // console.log('product: one', product);
 
-    const formattedBid = Number(product.currentBid).toLocaleString("en-IN");
+    let formattedBid;
+    if (product && product?.currentBid !== undefined) {
+        formattedBid = Number(product?.currentBid).toLocaleString("en-IN");
+    }
+
     const [cleanedFormattedBid, setCleanedFormattedBid] = useState(formattedBid);
     //const [cleanedFormattedBid, setCleanedFormattedBid] = useState(formattedBid.replace(/,/g, ''));
 
     const [addedToWatchList, setAddedToWatchList] = useState(false);
 
     const cleanedFormattedBidMemo = useMemo(() => {
-        setCleanedFormattedBid(formattedBid.replace(/,/g, ""));
-        return formattedBid.replace(/,/g, "");
+        console.log("cleanedFormattedBidMemo ", formattedBid)
+        if (formattedBid !== undefined) {
+            setCleanedFormattedBid(formattedBid.replace(/,/g, ""));
+            return formattedBid.replace(/,/g, "");
+        } else {
+            navigate('/auction/dashboard');
+        }
+
     }, [formattedBid]);
 
     //const cleanedFormattedBid = formattedBid && Number(formattedBid.replace(/,/g, ''));
@@ -66,12 +71,12 @@ const ProductDetails = () => {
     const [offerAmount, setOfferAmount] = useState("");
     const [OfferMessage, setOfferMessage] = useState("");
 
-    useEffect(()=>{
-        if(bidAmount) localStorage.setItem('bidAmount', bidAmount)
+    useEffect(() => {
+        if (bidAmount) localStorage.setItem('bidAmount', bidAmount)
     }, [bidAmount])
     const handleBidAmount = (event) => {
         const newValue = event.target.value;
-        if(/^\d*$/.test(newValue)){
+        if (/^\d*$/.test(newValue)) {
             setBidAmount(newValue);
         }
     };
@@ -79,7 +84,7 @@ const ProductDetails = () => {
     const handleOfferAmount = (event) => {
         //console.log("event value ", event.target.value)
         const newValue = event.target.value;
-        if(/^\d*$/.test(newValue)){
+        if (/^\d*$/.test(newValue)) {
             setOfferAmount(newValue);
         }
     };
@@ -93,7 +98,8 @@ const ProductDetails = () => {
         //setCleanedFormattedBid(formattedBid)
         let formattedBidValue = Number(cleanedFormattedBid);
         let inputBidAmount = localStorage.getItem('bidAmount');
-        let bidAmountValue = Number(inputBidAmount);
+        let bidAmountValue = Number(bidAmount);
+        console.log("handleBidAmountSubmit ", bidAmount, formattedBidValue)
 
         if (bidAmountValue < formattedBidValue) {
             toast.error("Bid Amount Cannot be lesser than Current Bid", {
@@ -116,6 +122,8 @@ const ProductDetails = () => {
     const handleOfferAmountSubmit = () => {
         //setCleanedFormattedBid(formattedBid)
         setOpenOfferModal(true);
+        console.log("handleQuickBid ", formattedBid)
+        setCleanedFormattedBid(formattedBid.replace(/,/g, ""));
     }
 
     const handleAddToWatchList = () => {
@@ -139,33 +147,12 @@ const ProductDetails = () => {
 
     const handleQuickBid = () => {
         setOpenBidModal(true);
+        console.log("handleQuickBid ", formattedBid)
+        setCleanedFormattedBid(formattedBid.replace(/,/g, ""));
     };
 
     const handleBidModalSuccess = async () => {
         setOpenBidModal(false);
-
-        // const payload = {
-        //     "versionInfo": {
-        //         "hasModuleVersionChanged": false,
-        //         "hasApiVersionChanged": false
-        //     },
-        //     "data": {
-        //         "Out1": "0"
-        //     }
-        // }
-
-        // const url = 'https://kisl-dev.outsystemscloud.com/Auction/screenservices/Auction/MainFlow/ProductDetails/ActionAddBid';
-
-        // try {
-        //     const response = await axios.post(url, payload, {
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //     });
-        //     console.log('response ', response)
-        // } catch (error) {
-        //     console.log("error ", error)
-        // }
 
         toast.success("Your Bid has been successfully Submitted", {
             position: "top-center",
@@ -190,7 +177,7 @@ const ProductDetails = () => {
             let formattedBidValue = Number(cleanedFormattedBid);
             let offerAmountValue = Number(offerAmount);
 
-            if (offerAmountValue < formattedBidValue) {
+            if (offerAmountValue <= formattedBidValue) {
                 toast.error("Bid Amount Cannot be lesser than Current Bid", {
                     position: "top-center",
                     autoClose: 3000,
@@ -245,10 +232,20 @@ const ProductDetails = () => {
 
 
     const handleBidModalClose = () => {
-        const formattedBid = Number(product.currentBid).toLocaleString("en-IN");
-        console.log('formattedBid: ',formattedBid)
-        setCleanedFormattedBid(formattedBid)
-        setOpenBidModal(false)
+        // const formattedBid = Number(product?.currentBid).toLocaleString("en-IN");
+        let formattedBid;
+        if (product && product?.currentBid !== undefined) {
+            formattedBid = Number(product?.currentBid).toLocaleString("en-IN");
+            console.log('formattedBid: ', formattedBid, formattedBid.replace(/,/g, ""))
+            setCleanedFormattedBid(formattedBid.replace(/,/g, ""));
+            //setCleanedFormattedBid(formattedBid)
+            setOpenBidModal(false)
+        }
+
+
+        // const formattedBid = Number(product.currentBid).toLocaleString("en-IN");
+        // setCleanedFormattedBid(formattedBid)
+        // setOpenBidModal(false)
     }
 
     const handleOfferModalClose = (event) => {
@@ -272,23 +269,8 @@ const ProductDetails = () => {
             transition: Slide
         })
     }
-
-    // const styleBid = {
-    //     position: 'absolute',
-    //     top: '50%',
-    //     left: '50%',
-    //     transform: 'translate(-50%, -50%)',
-    //     width: 400,
-    //     bgcolor: 'background.paper',
-    //     borderRadius :'4px',
-    //     boxShadow: 24,
-    //     p: 4,
-    //   };
-
-
-
     const modalBidContent = (<Box><Typography sx={{ padding: '4px', backgroundColor: '#337AB7', color: '#ffffff', fontSize: '14px', fontWeight: 'bold' }} id="modal-modal-title" variant="h6" component="h2">
-        {product.title}
+        {product?.title}
     </Typography>
         <Typography
             id="modal-modal-description"
@@ -302,7 +284,7 @@ const ProductDetails = () => {
     const modalOfferContent = (
         <Box>
             <Typography sx={{ padding: '4px', backgroundColor: '#337AB7', color: '#ffffff', fontSize: '14px', fontWeight: 'bold' }} id="modal-modal-title" variant="h6" component="h2">
-                {product.title}
+                {product?.title}
             </Typography>
             <Box style={{ paddingTop: '10px' }}>
                 <label>Your Offer <span style={{ color: 'red' }}>*</span> </label> <br />
@@ -312,7 +294,7 @@ const ProductDetails = () => {
                     size='small'
                     required
                     // type="number"
-                    inputProps={{inputMode: 'numeric', pattern: '[0-9]*'}}
+                    inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                     className={Styles.bidInput}
                     value={offerAmount}
                     onChange={handleOfferAmount}
@@ -340,7 +322,7 @@ const ProductDetails = () => {
         <>
             <Layout />
             <div className={Styles.ViewProductDetails}>
-                
+
                 <Card className={Styles.productDetailsWrapper}>
                     {addedToWatchList && (
                         <Alert severity='success' className={Styles.watchListAlert}>
@@ -348,17 +330,17 @@ const ProductDetails = () => {
                         </Alert>
                     )}
                     <Box className={Styles.productMain}>
-                        <CardMedia
+                        {product && product.image && (<CardMedia
                             component='img'
                             height='140'
                             width='100%'
                             image={product.image}
-                            alt={product.title}
+                            alt={product?.title}
                             className={Styles.productImage}
-                        />
+                        />)}
                         <CardContent className={Styles.productDetails}>
                             <Typography variant='h5' component='div' className={Styles.productTitle}>
-                                {product.title}
+                                {product?.title}
                             </Typography>
                             <Divider />
                             <Box className={Styles.productInfo}>
@@ -371,14 +353,14 @@ const ProductDetails = () => {
                                         color='primary'
                                         className={Styles.quickBidBtn}
                                         onClick={handleQuickBid}
-                                    // disabled={product.isExpired}
+                                    // disabled={product?.isExpired}
                                     >
                                         Quick Bid ₹{formattedBid}
                                     </Button>
                                     <Box className={Styles.bidSection}>
                                         <TextField
                                             // type="number"
-                                            inputProps={{inputMode: 'numeric', pattern: '[0-9]*'}}
+                                            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                                             label={`Minimum Bid ₹${formattedBid}`}
                                             variant='outlined'
                                             size='small'
@@ -421,7 +403,7 @@ const ProductDetails = () => {
                                         Make Offer
                                     </Button>
                                     <Typography variant='body2' color="text.secondary" className={Styles.remainingTime}>
-                                        Remaining Time :  {product.isExpired ? 'Expired' : `${product.timeRemaining} hrs`}
+                                        Remaining Time :  {product?.isExpired ? 'Expired' : `${product?.timeRemaining} hrs`}
                                     </Typography>
                                 </Box>
                                 <Box className={Styles.productInfoRight}>
@@ -455,33 +437,17 @@ const ProductDetails = () => {
                                     </Box>
                                 </Box>
                             </Box>
-                            {/* <Box className={Styles.productExtraInfo}>
-                          
-                            <Typography variant='body2' color="text.secondary" style={{ width: '125%', marginRight: '10px' }}>
-                                KPMG will bid incrementally for you upto your maximun bid. Your maximum bid is kept a secret from other users.
-                            </Typography>
-                           
-                            <Typography variant='body2' color="text.secondary">
-                                Your bid is a contract between you and the listing creator. If you have the highest bid, you will enter into a legally  binding purchase contract.
-                            </Typography>
-                          
-
-
-                        </Box> */}
-
                             <Box className={Styles.productExtraInfo}>
                                 {/* <Box> */}
-                                <Typography variant='body2' color="text.secondary" style={{ width: '98%', textAlign:'justify' }}>
+                                <Typography variant='body2' color="text.secondary" style={{ width: '98%', textAlign: 'justify' }}>
                                     KPMG will bid incrementally for you upto your maximun bid. Your maximum bid is kept a secret from other users.
                                 </Typography>
                                 {/* </Box>
                             <Box> */}
-                                <Typography variant='body2' color="text.secondary" style={{ width: '98%', paddingLeft:'25px', textAlign:'justify' }}>
+                                <Typography variant='body2' color="text.secondary" style={{ width: '98%', paddingLeft: '25px', textAlign: 'justify' }}>
                                     Your bid is a contract between you and the listing creator. If you have the highest bid, you will enter into a legally  binding purchase contract.
                                 </Typography>
                                 {/* </Box> */}
-
-
                             </Box>
                         </CardContent>
                     </Box>
@@ -489,29 +455,6 @@ const ProductDetails = () => {
 
 
                 </Card>
-
-                {/* <Modal
-                open={openBidModal}
-                onClose={handleOutsideClick}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-                className={Styles.modalBid}
-                >
-                <Box ref={modalRef} sx={styleBid} className='modalBidBox'>
-                    <Typography sx={{padding:'4px', backgroundColor:'#337AB7', color:'#ffffff', fontSize:'14px', fontWeight:'bold'}} id="modal-modal-title" variant="h6" component="h2">
-                        {product.title}
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2, color:'#3C763D', fontSize:'14px', fontWeight:'bold' }}>
-                        Confirm your bid of INR {cleanedFormattedBid}
-                    </Typography>
-                   
-                    <Box sx={{mt:'25px',display:'flex', justifyContent:'end'}}>
-                        <Button variant='outlined' onClick={handleBidModalClose}>Cancel</Button>
-                        <Button className={Styles.modalButtonSuccess} style={{backgroundColor:'#3CA93A', color:'#ffffff', marginLeft:'10px'}} onClick={handleBidModalSuccess}>Submit</Button>
-                    </Box>
-                </Box>
-            </Modal> */}
-
                 <ReusableModal
                     open={openBidModal}
                     onClose={handleBidModalClose}

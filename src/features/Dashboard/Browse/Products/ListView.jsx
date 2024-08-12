@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ProductListView from '../../../../utils/ProductListView'
 import styles from './ListView.module.scss'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const ListView = ({ status, filter, sortData }) => {
+  const dispatch = useDispatch();
 
-  //const products = useSelector((state) => state.products.products)
+  // const products = useSelector((state) => state.products.products)
   const { data: products, loading: productLoading, error: productError } = useSelector((state) => state.product);
 
   const getTimeValue = (timeVal) => {

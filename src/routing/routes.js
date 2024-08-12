@@ -9,6 +9,7 @@ import Sell from "../components/sell/Sell";
 import LoginPage from "../components/login/LoginPage";
 
 const routes = () => {
+
   return (
     <Router>
       <Routes>

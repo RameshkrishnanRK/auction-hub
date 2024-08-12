@@ -14,8 +14,8 @@ const ProductGridView = ({ id, image, title, currentBid, timeRemaining, isExpire
     }
 
     const handleBid = () => {
-        // const userName = userData && userData.user;
-        // console.log("userName ", userName)
+        const userName = userData && userData.user;
+        console.log("userName ", userName)
         if(userData !== null) {
             navigate(`/auction/product-details?productId=${id}`)
         } else {
@@ -34,7 +34,7 @@ const ProductGridView = ({ id, image, title, currentBid, timeRemaining, isExpire
             />
             <CardContent>
                 <Typography variant='h6' component='div' onClick={handleViewDetails}>
-                    <Link to="/auction/product-details" style={{ color: '#337AB7', fontSize: '14px', textAlign: 'left', textDecoration: 'none' }}>
+                    <Link to={`/auction/product-details?productId=${id}`} style={{ color: '#337AB7', fontSize: '14px', textAlign: 'left', textDecoration: 'none' }}>
                         {title}
                     </Link>
                 </Typography>

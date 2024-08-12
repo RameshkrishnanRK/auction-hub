@@ -2,13 +2,14 @@ import React, { useEffect } from "react";
 import { Box, Breadcrumbs, Grid } from "@mui/material";
 import Sidebar from "./Sidebar";
 import styles from "./Browse.module.scss";
-import { categoriesData, regionsData } from "./data";
+import { categoriesData, regionsData } from "./jsonData";
 import ControlPanel from "./ControlPanel";
 import { Link, useLocation } from "react-router-dom";
 import Layout from "../../../routing/components/Layout";
 import { useDispatch } from "react-redux";
-import { fetchSideBarStart, fetchSideBarFailure, fetchSideBarSuccess } from "../../../redux/slices/sideBarSlice";
+import { fetchSideBarStart, fetchSideBarFailure, fetchSideBarSuccess } from "../../../redux/slices/sideBarCategorySlice";
 import { fetchSideBarRegionsStart, fetchSideBarRegionsFailure, fetchSideBarRegionsSuccess } from "../../../redux/slices/sideBarRegionSlice";
+import UpdatedSidebar from "./UpdatedSidebar";
 
 const Browse = () => {
 
@@ -84,7 +85,8 @@ const Browse = () => {
 
                     <Grid item xs={3}>
 
-                        <Sidebar />
+                         <Sidebar /> 
+                        {/* <UpdatedSidebar/> */}
                     </Grid>
                     <Grid item xs={9}>
                         <ControlPanel />

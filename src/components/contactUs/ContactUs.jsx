@@ -18,10 +18,15 @@ const MainContainer = styled(Box)({
   display: "flex",
   flexDirection: "column",
   minHeight: "100vh",
+    
 });
 
 const ContentContainer = styled(Container)({
   flex: "1",
+  // margin: '10px 30px 10px 30px',
+  marginLeft:'30px',
+  marginRight:'30px',
+  padding: '5px'
 });
 
 const Textarea = styled(BaseTextareaAutosize)(
@@ -113,11 +118,11 @@ const ContactUs = () => {
     <MainContainer>
       <Layout />
       <ContentContainer className={styles.mainContainer}>
-        <Box mt={8}>
-          <Typography p={3} gutterBottom className={styles.title}>
+        <Box mt={8} marginTop='20px'>
+          <Typography p={3} gutterBottom className={styles.title} padding='20px' borderRadius='5px' >
             Contact Us
           </Typography>
-          <Box mt={8} className={styles.container}>
+          <Box mt={8} className={styles.container} marginTop='20px' borderRadius='5px'>
             <Box p={5}>
               <Typography
                 variant="body1"
@@ -252,8 +257,8 @@ const ContactUs = () => {
           Form Submitted Successfully
         </Alert>
       </Snackbar>
-      <Box className={styles.footer}>
-        <Typography className={styles.footerText}>
+      <Box className={styles.footer} marginTop='10px' marginLeft='30px'>
+        <Typography className={styles.footerText} fontSize='small' >
           All Rights Reserved. No part of this web page may be reproduced in any
           way without the prior written permission of KPMG India.
         </Typography>

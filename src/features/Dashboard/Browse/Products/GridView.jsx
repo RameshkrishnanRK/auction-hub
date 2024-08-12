@@ -2,16 +2,14 @@ import React, { useEffect } from 'react'
 import ProductGridView from '../../../../utils/ProductGridView'
 import styles from './GridView.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
-//import { fetchProductsFailure, fetchProductsStart, fetchProductsSuccess } from '../../../../redux/slices/productSlice'
+import { fetchProductsFailure, fetchProductsStart, fetchProductsSuccess } from '../../../../redux/slices/productSlice'
 import { Grid } from '@mui/material'
-//import { productsData } from '../data'
+//import { productsData } from '../jsonData'
 
 
 
 const GridView = ({ status, filter, sortData }) => {
-  const dispatch = useDispatch();
-
-  //const products = useSelector((state) => state.products.products)
+  // const products = useSelector((state) => state.products.products)
 
   const { data: products, loading: productLoading, error: productError } = useSelector((state) => state.product);
 
@@ -32,6 +30,8 @@ const GridView = ({ status, filter, sortData }) => {
 
   //   fetchProducts();
   // }, [dispatch]);
+
+
 
   const getTimeValue = (timeVal) => {
     //console.log("getTimeValue ", timeVal)

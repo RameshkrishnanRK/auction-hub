@@ -47,14 +47,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-
-
-
 export default function Header() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const userData = useSelector((state) => state.login.user);
+    console.log('userData:', userData)
 
     const handleLogout = () => {
         dispatch(logout());

@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import productReducer from "../slices/productSlice";
-import sideBarReducer from "../slices/sideBarSlice";
+import sideBarReducer from "../slices/sideBarCategorySlice";
 import contactReducer from "../slices/contactSlice";
 import sideBarRegionReducer from "../slices/sideBarRegionSlice";
 import loginReducer from "../slices/loginSlice";
