@@ -28,26 +28,18 @@ const About = () => {
               className={styles.subTitle}
               variant="body1"
               gutterBottom
-              fontSize='small'              
+              fontSize='small' 
             >
-             <p> Barbados Auctions is an online platform that facilitates the sale
-              and purchase of a variety of items located in Barbados. It
-              includes Auctions, Fixed Price, and Classified listings and
-              enables multiple vendors to sell on the website. </p>
+             <p> Barbados Auctions is an online platform that facilitates the sale and purchase of a variety of items located in Barbados. It
+              includes Auctions, Fixed Price, and Classified listings and enables multiple vendors to sell on the website. </p>
 
-              <p>The major objective of Barbados Auctions is to provide a mechanism
-              to enable businesses and individuals to use Information and
-              Communications Technology to efficiently conduct business. It is
-              part of the efforts aimed to improve our global competitiveness
-              where we are cited as being very slow at doing business in
-              Barbados.</p>
+              <p>The major objective of Barbados Auctions is to provide a mechanism to enable businesses and individuals to use Information and
+              Communications Technology to efficiently conduct business. It is part of the efforts aimed to improve our global competitiveness
+              where we are cited as being very slow at doing business in Barbados.</p>
 
-              <p>Ian Collymore, the sponsor of the website has substantial
-              knowledge and experience in many areas. These include Accounting,
-              Finance, Project Management, Procurement, Creating and Managing
-              Financing Structures, Transportation, Retail, Importation, Real
-              Estate and Electronic Commerce. This is in addition to post
-              graduate qualifications in Electronic Commerce.</p>
+              <p>Ian Collymore, the sponsor of the website has substantial knowledge and experience in many areas. These include Accounting,
+              Finance, Project Management, Procurement, Creating and Managing Financing Structures, Transportation, Retail, Importation, Real
+              Estate and Electronic Commerce. This is in addition to post graduate qualifications in Electronic Commerce.</p>
               
             </Typography>
                        

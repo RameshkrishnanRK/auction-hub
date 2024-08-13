@@ -9,7 +9,7 @@ const Home = () => {
       <Layout />
       <div className={Styles.auctionContainer}>
         <Typography className={Styles.auctionTitle} component="h1" fontWeight='bold' fontSize='1.5rem' marginLeft='40px'margin-top='5px'
-    text-align='left'>
+    >
           Welcome to KPMG Auction Platform!
         </Typography>
         <Typography className={Styles.auctionDescription} component="p" margin='20px'>

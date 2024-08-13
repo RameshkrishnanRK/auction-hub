@@ -118,7 +118,7 @@ const ContactUs = () => {
     <MainContainer>
       <Layout />
       <ContentContainer className={styles.mainContainer}>
-        <Box mt={8} marginTop='20px'>
+        <Box mt={8} marginTop='20px' marginLeft='20px'>
           <Typography p={3} gutterBottom className={styles.title} padding='20px' borderRadius='5px' >
             Contact Us
           </Typography>

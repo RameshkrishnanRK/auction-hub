@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Breadcrumbs, Grid } from "@mui/material";
 import Sidebar from "./Sidebar";
 import styles from "./Browse.module.scss";
@@ -9,14 +9,13 @@ import Layout from "../../../routing/components/Layout";
 import { useDispatch } from "react-redux";
 import { fetchSideBarStart, fetchSideBarFailure, fetchSideBarSuccess } from "../../../redux/slices/sideBarCategorySlice";
 import { fetchSideBarRegionsStart, fetchSideBarRegionsFailure, fetchSideBarRegionsSuccess } from "../../../redux/slices/sideBarRegionSlice";
-import UpdatedSidebar from "./UpdatedSidebar";
 
 const Browse = () => {
 
     const location = useLocation();
     const pathname = location.pathname;
     const pathSegments = pathname.split('/').filter((segment) => segment);
-
+    const [searchTerm, setSearchTerm] = useState('');
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -49,11 +48,12 @@ const Browse = () => {
 
         fetchCategories();
         fetchRegions();
-    }, [dispatch]);
+        console.log(searchTerm)
+    }, [dispatch,searchTerm]);
 
     return (
         <>
-            <Layout />
+            <Layout setSearchTerm={setSearchTerm}/>
             <Box className={styles.container}>
                 <Box className={styles.breadcrumbs}>
                     {/* <Breadcrumbs className='breadcrumb' arial-label='breadcrumb'>
@@ -89,7 +89,7 @@ const Browse = () => {
                         {/* <UpdatedSidebar/> */}
                     </Grid>
                     <Grid item xs={9}>
-                        <ControlPanel />
+                        <ControlPanel searchTerm={searchTerm} />
                     </Grid>
                 </Grid>
             </Box>

@@ -7,23 +7,24 @@ import { useSelector } from 'react-redux';
 const ProductGridView = ({ id, image, title, currentBid, timeRemaining, isExpired }) => {
     const navigate = useNavigate();
 
-    const userData = useSelector((state)=> state.login.user);
+    const userData = useSelector((state) => state.login.user);
 
     const handleViewDetails = () => {
         navigate(`/auction/product-details?productId=${id}`)
+
     }
 
     const handleBid = () => {
         const userName = userData && userData.user;
         console.log("userName ", userName)
-        if(userData !== null) {
+        if (userData !== null) {
             navigate(`/auction/product-details?productId=${id}`)
         } else {
             navigate(`/auction/login`)
         }
     }
     const formattedBid = Number(currentBid).toLocaleString('en-IN');
-    return ( 
+    return (
         <Card className={Styles.productGridWrapper}>
             <CardMedia
                 component='img'
@@ -63,11 +64,11 @@ const ProductGridView = ({ id, image, title, currentBid, timeRemaining, isExpire
                 disabled={isExpired}
             >
                 Quick Bid ₹{formattedBid}
-            </Button> :<Button
+            </Button> : <Button
                 variant='contained'
                 className={Styles.quickBidBtn}
                 onClick={handleBid}
-                // disabled={isExpired}
+            // disabled={isExpired}
             >
                 Quick Bid ₹{formattedBid}
             </Button>}

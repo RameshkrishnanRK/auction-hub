@@ -7,7 +7,7 @@ import { filterByOptions, sortOptions } from './jsonData';
 import GridView from './Products/GridView';
 import ListView from './Products/ListView';
 
-const ControlPanel = () => {
+const ControlPanel = ({searchTerm}) => {
     const [view, setView] = useState('grid');
     const [status, setStatus] = useState('active');
     const [filter, setFilter] = useState('all');
@@ -136,7 +136,7 @@ const ControlPanel = () => {
                     </FormControl>
                 </Box>
             </Box>
-            {view === 'grid' ? <GridView status={status} filter={filter} sortData={sortData} /> : <ListView status={status} filter={filter} sortData={sortData} />}
+            {view === 'grid' ? <GridView searchTerm={searchTerm} status={status} filter={filter} sortData={sortData} /> : <ListView searchTerm={searchTerm} status={status} filter={filter} sortData={sortData} />}
         </div >
     );
 };

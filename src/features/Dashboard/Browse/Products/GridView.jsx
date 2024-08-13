@@ -8,7 +8,7 @@ import { Grid } from '@mui/material'
 
 
 
-const GridView = ({ status, filter, sortData }) => {
+const GridView = ({searchTerm, status, filter, sortData }) => {
   // const products = useSelector((state) => state.products.products)
 
   const { data: products, loading: productLoading, error: productError } = useSelector((state) => state.product);
@@ -47,7 +47,7 @@ const GridView = ({ status, filter, sortData }) => {
     (product) => {
       const matchStatusFilter = (status === 'active' && product.status === 'active' && product.isExpired === false) || (status === 'completed' && product.status === 'completed' && product.isExpired === true)
       const matchTypeFilter = (product.type === filter || filter === 'all');
-
+      const matchTermFilter = (product.title?.toLowerCase()?.includes(searchTerm?.toLowerCase()) || searchTerm == (null || ''))
       return matchStatusFilter && matchTypeFilter
     }).sort((a, b) => {
       const timeComparison = getTimeValue(a.timeRemaining) - getTimeValue(b.timeRemaining);
