@@ -1,19 +1,27 @@
-import React, { useState } from 'react';
-import { Box, Typography, Container, TextField, Button, Grid, Snackbar, Alert, Breadcrumbs } from '@mui/material';
-import { styled } from '@mui/system';
-import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize';
-import styles from './ContactUs.module.scss';
+import React, { useState } from "react";
+import {
+  Box,
+  Typography,
+  Container,
+  TextField,
+  Button,
+  Grid,
+  Snackbar,
+  Alert,
+  Breadcrumbs,
+} from "@mui/material";
+import { styled } from "@mui/system";
+import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
+import styles from "./ContactUs.module.scss";
 import Layout from "../../routing/components/Layout";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-const MainContainer = styled(Box)({
-  display: "flex",
-  flexDirection: "column",
-  // minHeight: "100vh",
-});
 
 const ContentContainer = styled(Container)({
   flex: "1",
+  marginLeft: '30px',
+  marginRight: '30px',
+  padding: '5px'
 });
 
 const Textarea = styled(BaseTextareaAutosize)(
@@ -102,75 +110,49 @@ const ContactUs = () => {
   }
 
   return (
-    <><Layout />
-      <Box className={styles.breadcrumbs}>
-        {/* <Breadcrumbs className='breadcrumb' arial-label='breadcrumb'>
-                        <Link to="/">
-                            Home
-                        </Link>
-                        {pathSegments.map((segment, index) => {
-                            const to = `/${pathSegments.slice(0, index + 1).join('/')}`;
-                            return (
-                                <Link to={to}>
-                                    {segment.charAt(0).toUpperCase() + segment.slice(1)}
-                                </Link>
-                            )
-                        })}
-                       
-                    </Breadcrumbs> */}
-        <Box sx={{ paddingLeft: '50px', paddingTop: '20px' }}>
-          <Breadcrumbs className='breadcrumb' arial-label='breadcrumb'>
+    <div>
+      <Layout />
+      <Box >
+        <Box className={styles.box} >
+          <Breadcrumbs >
             <Link to="/" style={{ textDecoration: 'none' }}>
               Home
             </Link>
             <Link style={{ textDecoration: 'none' }}>
-              ContactUs
+              Contact Us
             </Link>
 
-            {/* <Typography color="text.primary" href="/browse">Browse</Typography> */}
           </Breadcrumbs>
         </Box>
       </Box>
-      <MainContainer>
-        <ContentContainer className={styles.mainContainer}>
-          <Box mt={1}>
-            <Typography p={2} gutterBottom className={styles.title}>
-              Contact Us
-            </Typography>
-            <Box mt={8} className={styles.container}>
-              <Box p={5}>
-                <Typography
-                  variant="body1"
-                  gutterBottom
-                  className={styles.disclaimer}
-                >
-                  All fields marked with "*" are required.
-                </Typography>
-                <Box
-                  component="form"
-                  sx={{
-                    "& .MuiTextField-root": { mb: 2, width: "100%" },
-                  }}
-                  noValidate
-                  autoComplete="off"
-                  onSubmit={handleSubmit}
-                >
-                  <Grid container spacing={1} sx={{ alignItems: 'center' }} >
-                    <Grid xs={2}>
-                      <Typography variant="body2" className={styles.text}>
-                        First Name <span>*</span>
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={5}>
-                      <TextField
-                        required
-                        id="firstName"
-                        value={formState.firstName}
-                        onChange={handleChange}
-                        error={Boolean(errors.firstName)}
-                        helperText={errors.firstName}
-                      />
-                    </Grid>
+      <ContentContainer className={styles.mainContainer} >
+        <Box mt={8} className={styles.box1} >
+          <Typography p={3} className={styles.title} padding='15px' >
+            Contact Us
+          </Typography>
+          <Box mt={8} className={styles.container} marginTop='20px' >
+            <Box p={5}>
+              <Typography
+                variant="body1"
+                gutterBottom
+                className={styles.disclaimer}
+              >
+                All fields marked with "*" are required.
+              </Typography>
+              <Box
+                component="form"
+                sx={{
+                  "& .MuiTextField-root": { mb: 2, width: "100%" },
+                }}
+                noValidate
+                autoComplete="off"
+                onSubmit={handleSubmit}
+              >
+                <Grid container spacing={1} sx={{ alignItems: "center" }}>
+                  <Grid item xs={2}>
+                    <Typography variant="body2" className={styles.text}>
+                      First Name <span>*</span>
+                    </Typography>
                   </Grid>
                   <Grid container spacing={1} sx={{ alignItems: 'center' }}>
                     <Grid xs={2}>
@@ -257,6 +239,7 @@ const ContactUs = () => {
                       Send
                     </Button>
                   </Box>
+                  </Grid>
                 </Box>
               </Box>
             </Box>
@@ -273,8 +256,24 @@ const ContactUs = () => {
             way without the prior written permission of KPMG India.
           </Typography>
         </Box>
-      </MainContainer>
-    </>
+      {/* </ContentContainer>
+      <Snackbar
+        open={openSnackBar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackBar}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert onClose={handleCloseSnackBar} severity="success">
+          Form Submitted Successfully
+        </Alert>
+      </Snackbar>
+      <Box className={styles.footer} >
+        <Typography className={styles.footerText} fontSize='small' >
+          All Rights Reserved. No part of this web page may be reproduced in any
+          way without the prior written permission of KPMG India.
+        </Typography>
+      </Box> */}
+    </div>
   );
 };
 

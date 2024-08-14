@@ -19,8 +19,8 @@ const ProductListView = ({ id, image, title, currentBid, timeRemaining, isExpire
         navigate(`/auction/product-details?productId=${id}`)
     }
     const handleBid = () => {
-        // const userName = userData && userData.user;
-        // console.log("userName ", userName)
+        const userName = userData && userData.user;
+        console.log("userName ", userName)
         if(userData !== null) {
             navigate(`/auction/product-details?productId=${id}`)
         } else {
@@ -31,7 +31,7 @@ const ProductListView = ({ id, image, title, currentBid, timeRemaining, isExpire
     return (
         <Card className={styles.productListWrapper}>
             <CardMedia
-                component="image"
+                component="img"
                 height='140'
                 image={image}
                 alt={title}

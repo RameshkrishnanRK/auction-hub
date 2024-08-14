@@ -1,17 +1,18 @@
 import React from "react";
 import Styles from "./Home.module.scss";
-import { Container, Typography } from "@mui/material";
+import { Container, Typography, Grid } from "@mui/material"; // Import Grid component
 import Layout from "../../routing/components/Layout";
 
 const Home = () => {
   return (
     <>
       <Layout />
-      <Container className={Styles.auctionContainer}>
-        <Typography className={Styles.auctionTitle} component="h1">
-          Welcome to KPMG Auction Platform
+      <div className={Styles.auctionContainer}>
+        <Typography className={Styles.auctionTitle} component="h1" fontWeight='bold' fontSize='1.5rem' marginLeft='40px'margin-top='5px'
+    >
+          Welcome to KPMG Auction Platform!
         </Typography>
-        <Typography className={Styles.auctionDescription} component="p">
+        <Typography className={Styles.auctionDescription} component="p" margin='20px'>
           KPMG Auction platform is a dynamic platform for buying and selling of
           Goods and Properties. It's a all in one Platform that provides users,
           the ease of choosing with customised browsing options. It's the
@@ -30,7 +31,8 @@ const Home = () => {
           sellers, and discover unbeatable deals and rare finds. Sign up today
           and start your auction adventure with us!
         </Typography>
-      </Container>
+        
+      </div>
     </>
   );
 };

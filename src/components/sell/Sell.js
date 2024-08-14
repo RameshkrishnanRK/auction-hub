@@ -4,7 +4,7 @@ import { styled } from '@mui/system';
 import styles from './Sell.module.scss'
 import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize';
 import { ChevronLeft } from '@mui/icons-material';
-import { categoriesData, regionsData } from '../../features/Dashboard/Browse/data';
+import { categoriesData, regionsData } from '../../data';
 import Layout from "../../routing/components/Layout";
 import { Link } from 'react-router-dom';
 import { Slide, ToastContainer, toast } from "react-toastify";
@@ -145,11 +145,9 @@ const Sell = () => {
     };
 
     const handleNext = () => {
-        // console.log('Step', category, subCategory, listingType, region)
         if (step === 1) {
             if (category && subCategory && listingType && region) {
-                // setErrors(prevState => ({ ...prevState, category: false, subCategory: false }))
-                // setErrors(prevstate => ({ ...prevState, listingType: false, re}))
+               
                 setStep(2)
             } else {
                 if (!category) {
@@ -171,7 +169,6 @@ const Sell = () => {
         }
     }
 
-    console.log("sub57", subCategoryList)
 
     const handleCreateListig = () => {
         if (step === 2) {
@@ -185,11 +182,7 @@ const Sell = () => {
                         backgroundColor: '#009933',
                         color: '#ffffff'
                     },
-                    // onClose: () => {
-                    //     setTimeout(() => {
-                    //         navigate('/auction/dashboard');
-                    //     }, 1000)
-                    // },
+                    
                     transition: Slide
                 })
             } else {
@@ -211,7 +204,7 @@ const Sell = () => {
             <Layout>
                 <>
                     <Box className={styles.breadcrumbs}>
-                        <Box sx={{ paddingLeft: '50px', paddingTop: '20px' }}>
+                        <Box sx={{ paddingLeft: '5px', paddingTop: '10px' }}>
                             <Breadcrumbs className='breadcrumb' arial-label='breadcrumb'>
                                 <Link to="/" style={{ textDecoration: 'none' }}>
                                     Home
@@ -222,12 +215,12 @@ const Sell = () => {
                             </Breadcrumbs>
                         </Box>
                     </Box>
-                    <MainContainer>
-                        <Container className={styles.mainContainer}>
+                    <MainContainer marginLeft='-5px'>
+                        <Container className={styles.mainContainer} >
                             <Box className={styles.title}>
-                                <Grid container justifyContent="space-between" alignItems="center">
-                                    <Grid item>
-                                        <Typography variant="h5" gutterBottom>
+                                <Grid container justifyContent="space-between" >
+                                    <Grid item >
+                                        <Typography variant="h5" gutterBottom fontSize='16px' >
                                             Create Listing - Step {step} of 2
                                         </Typography>
                                     </Grid>

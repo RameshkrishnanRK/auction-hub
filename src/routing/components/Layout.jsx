@@ -54,7 +54,6 @@ const Layout = (props) => {
     <React.Fragment>
       <Header setSearchTerm={setSearchTerm} />
       <Outlet />
-      <Toolbar id="back-to-top-anchor" />
       <Box sx={{ paddingX: '50px' }}>
         {children}
       </Box>

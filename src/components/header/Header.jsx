@@ -49,9 +49,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-
-
-
 export default function Header({ setSearchTerm }) {
 
     const dispatch = useDispatch();
@@ -65,14 +62,13 @@ export default function Header({ setSearchTerm }) {
         navigate("/auction/login");
     }
 
-    const handleSearch = (event) => {
+    const handleSearch = () => {
         setSearchTerm(inputValue)
     }
 
     return (
         <>
-            {/* <Box sx={{ flexGrow: 1 }}> */}
-            <AppBar position="sticky" className={styles.headerColor}>
+            <AppBar position="sticky" className={styles.headerColor} backgroundColor='#337ab7'>
                 <Toolbar sx={{ minHeight: '55px !important' }} mt={3}>
                     <img alt="kpmg" src={kpmgImage} />
                 </Toolbar>
@@ -117,14 +113,6 @@ export default function Header({ setSearchTerm }) {
                             Hello, {userData.user}
                             <LogoutOutlinedIcon onClick={handleLogout} style={{ fontSize: '15px', fontWeight: 'bold', paddingLeft: '4px', cursor: 'pointer' }} />
                         </> : <>
-                            {/* <Button mr={4} className={styles.link} color="inherit"><Link to="/sign-up">
-                                    SignUp
-                                </Link></Button>
-                                <Button mr={4} className={styles.link} color="inherit">
-                                    <Link to="/register">
-                                        Register
-                                    </Link>
-                                </Button> */}
                             <Button color="inherit" className={styles.link}>
                                 <Link to="/auction/login">
                                     Login
@@ -158,23 +146,28 @@ export default function Header({ setSearchTerm }) {
                         </Link>
                     </Typography>
                     <Box sx={{ flexGrow: 1 }} />
-                    {location.pathname.includes('/auction/dashboard') && (<><Search>
-                        <SearchIconWrapper>
-                            <SearchIcon />
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            onChange={(event) => { setInputValue(event.target.value) }}
-                            value={inputValue}
-                            placeholder="Enter keywords…"
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
-                    </Search>
-                        <Button variant="contained" color="primary" onClick={handleSearch} className={styles.searchBtn}>
-                            Search
-                        </Button></>)}
+                    {location.pathname.includes('/auction/dashboard') && (
+                        <>
+
+                            <Search>
+                                <SearchIconWrapper>
+                                    <SearchIcon />
+                                </SearchIconWrapper>
+                                <StyledInputBase
+                                    onChange={(event) => { setInputValue(event.target.value) }}
+                                    value={inputValue}
+                                    placeholder="Enter keywords…"
+                                    inputProps={{ 'aria-label': 'search' }}
+                                />
+                            </Search>
+                            <Button variant="contained" color="primary" onClick={handleSearch} className={styles.searchBtn}>
+                                Search
+                            </Button>
+                        </>
+                    )}
                 </Toolbar>
             </AppBar>
-            {/* </Box> */}
+
 
         </>
     );
