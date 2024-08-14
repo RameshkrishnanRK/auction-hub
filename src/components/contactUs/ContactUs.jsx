@@ -15,6 +15,8 @@ import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAuto
 import styles from "./ContactUs.module.scss";
 import Layout from "../../routing/components/Layout";
 import { Link } from "react-router-dom";
+import { FiRefreshCcw } from "react-icons/fi";
+
 
 
 const ContentContainer = styled(Container)({
@@ -53,7 +55,7 @@ const ContactUs = () => {
 
   const [formState, setFormState] = useState(initialFormState);
   const [captchaCode, setCaptchaCode] = useState(generateCaptcha());
-  const [openSnackBar, setOpenSnackBar] = useState(false)
+  const [openSnackBar, setOpenSnackBar] = useState(false);
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -106,8 +108,8 @@ const ContactUs = () => {
   };
 
   const handleCloseSnackBar = () => {
-    setOpenSnackBar(false)
-  }
+    setOpenSnackBar(false);
+  };
 
   return (
     <div>
@@ -154,109 +156,114 @@ const ContactUs = () => {
                       First Name <span>*</span>
                     </Typography>
                   </Grid>
-                  <Grid container spacing={1} sx={{ alignItems: 'center' }}>
-                    <Grid xs={2}>
-                      <Typography variant="body2" className={styles.text}>
-                        Last Name <span>*</span>
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={5}>
-                      <TextField
-                        required
-                        id="lastName"
-                        value={formState.lastName}
-                        onChange={handleChange}
-                        error={Boolean(errors.lastName)}
-                        helperText={errors.lastName}
-                      />
-                    </Grid>
+                  <Grid item xs={5}>
+                    <TextField
+                      required
+                      id="firstName"
+                      value={formState.firstName}
+                      onChange={handleChange}
+                      error={Boolean(errors.firstName)}
+                      helperText={errors.firstName}
+                    />
                   </Grid>
-                  <Grid container spacing={1} sx={{ alignItems: 'center' }}>
-                    <Grid xs={2}>
-                      <Typography variant='body2' className={styles.text}>
-                        Email <span>*</span>
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={5}>
-                      <TextField
-                        required
-                        id="email"
-                        value={formState.email}
-                        onChange={handleChange}
-                        error={Boolean(errors.email)}
-                        helperText={errors.email}
-                      />
-                    </Grid>
+                </Grid>
+                <Grid container spacing={1} sx={{ alignItems: "center" }}>
+                  <Grid item xs={2}>
+                    <Typography variant="body2" className={styles.text}>
+                      Last Name <span>*</span>
+                    </Typography>
                   </Grid>
-                  <Grid container spacing={1} sx={{ alignItems: 'center' }}>
-                    <Grid xs={2}>
-                      <Typography mt={2} className={styles.text}>
-                        Message
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={5}>
-                      <Textarea
-                        minRows={3}
-                        value={formState.message}
-                        onChange={(e) =>
-                          setFormState((prevState) => ({
-                            ...prevState,
-                            message: e.target.value,
-                          }))
-                        }
-                      />
-                    </Grid>
+                  <Grid item xs={5}>
+                    <TextField
+                      required
+                      id="lastName"
+                      value={formState.lastName}
+                      onChange={handleChange}
+                      error={Boolean(errors.lastName)}
+                      helperText={errors.lastName}
+                    />
                   </Grid>
-                  <Grid container spacing={1} mt={3} sx={{ alignItems: 'center' }}>
-                    <Grid xs={2}>
-                      <Typography variant="body2" className={styles.text}>
-                        Captcha
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={5}>
-                      <TextField
-                        required
-                        id="captcha"
-                        value={formState.captcha}
-                        onChange={handleChange}
-                        error={Boolean(errors.captcha)}
-                        helperText={errors.captcha}
-                      />
-                    </Grid>
-                    <Grid item xs={4} mt={2}>
-                      <Box display="flex" alignItems="center">
-                        <Grid item xs={2}>
-                          <Typography>{captchaCode}</Typography>
-                        </Grid>
-                        <Grid item xs={2}>
-                          <Button onClick={resetCaptcha}>Reset</Button>
-                        </Grid>
-                      </Box>
-                    </Grid>
+                </Grid>
+                <Grid container spacing={1}>
+                  <Grid item xs={2}>
+                    <Typography mt={2} className={styles.text}>
+                      Email <span>*</span>
+                    </Typography>
                   </Grid>
-                  <Box display="flex" justifyContent="flex-end" mt={2}>
-                    <Button type="submit" variant="contained" color="primary">
-                      Send
-                    </Button>
-                  </Box>
+                  <Grid item xs={5}>
+                    <TextField
+                      required
+                      id="email"
+                      value={formState.email}
+                      onChange={handleChange}
+                      error={Boolean(errors.email)}
+                      helperText={errors.email}
+                    />
                   </Grid>
+                </Grid>
+                <Grid container spacing={1}>
+                  <Grid item xs={2}>
+                    <Typography mt={2} className={styles.text}>
+                      Message
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={5}>
+                    <Textarea
+                      minRows={3}
+                      value={formState.message}
+                      onChange={(e) =>
+                        setFormState((prevState) => ({
+                          ...prevState,
+                          message: e.target.value,
+                        }))
+                      }
+                    />
+                  </Grid>
+                </Grid>
+                <Grid container spacing={1} mt={3}>
+                  <Grid item xs={2}>
+                    <Typography mt={2} className={styles.text}>
+                      Captcha
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={5}>
+                    <TextField
+                      required
+                      id="captcha"
+                      value={formState.captcha}
+                      onChange={handleChange}
+                      error={Boolean(errors.captcha)}
+                      helperText={errors.captcha}
+                    />
+                  </Grid>
+                  <Grid item xs={4} mt={2}>
+                    <Box display="flex" alignItems="center" >
+                      <Grid item xs={2}>                     
+                        <Button 
+                        size="medium" 
+                        variant='contained' 
+                        className={styles.captchaBtn}                       
+                        color='primary'>
+                        {captchaCode}
+                        </Button>
+                                               
+                      </Grid>
+                      <Grid item xs={2}>
+                        <Button onClick={resetCaptcha}><FiRefreshCcw size={20}></FiRefreshCcw></Button>
+                      </Grid>
+                    </Box>
+                  </Grid>
+                </Grid>
+                <Box display="flex" justifyContent="flex-end" mt={2}>
+                  <Button type="submit" variant="contained" color="primary">
+                    Send
+                  </Button>
                 </Box>
               </Box>
             </Box>
           </Box>
-        </ContentContainer>
-        <Snackbar open={openSnackBar} autoHideDuration={6000} onClose={handleCloseSnackBar} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} >
-          <Alert onClose={handleCloseSnackBar} variant="filled" severity='success' >
-            Thank you for contacting us. We will call you shortly.
-          </Alert>
-        </Snackbar>
-        <Box className={styles.footer}>
-          <Typography className={styles.footerText}>
-            All Rights Reserved. No part of this web page may be reproduced in any
-            way without the prior written permission of KPMG India.
-          </Typography>
         </Box>
-      {/* </ContentContainer>
+      </ContentContainer>
       <Snackbar
         open={openSnackBar}
         autoHideDuration={6000}
@@ -272,7 +279,7 @@ const ContactUs = () => {
           All Rights Reserved. No part of this web page may be reproduced in any
           way without the prior written permission of KPMG India.
         </Typography>
-      </Box> */}
+      </Box>
     </div>
   );
 };

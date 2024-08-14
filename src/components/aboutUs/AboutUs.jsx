@@ -28,7 +28,7 @@ const About = () => {
         </Box>
       </Box>
       <ContentContainer className={styles.mainContainer}  >
-        <Box mt={8} marginTop='10px' >
+        <Box mt={8} marginTop='10px'  >
           <Typography p={2} className={styles.title} margin='5px'  >
             About Us
           </Typography>

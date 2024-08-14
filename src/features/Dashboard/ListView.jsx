@@ -24,7 +24,7 @@ const ListView = ({searchTerm, status, filter, sortData }) => {
       const matchStatusFilter = (status === 'active' && product.status === 'active' && product.isExpired === false) || (status === 'completed' && product.status === 'completed' && product.isExpired === true)
       const matchTypeFilter = (product.type === filter || filter === 'all');
       const matchTermFilter = (product.title?.toLowerCase()?.includes(searchTerm?.toLowerCase()) || searchTerm == (null || ''))
-      return matchStatusFilter && matchTypeFilter
+      return matchStatusFilter && matchTypeFilter && matchTermFilter
     }).sort((a, b) => {
       const timeComparison = getTimeValue(a.timeRemaining) - getTimeValue(b.timeRemaining);
       const nameComparison = a.title.localeCompare(b.title);
