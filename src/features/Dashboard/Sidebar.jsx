@@ -87,7 +87,7 @@ const Sidebar = () => {
   
   top: 40;
   left: 0;
-  width: 300px;
+//   width: 250px;
   height: 100%;
   
   color: white;
@@ -159,7 +159,8 @@ const Sidebar = () => {
                                                     <List component="div" disablePadding>
                                                         {category.subcategories.map((subcategory, subIndex) => (
                                                             <ListItem key={subIndex} className={styles.nested} button
-                                                                onClick={() => handleSubcategoryClick(subcategory.name)}>
+                                                            // onClick={() => handleSubcategoryClick(subcategory.name)}
+                                                            >
                                                                 <ListItemText style={{ cursor: 'pointer' }} primary={subcategory.name} />
                                                             </ListItem>
                                                         ))}
