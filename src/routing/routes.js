@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Browse from "../features/Dashboard/Browse/Browse";
 import Home from "../components/home/Home";
 import AboutUs from "../components/aboutUs/AboutUs";
-import ProductDetails from "../features/Dashboard/Browse/Products/ProductDetails";
 import ContactUs from "../components/contactUs/ContactUs";
 import Sell from "../components/sell/Sell";
 import LoginPage from "../components/login/LoginPage";
+import ProductDetails from "../features/Dashboard/ProductDetails";
+import Browse from "../features/Dashboard/Browse";
 
 const routes = () => {
 

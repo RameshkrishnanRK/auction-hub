@@ -31,7 +31,7 @@ const ProductListView = ({ id, image, title, currentBid, timeRemaining, isExpire
     return (
         <Card className={styles.productListWrapper}>
             <CardMedia
-                component="image"
+                component="img"
                 height='140'
                 image={image}
                 alt={title}

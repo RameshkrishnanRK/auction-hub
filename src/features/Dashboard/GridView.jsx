@@ -1,40 +1,20 @@
 import React, { useEffect } from 'react'
-import ProductGridView from '../../../../utils/ProductGridView'
+import ProductGridView from '../../utils/ProductGridView'
 import styles from './GridView.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchProductsFailure, fetchProductsStart, fetchProductsSuccess } from '../../../../redux/slices/productSlice'
+import { fetchProductsFailure, fetchProductsStart, fetchProductsSuccess } from '../../redux/slices/productSlice'
 import { Grid } from '@mui/material'
+import { categoriesData, regionsData } from '../../jsonData'
 //import { productsData } from '../jsonData'
 
 
 
-const GridView = ({searchTerm, status, filter, sortData }) => {
+const GridView = ({ searchTerm, status, filter, sortData }) => {
   // const products = useSelector((state) => state.products.products)
 
   const { data: products, loading: productLoading, error: productError } = useSelector((state) => state.product);
 
-  // useEffect(() => {
-
-  //   const fetchProducts = () => {
-  //     dispatch(fetchProductsStart());
-  //     try {
-  //       //api call
-  //       const data = productsData
-  //       console.log("data: products ", data)
-  //       dispatch(fetchProductsSuccess(data));
-  //     } catch (error) {
-  //       console.log("data: products error ", error)
-  //       dispatch(fetchProductsFailure());
-  //     }
-  //   }
-
-  //   fetchProducts();
-  // }, [dispatch]);
-
-
-
   const getTimeValue = (timeVal) => {
-    //console.log("getTimeValue ", timeVal)
     if (timeVal === 'expired') return Number.MAX_SAFE_INTEGER;
     return parseInt(timeVal, 10) || Number.MAX_SAFE_INTEGER;
   };
@@ -85,6 +65,56 @@ const GridView = ({searchTerm, status, filter, sortData }) => {
       return sortData === 'title-a-to-z' ? -timeComparison : timeComparison;
     });
 
+//   const filteredProducts = products.filter((product) => {
+//     const matchStatusFilter = (status === 'active' && product.status === 'active' && !product.isExpired) ||
+//         (status === 'completed' && product.status === 'completed' && product.isExpired);
+//     const matchTypeFilter = product.type === filter || filter === 'all';
+//     const matchTermFilter = product.title?.toLowerCase()?.includes(searchTerm?.toLowerCase()) || !searchTerm;
+
+//     const matchCategory = categoriesData.some((category) => category.name === product.category);
+//     const matchSubcategory = categoriesData.some((category) =>
+//         category.subcategories.some((subcat) => subcat.name === product.subcategory)
+//     );
+//     const matchRegion = regionsData.some((region) => region.name === product.region);
+//     const matchSubregion = regionsData.some((region) =>
+//         region.subregions.some((subreg) => subreg.name === product.subregion)
+//     );
+
+//     return (
+//         matchStatusFilter &&
+//         matchTypeFilter &&
+//         matchTermFilter &&
+//         matchCategory &&
+//         matchSubcategory &&
+//         matchRegion &&
+//         matchSubregion
+//     );
+// }).sort((a, b) => {
+//     const timeComparison = getTimeValue(a.timeRemaining) - getTimeValue(b.timeRemaining);
+
+//     if (timeComparison === 0) {
+//         if (sortData === 'title-a-to-z') {
+//             return a.title.localeCompare(b.title);
+//         } else if (sortData === 'title-z-to-a') {
+//             return b.title.localeCompare(a.title);
+//         } else if (sortData === 'price-lowest') {
+//             return a.currentBid - b.currentBid;
+//         } else if (sortData === 'price-highest') {
+//             return b.currentBid - a.currentBid;
+//         }
+//     } else {
+//         if (sortData === 'price-lowest') {
+//             return a.currentBid - b.currentBid;
+//         } else if (sortData === 'price-highest') {
+//             return b.currentBid - a.currentBid;
+//         }
+//     }
+
+//     return sortData === 'title-a-to-z' ? -timeComparison : timeComparison;
+// });
+
+console.log('filteredProducts: ', filteredProducts)
+
   return (<>
     {console.log("initialdata ", products)}
     <Grid container spacing={2}>
@@ -104,18 +134,7 @@ const GridView = ({searchTerm, status, filter, sortData }) => {
       }
     </Grid>
   </>
-    // <div className={styles.gridViewProducts}>
-    //   {products.map(product => (
-    //     <ProductGridView
-    //       id={product.id}
-    //       image={product.image} 
-    //       title={product.title} 
-    //       currentBid={product.currentBid} 
-    //       timeRemaining={product.timeRemaining} 
-    //       isExpired={ product.isExpired}
-    //     />
-    //   ))}
-    // </div>
+
   )
 }
 

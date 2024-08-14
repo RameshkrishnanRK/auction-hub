@@ -8,24 +8,19 @@ import {
   Grid,
   Snackbar,
   Alert,
+  Breadcrumbs,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 import styles from "./ContactUs.module.scss";
 import Layout from "../../routing/components/Layout";
+import { Link } from "react-router-dom";
 
-const MainContainer = styled(Box)({
-  display: "flex",
-  flexDirection: "column",
-  minHeight: "100vh",
-    
-});
 
 const ContentContainer = styled(Container)({
   flex: "1",
-  // margin: '10px 30px 10px 30px',
-  marginLeft:'30px',
-  marginRight:'30px',
+  marginLeft: '30px',
+  marginRight: '30px',
   padding: '5px'
 });
 
@@ -115,14 +110,27 @@ const ContactUs = () => {
   };
 
   return (
-    <MainContainer>
+    <div>
       <Layout />
-      <ContentContainer className={styles.mainContainer}>
-        <Box mt={8} marginTop='20px' marginLeft='20px'>
-          <Typography p={3} gutterBottom className={styles.title} padding='20px' borderRadius='5px' >
+      <Box >
+        <Box className={styles.box} >
+          <Breadcrumbs >
+            <Link to="/" style={{ textDecoration: 'none' }}>
+              Home
+            </Link>
+            <Link style={{ textDecoration: 'none' }}>
+              Contact Us
+            </Link>
+
+          </Breadcrumbs>
+        </Box>
+      </Box>
+      <ContentContainer className={styles.mainContainer} >
+        <Box mt={8} className={styles.box1} >
+          <Typography p={3} className={styles.title} padding='15px' >
             Contact Us
           </Typography>
-          <Box mt={8} className={styles.container} marginTop='20px' borderRadius='5px'>
+          <Box mt={8} className={styles.container} marginTop='20px' >
             <Box p={5}>
               <Typography
                 variant="body1"
@@ -257,13 +265,13 @@ const ContactUs = () => {
           Form Submitted Successfully
         </Alert>
       </Snackbar>
-      <Box className={styles.footer} marginTop='10px' marginLeft='30px'>
+      <Box className={styles.footer} >
         <Typography className={styles.footerText} fontSize='small' >
           All Rights Reserved. No part of this web page may be reproduced in any
           way without the prior written permission of KPMG India.
         </Typography>
       </Box>
-    </MainContainer>
+    </div>
   );
 };
 

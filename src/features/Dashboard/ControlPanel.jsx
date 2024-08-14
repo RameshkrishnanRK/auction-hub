@@ -3,9 +3,9 @@ import { Box, FormControl, MenuItem, Select, Tab, Tabs, ToggleButton, ToggleButt
 import React, { useState } from 'react'
 import ListIcon from "@mui/icons-material/List";
 import styles from './ControlPanel.scss'
-import { filterByOptions, sortOptions } from './jsonData';
-import GridView from './Products/GridView';
-import ListView from './Products/ListView';
+import { filterByOptions, sortOptions } from '../../jsonData';
+import GridView from './GridView';
+import ListView from './ListView';
 
 const ControlPanel = ({searchTerm}) => {
     const [view, setView] = useState('grid');
@@ -45,12 +45,12 @@ const ControlPanel = ({searchTerm}) => {
                     sx={{
                         '& .MuiToggleButton-root': {
                           '&.Mui-selected': {
-                            backgroundColor: '#1768ac', // Change background color when selected
-                            color: '#ffffff', // Change text/icon color when selected
+                            backgroundColor: '#1768ac', 
+                            color: '#ffffff', 
                           },
                           '&:not(.Mui-selected)': {
-                            backgroundColor: '#ffffff', // Change background color when not selected
-                            color: '#1768ac', // Change text/icon color when not selected
+                            backgroundColor: '#ffffff', 
+                            color: '#1768ac', 
                           },
                         },
                       }}
@@ -84,16 +84,20 @@ const ControlPanel = ({searchTerm}) => {
                     value={status}
                     onChange={handleStatusChange}
                     aria-label="status tabs"
-                    textColor="primary"
-                    indicatorColor="primary"
+                    // textColor="primary"
+                    // indicatorColor="primary"
                     sx={{
-                        borderRadius: '5px', border: '1px solid #1768ac', '& .MuiTab-root': {
-                            minWidth: 120, minHeight: 40, padding: 0, lineHeight: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center'
+                        borderRadius: '5px', '& .MuiTab-root': {
+                            minWidth: 120, minHeight: 30, padding: 0, lineHeight: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center'
                         },
+                     
                     }}
+                    style={{minHeight: '20px'}}
                 >
-                    <Tab value='active' label='Active' sx={{ backgroundColor: status === 'active' ? '#1768ac' : '#ffffff', '&.Mui-selected': { color: status === 'active' ? '#ffffff' : '#1768ac' } }} />
-                    <Tab value='completed' label='Completed' sx={{ backgroundColor: status === 'completed' ? '#1768ac' : '#ffffff', '&.Mui-selected': { color: status === 'completed' ? '#ffffff' : '#1768ac' } }} />
+                    <Tab value='active' label='Active' sx={{ backgroundColor: status === 'active' ? '#1768ac' : '#ffffff', '&.Mui-selected': { color: status === 'active' ? '#ffffff' : '#1768ac' } }}
+                    style={{minHeight: '40px'}} />
+                    <Tab value='completed' label='Completed' sx={{ backgroundColor: status === 'completed' ? '#1768ac' : '#ffffff', '&.Mui-selected': { color: status === 'completed' ? '#ffffff' : '#1768ac' } }}
+                    style={{minHeight: '40px'}}  />
                 </Tabs>
                 <Box display='flex' alignItems='center'>
                     <FormControl sx={{ m: 1, minWidth: 120, }} size='small'>

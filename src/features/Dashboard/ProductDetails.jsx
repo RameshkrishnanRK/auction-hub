@@ -14,11 +14,10 @@ import {
 } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-//import { fetchProducts } from "../../../../redux/slices/productSlice";
 import { Slide, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ReusableModal from "../../../../utils/reusableModal";
-import Layout from "../../../../routing/components/Layout";
+import ReusableModal from "../../utils/reusableModal";
+import Layout from "../../routing/components/Layout";
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -34,15 +33,15 @@ const ProductDetails = () => {
     const [openBidModal, setOpenBidModal] = useState(false);
     const [openOfferModal, setOpenOfferModal] = useState(false);
 
-    // const products = useSelector((state) => state.products.products);
     const { data: products, loading: productLoading, error: productError } = useSelector((state) => state.product);
 
-    window.history.replaceState(null, '', '/auction/dashboard');
+    // window.history.replaceState(null, '', '/auction/dashboard');
+    window.history.replaceState(null, '/auction/dashboard');
+
 
     const product =
         products.length > 0 &&
         products.find((product) => product?.id === parseInt(productId));
-    // console.log('product: one', product);
 
     let formattedBid;
     if (product && product?.currentBid !== undefined) {
@@ -50,7 +49,6 @@ const ProductDetails = () => {
     }
 
     const [cleanedFormattedBid, setCleanedFormattedBid] = useState(formattedBid);
-    //const [cleanedFormattedBid, setCleanedFormattedBid] = useState(formattedBid.replace(/,/g, ''));
 
     const [addedToWatchList, setAddedToWatchList] = useState(false);
 
@@ -65,7 +63,6 @@ const ProductDetails = () => {
 
     }, [formattedBid]);
 
-    //const cleanedFormattedBid = formattedBid && Number(formattedBid.replace(/,/g, ''));
 
     const [bidAmount, setBidAmount] = useState("");
     const [offerAmount, setOfferAmount] = useState("");
@@ -82,7 +79,6 @@ const ProductDetails = () => {
     };
 
     const handleOfferAmount = (event) => {
-        //console.log("event value ", event.target.value)
         const newValue = event.target.value;
         if (/^\d*$/.test(newValue)) {
             setOfferAmount(newValue);
@@ -90,12 +86,10 @@ const ProductDetails = () => {
     };
 
     const handleOfferMessage = (event) => {
-        //console.log("event value ", event.target.value)
         setOfferMessage(event.target.value);
     };
 
     const handleBidAmountSubmit = () => {
-        //setCleanedFormattedBid(formattedBid)
         let formattedBidValue = Number(cleanedFormattedBid);
         let inputBidAmount = localStorage.getItem('bidAmount');
         let bidAmountValue = Number(bidAmount);
@@ -120,7 +114,6 @@ const ProductDetails = () => {
 
 
     const handleOfferAmountSubmit = () => {
-        //setCleanedFormattedBid(formattedBid)
         setOpenOfferModal(true);
         console.log("handleQuickBid ", formattedBid)
         setCleanedFormattedBid(formattedBid.replace(/,/g, ""));
@@ -135,11 +128,7 @@ const ProductDetails = () => {
                 backgroundColor: '#009933',
                 color: '#ffffff'
             },
-            // onClose: () => {
-            //     setTimeout(() => {
-            //         navigate('/auction/dashboard');
-            //     }, 1000)
-            // },
+
             transition: Slide
         })
 
@@ -162,17 +151,12 @@ const ProductDetails = () => {
                 backgroundColor: "#009933",
                 color: "#ffffff",
             },
-            // onClose: () => {
-            //     setTimeout(() => {
-            //         navigate("/auction/dashboard");
-            //     }, 1000);
-            // },
+
             transition: Slide,
         });
     };
 
     const handleOfferModalSuccess = async () => {
-        //setOpenOfferModal(false)
         if (offerAmount.length > 0 && OfferMessage.length > 0) {
             let formattedBidValue = Number(cleanedFormattedBid);
             let offerAmountValue = Number(offerAmount);
@@ -200,11 +184,7 @@ const ProductDetails = () => {
                         backgroundColor: '#009933',
                         color: '#ffffff'
                     },
-                    // onClose: () => {
-                    //     setTimeout(() => {
-                    //         navigate('/auction/dashboard');
-                    //     }, 1000)
-                    // },
+
                     transition: Slide
                 })
                 console.log("navigate(-1);")
@@ -227,25 +207,21 @@ const ProductDetails = () => {
         if (modalRef.current && !modalRef.current.contains(event.target)) {
             event.stopPropagation();
         }
-        //setOpenBidModal(false)
+
     }
 
 
     const handleBidModalClose = () => {
-        // const formattedBid = Number(product?.currentBid).toLocaleString("en-IN");
         let formattedBid;
         if (product && product?.currentBid !== undefined) {
             formattedBid = Number(product?.currentBid).toLocaleString("en-IN");
             console.log('formattedBid: ', formattedBid, formattedBid.replace(/,/g, ""))
             setCleanedFormattedBid(formattedBid.replace(/,/g, ""));
-            //setCleanedFormattedBid(formattedBid)
             setOpenBidModal(false)
         }
 
 
-        // const formattedBid = Number(product.currentBid).toLocaleString("en-IN");
-        // setCleanedFormattedBid(formattedBid)
-        // setOpenBidModal(false)
+
     }
 
     const handleOfferModalClose = (event) => {
@@ -261,11 +237,7 @@ const ProductDetails = () => {
                 backgroundColor: '#009933',
                 color: '#ffffff'
             },
-            // onClose: () => {
-            //     setTimeout(() => {
-            //         navigate('/auction/dashboard');
-            //     }, 1000)
-            // },
+
             transition: Slide
         })
     }
@@ -293,7 +265,6 @@ const ProductDetails = () => {
                     variant='outlined'
                     size='small'
                     required
-                    // type="number"
                     inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                     className={Styles.bidInput}
                     value={offerAmount}
@@ -359,7 +330,6 @@ const ProductDetails = () => {
                                     </Button>
                                     <Box className={Styles.bidSection}>
                                         <TextField
-                                            // type="number"
                                             inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                                             label={`Minimum Bid ₹${formattedBid}`}
                                             variant='outlined'
@@ -438,16 +408,13 @@ const ProductDetails = () => {
                                 </Box>
                             </Box>
                             <Box className={Styles.productExtraInfo}>
-                                {/* <Box> */}
                                 <Typography variant='body2' color="text.secondary" style={{ width: '98%', textAlign: 'justify' }}>
                                     KPMG will bid incrementally for you upto your maximun bid. Your maximum bid is kept a secret from other users.
                                 </Typography>
-                                {/* </Box>
-                            <Box> */}
+
                                 <Typography variant='body2' color="text.secondary" style={{ width: '98%', paddingLeft: '25px', textAlign: 'justify' }}>
                                     Your bid is a contract between you and the listing creator. If you have the highest bid, you will enter into a legally  binding purchase contract.
                                 </Typography>
-                                {/* </Box> */}
                             </Box>
                         </CardContent>
                     </Box>

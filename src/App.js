@@ -2,7 +2,7 @@ import './App.css';
 import AppRouter from "./routing/routes";
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { productsData } from './features/Dashboard/Browse/jsonData';
+import { productsData } from './jsonData';
 import { fetchProductsStart, fetchProductsSuccess, fetchProductsFailure } from './redux/slices/productSlice';
 
 function App() {

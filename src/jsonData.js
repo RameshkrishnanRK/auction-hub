@@ -1,4 +1,5 @@
 export const productsData = [
+    //Real estate - Villas
     {
         id: 0,
         image: process.env.PUBLIC_URL + '/images/FarmHouse.jpg',

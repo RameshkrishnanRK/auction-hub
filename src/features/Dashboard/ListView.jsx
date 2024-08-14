@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import ProductListView from '../../../../utils/ProductListView'
+import ProductListView from '../../utils/ProductListView'
 import styles from './ListView.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 
