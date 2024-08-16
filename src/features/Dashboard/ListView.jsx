@@ -1,11 +1,12 @@
-import React from 'react'
-import ProductListView from '../../../../utils/ProductListView'
+import React, { useEffect } from 'react'
+import ProductListView from '../../utils/ProductListView'
 import styles from './ListView.module.scss'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-const ListView = ({ status, filter, sortData }) => {
+const ListView = ({searchTerm, status, filter, sortData }) => {
+  const dispatch = useDispatch();
 
-  //const products = useSelector((state) => state.products.products)
+  // const products = useSelector((state) => state.products.products)
   const { data: products, loading: productLoading, error: productError } = useSelector((state) => state.product);
 
   const getTimeValue = (timeVal) => {
@@ -22,7 +23,7 @@ const ListView = ({ status, filter, sortData }) => {
     (product) => {
       const matchStatusFilter = (status === 'active' && product.status === 'active' && product.isExpired === false) || (status === 'completed' && product.status === 'completed' && product.isExpired === true)
       const matchTypeFilter = (product.type === filter || filter === 'all');
-
+      const matchTermFilter = (product.title?.toLowerCase()?.includes(searchTerm?.toLowerCase()) || searchTerm == (null || ''))
       return matchStatusFilter && matchTypeFilter
     }).sort((a, b) => {
       const timeComparison = getTimeValue(a.timeRemaining) - getTimeValue(b.timeRemaining);

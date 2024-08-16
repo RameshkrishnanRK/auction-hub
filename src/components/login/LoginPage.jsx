@@ -24,7 +24,7 @@ const LoginPage = () => {
 
   const dispatch = useDispatch();
 
-  //const { loading, error} = useSelector((state)=> state.login);
+  useSelector((state) => state.login);
 
 
   const navigate = useNavigate();

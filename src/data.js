@@ -70,6 +70,16 @@ export const productsData = [
         type:'auction'
     },
     {
+        id: 66,
+        image: process.env.PUBLIC_URL + '/images/Oil painting.jfif',
+        title: '19th Century Painting',
+        currentBid: 800000,
+        timeRemaining: '6',
+        isExpired: false,
+        status: 'active',
+        type:'classified'
+    },
+    {
         id: 16,
         image: process.env.PUBLIC_URL + '/images/Car.png',
         title: 'b 2021 Maruti Car',

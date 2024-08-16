@@ -18,7 +18,6 @@ const Breadcrumb = () => {
           </Link>
         );
       })}
-      {/* <Typography color="text.primary" href="/browse">Browse</Typography> */}
     </Breadcrumbs>
   );
 };

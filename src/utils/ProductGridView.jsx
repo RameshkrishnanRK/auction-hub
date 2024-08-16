@@ -7,23 +7,24 @@ import { useSelector } from 'react-redux';
 const ProductGridView = ({ id, image, title, currentBid, timeRemaining, isExpired }) => {
     const navigate = useNavigate();
 
-    const userData = useSelector((state)=> state.login.user);
+    const userData = useSelector((state) => state.login.user);
 
     const handleViewDetails = () => {
         navigate(`/auction/product-details?productId=${id}`)
+
     }
 
     const handleBid = () => {
-        // const userName = userData && userData.user;
-        // console.log("userName ", userName)
-        if(userData !== null) {
+        const userName = userData && userData.user;
+        console.log("userName ", userName)
+        if (userData !== null) {
             navigate(`/auction/product-details?productId=${id}`)
         } else {
             navigate(`/auction/login`)
         }
     }
     const formattedBid = Number(currentBid).toLocaleString('en-IN');
-    return ( 
+    return (
         <Card className={Styles.productGridWrapper}>
             <CardMedia
                 component='img'
@@ -34,7 +35,7 @@ const ProductGridView = ({ id, image, title, currentBid, timeRemaining, isExpire
             />
             <CardContent>
                 <Typography variant='h6' component='div' onClick={handleViewDetails}>
-                    <Link to="/auction/product-details" style={{ color: '#337AB7', fontSize: '14px', textAlign: 'left', textDecoration: 'none' }}>
+                    <Link to={`/auction/product-details?productId=${id}`} style={{ color: '#337AB7', fontSize: '14px', textAlign: 'left', textDecoration: 'none' }}>
                         {title}
                     </Link>
                 </Typography>
@@ -63,11 +64,11 @@ const ProductGridView = ({ id, image, title, currentBid, timeRemaining, isExpire
                 disabled={isExpired}
             >
                 Quick Bid ₹{formattedBid}
-            </Button> :<Button
+            </Button> : <Button
                 variant='contained'
                 className={Styles.quickBidBtn}
                 onClick={handleBid}
-                // disabled={isExpired}
+            // disabled={isExpired}
             >
                 Quick Bid ₹{formattedBid}
             </Button>}

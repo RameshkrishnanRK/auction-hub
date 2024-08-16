@@ -8,23 +8,12 @@
         color: red !important;
         height: 40px;
 
-        // .MuiButtonBase-root-MuiToggleButton-root{
-        // &:global(.MuiToggleButtonGroup-root) {
+
         .MuiToggleButton-root {
             min-width: 50%;
             height: 40px;
             background-color: red;
-            // background-color: #fff;
-            // color: #000;
 
-            // &.Mui-selected {
-            //     background-color: #1768ac !important;
-            //     color: #fff;
-            // }
-            // &:not(.Mui-selected) {
-            //     background-color: #fff;
-            //     color: #000;
-            // }
             &.active {
                 background-color: #1768ac;
                 color: #fff;
