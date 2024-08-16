@@ -1,13 +1,13 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Toolbar from '@mui/material/Toolbar';
-import useScrollTrigger from '@mui/material/useScrollTrigger';
-import Box from '@mui/material/Box';
-import Fab from '@mui/material/Fab';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import Fade from '@mui/material/Fade';
-import Header from '../../components/header/Header'
-import { Outlet } from 'react-router-dom'
+import * as React from "react";
+import PropTypes from "prop-types";
+import Toolbar from "@mui/material/Toolbar";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
+import Box from "@mui/material/Box";
+import Fab from "@mui/material/Fab";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import Fade from "@mui/material/Fade";
+import Header from "../../components/header/Header";
+import { Outlet } from "react-router-dom";
 
 const ScrollTop = (props) => {
   const { children, window } = props;
@@ -19,12 +19,12 @@ const ScrollTop = (props) => {
 
   const handleClick = (event) => {
     const anchor = (event.target.ownerDocument || document).querySelector(
-      '#back-to-top-anchor',
+      "#back-to-top-anchor"
     );
 
     if (anchor) {
       anchor.scrollIntoView({
-        block: 'center',
+        block: "center",
       });
     }
   };
@@ -34,13 +34,13 @@ const ScrollTop = (props) => {
       <Box
         onClick={handleClick}
         role="presentation"
-        sx={{ position: 'fixed', bottom: 16, right: 16 }}
+        sx={{ position: "fixed", bottom: 16, right: 16 }}
       >
         {children}
       </Box>
     </Fade>
   );
-}
+};
 
 ScrollTop.propTypes = {
   children: PropTypes.element.isRequired,
@@ -54,9 +54,7 @@ const Layout = (props) => {
     <React.Fragment>
       <Header setSearchTerm={setSearchTerm} />
       <Outlet />
-      <Box sx={{ paddingX: '50px' }}>
-        {children}
-      </Box>
+      <Box sx={{ paddingX: "50px" }}>{children}</Box>
       <ScrollTop>
         <Fab size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />
@@ -64,6 +62,6 @@ const Layout = (props) => {
       </ScrollTop>
     </React.Fragment>
   );
-}
+};
 
-export default Layout
+export default Layout;

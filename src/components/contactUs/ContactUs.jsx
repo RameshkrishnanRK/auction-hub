@@ -16,12 +16,11 @@ import styles from "./ContactUs.module.scss";
 import Layout from "../../routing/components/Layout";
 import { Link } from "react-router-dom";
 
-
 const ContentContainer = styled(Container)({
   flex: "1",
-  marginLeft: '30px',
-  marginRight: '30px',
-  padding: '5px'
+  marginLeft: "30px",
+  marginRight: "30px",
+  padding: "5px",
 });
 
 const Textarea = styled(BaseTextareaAutosize)(
@@ -112,25 +111,27 @@ const ContactUs = () => {
   return (
     <div>
       <Layout />
-      <Box >
-        <Box className={styles.box} >
-          <Breadcrumbs >
-            <Link to="/" style={{ textDecoration: 'none' }}>
+      <Box>
+        <Box className={styles.box}>
+          <Breadcrumbs>
+            <Link to="/" style={{ textDecoration: "none" }}>
               Home
             </Link>
-            <Link style={{ textDecoration: 'none' }}>
-              Contact Us
-            </Link>
-
+            <Link style={{ textDecoration: "none" }}>Contact Us</Link>
           </Breadcrumbs>
         </Box>
       </Box>
-      <ContentContainer className={styles.mainContainer} >
-        <Box mt={8} className={styles.box1} >
-          <Typography p={3} className={styles.title} padding='15px' >
+      <ContentContainer className={styles.mainContainer}>
+        <Box mt={8} className={styles.box1}>
+          <Typography
+            p={3}
+            className={styles.title}
+            marginLeft="15px"
+            marginRight="25px"
+          >
             Contact Us
           </Typography>
-          <Box mt={8} className={styles.container} marginTop='20px' >
+          <Box mt={8} className={styles.container} marginTop="20px">
             <Box p={5}>
               <Typography
                 variant="body1"
@@ -265,8 +266,8 @@ const ContactUs = () => {
           Form Submitted Successfully
         </Alert>
       </Snackbar>
-      <Box className={styles.footer} >
-        <Typography className={styles.footerText} fontSize='small' >
+      <Box className={styles.footer}>
+        <Typography className={styles.footerText} fontSize="small">
           All Rights Reserved. No part of this web page may be reproduced in any
           way without the prior written permission of KPMG India.
         </Typography>

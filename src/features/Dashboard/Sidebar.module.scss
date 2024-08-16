@@ -26,25 +26,23 @@
   transition: right 0.3s ease;
 }
 
-@media (min-width: 768px){
-  .side-menu{
+@media (min-width: 768px) {
+  .side-menu {
     transform: translateX(0);
   }
-  .menu-toggle{
+  .menu-toggle {
     display: none;
   }
 }
 
-@media (max-width: 767px){
-  .side-menu{
+@media (max-width: 767px) {
+  .side-menu {
     width: 200px;
   }
   .menu-toggle {
     right: -45px;
   }
 }
-
-
 
 .sidebarContainer {
   display: flex;
@@ -61,22 +59,22 @@
   margin-bottom: 20px;
   z-index: 1;
 
-  .sidebarCategoriesContent {               
-      margin-bottom: 5px;
-      padding-top: 15px;
-      padding-bottom: 15px;
-      background-color: rgb(230, 230, 230);
-      height: 30px;
-      text-align: center;
-      cursor: pointer;
+  .sidebarCategoriesContent {
+    margin-bottom: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: rgb(230, 230, 230);
+    height: 30px;
+    text-align: center;
+    cursor: pointer;
   }
 
   .scrollable {
-      max-height: calc(65vh - 40px);
-      overflow-y: auto;  
-      .nested{
-        padding-left: 30px;
-      }
+    max-height: calc(65vh - 40px);
+    overflow-y: auto;
+    .nested {
+      padding-left: 30px;
+    }
   }
 }
 
@@ -87,20 +85,20 @@
   margin-bottom: 20px;
   cursor: pointer;
 
-  .sidebarRegionsContent {        
-      margin-bottom: 10px;
-      padding-top: 15px;
-      padding-bottom: 15px;
-      background-color: rgb(230, 230, 230);
-      height: 30px;
-      text-align: center;
+  .sidebarRegionsContent {
+    margin-bottom: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: rgb(230, 230, 230);
+    height: 30px;
+    text-align: center;
   }
 
   .scrollable {
-      max-height: calc(65vh - 40px);
-      overflow-y: auto;  
-      .nested{
-        padding-left: 30px;
-      }
+    max-height: calc(65vh - 40px);
+    overflow-y: auto;
+    .nested {
+      padding-left: 30px;
+    }
   }
 }
