@@ -6,7 +6,7 @@ import Layout from "../../routing/components/Layout";
 import { Link } from "react-router-dom";
 
 const ContentContainer = styled(Container)({
-  flex: "1",
+  flex: '1',
 });
 
 const About = () => {

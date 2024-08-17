@@ -15,6 +15,8 @@ import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAuto
 import styles from "./ContactUs.module.scss";
 import Layout from "../../routing/components/Layout";
 import { Link } from "react-router-dom";
+import { FiRefreshCcw } from "react-icons/fi";
+
 
 const ContentContainer = styled(Container)({
   flex: "1",
@@ -236,12 +238,19 @@ const ContactUs = () => {
                     />
                   </Grid>
                   <Grid item xs={4} mt={2}>
-                    <Box display="flex" alignItems="center">
-                      <Grid item xs={2}>
-                        <Typography>{captchaCode}</Typography>
+                    <Box display="flex" alignItems="center" >
+                      <Grid item xs={2}>                     
+                        <Button 
+                        size="medium" 
+                        variant='contained' 
+                        className={styles.captchaBtn}                       
+                        color='primary'>
+                        {captchaCode}
+                        </Button>
+                                               
                       </Grid>
                       <Grid item xs={2}>
-                        <Button onClick={resetCaptcha}>Reset</Button>
+                        <Button onClick={resetCaptcha}><FiRefreshCcw size={20}></FiRefreshCcw></Button>
                       </Grid>
                     </Box>
                   </Grid>

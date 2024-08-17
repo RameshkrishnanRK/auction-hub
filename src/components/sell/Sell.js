@@ -370,7 +370,7 @@ const Sell = () => {
                                                             </Typography>
                                                         </Grid>
                                                         <Grid item xs={10} sx={{ paddingRight: '20px' }}>
-                                                            <FormControl sx={{ m: 1, width: '100%' }} variant="outlined">
+                                                            <FormControl sx={{ m: 1, width: '100%', backgroundColor: '#dfdfdf' }} variant="outlined">
                                                                 <OutlinedInput
                                                                     disabled
                                                                     size='small'
