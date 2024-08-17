@@ -7,8 +7,6 @@ const ListView = ({subCatData, searchTerm, status, filter, sortData }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   const dispatch = useDispatch();
-console.log('filteredProducts-list',filteredProducts);
-  // const products = useSelector((state) => state.products.products)
   const {
     data: products,
     loading: productLoading,
@@ -20,13 +18,10 @@ console.log('filteredProducts-list',filteredProducts);
     return parseInt(timeVal, 10) || Number.MAX_SAFE_INTEGER;
   };
 
-  // const filteredProducts = products.filter(
-  //   (product) => ((status === 'active' && product.status === 'active' && product.isExpired === false) || (status === 'completed' && product.status === 'completed' && product.isExpired === true)) && (product.type === filter || filter === 'all')
-  // ).sort((a,b) => getTimeValue(a.timeRemaining) - getTimeValue(b.timeRemaining));;
+
 
   useEffect(() => {
     const filtered = products
-  // const filteredProducts = products
     .filter((product) => {
       const matchStatusFilter =
         (status === "active" &&
@@ -35,20 +30,16 @@ console.log('filteredProducts-list',filteredProducts);
         (status === "completed" &&
           product.status === "completed" &&
           product.isExpired === true);
-          // console.log('matchStatusFilter', matchStatusFilter)
 
-          // const matchTypeSubCat = product.subCatType === subCatData || subCatData === "all";
-      // const matchTypeFilter = product.type === filter || filter === "all";
+       
       const matchTypeSubCat =
       subCatData && subCatData.length > 0
         ? product.subCatType === subCatData || subCatData === "all"
-        : true; // Default to true if subCatData is not provided or empty
-console.log('matchTypeSubCat', matchTypeSubCat)
+        : true; 
     const matchTypeFilter =
       filter && filter !== "all"
         ? product.type === filter
-        : true; // Default to true if filter is "all" or not provided
-        // console.log('matchTypeFilter', matchTypeFilter)
+        : true; 
 
       const matchTermFilter =
         product.title?.toLowerCase()?.includes(searchTerm?.toLowerCase()) ||
@@ -62,8 +53,7 @@ console.log('matchTypeSubCat', matchTypeSubCat)
 
 
       if (timeComparison === 0) {
-        // return sortData === 'title-a-to-z' ?
-        //   a.title.localeCompare(b.title) : b.title.localeCompare(a.title)
+        
         if (sortData === "title-a-to-z") {
           return a.title.localeCompare(b.title);
         } else if (sortData === "title-z-to-a") {
@@ -83,7 +73,6 @@ console.log('matchTypeSubCat', matchTypeSubCat)
 
       return sortData === "title-a-to-z" ? -timeComparison : timeComparison;
     });
-    console.log('filtered', filtered)
     setFilteredProducts(filtered);
   }, [products, subCatData, searchTerm, status, filter, sortData]);
   

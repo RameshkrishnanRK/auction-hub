@@ -67,7 +67,6 @@ const ProductListView = ({
             variant="contained"
             className={styles.quickBidBtn}
             onClick={handleBid}
-            // disabled={isExpired}
           >
             Quick Bid ₹{formattedBid}
           </Button>

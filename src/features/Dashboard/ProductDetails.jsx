@@ -39,7 +39,6 @@ const ProductDetails = () => {
     error: productError,
   } = useSelector((state) => state.product);
 
-  // window.history.replaceState(null, '', '/auction/dashboard');
   window.history.replaceState(null, "/auction/dashboard");
 
   const product =
@@ -347,7 +346,6 @@ const ProductDetails = () => {
                     color="primary"
                     className={Styles.quickBidBtn}
                     onClick={handleQuickBid}
-                    // disabled={product?.isExpired}
                   >
                     Quick Bid ₹{formattedBid}
                   </Button>
@@ -367,7 +365,6 @@ const ProductDetails = () => {
                       color="success"
                       className={Styles.submitBidBtn}
                       onClick={handleBidAmountSubmit}
-                      // disabled={isExpired}
                     >
                       Submit Bid
                     </Button>
@@ -390,7 +387,6 @@ const ProductDetails = () => {
                   <Button
                     className={Styles.buyNowBtn}
                     onClick={handleBuyNow}
-                    // disabled={isExpired}
                   >
                     Buy Now ₹520,000.00
                   </Button>
@@ -412,7 +408,6 @@ const ProductDetails = () => {
                   <Button
                     className={Styles.makeOfferButton}
                     onClick={handleOfferAmountSubmit}
-                    // disabled={isExpired}
                   >
                     Make Offer
                   </Button>
@@ -435,7 +430,6 @@ const ProductDetails = () => {
                       color="primary"
                       className={Styles.addWatchListBtn}
                       onClick={handleAddToWatchList}
-                      // disabled={isExpired}
                     >
                       + Add to watch list
                     </Button>

@@ -22,8 +22,6 @@ const ControlPanel = ({ subCatData, searchTerm }) => {
   const [status, setStatus] = useState("active");
   const [filter, setFilter] = useState("all");
   const [sortData, setSortData] = useState("");
-  // const subCatData = localStorage.getItem('subCatData')
-  console.log("sub-control", subCatData);
 
   const handleViewChange = (event, newView) => {
     if (newView !== null) {
