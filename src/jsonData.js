@@ -13,6 +13,7 @@ export const productsData = [
     subcategory: "Villas",
     region: "St Peter",
     subregion: "Subregion 1",
+    subCatType: "Cars",
   },
   {
     id: 1,
@@ -27,6 +28,7 @@ export const productsData = [
     subcategory: "Independent Houses",
     region: "St Michael",
     subregion: "Subregion 2",
+    subCatType: "Trucks",
   },
   {
     id: 2,
@@ -41,6 +43,7 @@ export const productsData = [
     subcategory: "Laptops",
     region: "Region C",
     subregion: "Subregion 1",
+    subCatType: "Tractors",
   },
   {
     id: 3,
@@ -63,12 +66,13 @@ export const productsData = [
     currentBid: 3000000,
     timeRemaining: "Expired",
     isExpired: true,
-    status: "completed",
+    status: "active",
     type: "classified",
     category: "Real Estate",
     subcategory: "Flats",
     region: "St Phillip",
     subregion: "Subregion 2",
+
   },
   {
     id: 5,
@@ -83,6 +87,8 @@ export const productsData = [
     subcategory: "Agriculture Lands",
     region: "St John",
     subregion: "Subregion 3",
+    subCatType: "Real Estates",
+
   },
   {
     id: 6,
@@ -97,6 +103,8 @@ export const productsData = [
     subcategory: "Independent Houses",
     region: "St George",
     subregion: "Subregion 2",
+    subCatType: "Trucks",
+
   },
   {
     id: 66,

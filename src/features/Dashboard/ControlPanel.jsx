@@ -17,11 +17,13 @@ import { filterByOptions, sortOptions } from "../../jsonData";
 import GridView from "./GridView";
 import ListView from "./ListView";
 
-const ControlPanel = ({ searchTerm }) => {
+const ControlPanel = ({ subCatData, searchTerm }) => {
   const [view, setView] = useState("grid");
   const [status, setStatus] = useState("active");
   const [filter, setFilter] = useState("all");
   const [sortData, setSortData] = useState("");
+  // const subCatData = localStorage.getItem('subCatData')
+  console.log("sub-control", subCatData);
 
   const handleViewChange = (event, newView) => {
     if (newView !== null) {
@@ -30,7 +32,6 @@ const ControlPanel = ({ searchTerm }) => {
   };
 
   const handleStatusChange = (event, newStatus) => {
-    console.log("newStatus ", newStatus);
     setStatus(newStatus);
   };
 
@@ -185,6 +186,7 @@ const ControlPanel = ({ searchTerm }) => {
       </Box>
       {view === "grid" ? (
         <GridView
+          subCatData={subCatData}
           searchTerm={searchTerm}
           status={status}
           filter={filter}
@@ -192,6 +194,7 @@ const ControlPanel = ({ searchTerm }) => {
         />
       ) : (
         <ListView
+          subCatData={subCatData}
           searchTerm={searchTerm}
           status={status}
           filter={filter}

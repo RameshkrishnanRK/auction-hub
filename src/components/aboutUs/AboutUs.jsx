@@ -23,7 +23,7 @@ const About = () => {
           </Breadcrumbs>
         </Box>
       </Box>
-      <ContentContainer className={styles.mainContainer}>
+      <div className={styles.mainContainer}>
         <Box mt={8} marginTop="10px">
           <Typography
             p={2}
@@ -69,7 +69,7 @@ const About = () => {
             </Typography>
           </Box>
         </Box>
-      </ContentContainer>
+      </div>
       <Typography className={styles.footer} fontSize="13px">
         © Copyright 2023 http://barbadosauctions.com. All Rights Reserved. No
         part of this web page may be reproduced in any way without the prior

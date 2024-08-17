@@ -23,7 +23,9 @@ const Browse = () => {
   const pathname = location.pathname;
   const pathSegments = pathname.split("/").filter((segment) => segment);
   const [searchTerm, setSearchTerm] = useState("");
+  const [subCatData, setSubCatData] = useState("");
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     const fetchCategories = () => {
@@ -31,10 +33,8 @@ const Browse = () => {
       try {
         //api call
         const data = categoriesData;
-        console.log("data: categories ", data);
         dispatch(fetchSideBarSuccess(data));
       } catch (error) {
-        console.log("data: products error ", error);
         dispatch(fetchSideBarFailure());
       }
     };
@@ -44,17 +44,14 @@ const Browse = () => {
       try {
         //api call
         const data = regionsData;
-        console.log("data: categories ", data);
         dispatch(fetchSideBarRegionsSuccess(data));
       } catch (error) {
-        console.log("data: products error ", error);
         dispatch(fetchSideBarRegionsFailure());
       }
     };
 
     fetchCategories();
     fetchRegions();
-    console.log("searchTerm: ", searchTerm);
   }, [dispatch, searchTerm]);
 
   return (
@@ -71,10 +68,10 @@ const Browse = () => {
           </Box>
           <Grid container spacing={3}>
             <Grid item xs={3}>
-              <Sidebar />
+              <Sidebar  subCatData={subCatData} setSubCatData={setSubCatData}/>
             </Grid>
             <Grid item xs={9}>
-              <ControlPanel searchTerm={searchTerm} />
+              <ControlPanel searchTerm={searchTerm} subCatData={subCatData} />
             </Grid>
           </Grid>
         </Box>

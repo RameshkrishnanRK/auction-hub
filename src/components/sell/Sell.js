@@ -105,7 +105,6 @@ const Sell = () => {
 
     useEffect(() => {
         const selectedCategory = categoriesData.filter(data => (data.name === category))
-        console.log(selectedCategory, "sel36")
 
         setSubCategoryList(selectedCategory[0]?.subcategories)
 
@@ -165,7 +164,6 @@ const Sell = () => {
                 return;
             }
         } else {
-            console.log(category, subCategory, listingType, region, title, description)
         }
     }
 
@@ -195,7 +193,6 @@ const Sell = () => {
                 return;
             }
         } else {
-            console.log(title, description)
         }
     }
 

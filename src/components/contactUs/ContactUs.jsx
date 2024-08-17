@@ -121,7 +121,7 @@ const ContactUs = () => {
           </Breadcrumbs>
         </Box>
       </Box>
-      <ContentContainer className={styles.mainContainer}>
+      <div className={styles.mainContainer}>
         <Box mt={8} className={styles.box1}>
           <Typography
             p={3}
@@ -255,7 +255,7 @@ const ContactUs = () => {
             </Box>
           </Box>
         </Box>
-      </ContentContainer>
+      </div>
       <Snackbar
         open={openSnackBar}
         autoHideDuration={6000}

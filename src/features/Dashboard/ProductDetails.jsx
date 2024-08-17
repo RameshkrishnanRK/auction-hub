@@ -56,7 +56,6 @@ const ProductDetails = () => {
   const [addedToWatchList, setAddedToWatchList] = useState(false);
 
   const cleanedFormattedBidMemo = useMemo(() => {
-    console.log("cleanedFormattedBidMemo ", formattedBid);
     if (formattedBid !== undefined) {
       setCleanedFormattedBid(formattedBid.replace(/,/g, ""));
       return formattedBid.replace(/,/g, "");
@@ -94,7 +93,6 @@ const ProductDetails = () => {
     let formattedBidValue = Number(cleanedFormattedBid);
     let inputBidAmount = localStorage.getItem("bidAmount");
     let bidAmountValue = Number(bidAmount);
-    console.log("handleBidAmountSubmit ", bidAmount, formattedBidValue);
 
     if (bidAmountValue < formattedBidValue) {
       toast.error("Bid Amount Cannot be lesser than Current Bid", {
@@ -115,7 +113,6 @@ const ProductDetails = () => {
 
   const handleOfferAmountSubmit = () => {
     setOpenOfferModal(true);
-    console.log("handleQuickBid ", formattedBid);
     setCleanedFormattedBid(formattedBid.replace(/,/g, ""));
   };
 
@@ -135,7 +132,6 @@ const ProductDetails = () => {
 
   const handleQuickBid = () => {
     setOpenBidModal(true);
-    console.log("handleQuickBid ", formattedBid);
     setCleanedFormattedBid(formattedBid.replace(/,/g, ""));
   };
 
@@ -186,7 +182,6 @@ const ProductDetails = () => {
 
           transition: Slide,
         });
-        console.log("navigate(-1);");
       }
     } else {
       toast.error("Please fill all the required fields", {
@@ -212,11 +207,7 @@ const ProductDetails = () => {
     let formattedBid;
     if (product && product?.currentBid !== undefined) {
       formattedBid = Number(product?.currentBid).toLocaleString("en-IN");
-      console.log(
-        "formattedBid: ",
-        formattedBid,
-        formattedBid.replace(/,/g, "")
-      );
+      
       setCleanedFormattedBid(formattedBid.replace(/,/g, ""));
       setOpenBidModal(false);
     }
