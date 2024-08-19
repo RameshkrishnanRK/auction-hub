@@ -6,7 +6,7 @@ import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAuto
 import { ChevronLeft } from '@mui/icons-material';
 import { categoriesData, regionsData } from '../../data';
 import Layout from "../../routing/components/Layout";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Slide, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -80,7 +80,7 @@ const grey = {
 };
 
 const Sell = () => {
-
+    const navigate = useNavigate();
     const [step, setStep] = React.useState(1);
     const [category, setCategory] = React.useState('');
     const [subCategory, setSubCategory] = React.useState('');
@@ -167,17 +167,18 @@ const Sell = () => {
         if (step === 2) {
             if (title && description) {
                 setErrors({})
-                toast.success("Successfully created the listing.", {
-                    position: "top-center",
-                    autoClose: 2000,
-                    style: {
-                        width: '430px',
-                        backgroundColor: '#009933',
-                        color: '#ffffff'
-                    },
+                // toast.success("Successfully created the listing.", {
+                //     position: "top-center",
+                //     autoClose: 2000,
+                //     style: {
+                //         width: '430px',
+                //         backgroundColor: '#009933',
+                //         color: '#ffffff'
+                //     },
                     
-                    transition: Slide
-                })
+                //     transition: Slide
+                // })
+                navigate(`/auction/dashboard?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`);
             } else {
                 if (!title) {
                     setErrors(prevState => ({ ...prevState, title: true }))
