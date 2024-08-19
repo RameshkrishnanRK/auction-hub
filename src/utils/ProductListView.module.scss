@@ -1,74 +1,63 @@
-.productListWrapper{
+.productListWrapper {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  padding: 10px;
+  justify-content: space-between;
+
+  .productListImage {
+    width: 150px;
+    height: 150px;
+    margin: 5px;
+  }
+  .productListTitle {
+    flex: 1;
+    margin-left: 10px;
+    padding-top: 5px;
+  }
+
+  .productListActions {
     display: flex;
-    align-items: center;
-    margin: 20px 0;
-    padding: 10px;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 400px;
 
-    .productListImage{
-        width: 150px;
-        height: 150px;
-        margin: 5px;
+    .quickBidBtn {
+      margin-bottom: 5px;
+      background-color: #c24242 !important;
+      width: 250px;
     }
-    .productListTitle{
-        flex: 1;
+
+    .expiredText {
+      margin-bottom: 10px;
+    }
+
+    .productListDetails {
+      display: flex;
+      align-items: center;
+      margin-top: 40px;
+      margin-right: 10px;
+
+      .verticalDottedLine {
+        width: 4px;
+        height: 16px;
+        background: repeating-linear-gradient(
+          to bottom,
+          #e2e2e2,
+          #e2e2e2 3px,
+          transparent 2px,
+          transparent 4px
+        );
+        margin: 0 10px;
+      }
+
+      .viewDetailsBtn {
         margin-left: 10px;
-        padding-top: 5px;
-      
-        
+      }
 
+      > * {
+        margin-right: 20px;
+      }
     }
-
-    .productListActions{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        width: 400px;
-
-        .quickBidBtn {
-            margin-bottom: 5px;
-            background-color: #c24242 !important;
-            width: 250px;
-        }
-
-        .expiredText{
-            margin-bottom: 10px;
-        }
-
-        .productListDetails{
-            display: flex;
-            align-items: center;
-            margin-top: 40px;
-            margin-right: 10px;
-            
-
-            .verticalDottedLine{
-                width: 4px;
-                height: 16px;
-                background: repeating-linear-gradient(
-                    to bottom,
-                    #e2e2e2,
-                    #e2e2e2 3px,
-                    transparent 2px,
-                    transparent 4px,
-                );
-                margin: 0 10px;
-            }
-
-            .viewDetailsBtn{
-                margin-left: 10px;
-            }
-    
-            >* {
-                margin-right: 20px;
-            }
-
-        }
-
-        
-    }
-
-    
-    
-    
+  }
 }

@@ -67,7 +67,7 @@ const LoginPage = () => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "2fr 1fr", // Adjust the column widths
+          gridTemplateColumns: "2fr 1fr", 
           alignItems: "center",
           minHeight: "100vh",
         }}

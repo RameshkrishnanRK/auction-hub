@@ -6,11 +6,11 @@ import sideBarRegionReducer from "../slices/sideBarRegionSlice";
 import loginReducer from "../slices/loginSlice";
 
 const rootReducer = combineReducers({
-    product: productReducer,
-    sidebar: sideBarReducer,
-    contact: contactReducer,
-    sideBarRegion: sideBarRegionReducer,
-    login: loginReducer
+  product: productReducer,
+  sidebar: sideBarReducer,
+  contact: contactReducer,
+  sideBarRegion: sideBarRegionReducer,
+  login: loginReducer,
 });
 
 export default rootReducer;

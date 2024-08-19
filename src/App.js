@@ -1,12 +1,15 @@
-import './App.css';
+import "./App.css";
 import AppRouter from "./routing/routes";
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { productsData } from './jsonData';
-import { fetchProductsStart, fetchProductsSuccess, fetchProductsFailure } from './redux/slices/productSlice';
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { productsData } from "./jsonData";
+import {
+  fetchProductsStart,
+  fetchProductsSuccess,
+  fetchProductsFailure,
+} from "./redux/slices/productSlice";
 
 function App() {
-
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchProducts = () => {
@@ -18,7 +21,7 @@ function App() {
       } catch (error) {
         dispatch(fetchProductsFailure());
       }
-    }
+    };
 
     fetchProducts();
   }, [dispatch]);

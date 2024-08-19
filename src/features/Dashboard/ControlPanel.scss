@@ -1,52 +1,50 @@
 .controlPanel {
-    padding: 10px;
-    background-color: #e6e6e6;
-    border-radius: 5px;
+  padding: 10px;
+  background-color: #e6e6e6;
+  border-radius: 5px;
 
-    .viewToggleGroup {
+  .viewToggleGroup {
+    background-color: #1768ac;
+    color: red !important;
+    height: 40px;
+
+    .MuiToggleButton-root {
+      min-width: 50%;
+      height: 40px;
+      background-color: red;
+
+      &.active {
         background-color: #1768ac;
-        color: red !important;
-        height: 40px;
+        color: #fff;
 
-
-        .MuiToggleButton-root {
-            min-width: 50%;
-            height: 40px;
-            background-color: red;
-
-            &.active {
-                background-color: #1768ac;
-                color: #fff;
-
-                &:first-of-type {
-                    background-color: #1768ac;
-                    color: #fff;
-                }
-
-                &:last-of-type {
-                    background-color: #fff;
-                    color: #1768ac;
-                }
-            }
-
-            &:not(.active) {
-                &:first-of-type {
-                    background-color: #fff;
-                    color: #1768ac;
-
-                }
-
-                &:last-of-type {
-                    background-color: #1768ac;
-                    color: #fff;
-                }
-            }
+        &:first-of-type {
+          background-color: #1768ac;
+          color: #fff;
         }
-    }
 
-    .controlPanelSelect {
-        margin-left: 10px;
-        max-width: 100px;
-        margin-right: 15px;
+        &:last-of-type {
+          background-color: #fff;
+          color: #1768ac;
+        }
+      }
+
+      &:not(.active) {
+        &:first-of-type {
+          background-color: #fff;
+          color: #1768ac;
+        }
+
+        &:last-of-type {
+          background-color: #1768ac;
+          color: #fff;
+        }
+      }
     }
+  }
+
+  .controlPanelSelect {
+    margin-left: 10px;
+    max-width: 100px;
+    margin-right: 15px;
+  }
 }
