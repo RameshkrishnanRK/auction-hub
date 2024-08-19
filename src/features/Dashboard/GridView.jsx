@@ -63,7 +63,7 @@ useEffect(() => {
       const matchTermFilter =
         product.title?.toLowerCase()?.includes(searchTerm?.toLowerCase()) ||
         searchTerm == (null || "");
-      return matchStatusFilter && matchTypeFilter && matchTypeSubCat;
+      return matchStatusFilter && matchTypeFilter && matchTypeSubCat && matchTermFilter;
     })
     .sort((a, b) => {
       const timeComparison =
