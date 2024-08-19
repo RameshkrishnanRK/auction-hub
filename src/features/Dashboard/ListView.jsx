@@ -44,7 +44,7 @@ const ListView = ({subCatData, searchTerm, status, filter, sortData }) => {
       const matchTermFilter =
         product.title?.toLowerCase()?.includes(searchTerm?.toLowerCase()) ||
         searchTerm == (null || "");
-      return matchStatusFilter && matchTypeFilter && matchTypeSubCat;
+      return matchStatusFilter && matchTypeFilter &&matchTermFilter && matchTypeSubCat;
     })
     .sort((a, b) => {
       const timeComparison =
