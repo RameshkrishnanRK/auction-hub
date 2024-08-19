@@ -13,7 +13,6 @@ import "react-toastify/dist/ReactToastify.css";
 const MainContainer = styled(Box)({
     display: 'flex',
     flexDirection: 'column',
-    // minHeight: '100vh',
     padding: '10px 0',
 });
 const FormSection = styled(Box)({
@@ -105,32 +104,27 @@ const Sell = () => {
 
     useEffect(() => {
         const selectedCategory = categoriesData.filter(data => (data.name === category))
-        console.log(selectedCategory, "sel36")
 
         setSubCategoryList(selectedCategory[0]?.subcategories)
 
     }, [category])
 
     const handleCategoryChange = (event) => {
-        //error?.cat :false
         setCategory(event.target.value);
         setErrors(prevState => ({ ...prevState, category: false }))
     };
 
     const handleSubCategoryChange = (event) => {
-        //error?.subcat :false
         setSubCategory(event.target.value);
         setErrors(prevState => ({ ...prevState, subCategory: false }))
     };
 
     const handleListingTypeChange = (event) => {
-        //error?.Listing :false
         setListingType(event.target.value);
         setErrors(prevState => ({ ...prevState, listingType: false }))
     };
 
     const handleRegionChange = (event) => {
-        //error?.Listing :false
         setRegion(event.target.value);
         setErrors(prevState => ({ ...prevState, region: false }))
     };
@@ -165,7 +159,6 @@ const Sell = () => {
                 return;
             }
         } else {
-            console.log(category, subCategory, listingType, region, title, description)
         }
     }
 
@@ -195,7 +188,6 @@ const Sell = () => {
                 return;
             }
         } else {
-            console.log(title, description)
         }
     }
 
@@ -380,7 +372,6 @@ const Sell = () => {
                                                         <Grid item xs={10} sx={{ paddingRight: '20px' }}>
                                                             <FormControl sx={{ m: 1, width: '100%', backgroundColor: '#dfdfdf' }} variant="outlined">
                                                                 <OutlinedInput
-                                                                    //value={title}
                                                                     disabled
                                                                     size='small'
                                                                     id="outlined-adornment-weight"
@@ -412,7 +403,6 @@ const Sell = () => {
                                     </FormSection>
 
                                     <Box className={styles.title} sx={{ display: 'flex' }}>
-                                        {/* <Button onClick={() => {setStep(1)}}>back</Button> */}
                                         <Button onClick={() => { setStep(1) }} startIcon={<ChevronLeft />}>
                                             Back
                                         </Button>

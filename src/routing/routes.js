@@ -9,7 +9,6 @@ import ProductDetails from "../features/Dashboard/ProductDetails";
 import Browse from "../features/Dashboard/Browse";
 
 const routes = () => {
-
   return (
     <Router>
       <Routes>
