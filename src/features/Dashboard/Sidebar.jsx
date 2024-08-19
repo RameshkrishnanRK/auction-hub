@@ -36,10 +36,10 @@ const Sidebar = ({ subCatData, setSubCatData }) => {
     error: regionsError,
   } = useSelector((state) => state.sideBarRegion);
 
-  localStorage.setItem("subCatData", subCatData);
+  // localStorage.setItem("subCatData", subCatData);
   useEffect(() => {
     if (subCatData) {
-      const subCatData1 = localStorage.getItem("subCatData");
+      // const subCatData1 = localStorage.getItem("subCatData");
     }
   }, [subCatData]);
 
