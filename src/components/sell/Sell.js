@@ -373,7 +373,8 @@ const Sell = () => {
                                                         <Grid item xs={10} sx={{ paddingRight: '20px' }}>
                                                             <FormControl sx={{ m: 1, width: '100%', backgroundColor: '#dfdfdf' }} variant="outlined">
                                                                 <OutlinedInput
-                                                                    disabled
+                                                                    value={title}
+                                                                    // disabled
                                                                     size='small'
                                                                     id="outlined-adornment-weight"
                                                                     aria-describedby="outlined-weight-helper-text"
