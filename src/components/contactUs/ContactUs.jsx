@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   Box,
   Typography,
-  Container,
   TextField,
   Button,
   Grid,
@@ -10,34 +9,34 @@ import {
   Alert,
   Breadcrumbs,
 } from "@mui/material";
-import { styled } from "@mui/system";
-import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
+// import { styled } from "@mui/system";
+// import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 import styles from "./ContactUs.module.scss";
 import Layout from "../../routing/components/Layout";
 import { Link } from "react-router-dom";
 import { FiRefreshCcw } from "react-icons/fi";
 
 
-const ContentContainer = styled(Container)({
-  flex: "1",
-  marginLeft: "30px",
-  marginRight: "30px",
-  padding: "5px",
-});
+// const ContentContainer = styled(Container)({
+//   flex: "1",
+//   marginLeft: "30px",
+//   marginRight: "30px",
+//   padding: "5px",
+// });
 
-const Textarea = styled(BaseTextareaAutosize)(
-  () => `
-    box-sizing: border-box;
-    width: 100%;
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.5;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid grey;
-  `
-);
+// const Textarea = styled(BaseTextareaAutosize)(
+//   () => `
+//     box-sizing: border-box;
+//     width: 100%;
+//     font-family: 'IBM Plex Sans', sans-serif;
+//     font-size: 0.875rem;
+//     font-weight: 400;
+//     line-height: 1.5;
+//     padding: 12px;
+//     border-radius: 8px;
+//     border: 1px solid grey;
+//   `
+// );
 
 const initialFormState = {
   firstName: "",
@@ -209,9 +208,14 @@ const ContactUs = () => {
                     </Typography>
                   </Grid>
                   <Grid item xs={5}>
-                    <Textarea
-                      minRows={3}
+                    <TextField
+                      multiline={true}
+                      minRows={4}
+                      required
+                      id="Message"
                       value={formState.message}
+                      error={Boolean(errors.message)}
+                      helperText={errors.message}
                       onChange={(e) =>
                         setFormState((prevState) => ({
                           ...prevState,
@@ -221,7 +225,7 @@ const ContactUs = () => {
                     />
                   </Grid>
                 </Grid>
-                <Grid container spacing={1} mt={3}>
+                <Grid container spacing={1} >
                   <Grid item xs={2}>
                     <Typography mt={2} className={styles.text}>
                       Captcha
@@ -239,19 +243,19 @@ const ContactUs = () => {
                   </Grid>
                   <Grid item xs={4} mt={2}>
                     <Box display="flex" alignItems="center" >
-                      <Grid item xs={2}>                     
-                        <Button 
-                        size="medium" 
-                        variant='contained' 
-                        className={styles.captchaBtn}                       
-                        color='primary'>
-                        {captchaCode}
+                      {/* <Grid item xs={2}> */}
+                        <Button
+                          size="medium"
+                          variant='contained'
+                          className={styles.captchaBtn}
+                          color='primary'>
+                          {captchaCode}
                         </Button>
-                                               
-                      </Grid>
-                      <Grid item xs={2}>
+
+                      {/* </Grid> */}
+                      {/* <Grid item xs={2}> */}
                         <Button onClick={resetCaptcha}><FiRefreshCcw size={20}></FiRefreshCcw></Button>
-                      </Grid>
+                      {/* </Grid> */}
                     </Box>
                   </Grid>
                 </Grid>
