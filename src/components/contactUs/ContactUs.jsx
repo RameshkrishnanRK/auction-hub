@@ -9,34 +9,10 @@ import {
   Alert,
   Breadcrumbs,
 } from "@mui/material";
-// import { styled } from "@mui/system";
-// import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 import styles from "./ContactUs.module.scss";
 import Layout from "../../routing/components/Layout";
 import { Link } from "react-router-dom";
 import { FiRefreshCcw } from "react-icons/fi";
-
-
-// const ContentContainer = styled(Container)({
-//   flex: "1",
-//   marginLeft: "30px",
-//   marginRight: "30px",
-//   padding: "5px",
-// });
-
-// const Textarea = styled(BaseTextareaAutosize)(
-//   () => `
-//     box-sizing: border-box;
-//     width: 100%;
-//     font-family: 'IBM Plex Sans', sans-serif;
-//     font-size: 0.875rem;
-//     font-weight: 400;
-//     line-height: 1.5;
-//     padding: 12px;
-//     border-radius: 8px;
-//     border: 1px solid grey;
-//   `
-// );
 
 const initialFormState = {
   firstName: "",
@@ -66,8 +42,7 @@ const ContactUs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      // Handle form submission
+    if (validateForm()) {     
       setOpenSnackBar(true);
       setFormState(initialFormState);
       resetCaptcha();
@@ -242,20 +217,15 @@ const ContactUs = () => {
                     />
                   </Grid>
                   <Grid item xs={4} mt={2}>
-                    <Box display="flex" alignItems="center" >
-                      {/* <Grid item xs={2}> */}
+                    <Box display="flex" alignItems="center" >                      
                         <Button
                           size="medium"
                           variant='contained'
                           className={styles.captchaBtn}
                           color='primary'>
                           {captchaCode}
-                        </Button>
-
-                      {/* </Grid> */}
-                      {/* <Grid item xs={2}> */}
-                        <Button onClick={resetCaptcha}><FiRefreshCcw size={20}></FiRefreshCcw></Button>
-                      {/* </Grid> */}
+                        </Button>                     
+                        <Button onClick={resetCaptcha}><FiRefreshCcw size={20}></FiRefreshCcw></Button>                      
                     </Box>
                   </Grid>
                 </Grid>
