@@ -208,8 +208,8 @@ const Sell = () => {
                             </Breadcrumbs>
                         </Box>
                     </Box>
-                    <MainContainer marginLeft='-5px'>
-                        <Container className={styles.mainContainer} >
+                    <MainContainer marginLeft='2px'>
+                        <div className={styles.mainContainer} >
                             <Box className={styles.title}>
                                 <Grid container justifyContent="space-between" >
                                     <Grid item >
@@ -441,7 +441,7 @@ const Sell = () => {
                                 </Typography>
                             </Box>
 
-                        </Container>
+                        </div>
                         <ToastContainer />
                     </MainContainer>
                 </>

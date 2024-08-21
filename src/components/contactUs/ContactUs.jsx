@@ -273,10 +273,10 @@ const ContactUs = () => {
         open={openSnackBar}
         autoHideDuration={6000}
         onClose={handleCloseSnackBar}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
-        <Alert onClose={handleCloseSnackBar} severity="success">
-          Form Submitted Successfully
+        <Alert onClose={handleCloseSnackBar} variant="filled" severity="success">
+          Thank you for contacting us. we will reach out you shortly
         </Alert>
       </Snackbar>
       <Box className={styles.footer}>
