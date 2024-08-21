@@ -100,7 +100,7 @@ const ContactUs = () => {
       <div className={styles.mainContainer}>
         <Box mt={8} className={styles.box1}>
           <Typography
-            p={3}
+            p={2}
             className={styles.title}
             marginLeft="15px"
             marginRight="25px"

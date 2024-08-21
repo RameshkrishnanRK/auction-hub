@@ -298,9 +298,10 @@ const Sell = () => {
                                                             </Typography>
                                                         </Grid>
                                                         <Grid item xs={10} sx={{ paddingRight: '20px' }}>
-                                                            <FormControl sx={{ m: 1, width: '100%', backgroundColor: '#dfdfdf' }} variant="outlined">
+                                                            <FormControl sx={{ m: 1, width: '100%', backgroundColor: '#F8F9F9' }} variant="outlined">
                                                                 <OutlinedInput
-                                                                    value={title}                                                                   
+                                                                    value={title} 
+                                                                    disabled                                                                  
                                                                     size='small'
                                                                     id="outlined-adornment-weight"
                                                                     aria-describedby="outlined-weight-helper-text"
