@@ -12,7 +12,7 @@ export const productsData = [
     subcategory: "Villas",
     region: "St Peter",
     subregion: "Subregion 1",
-    subCatType: "Cars",
+    subCatType: "Villas",
   },
   {
     id: 1,
@@ -27,7 +27,7 @@ export const productsData = [
     subcategory: "Independent Houses",
     region: "St Michael",
     subregion: "Subregion 2",
-    subCatType: "Trucks",
+    subCatType: "Real Estates",
   },
   {
     id: 2,
@@ -42,7 +42,7 @@ export const productsData = [
     subcategory: "Laptops",
     region: "Region C",
     subregion: "Subregion 1",
-    subCatType: "Tractors",
+    subCatType: "Laptops",
   },
   {
     id: 3,
@@ -57,6 +57,7 @@ export const productsData = [
     subcategory: "Other",
     region: "St Lucy",
     subregion: "Subregion 1",
+    subCatType: "Retail & Services",
   },
   {
     id: 4,
@@ -71,7 +72,7 @@ export const productsData = [
     subcategory: "Flats",
     region: "St Phillip",
     subregion: "Subregion 2",
-
+    subCatType: "Flats",
   },
   {
     id: 5,
@@ -86,8 +87,7 @@ export const productsData = [
     subcategory: "Agriculture Lands",
     region: "St John",
     subregion: "Subregion 3",
-    subCatType: "Real Estates",
-
+    subCatType: "Coffee Estates",
   },
   {
     id: 6,
@@ -103,8 +103,7 @@ export const productsData = [
     region: "St George",
     subregion: "Subregion 2",
     subCatType: "Trucks",
-    subCatType: "Real Estates",
-
+    subCatType: "Independent Houses",
   },
   {
     id: 7,
@@ -120,7 +119,6 @@ export const productsData = [
     region: "St Andrew",
     subregion: "Subregion 1",
     subCatType: "Other Assets",
-    
   },
   {
     id: 8,
@@ -150,7 +148,6 @@ export const productsData = [
     subcategory: "Cars",
     region: "Christ Church",
     subregion: "Subregion 4",
-    
   },
   {
     id: 10,
@@ -161,8 +158,8 @@ export const productsData = [
     isExpired: true,
     status: "completed",
     type: "auction",
-    category: "Real Estate",
-    subcategory: "Villas",
+    category: "Automobiles",
+    subcategory: "Tractor",
     region: "St Peter",
     subregion: "Subregion 1",
     subCatType: "Tractors",
@@ -176,8 +173,8 @@ export const productsData = [
     isExpired: false,
     status: "active",
     type: "fixed-price",
-    category: "Consumer Electronics",
-    subcategory: "Laptops",
+    category: "Automobiles",
+    subcategory: "Tractor",
     region: "Region C",
     subregion: "Subregion 1",
     subCatType: "Tractors",
@@ -191,8 +188,8 @@ export const productsData = [
     isExpired: false,
     status: "active",
     type: "fixed-price",
-    category: "Consumer Electronics",
-    subcategory: "Laptops",
+    category: "Automobiles",
+    subcategory: "Truck",
     region: "Region C",
     subregion: "Subregion 1",
     subCatType: "Trucks",
@@ -206,8 +203,8 @@ export const productsData = [
     isExpired: true,
     status: "completed",
     type: "auction",
-    category: "Real Estate",
-    subcategory: "Villas",
+    category: "Automobiles",
+    subcategory: "Truck",
     region: "St Peter",
     subregion: "Subregion 1",
     subCatType: "Trucks",
@@ -228,14 +225,11 @@ export const categoriesData = [
   },
   {
     name: "Automobiles",
-    quantity: 3,
-    subcategories: [{ name: "Cars" }, { name: "Trucks" }, { name: "Tractors" }],
-  },
-  {
-    name: "Beauty Products",
-    quantity: 6,
+    quantity: 8,
     subcategories: [
-      { name: "Cars & Trucks" },
+      { name: "Cars" },
+      { name: "Trucks" },
+      { name: "Tractors" },
       { name: "Damaged Cars & Trucks" },
       { name: "MotorCycles" },
       { name: "Other Vehicles" },
@@ -243,13 +237,14 @@ export const categoriesData = [
       { name: "Power Sports" },
     ],
   },
+
   {
     name: "Boats",
     quantity: 0,
     subcategories: [],
   },
   {
-    name: "Business & Industrials",
+    name: "Cellphone and PDAs",
     quantity: 19,
     subcategories: [
       { name: "Amazon FireSticks" },
@@ -274,7 +269,7 @@ export const categoriesData = [
     ],
   },
   {
-    name: "Cellphone and PDAs",
+    name: "Business & Industrials",
     quantity: 14,
     subcategories: [
       { name: "Agriculture & Forestry" },
@@ -294,7 +289,7 @@ export const categoriesData = [
     ],
   },
   {
-    name: "Clothing & Shoes",
+    name: "Collectibles",
     quantity: 10,
     subcategories: [
       { name: "Advice & Instructions" },
@@ -310,18 +305,7 @@ export const categoriesData = [
     ],
   },
   {
-    name: "Collectibles",
-    quantity: 5,
-    subcategories: [
-      { name: "Equipments" },
-      { name: "Other Assets" },
-      { name: "Real Estates" },
-      { name: "Tools" },
-      { name: "Vehicles" },
-    ],
-  },
-  {
-    name: "Computers",
+    name: "Beauty Products",
     quantity: 2,
     subcategories: [{ name: "Natural Hair" }, { name: "Synthetic Hair" }],
   },
@@ -336,10 +320,15 @@ export const categoriesData = [
       { name: "Printers" },
       { name: "Scanners" },
       { name: "Servers" },
+      { name: "Bluetooth" },
+
+      { name: "Others" },
+
+      { name: "Phone & SIM Cards" },
     ],
   },
   {
-    name: "Everything Else",
+    name: "Home & Garden",
     quantity: 6,
     subcategories: [
       { name: "Inside Home" },
@@ -351,10 +340,10 @@ export const categoriesData = [
     ],
   },
   {
-    name: "Government",
+    name: "Sporting Goods",
     quantity: 9,
     subcategories: [
-      { name: "Excise & Fitness" },
+      { name: "Excersise & Fitness" },
       { name: "Golf" },
       { name: "Indoor Games" },
       { name: "Others" },
@@ -367,16 +356,18 @@ export const categoriesData = [
   },
   {
     name: "Real Estate",
-    quantity: 4,
+    quantity: 6,
     subcategories: [
       { name: "Villas" },
       { name: "Flats" },
       { name: "Independent Houses" },
       { name: "Agriculture Lands" },
+      { name: "Coffee Estates" },
+      { name: "Manufactured Homes" },
     ],
   },
   {
-    name: "Health & Beauty",
+    name: "Tickets",
     quantity: 7,
     subcategories: [
       { name: "Airline" },
@@ -389,7 +380,7 @@ export const categoriesData = [
     ],
   },
   {
-    name: "Home & Garden",
+    name: "Specialty Services",
     quantity: 44,
     subcategories: [
       { name: "Advertising" },
@@ -439,20 +430,9 @@ export const categoriesData = [
       { name: "Wholesale Lots" },
     ],
   },
+
   {
-    name: "Specialty Services",
-    quantity: 6,
-    subcategories: [
-      { name: "Commercial" },
-      { name: "Land" },
-      { name: "Manufactured Homes" },
-      { name: "Other Real Estate" },
-      { name: "Residential" },
-      { name: "Timeshares for Sale" },
-    ],
-  },
-  {
-    name: "Sporting Goods",
+    name: "Electronics",
     quantity: 6,
     subcategories: [
       { name: "Bluetooth" },
@@ -464,7 +444,7 @@ export const categoriesData = [
     ],
   },
   {
-    name: "Tickets",
+    name: "Clothing & Shoes",
     quantity: 18,
     subcategories: [
       { name: "Boys" },
@@ -487,7 +467,7 @@ export const categoriesData = [
     ],
   },
   {
-    name: "Travel",
+    name: "Everything Else",
     quantity: 14,
     subcategories: [
       { name: "Advertisement" },
