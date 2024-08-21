@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from './login.module.scss'
 import {
   Container,
   Paper,
@@ -14,7 +13,7 @@ import {
 import kpmgLogo from "../../assets/images/Auction.KPMG_logo_blue.png";
 import kpmgLoginImage from "../../assets/images/Auction.png";
 import { useDispatch, useSelector } from "react-redux";
-import { loginStart, loginSuccess } from "../../redux/slices/loginSlice";
+import { loginSuccess } from "../../redux/slices/loginSlice";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");

@@ -10,20 +10,11 @@ import {
   Typography,
 } from "@mui/material";
 import styles from "./Sidebar.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProductsSuccess } from "../../redux/slices/productSlice";
-import { categoriesData, productsData } from "../../jsonData";
+import { useSelector } from "react-redux";
 
 const Sidebar = ({ subCatData, setSubCatData }) => {
   const [openCategories, setOpenCategories] = useState({});
   const [isOpen, setIsOpen] = useState(false);
-
-  const dispatch = useDispatch();
-  const {
-    data: products,
-    loading: productLoading,
-    error: productError,
-  } = useSelector((state) => state.product);
 
   const {
     data: categories,
@@ -38,8 +29,7 @@ const Sidebar = ({ subCatData, setSubCatData }) => {
 
   localStorage.setItem("subCatData", subCatData);
   useEffect(() => {
-    if (subCatData) {
-      const subCatData1 = localStorage.getItem("subCatData");
+    if (subCatData) {      
     }
   }, [subCatData]);
 

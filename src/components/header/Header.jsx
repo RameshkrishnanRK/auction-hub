@@ -14,7 +14,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { logout } from "../../redux/slices/loginSlice";
-import { FormControl, Input, InputAdornment, InputLabel } from "@mui/material";
 import { useLocation } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
