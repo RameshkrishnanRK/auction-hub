@@ -1,12 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { products } from "../../jsonData";
-
-const initialState = {
-  data: [],
-  loading: false,
-  error: null,
-  success: false,
-};
 
 const sideBarSlice = createSlice({
   name: "sidebar",

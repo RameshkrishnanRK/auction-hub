@@ -1,13 +1,8 @@
 import React from "react";
-import { Box, Typography, Container, Breadcrumbs } from "@mui/material";
-import { styled } from "@mui/system";
+import { Box, Typography, Breadcrumbs } from "@mui/material";
 import styles from "./AboutUs.module.scss";
 import Layout from "../../routing/components/Layout";
 import { Link } from "react-router-dom";
-
-const ContentContainer = styled(Container)({
-  flex: "1",
-});
 
 const About = () => {
   return (

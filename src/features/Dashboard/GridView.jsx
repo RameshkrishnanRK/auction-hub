@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from "react";
 import ProductGridView from "../../utils/ProductGridView";
-import styles from "./GridView.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchProductsFailure,
-  fetchProductsStart,
-  fetchProductsSuccess,
-} from "../../redux/slices/productSlice";
+import { useSelector } from "react-redux";
 import { Grid } from "@mui/material";
-import { categoriesData, regionsData } from "../../jsonData";
+import { useLocation } from 'react-router-dom'
+import {  Button, Card, CardContent, CardMedia, Typography } from '@mui/material';
+import Styles from '../../utils/ProductGridView.module.scss'
+import house from "../../assets/images/house.jpg"
+import car from "../../assets/images/car.jpg"
+import laptop from "../../assets/images/laptop.jpg"
+
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+};
 
 const GridView = ({subCatData, searchTerm, status, filter, sortData }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
-  
     
-  
-
   const {
-    data: products,
-    loading: productLoading,
-    error: productError,
+    data: products,  
   } = useSelector((state) => state.product);
 
   const getTimeValue = (timeVal) => {
@@ -52,14 +50,12 @@ useEffect(() => {
 
       const matchTermFilter =
         product.title?.toLowerCase()?.includes(searchTerm?.toLowerCase()) ||
-        searchTerm == (null || "");
-      return matchStatusFilter && matchTypeFilter && matchTypeSubCat;
+        searchTerm === (null || "");
+      return matchStatusFilter && matchTypeFilter && matchTypeSubCat && matchTermFilter;
     })
     .sort((a, b) => {
       const timeComparison =
-        getTimeValue(a.timeRemaining) - getTimeValue(b.timeRemaining);
-      const nameComparison = a.title.localeCompare(b.title);
-
+        getTimeValue(a.timeRemaining) - getTimeValue(b.timeRemaining);    
 
       if (timeComparison === 0) {
         
@@ -85,14 +81,56 @@ useEffect(() => {
     setFilteredProducts(filtered);
   }, [products, subCatData, searchTerm, status, filter, sortData]); 
 
-  
+  const query = useQuery();
+  const title = query.get("title");
+  const description = query.get("description");
+  let  image =  house;
+    if( title ) {
+      if (title.toLowerCase().includes('car'))
+        image = car
+      else if (title.toLowerCase().includes('laptop'))
+        image = laptop
+      else
+        image = house
+    }
 
 
   return (
     <>
+    <Grid container spacing={2}>
+      {title && description &&
+        (
+          (
+            <Grid item xs={12} sm={6} md={4}  >
+              <Card className={Styles.productGridWrapper}>
+                <CardMedia
+                  component='img'
+                  height='160'
+                  width='100%'
+                  image={image}
+                  alt={title} />
+                <CardContent>
+                  <Typography variant='h6' component='div' style={{ fontSize: '15px' }} >
+                    {title}
+                  </Typography>
+                  <Typography variant='body2' style={{ fontSize: '12px' }} >
+                    {description}
+                  </Typography>
+                </CardContent>
+                <Button
+                  variant='contained'
+                  className={Styles.quickBidBtn}>
+                  Demo Data
+                </Button>
+              </Card>
+            </Grid>
+          ))
+      }
+    </Grid>
       <Grid container spacing={2}>
-        {filteredProducts.map((product) => (
-          <Grid item xs={12} sm={6} md={4} key={product.id}>
+        {title === null &&        
+        filteredProducts.map((product) => (
+          <Grid item xs={12} sm={6} md={4} mt={2} key={product.id}>
             <ProductGridView
               id={product.id}
               image={product.image}

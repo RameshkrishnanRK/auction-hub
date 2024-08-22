@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import Styles from "./ProductDetails.module.scss";
 import {
   Alert,
@@ -10,10 +10,9 @@ import {
   Divider,
   TextField,
   Typography,
-  Modal,
 } from "@mui/material";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { Slide, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReusableModal from "../../utils/reusableModal";
@@ -24,19 +23,14 @@ const useQuery = () => {
 };
 
 const ProductDetails = () => {
-  const dispatch = useDispatch();
   const query = useQuery();
   const productId = query.get("productId");
 
-  const navigate = useNavigate();
-  const modalRef = useRef(null);
   const [openBidModal, setOpenBidModal] = useState(false);
   const [openOfferModal, setOpenOfferModal] = useState(false);
 
   const {
     data: products,
-    loading: productLoading,
-    error: productError,
   } = useSelector((state) => state.product);
 
   window.history.replaceState(null, "/auction/dashboard");
@@ -51,17 +45,7 @@ const ProductDetails = () => {
   }
 
   const [cleanedFormattedBid, setCleanedFormattedBid] = useState(formattedBid);
-
-  const [addedToWatchList, setAddedToWatchList] = useState(false);
-
-  const cleanedFormattedBidMemo = useMemo(() => {
-    if (formattedBid !== undefined) {
-      setCleanedFormattedBid(formattedBid.replace(/,/g, ""));
-      return formattedBid.replace(/,/g, "");
-    } else {
-      navigate("/auction/dashboard");
-    }
-  }, [formattedBid]);
+  const [addedToWatchList] = useState(false);
 
   const [bidAmount, setBidAmount] = useState("");
   const [offerAmount, setOfferAmount] = useState("");
@@ -90,7 +74,6 @@ const ProductDetails = () => {
 
   const handleBidAmountSubmit = () => {
     let formattedBidValue = Number(cleanedFormattedBid);
-    let inputBidAmount = localStorage.getItem("bidAmount");
     let bidAmountValue = Number(bidAmount);
 
     if (bidAmountValue < formattedBidValue) {
@@ -124,7 +107,6 @@ const ProductDetails = () => {
         backgroundColor: "#009933",
         color: "#ffffff",
       },
-
       transition: Slide,
     });
   };
@@ -145,7 +127,6 @@ const ProductDetails = () => {
         backgroundColor: "#009933",
         color: "#ffffff",
       },
-
       transition: Slide,
     });
   };
@@ -196,17 +177,11 @@ const ProductDetails = () => {
     }
   };
 
-  const handleOutsideClick = (event) => {
-    if (modalRef.current && !modalRef.current.contains(event.target)) {
-      event.stopPropagation();
-    }
-  };
-
   const handleBidModalClose = () => {
     let formattedBid;
     if (product && product?.currentBid !== undefined) {
       formattedBid = Number(product?.currentBid).toLocaleString("en-IN");
-      
+
       setCleanedFormattedBid(formattedBid.replace(/,/g, ""));
       setOpenBidModal(false);
     }
@@ -225,7 +200,6 @@ const ProductDetails = () => {
         backgroundColor: "#009933",
         color: "#ffffff",
       },
-
       transition: Slide,
     });
   };
