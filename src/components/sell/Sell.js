@@ -151,8 +151,8 @@ const Sell = () => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="body2" gutterBottom >
-                                            All fields marked with{" "} 
-                                            <span style={{color: "red"}}>*</span> are required.
+                                            All fields marked with{" "} "
+                                            <span style={{color: "red"}}>*</span>"are required.
                                         </Typography>
                                     </Grid>
                                 </Grid>

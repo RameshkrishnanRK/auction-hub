@@ -8,6 +8,7 @@ import Styles from '../../utils/ProductGridView.module.scss'
 import house from "../../assets/images/house.jpg"
 import car from "../../assets/images/car.jpg"
 import laptop from "../../assets/images/laptop.jpg"
+import styles from "../Dashboard/GridView.module.scss"
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -132,7 +133,8 @@ useEffect(() => {
       }
     </Grid>
       <Grid container spacing={2}>
-        {title === null &&        
+        {filteredProducts.length > 0 ? (
+        title === null &&        
         filteredProducts.map((product) => (
           <Grid item xs={12} sm={6} md={4} mt={2} key={product.id}>
             <ProductGridView
@@ -144,7 +146,13 @@ useEffect(() => {
               isExpired={product.isExpired}
             />
           </Grid>
-        ))}
+        ))
+      ) : (
+        <div className={styles.noResults}>
+          Search not found
+        </div>
+      )}
+      
       </Grid>
     </>
   );
