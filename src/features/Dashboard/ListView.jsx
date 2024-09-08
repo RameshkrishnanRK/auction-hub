@@ -34,9 +34,9 @@ const ListView = ({ subCatData, subRegData, searchTerm, status, filter, sortData
             ? product.subCatType === subCatData || subCatData === "all"
             : true;
         const matchTypeSubReg =
-            subRegData && subRegData.length > 0
-              ? product.subregion === subRegData || subRegData === "all"
-              : true; 
+          subRegData && subRegData.length > 0
+            ? product.subregion === subRegData || subRegData === "all"
+            : true;
         const matchTypeFilter =
           filter && filter !== "all"
             ? product.type === filter
@@ -45,7 +45,14 @@ const ListView = ({ subCatData, subRegData, searchTerm, status, filter, sortData
         const matchTermFilter =
           product.title?.toLowerCase()?.includes(searchTerm?.toLowerCase()) ||
           searchTerm === (null || "");
-        return matchStatusFilter && matchTypeFilter && matchTypeSubCat && matchTypeSubReg &&  matchTermFilter;
+
+        return (
+          matchStatusFilter &&
+          matchTypeFilter &&
+          matchTypeSubCat &&
+          matchTypeSubReg &&
+          matchTermFilter
+        );
       })
       .sort((a, b) => {
         const timeComparison =
@@ -77,16 +84,22 @@ const ListView = ({ subCatData, subRegData, searchTerm, status, filter, sortData
 
   return (
     <div className={styles.listViewProducts}>
-      {filteredProducts.map((product) => (
-        <ProductListView
-          id={product.id}
-          image={product.image}
-          title={product.title}
-          currentBid={product.currentBid}
-          timeRemaining={product.timeRemaining}
-          isExpired={product.isExpired}
-        />
-      ))}
+      {filteredProducts.length > 0 ? (
+        filteredProducts.map((product) => (
+          <ProductListView
+            id={product.id}
+            image={product.image}
+            title={product.title}
+            currentBid={product.currentBid}
+            timeRemaining={product.timeRemaining}
+            isExpired={product.isExpired}
+          />
+        ))
+      ) : (
+        <div className={styles.noResults}>
+          Search not found
+        </div>
+      )}
     </div>
   );
 };
