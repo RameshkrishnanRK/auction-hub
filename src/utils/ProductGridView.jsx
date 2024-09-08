@@ -28,7 +28,7 @@ const ProductGridView = ({
   };
 
   const handleBid = () => {
-    const userName = userData && userData.user;
+    // const userName = userData && userData.user;
     if (userData !== null) {
       navigate(`/auction/product-details?productId=${id}`);
     } else {

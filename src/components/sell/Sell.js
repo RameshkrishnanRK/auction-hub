@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
-import { Box, Container, Typography, Button, FormControl, Select, MenuItem, InputLabel, RadioGroup, FormControlLabel, Radio, Grid, OutlinedInput, Breadcrumbs, FormHelperText } from '@mui/material';
+import { Box, Typography, Button, FormControl, Select, MenuItem, InputLabel, RadioGroup, FormControlLabel, Radio, Grid, OutlinedInput, Breadcrumbs } from '@mui/material';
 import { styled } from '@mui/system';
 import styles from './Sell.module.scss'
-import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize';
 import { ChevronLeft } from '@mui/icons-material';
 import { categoriesData, regionsData } from '../../data';
 import Layout from "../../routing/components/Layout";
-import { Link } from 'react-router-dom';
-import { Slide, ToastContainer, toast } from "react-toastify";
+import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const MainContainer = styled(Box)({
@@ -26,61 +25,8 @@ const CustomButton = styled(Button)({
     display: 'block'
 });
 
-const Textarea = styled(BaseTextareaAutosize)(
-    ({ theme }) => `
-    box-sizing: border-box;
-    width: 320px;
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.5;
-    padding: 8px 12px;
-    border-radius: 8px;
-    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
-    background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-    border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
-    box-shadow: 0px 2px 2px ${theme.palette.mode === 'dark' ? grey[900] : grey[50]};
-
-    &:hover {
-      border-color: ${blue[400]};
-    }
-
-    &:focus {
-      border-color: ${blue[400]};
-      box-shadow: 0 0 0 3px ${theme.palette.mode === 'dark' ? blue[600] : blue[200]};
-    }
-
-    // firefox
-    &:focus-visible {
-      outline: 0;
-    }
-  `,
-);
-
-const blue = {
-    100: '#DAECFF',
-    200: '#b6daff',
-    400: '#3399FF',
-    500: '#007FFF',
-    600: '#0072E5',
-    900: '#003A75',
-};
-
-const grey = {
-    50: '#F3F6F9',
-    100: '#E5EAF2',
-    200: '#DAE2ED',
-    300: '#C7D0DD',
-    400: '#B0B8C4',
-    500: '#9DA8B7',
-    600: '#6B7A90',
-    700: '#434D5B',
-    800: '#303740',
-    900: '#1C2025',
-};
-
 const Sell = () => {
-
+    const navigate = useNavigate();
     const [step, setStep] = React.useState(1);
     const [category, setCategory] = React.useState('');
     const [subCategory, setSubCategory] = React.useState('');
@@ -101,12 +47,10 @@ const Sell = () => {
         description: false,
     })
 
-
     useEffect(() => {
         const selectedCategory = categoriesData.filter(data => (data.name === category))
 
         setSubCategoryList(selectedCategory[0]?.subcategories)
-
     }, [category])
 
     const handleCategoryChange = (event) => {
@@ -141,7 +85,7 @@ const Sell = () => {
     const handleNext = () => {
         if (step === 1) {
             if (category && subCategory && listingType && region) {
-               
+
                 setStep(2)
             } else {
                 if (!category) {
@@ -162,22 +106,11 @@ const Sell = () => {
         }
     }
 
-
     const handleCreateListig = () => {
         if (step === 2) {
             if (title && description) {
-                setErrors({})
-                toast.success("Successfully created the listing.", {
-                    position: "top-center",
-                    autoClose: 2000,
-                    style: {
-                        width: '430px',
-                        backgroundColor: '#009933',
-                        color: '#ffffff'
-                    },
-                    
-                    transition: Slide
-                })
+                setErrors({})                
+                navigate(`/auction/dashboard?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`);
             } else {
                 if (!title) {
                     setErrors(prevState => ({ ...prevState, title: true }))
@@ -207,8 +140,8 @@ const Sell = () => {
                             </Breadcrumbs>
                         </Box>
                     </Box>
-                    <MainContainer marginLeft='-5px'>
-                        <Container className={styles.mainContainer} >
+                    <MainContainer marginLeft='2px'>
+                        <div className={styles.mainContainer} >
                             <Box className={styles.title}>
                                 <Grid container justifyContent="space-between" >
                                     <Grid item >
@@ -240,7 +173,6 @@ const Sell = () => {
                                                         <MenuItem value="">
                                                             <em>Select Category</em>
                                                         </MenuItem>
-
                                                         {
                                                             categoriesData.map((data, index) => (
                                                                 <MenuItem value={data.name} key={index}>
@@ -248,8 +180,6 @@ const Sell = () => {
                                                                 </MenuItem>
                                                             ))
                                                         }
-
-
                                                     </Select>
                                                 </FormControl>
                                                 {errors?.category && <div style={{ color: 'red', padding: '3px 5px', marginTop: '-5px', marginLeft: '7px' }}>Category is Required</div>}
@@ -264,14 +194,12 @@ const Sell = () => {
                                                         {subCategoryList && subCategoryList?.length > 0 && subCategoryList.map((data, index) => (
                                                             <MenuItem value={data} key={index}>{data}</MenuItem>
                                                         ))}
-
                                                     </Select>
 
                                                 </FormControl>
                                                 {errors?.category && <div style={{ color: 'red', padding: '3px 5px', marginTop: '-5px' }}>SubCategory is Required</div>}
                                             </Grid>
                                         </Grid>
-
                                     </FormSection>
 
                                     <FormSection className={styles.categoryContainer}>
@@ -370,9 +298,10 @@ const Sell = () => {
                                                             </Typography>
                                                         </Grid>
                                                         <Grid item xs={10} sx={{ paddingRight: '20px' }}>
-                                                            <FormControl sx={{ m: 1, width: '100%' }} variant="outlined">
+                                                            <FormControl sx={{ m: 1, width: '100%', backgroundColor: '#F8F9F9' }} variant="outlined">
                                                                 <OutlinedInput
-                                                                    disabled
+                                                                    value={title} 
+                                                                    disabled                                                                  
                                                                     size='small'
                                                                     id="outlined-adornment-weight"
                                                                     aria-describedby="outlined-weight-helper-text"
@@ -386,14 +315,28 @@ const Sell = () => {
 
                                                     <Grid container alignItems="center" marginTop={'7px'}>
                                                         <Grid item xs={2}>
-                                                            <FormControl error={error.description}>
-                                                                <Typography sx={{ marginBottom: 0, paddingLeft: '62px', textAlign: 'right' }} variant="body1" gutterBottom>
-                                                                    Description <span style={{ color: 'red' }}>*</span> :
-                                                                </Typography>
-                                                            </FormControl>
+                                                        <Typography sx={{ marginBottom: 0, textAlign: 'right' }} variant="body1" gutterBottom>
+                                                        Description <span style={{ color: 'red' }}>*</span> :
+                                                            </Typography>                                                            
                                                         </Grid>
-                                                        <Grid item xs={10} sx={{ paddingLeft: '7px', paddingRight: '10px' }}>
-                                                            <Textarea value={description} onChange={(event) => { handleDescriptionChange(event) }} sx={{ width: '100%' }} aria-label="minimum height" minRows={3} />
+                                                        <Grid item xs={10} sx={{ paddingLeft: '2px', paddingRight: '20px' }}>
+
+                                                            <FormControl error={error?.description} sx={{ m: 1, width: '100%' }} variant="outlined">
+                                                                <OutlinedInput
+                                                                    aria-label="minimum height"
+                                                                    multiline={true}
+                                                                    minRows={3}
+                                                                    error={error?.description}
+                                                                    size='small'
+                                                                    id="outlined-adornment-weight"
+                                                                    aria-describedby="outlined-weight-helper-text"
+                                                                    inputProps={{
+                                                                        'aria-label': 'Title',
+                                                                    }}
+                                                                    value={description}
+                                                                    onChange={(event) => { handleDescriptionChange(event) }}
+                                                                />
+                                                            </FormControl>                                                           
                                                             {errors?.description && <div style={{ color: 'red', padding: '3px 5px', marginTop: '-5px' }}>Description is required</div>}
                                                         </Grid>
                                                     </Grid>
@@ -419,8 +362,7 @@ const Sell = () => {
                                     All Rights Reserved. No part of this web page may be reproduced in any way without the prior written permission of KPMG India.
                                 </Typography>
                             </Box>
-
-                        </Container>
+                        </div>
                         <ToastContainer />
                     </MainContainer>
                 </>

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   Box,
   Typography,
-  Container,
   TextField,
   Button,
   Grid,
@@ -10,32 +9,10 @@ import {
   Alert,
   Breadcrumbs,
 } from "@mui/material";
-import { styled } from "@mui/system";
-import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 import styles from "./ContactUs.module.scss";
 import Layout from "../../routing/components/Layout";
 import { Link } from "react-router-dom";
-
-const ContentContainer = styled(Container)({
-  flex: "1",
-  marginLeft: "30px",
-  marginRight: "30px",
-  padding: "5px",
-});
-
-const Textarea = styled(BaseTextareaAutosize)(
-  () => `
-    box-sizing: border-box;
-    width: 100%;
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.5;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid grey;
-  `
-);
+import { FiRefreshCcw } from "react-icons/fi";
 
 const initialFormState = {
   firstName: "",
@@ -65,8 +42,7 @@ const ContactUs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      // Handle form submission
+    if (validateForm()) {     
       setOpenSnackBar(true);
       setFormState(initialFormState);
       resetCaptcha();
@@ -124,7 +100,7 @@ const ContactUs = () => {
       <div className={styles.mainContainer}>
         <Box mt={8} className={styles.box1}>
           <Typography
-            p={3}
+            p={2}
             className={styles.title}
             marginLeft="15px"
             marginRight="25px"
@@ -207,9 +183,14 @@ const ContactUs = () => {
                     </Typography>
                   </Grid>
                   <Grid item xs={5}>
-                    <Textarea
-                      minRows={3}
+                    <TextField
+                      multiline={true}
+                      minRows={4}
+                      required
+                      id="Message"
                       value={formState.message}
+                      error={Boolean(errors.message)}
+                      helperText={errors.message}
                       onChange={(e) =>
                         setFormState((prevState) => ({
                           ...prevState,
@@ -219,7 +200,7 @@ const ContactUs = () => {
                     />
                   </Grid>
                 </Grid>
-                <Grid container spacing={1} mt={3}>
+                <Grid container spacing={1} >
                   <Grid item xs={2}>
                     <Typography mt={2} className={styles.text}>
                       Captcha
@@ -236,13 +217,15 @@ const ContactUs = () => {
                     />
                   </Grid>
                   <Grid item xs={4} mt={2}>
-                    <Box display="flex" alignItems="center">
-                      <Grid item xs={2}>
-                        <Typography>{captchaCode}</Typography>
-                      </Grid>
-                      <Grid item xs={2}>
-                        <Button onClick={resetCaptcha}>Reset</Button>
-                      </Grid>
+                    <Box display="flex" alignItems="center" >                      
+                        <Button
+                          size="medium"
+                          variant='contained'
+                          className={styles.captchaBtn}
+                          color='primary'>
+                          {captchaCode}
+                        </Button>                     
+                        <Button onClick={resetCaptcha}><FiRefreshCcw size={20}></FiRefreshCcw></Button>                      
                     </Box>
                   </Grid>
                 </Grid>
@@ -260,10 +243,10 @@ const ContactUs = () => {
         open={openSnackBar}
         autoHideDuration={6000}
         onClose={handleCloseSnackBar}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
-        <Alert onClose={handleCloseSnackBar} severity="success">
-          Form Submitted Successfully
+        <Alert onClose={handleCloseSnackBar} variant="filled" severity="success">
+          Thank you for contacting us. we will reach out you shortly
         </Alert>
       </Snackbar>
       <Box className={styles.footer}>

@@ -9,7 +9,6 @@ import {
 import React from "react";
 import styles from "./ProductListView.module.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { green } from "@mui/material/colors";
 import { useSelect } from "@mui/base";
 
 const ProductListView = ({
@@ -26,7 +25,7 @@ const ProductListView = ({
     navigate(`/auction/product-details?productId=${id}`);
   };
   const handleBid = () => {
-    const userName = userData && userData.user;
+    // const userName = userData && userData.user;
     if (userData !== null) {
       navigate(`/auction/product-details?productId=${id}`);
     } else {

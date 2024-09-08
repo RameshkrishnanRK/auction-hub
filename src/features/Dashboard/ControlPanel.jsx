@@ -144,7 +144,7 @@ const ControlPanel = ({ subCatData, searchTerm }) => {
             <InputLabel id="filter-by-by">Filter By</InputLabel>
             <Select
               labelId="filter-by"
-              value={sortData}
+              value={filter}
               label="Filter By"
               onChange={handleFilterChange}
               displayEmpty

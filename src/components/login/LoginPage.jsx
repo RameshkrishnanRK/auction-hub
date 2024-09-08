@@ -13,7 +13,7 @@ import {
 import kpmgLogo from "../../assets/images/Auction.KPMG_logo_blue.png";
 import kpmgLoginImage from "../../assets/images/Auction.png";
 import { useDispatch, useSelector } from "react-redux";
-import { loginStart, loginSuccess } from "../../redux/slices/loginSlice";
+import { loginSuccess } from "../../redux/slices/loginSlice";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -123,17 +123,19 @@ const LoginPage = () => {
                 error={passwordError !== ""}
                 helperText={passwordError}
               />
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems:'center'}}>
                 <FormControlLabel
                   control={
                     <Checkbox
+                      size="small"
                       value={rememberMe}
                       color="primary"
                       onChange={(e) => setRememberMe(e.target.checked)}
                     />
                   }
-                  label="Remember me"
+                  label={<Typography variant="body2">Remember me</Typography>} 
                 />
+                
                 <Link href="#" variant="body2">
                   Forgot password?
                 </Link>

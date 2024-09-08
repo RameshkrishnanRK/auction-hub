@@ -102,7 +102,6 @@ export const productsData = [
     subcategory: "Independent Houses",
     region: "St George",
     subregion: "Subregion 2",
-    subCatType: "Trucks",
     subCatType: "Independent Houses",
   },
   {

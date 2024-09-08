@@ -1,6 +1,5 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import Toolbar from "@mui/material/Toolbar";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";

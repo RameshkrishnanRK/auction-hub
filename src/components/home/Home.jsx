@@ -1,6 +1,6 @@
 import React from "react";
 import Styles from "./Home.module.scss";
-import { Container, Typography, Grid } from "@mui/material"; 
+import { Typography } from "@mui/material"; 
 import Layout from "../../routing/components/Layout";
 
 const Home = () => {

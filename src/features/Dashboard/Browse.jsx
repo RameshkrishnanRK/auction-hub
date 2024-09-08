@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar";
 import styles from "./Browse.module.scss";
 import { categoriesData, regionsData } from "../../jsonData";
 import ControlPanel from "./ControlPanel";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
   fetchSideBarStart,
@@ -19,9 +19,6 @@ import {
 import Layout from "../../routing/components/Layout";
 
 const Browse = () => {
-  const location = useLocation();
-  const pathname = location.pathname;
-  const pathSegments = pathname.split("/").filter((segment) => segment);
   const [searchTerm, setSearchTerm] = useState("");
   const [subCatData, setSubCatData] = useState("");
   const dispatch = useDispatch();
