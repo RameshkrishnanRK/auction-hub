@@ -39,7 +39,7 @@ const About = () => {
               <p>
                 {" "}
                 KPMG Auction Hub is an online platform that facilitates the
-                sale and purchase of a variety of items located in KPMG India. It
+                sale and purchase of a variety of items. It
                 includes Auctions, Fixed Price, and Classified listings and
                 enables multiple vendors to sell on the website.{" "}
               </p>
@@ -53,7 +53,7 @@ const About = () => {
               </p>
 
               <p>
-                We at KPMG have substantial
+                We at KPMG India  have substantial
                 knowledge and experience in many areas. These include
                 Accounting, Finance, Project Management, Procurement, Creating
                 and Managing Financing Structures, Transportation, Retail,
