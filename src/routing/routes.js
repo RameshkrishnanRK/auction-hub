@@ -7,6 +7,7 @@ import Sell from "../components/sell/Sell";
 import LoginPage from "../components/login/LoginPage";
 import ProductDetails from "../features/Dashboard/ProductDetails";
 import Browse from "../features/Dashboard/Browse";
+import Register from "../components/register/Register";
 
 const routes = () => {
   return (
@@ -14,6 +15,7 @@ const routes = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auction/home" element={<Home />} />
+        <Route path="/auction/register" element={<Register />} />
         <Route path="/auction/login" element={<LoginPage />} />
         <Route path="/auction/dashboard" element={<Browse />} />
         <Route path="/auction/about-us" element={<AboutUs />} />

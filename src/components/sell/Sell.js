@@ -151,7 +151,8 @@ const Sell = () => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="body2" gutterBottom >
-                                            All fields marked with "*" are required.
+                                            All fields marked with{" "} 
+                                            <span style={{color: "red"}}>*</span> are required.
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -358,8 +359,8 @@ const Sell = () => {
                             }
 
                             <Box >
-                                <Typography className={styles.footer} >
-                                    All Rights Reserved. No part of this web page may be reproduced in any way without the prior written permission of KPMG India.
+                                <Typography className={styles.footer} fontSize="small" >
+                                © Copyright 2024 KPMG India. All Rights Reserved. No part of this web page may be reproduced in any way without the prior written permission of KPMG India.
                                 </Typography>
                             </Box>
                         </div>

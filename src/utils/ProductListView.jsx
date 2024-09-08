@@ -45,7 +45,7 @@ const ProductListView = ({
       <CardContent className={styles.productListTitle}>
         <Typography variant="h6" component="div" onClick={handleViewDetails}>
           <Link
-            to="/auction/product-details"
+            to={`/auction/product-details?productId=${id}`}
             style={{ textDecoration: "none" }}
           >
             {title}
@@ -97,7 +97,7 @@ const ProductListView = ({
             onClick={handleViewDetails}
           >
             <Link
-              to="/auction/product-details"
+            to={`/auction/product-details?productId=${id}`}
               style={{ textDecoration: "none" }}
             >
               View Details

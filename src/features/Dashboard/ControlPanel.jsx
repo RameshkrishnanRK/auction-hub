@@ -17,7 +17,7 @@ import { filterByOptions, sortOptions } from "../../jsonData";
 import GridView from "./GridView";
 import ListView from "./ListView";
 
-const ControlPanel = ({ subCatData, searchTerm }) => {
+const ControlPanel = ({ subCatData, searchTerm, subRegData }) => {
   const [view, setView] = useState("grid");
   const [status, setStatus] = useState("active");
   const [filter, setFilter] = useState("all");
@@ -141,7 +141,7 @@ const ControlPanel = ({ subCatData, searchTerm }) => {
         </Tabs>
         <Box display="flex" alignItems="center">
           <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-            <InputLabel id="filter-by-by">Filter By</InputLabel>
+            <InputLabel id="filter-by">Filter By</InputLabel>
             <Select
               labelId="filter-by"
               value={filter}
@@ -185,6 +185,7 @@ const ControlPanel = ({ subCatData, searchTerm }) => {
       {view === "grid" ? (
         <GridView
           subCatData={subCatData}
+          subRegData={subRegData}
           searchTerm={searchTerm}
           status={status}
           filter={filter}
@@ -193,6 +194,7 @@ const ControlPanel = ({ subCatData, searchTerm }) => {
       ) : (
         <ListView
           subCatData={subCatData}
+          subRegData={subRegData}
           searchTerm={searchTerm}
           status={status}
           filter={filter}

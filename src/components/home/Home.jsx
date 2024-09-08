@@ -2,8 +2,17 @@ import React from "react";
 import Styles from "./Home.module.scss";
 import { Typography } from "@mui/material"; 
 import Layout from "../../routing/components/Layout";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+  // To  fetch users details from store
+  const userStore = useSelector((state) => state.register.user);
+  console.log('Registered-users from store: ', userStore);
+
+  // To  fetch users details from localstorage
+  const userLocal = localStorage.getItem("user");
+  console.log('Registered-users from local: ', userLocal);
+
   return (
     <>
       <Layout />
@@ -33,11 +42,11 @@ const Home = () => {
           homegoods. Sellers can easily list their items with detailed
           descriptions and photos, attracting bidders with ease. Our real-time
           bidding system adds excitement, keeping you on the edge of your seat
-          as you watcch the count down timers. We prioritize your security with
+          as you watch the count down timers. We prioritize your security with
           top-notch measures to protect your data and transactions. With
           automated bidding options, you can set your maximum bid and let our
           system do the rest. Stay informed with notifications about bid updates
-          and aution reminders. Join our thriving community of buyers and
+          and auction reminders. Join our thriving community of buyers and
           sellers, and discover unbeatable deals and rare finds. Sign up today
           and start your auction adventure with us!
         </Typography>

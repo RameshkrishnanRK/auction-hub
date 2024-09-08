@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import {
@@ -12,8 +12,9 @@ import {
 import styles from "./Sidebar.module.scss";
 import { useSelector } from "react-redux";
 
-const Sidebar = ({ subCatData, setSubCatData }) => {
+const Sidebar = ({ subCatData, setSubCatData, subRegData, setSubRegData }) => {
   const [openCategories, setOpenCategories] = useState({});
+  const [openRegions, setOpenRegions] = useState({});
   const [isOpen, setIsOpen] = useState(false);
 
   const {
@@ -27,12 +28,6 @@ const Sidebar = ({ subCatData, setSubCatData }) => {
     error: regionsError,
   } = useSelector((state) => state.sideBarRegion);
 
-  // localStorage.setItem("subCatData", subCatData);
-  useEffect(() => {
-    if (subCatData) {      
-    }
-  }, [subCatData]);
-
   const handleSubcategoryClick = (event, newView) => {
 
     if (newView !== null) {
@@ -40,10 +35,23 @@ const Sidebar = ({ subCatData, setSubCatData }) => {
     }
   };
 
+  const handleSubRegionClick = (event, newView) => {
+    if (newView !== null) {
+      setSubRegData(newView);
+    }
+  };
+
   const handleCategoryClick = (categoryName) => {
     setOpenCategories((prevOpencategories) => ({
       ...prevOpencategories,
       [categoryName]: !prevOpencategories[categoryName],
+    }));
+  };
+
+  const handleRegionClick = (regionName) => {
+    setOpenRegions((prevOpencategories) => ({
+      ...prevOpencategories,
+      [regionName]: !prevOpencategories[regionName],
     }));
   };
   const toggleMenu = () => {
@@ -158,7 +166,7 @@ const Sidebar = ({ subCatData, setSubCatData }) => {
                                   >
                                     <ListItemText
                                       style={{ cursor: "pointer" }}
-                                      valu={subcategory.name}
+                                      value={subcategory.name}
                                       onClick={(e) =>
                                         handleSubcategoryClick(
                                           e,
@@ -192,13 +200,13 @@ const Sidebar = ({ subCatData, setSubCatData }) => {
                     <div key={index}>
                       <ListItem
                         button
-                        onClick={() => handleCategoryClick(region.name)}
+                        onClick={() => handleRegionClick(region.name)}
                       >
                         <ListItemText
                           primary={`${region.name} (${region.quantity})`}
                         />
                         {region.subregions && region.subregions.length > 0 ? (
-                          openCategories[region.name] ? (
+                          openRegions[region.name] ? (
                             <ExpandLess />
                           ) : (
                             <ExpandMore />
@@ -207,7 +215,7 @@ const Sidebar = ({ subCatData, setSubCatData }) => {
                       </ListItem>
                       {region.subregions && region.subregions.length > 0 && (
                         <Collapse
-                          in={openCategories[region.name]}
+                          in={openRegions[region.name]}
                           timeout="auto"
                           unmountOnExit
                         >
@@ -217,7 +225,17 @@ const Sidebar = ({ subCatData, setSubCatData }) => {
                                 key={subIndex}
                                 className={styles.nested}
                               >
-                                <ListItemText primary={subregion.name} />
+                                <ListItemText
+                                      style={{ cursor: "pointer" }}
+                                      value={subregion.name}
+                                      onClick={(e) =>
+                                        handleSubRegionClick(
+                                          e,
+                                          subregion.name,
+                                        )
+                                      }
+                                      primary={subregion.name}
+                                    />
                               </ListItem>
                             ))}
                           </List>

@@ -29,22 +29,31 @@ const ProductDetails = () => {
   const [openBidModal, setOpenBidModal] = useState(false);
   const [openOfferModal, setOpenOfferModal] = useState(false);
 
-  const {
-    data: products,
-  } = useSelector((state) => state.product);
+  const { data: products } = useSelector((state) => state.product);
 
   window.history.replaceState(null, "/auction/dashboard");
 
-  const product =
-    products.length > 0 &&
-    products.find((product) => product?.id === parseInt(productId));
+  // let product;
+  // useEffect(() => {
+  // if(products && products.length > 0) {
+  // product = products.find((product) => product?.id === parseInt(productId));
+  // }
+  //     console.log('product: ', product);
+  //     console.log('products: ', products);
+  //     console.log('productId: ', productId);
+  // }, [products, productId]);
 
-  let formattedBid;
+  const product =
+      products.length > 0 &&
+      products.find((product) => product?.id === parseInt(productId));
+
+  let formattedBid = 0;
   if (product && product?.currentBid !== undefined) {
     formattedBid = Number(product?.currentBid).toLocaleString("en-IN");
+    console.log('formattedBid: ', formattedBid);
   }
 
-  const [cleanedFormattedBid, setCleanedFormattedBid] = useState(formattedBid);
+  const [cleanedFormattedBid, setCleanedFormattedBid] = useState(product?.currentBid || 0);
   const [addedToWatchList] = useState(false);
 
   const [bidAmount, setBidAmount] = useState("");
@@ -73,10 +82,10 @@ const ProductDetails = () => {
   };
 
   const handleBidAmountSubmit = () => {
-    let formattedBidValue = Number(cleanedFormattedBid);
-    let bidAmountValue = Number(bidAmount);
+    let formattedBidValue = Number(cleanedFormattedBid) || 0;
+    let bidAmountValue = Number(bidAmount) || 0;
 
-    if (bidAmountValue < formattedBidValue) {
+    if (bidAmountValue === 0 || bidAmountValue < formattedBidValue) {
       toast.error("Bid Amount Cannot be lesser than Current Bid", {
         position: "top-center",
         autoClose: 3000,
@@ -358,10 +367,7 @@ const ProductDetails = () => {
                     </span>{" "}
                     <hr style={{ border: "0", borderTop: "1px solid #000" }} />
                   </Typography>
-                  <Button
-                    className={Styles.buyNowBtn}
-                    onClick={handleBuyNow}
-                  >
+                  <Button className={Styles.buyNowBtn} onClick={handleBuyNow}>
                     Buy Now ₹520,000.00
                   </Button>
                   <Typography variant="body2" className={Styles.orText}>

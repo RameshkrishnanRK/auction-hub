@@ -3,7 +3,7 @@ import ProductListView from "../../utils/ProductListView";
 import styles from "./ListView.module.scss";
 import { useSelector } from "react-redux";
 
-const ListView = ({ subCatData, searchTerm, status, filter, sortData }) => {
+const ListView = ({ subCatData, subRegData, searchTerm, status, filter, sortData }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   // const dispatch = useDispatch();
@@ -33,7 +33,10 @@ const ListView = ({ subCatData, searchTerm, status, filter, sortData }) => {
           subCatData && subCatData.length > 0
             ? product.subCatType === subCatData || subCatData === "all"
             : true;
-
+        const matchTypeSubReg =
+            subRegData && subRegData.length > 0
+              ? product.subregion === subRegData || subRegData === "all"
+              : true; 
         const matchTypeFilter =
           filter && filter !== "all"
             ? product.type === filter
@@ -42,7 +45,7 @@ const ListView = ({ subCatData, searchTerm, status, filter, sortData }) => {
         const matchTermFilter =
           product.title?.toLowerCase()?.includes(searchTerm?.toLowerCase()) ||
           searchTerm === (null || "");
-        return matchStatusFilter && matchTypeFilter && matchTypeSubCat && matchTermFilter;
+        return matchStatusFilter && matchTypeFilter && matchTypeSubCat && matchTypeSubReg &&  matchTermFilter;
       })
       .sort((a, b) => {
         const timeComparison =
@@ -69,7 +72,7 @@ const ListView = ({ subCatData, searchTerm, status, filter, sortData }) => {
         return sortData === "title-a-to-z" ? -timeComparison : timeComparison;
       });
     setFilteredProducts(filtered);
-  }, [products, subCatData, searchTerm, status, filter, sortData]);
+  }, [products, subCatData,subRegData, searchTerm, status, filter, sortData]);
 
 
   return (
