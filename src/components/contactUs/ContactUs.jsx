@@ -230,7 +230,7 @@ const ContactUs = () => {
                     </Box>
                   </Grid>
                 </Grid>
-                <Box display="flex" justifyContent="flex-end" mt={2}>
+                <Box display="flex" justifyContent="center" mt={2}>
                   <Button type="submit" variant="contained" color="primary">
                     Send
                   </Button>

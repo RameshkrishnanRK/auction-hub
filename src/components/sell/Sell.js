@@ -244,8 +244,7 @@ const Sell = () => {
                                             {errors?.region && <div style={{ color: 'red', padding: '3px 5px' }}>Region is required.</div>}
                                         </FormControl>
                                     </FormSection>
-
-                                    <Box className={styles.title}>
+                                    <Box className={styles.title} sx={{display: 'flex', justifyContent: "center"}} >
                                         <CustomButton variant="contained" color="primary" onClick={handleNext}>
                                             Next
                                         </CustomButton>
@@ -346,14 +345,17 @@ const Sell = () => {
                                         </Grid>
                                     </FormSection>
 
-                                    <Box className={styles.title} sx={{ display: 'flex' }}>
+                                    <Box  className={styles.title} sx={{ display: 'flex', justifyContent: 'space-between' , alignItems: 'center', mt:2}}>
                                         <Button onClick={() => { setStep(1) }} startIcon={<ChevronLeft />}>
                                             Back
                                         </Button>
-                                        <Button variant='outlined' sx={{ mx: 5 }}>Save Draft</Button>
-                                        <CustomButton variant="contained" color="primary" onClick={handleCreateListig}>
+                                        <Box  sx={{ display: 'flex', justifyContent: 'center' , display: 'flex', flexGrow: 1}}>
+                                        {/* <Button variant='outlined' sx={{ mx: 5 }}>Save Draft</Button> */}
+                                        <CustomButton variant="contained" color="primary" onClick={handleCreateListig} className='jus'>
+                                            
                                             Create Listing
                                         </CustomButton>
+                                        </Box>
                                     </Box>
                                 </>
                             }
