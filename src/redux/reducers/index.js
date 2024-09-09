@@ -4,6 +4,7 @@ import sideBarReducer from "../slices/sideBarCategorySlice";
 import contactReducer from "../slices/contactSlice";
 import sideBarRegionReducer from "../slices/sideBarRegionSlice";
 import loginReducer from "../slices/loginSlice";
+import registerReducer from "../slices/registerSlice";
 
 const rootReducer = combineReducers({
   product: productReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   contact: contactReducer,
   sideBarRegion: sideBarRegionReducer,
   login: loginReducer,
+  register: registerReducer,
 });
 
 export default rootReducer;

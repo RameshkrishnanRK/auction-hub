@@ -8,12 +8,13 @@ import Styles from '../../utils/ProductGridView.module.scss'
 import house from "../../assets/images/house.jpg"
 import car from "../../assets/images/car.jpg"
 import laptop from "../../assets/images/laptop.jpg"
+import styles from "../Dashboard/GridView.module.scss"
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
 
-const GridView = ({subCatData, searchTerm, status, filter, sortData }) => {
+const GridView = ({subCatData, subRegData, searchTerm, status, filter, sortData }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
     
   const {
@@ -43,6 +44,10 @@ useEffect(() => {
       subCatData && subCatData.length > 0
         ? product.subCatType === subCatData || subCatData === "all"
         : true; 
+        const matchTypeSubReg =
+        subRegData && subRegData.length > 0
+          ? product.subregion === subRegData || subRegData === "all"
+          : true; 
     const matchTypeFilter =
       filter && filter !== "all"
         ? product.type === filter
@@ -51,7 +56,7 @@ useEffect(() => {
       const matchTermFilter =
         product.title?.toLowerCase()?.includes(searchTerm?.toLowerCase()) ||
         searchTerm === (null || "");
-      return matchStatusFilter && matchTypeFilter && matchTypeSubCat && matchTermFilter;
+      return matchStatusFilter && matchTypeFilter && matchTypeSubCat && matchTypeSubReg && matchTermFilter;
     })
     .sort((a, b) => {
       const timeComparison =
@@ -79,7 +84,7 @@ useEffect(() => {
       return sortData === "title-a-to-z" ? -timeComparison : timeComparison;
     });
     setFilteredProducts(filtered);
-  }, [products, subCatData, searchTerm, status, filter, sortData]); 
+  }, [products, subCatData, subRegData, searchTerm, status, filter, sortData]); 
 
   const query = useQuery();
   const title = query.get("title");
@@ -128,7 +133,8 @@ useEffect(() => {
       }
     </Grid>
       <Grid container spacing={2}>
-        {title === null &&        
+        {filteredProducts.length > 0 ? (
+        title === null &&        
         filteredProducts.map((product) => (
           <Grid item xs={12} sm={6} md={4} mt={2} key={product.id}>
             <ProductGridView
@@ -140,7 +146,13 @@ useEffect(() => {
               isExpired={product.isExpired}
             />
           </Grid>
-        ))}
+        ))
+      ) : (
+        <div className={styles.noResults}>
+          Search not found
+        </div>
+      )}
+      
       </Grid>
     </>
   );

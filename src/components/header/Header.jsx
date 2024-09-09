@@ -117,6 +117,9 @@ export default function Header({ setSearchTerm }) {
             </>
           ) : (
             <>
+            <Button color="inherit" className={styles.link}>
+                <Link to="/auction/register">Register</Link>
+              </Button>
               <Button color="inherit" className={styles.link}>
                 <Link to="/auction/login">Login</Link>
               </Button>

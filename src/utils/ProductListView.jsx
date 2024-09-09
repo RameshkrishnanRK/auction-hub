@@ -9,7 +9,6 @@ import {
 import React from "react";
 import styles from "./ProductListView.module.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { green } from "@mui/material/colors";
 import { useSelect } from "@mui/base";
 
 const ProductListView = ({
@@ -26,7 +25,7 @@ const ProductListView = ({
     navigate(`/auction/product-details?productId=${id}`);
   };
   const handleBid = () => {
-    const userName = userData && userData.user;
+    // const userName = userData && userData.user;
     if (userData !== null) {
       navigate(`/auction/product-details?productId=${id}`);
     } else {
@@ -46,7 +45,7 @@ const ProductListView = ({
       <CardContent className={styles.productListTitle}>
         <Typography variant="h6" component="div" onClick={handleViewDetails}>
           <Link
-            to="/auction/product-details"
+            to={`/auction/product-details?productId=${id}`}
             style={{ textDecoration: "none" }}
           >
             {title}
@@ -98,7 +97,7 @@ const ProductListView = ({
             onClick={handleViewDetails}
           >
             <Link
-              to="/auction/product-details"
+            to={`/auction/product-details?productId=${id}`}
               style={{ textDecoration: "none" }}
             >
               View Details

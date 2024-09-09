@@ -114,7 +114,8 @@ const ContactUs = () => {
                 gutterBottom
                 className={styles.disclaimer}
               >
-                All fields marked with "*" are required.
+                All fields marked with{" "} 
+                <span style={{color: "red"}}>*</span> are required.
               </Typography>
               <Box
                 component="form"
@@ -229,7 +230,7 @@ const ContactUs = () => {
                     </Box>
                   </Grid>
                 </Grid>
-                <Box display="flex" justifyContent="flex-end" mt={2}>
+                <Box display="flex" justifyContent="center" mt={2}>
                   <Button type="submit" variant="contained" color="primary">
                     Send
                   </Button>
@@ -251,8 +252,7 @@ const ContactUs = () => {
       </Snackbar>
       <Box className={styles.footer}>
         <Typography className={styles.footerText} fontSize="small">
-          All Rights Reserved. No part of this web page may be reproduced in any
-          way without the prior written permission of KPMG India.
+        © Copyright 2024 KPMG India. All Rights Reserved. No part of this web page may be reproduced in any way without the prior written permission of KPMG India.
         </Typography>
       </Box>
     </div>

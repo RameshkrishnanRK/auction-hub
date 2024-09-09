@@ -21,6 +21,8 @@ import Layout from "../../routing/components/Layout";
 const Browse = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [subCatData, setSubCatData] = useState("");
+  const [subRegData, setSubRegData] = useState("");
+
   const dispatch = useDispatch();
 
 
@@ -65,10 +67,10 @@ const Browse = () => {
           </Box>
           <Grid container spacing={3}>
             <Grid item xs={3}>
-              <Sidebar  subCatData={subCatData} setSubCatData={setSubCatData}/>
+              <Sidebar  subCatData={subCatData} setSubCatData={setSubCatData} subRegData={subRegData} setSubRegData={setSubRegData}/>
             </Grid>
             <Grid item xs={9}>
-              <ControlPanel searchTerm={searchTerm} subCatData={subCatData} />
+              <ControlPanel searchTerm={searchTerm} subCatData={subCatData} subRegData={subRegData} />
             </Grid>
           </Grid>
         </Box>

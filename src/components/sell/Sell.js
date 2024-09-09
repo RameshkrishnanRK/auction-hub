@@ -151,7 +151,8 @@ const Sell = () => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="body2" gutterBottom >
-                                            All fields marked with "*" are required.
+                                            All fields marked with{" "} "
+                                            <span style={{color: "red"}}>*</span>"are required.
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -243,8 +244,7 @@ const Sell = () => {
                                             {errors?.region && <div style={{ color: 'red', padding: '3px 5px' }}>Region is required.</div>}
                                         </FormControl>
                                     </FormSection>
-
-                                    <Box className={styles.title}>
+                                    <Box className={styles.title} sx={{display: 'flex', justifyContent: "center"}} >
                                         <CustomButton variant="contained" color="primary" onClick={handleNext}>
                                             Next
                                         </CustomButton>
@@ -345,21 +345,24 @@ const Sell = () => {
                                         </Grid>
                                     </FormSection>
 
-                                    <Box className={styles.title} sx={{ display: 'flex' }}>
+                                    <Box  className={styles.title} sx={{ display: 'flex', justifyContent: 'space-between' , alignItems: 'center', mt:2}}>
                                         <Button onClick={() => { setStep(1) }} startIcon={<ChevronLeft />}>
                                             Back
                                         </Button>
-                                        <Button variant='outlined' sx={{ mx: 5 }}>Save Draft</Button>
-                                        <CustomButton variant="contained" color="primary" onClick={handleCreateListig}>
+                                        <Box  sx={{ display: 'flex', justifyContent: 'center' , display: 'flex', flexGrow: 1}}>
+                                        {/* <Button variant='outlined' sx={{ mx: 5 }}>Save Draft</Button> */}
+                                        <CustomButton variant="contained" color="primary" onClick={handleCreateListig} className='jus'>
+                                            
                                             Create Listing
                                         </CustomButton>
+                                        </Box>
                                     </Box>
                                 </>
                             }
 
                             <Box >
-                                <Typography className={styles.footer} >
-                                    All Rights Reserved. No part of this web page may be reproduced in any way without the prior written permission of KPMG India.
+                                <Typography className={styles.footer} fontSize="small" >
+                                © Copyright 2024 KPMG India. All Rights Reserved. No part of this web page may be reproduced in any way without the prior written permission of KPMG India.
                                 </Typography>
                             </Box>
                         </div>

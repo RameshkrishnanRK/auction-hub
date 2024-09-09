@@ -38,37 +38,33 @@ const About = () => {
             >
               <p>
                 {" "}
-                Barbados Auctions is an online platform that facilitates the
-                sale and purchase of a variety of items located in Barbados. It
+                KPMG Auction Hub is an online platform that facilitates the
+                sale and purchase of a variety of items. It
                 includes Auctions, Fixed Price, and Classified listings and
                 enables multiple vendors to sell on the website.{" "}
               </p>
 
               <p>
-                The major objective of Barbados Auctions is to provide a
+                The major objective of KPMG India's  Auction Hub Platform is to provide a
                 mechanism to enable businesses and individuals to use
                 Information and Communications Technology to efficiently conduct
                 business. It is part of the efforts aimed to improve our global
-                competitiveness where we are cited as being very slow at doing
-                business in Barbados.
+                competitiveness.
               </p>
 
               <p>
-                Ian Collymore, the sponsor of the website has substantial
+                We at KPMG India  have substantial
                 knowledge and experience in many areas. These include
                 Accounting, Finance, Project Management, Procurement, Creating
                 and Managing Financing Structures, Transportation, Retail,
-                Importation, Real Estate and Electronic Commerce. This is in
-                addition to post graduate qualifications in Electronic Commerce.
+                Importation, Real Estate and Electronic Commerce.
               </p>
             </Typography>
           </Box>
         </Box>
       </div>
       <Typography className={styles.footer} fontSize="13px">
-        © Copyright 2023 http://barbadosauctions.com. All Rights Reserved. No
-        part of this web page may be reproduced in any way without the prior
-        written permission of http://barbadosauctions.com.
+      © Copyright 2024 KPMG India. All Rights Reserved. No part of this web page may be reproduced in any way without the prior written permission of KPMG India.
       </Typography>
     </div>
   );
