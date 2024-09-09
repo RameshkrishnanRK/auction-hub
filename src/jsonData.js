@@ -130,8 +130,8 @@ export const productsData = [
     type: "classified",
     category: "Automobiles",
     subcategory: "Cars",
-    region: "St Thomas",
-    subregion: "Subregion 3",
+    region: "Region A",
+    subregion: "Subregion 2",
     subCatType: "Cars",
   },
   {
@@ -145,7 +145,7 @@ export const productsData = [
     type: "auction",
     category: "Automobiles",
     subcategory: "Cars",
-    region: "Christ Church",
+    region: "Region B",
     subregion: "Subregion 4",
   },
   {
