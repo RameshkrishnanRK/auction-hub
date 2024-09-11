@@ -156,6 +156,17 @@ const ProductDetails = () => {
           },
           transition: Slide,
         });
+      } else if (offerAmountValue >= product.buyNow) {
+        toast.error("Offer Amount Cannot exceed the Buy Now Price", {
+          position: "top-center",
+          autoClose: 3000,
+          style: {
+            width: "430px",
+            backgroundColor: "#DC2020",
+            color: "#ffffff",
+          },
+          transition: Slide,
+        });
       } else {
         setCleanedFormattedBid(offerAmountValue);
         setOpenOfferModal(false);
@@ -368,7 +379,7 @@ const ProductDetails = () => {
                     <hr style={{ border: "0", borderTop: "1px solid #000" }} />
                   </Typography>
                   <Button className={Styles.buyNowBtn} onClick={handleBuyNow}>
-                    Buy Now ₹520,000.00
+                    Buy Now ₹ {product.buyNow}
                   </Button>
                   <Typography variant="body2" className={Styles.orText}>
                     <hr style={{ border: "1px solid grey", width: "200" }} />
