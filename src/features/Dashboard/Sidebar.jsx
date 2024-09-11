@@ -9,10 +9,7 @@ import {
   Paper,
   Typography,
 <<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of 0cf4980 (Changes suggested in Demo)
   FormControlLabel,
   Checkbox,
 =======
@@ -22,7 +19,7 @@ import {
 import styles from "./Sidebar.module.scss";
 import { useSelector } from "react-redux";
 
-const Sidebar = ({ subCatData, setSubCatData, subRegData, setSubRegData }) => {
+const Sidebar = ({  setSubCatData,  setSubRegData }) => {
   const [openCategories, setOpenCategories] = useState({});
   const [openRegions, setOpenRegions] = useState({});
   const [view, setView] = useState("main"); // "main", "subcategory", or "subregion"
@@ -41,7 +38,6 @@ const Sidebar = ({ subCatData, setSubCatData, subRegData, setSubRegData }) => {
     error: regionsError,
   } = useSelector((state) => state.sideBarRegion);
 
-<<<<<<< HEAD
 <<<<<<< HEAD
   // const handleSubcategoryClick = (subcategory) => {
   //   const updatedSubcategories = [...selectedSubcategories];
@@ -84,52 +80,21 @@ const Sidebar = ({ subCatData, setSubCatData, subRegData, setSubRegData }) => {
     setView("subregion");
   };
 >>>>>>> parent of fc8bc4a (created skelton profile for bidder/auctioneer , modified login page accordingly,Added Styling to Product Detail page, Checkbox to subcategory and sub region, makeoffer conditioned, dynamic buyNow)
-=======
-  const handleSubcategoryClick = (subcategory) => {
-    const updatedSubcategories = [...selectedSubcategories];
-    if (updatedSubcategories.includes(subcategory)) {
-      const index = updatedSubcategories.indexOf(subcategory);
-      updatedSubcategories.splice(index, 1);
-    } else {
-      updatedSubcategories.push(subcategory);
-    }
-    setSelectedSubcategories(updatedSubcategories);
-    setSubCatData(updatedSubcategories);
-    // setSubCatData(subcategory);
-    // setSelectedCategory(subcategory);
-    // setView("subcategory");
-  };
 
-  const handleSubRegionClick = (subregion) => {
-    const updatedSubregions = [...selectedSubregions];
-    if (updatedSubregions.includes(subregion)) {
-      const index = updatedSubregions.indexOf(subregion);
-      updatedSubregions.splice(index, 1);
-    } else {
-      updatedSubregions.push(subregion);
-    }
-    setSelectedSubregions(updatedSubregions);
-    setSubRegData(updatedSubregions);
-    // setSelectedRegion(subregion);
-    // setView("subregion");
-  };
->>>>>>> parent of 0cf4980 (Changes suggested in Demo)
-
-  const handleCategoryClick = (categoryName) => {
-    setOpenCategories((prevOpenCategories) => ({
-      ...prevOpenCategories,
-      [categoryName]: !prevOpenCategories[categoryName],
+  const handleCategoryClick = (category) => {
+    setOpenCategories((prevState) => ({
+      ...prevState,
+      [category]: !prevState[category],
     }));
   };
 
-  const handleRegionClick = (regionName) => {
-    setOpenRegions((prevOpenRegions) => ({
-      ...prevOpenRegions,
-      [regionName]: !prevOpenRegions[regionName],
+  const handleRegionClick = (region) => {
+    setOpenRegions((prevState) => ({
+      ...prevState,
+      [region]: !prevState[region],
     }));
   };
 
-<<<<<<< HEAD
 <<<<<<< HEAD
   const handleSubcategoryChange =(subcategory) => {
     const updatedSubcategories= selectedSubcategories.includes(subcategory)
@@ -146,8 +111,6 @@ const Sidebar = ({ subCatData, setSubCatData, subRegData, setSubRegData }) => {
       setSelectedSubregions(updatedSubregions);
       setSubCatData(updatedSubregions);    
   };
-=======
->>>>>>> parent of 0cf4980 (Changes suggested in Demo)
   // const toggleMenu = () => {
   //   setIsOpen(!isOpen);
   // };
@@ -199,10 +162,10 @@ const Sidebar = ({ subCatData, setSubCatData, subRegData, setSubRegData }) => {
                                   control={
                                     <Checkbox
                                       checked={selectedSubcategories.includes(
-                                        subcategory.name,
+                                        subcategory.name
                                       )}
                                       onChange={() =>
-                                        handleSubcategoryClick(subcategory.name)
+                                        handleSubcategoryChange(subcategory.name)
                                       }
                                     />
                                   }
@@ -262,7 +225,7 @@ const Sidebar = ({ subCatData, setSubCatData, subRegData, setSubRegData }) => {
                                     subregion.name,
                                   )}
                                   onChange={() =>
-                                    handleSubRegionClick(subregion.name)
+                                    handleSubregionChange(subregion.name)
                                   }
                                 />
                               }

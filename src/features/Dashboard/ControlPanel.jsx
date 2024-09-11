@@ -10,18 +10,20 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ListIcon from "@mui/icons-material/List";
 import styles from "./ControlPanel.scss";
 import { filterByOptions, sortOptions } from "../../jsonData";
 import GridView from "./GridView";
 import ListView from "./ListView";
+import filteredProducts from '../Dashboard/Browse'
 
-const ControlPanel = ({ subCatData, searchTerm, subRegData }) => {
+const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilteredProducts}) => {
   const [view, setView] = useState("grid");
   const [status, setStatus] = useState("active");
   const [filter, setFilter] = useState("all");
   const [sortData, setSortData] = useState("");
+
 
   const handleViewChange = (event, newView) => {
     if (newView !== null) {
@@ -40,6 +42,33 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData }) => {
   const handleSortChange = (event) => {
     setSortData(event.target.value);
   };
+  useEffect(()=> {
+    let filtered = products;
+    if ( subCatData.length >0) {
+      filtered = filtered.filter((product)=>
+      subCatData.includes(product.subCatType));
+    }
+    if (subRegData.length >0){
+      filtered = filtered.filter ((product)=>
+      subRegData.includes(product.subRegType));
+    }
+    // if (status){
+    //   filtered = filtered.filter((product)=> product.status === status);
+    // }
+    // if (filter !== "all"){
+    //   filtered = filtered.filter ((product)=>product.type === filter);
+    // }
+    // if (sortData === "price-lowest"){
+    //   filtered = filtered.sort((a,b) => a.currentBid - b.currentBid);
+    // } else if (sortData === "price-highest"){
+    //   filtered = filtered.sort((a,b) => b.currentBid - a.currentBid);
+    // } else if (sortData === "title-a-to-z") {
+    //   filtered = filtered.sort ((a,b)=> a.title.localCompare(b.title));
+    // } else if (sortData === "title-z-to-a"){
+    //   filtered = filtered.sort((a,b)=> b.title.localeCompare(a.title));
+    // }
+    setFilteredProducts(filtered);
+  }, [subCatData, subRegData, products, setFilteredProducts]);
   return (
     <div>
       <Box
@@ -184,6 +213,7 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData }) => {
       </Box>
       {view === "grid" ? (
         <GridView
+        products={filteredProducts}
           subCatData={subCatData}
           subRegData={subRegData}
           searchTerm={searchTerm}
@@ -193,6 +223,7 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData }) => {
         />
       ) : (
         <ListView
+        products={filteredProducts}
           subCatData={subCatData}
           subRegData={subRegData}
           searchTerm={searchTerm}
