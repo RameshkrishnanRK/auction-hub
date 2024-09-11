@@ -9,6 +9,10 @@ import {
   Checkbox,
   Button,
   Link,
+  InputLabel,
+  Select,
+  FormControl,
+  MenuItem,
 } from "@mui/material";
 import kpmgLogo from "../../assets/images/Auction.KPMG_logo_blue.png";
 import kpmgLoginImage from "../../assets/images/Auction.png";
@@ -21,7 +25,8 @@ const LoginPage = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-
+  const [role, setRole] = useState("");
+  const [roleError, setRoleError] = useState("");
   const dispatch = useDispatch();
 
   useSelector((state) => state.login);
@@ -46,6 +51,12 @@ const LoginPage = () => {
       valid = false;
     } else {
       setPasswordError("");
+    }
+    if (role === "") {
+      setRoleError("Please select a role");
+      valid = false;
+    } else {
+      setRoleError("");
     }
 
     if (!valid) {
@@ -123,6 +134,35 @@ const LoginPage = () => {
                 error={passwordError !== ""}
                 helperText={passwordError}
               />
+              <FormControl
+                variant="standard"
+                fullWidth
+                margin="normal"
+                error={roleError !== ""}
+              >
+                <InputLabel id="role-label">Select Role</InputLabel>
+                <Select
+                  labelId="role-label"
+                  id="role"
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+                >
+                  <MenuItem value="bidder">Bidder</MenuItem>
+                  <MenuItem value="Auctioneer">Auctioneer</MenuItem>
+                </Select>
+                {roleError && (
+                  <Typography variant="body2" color="error">
+                    {roleError}
+                  </Typography>
+                )}
+              </FormControl>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              ></div>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems:'center'}}>
                 <FormControlLabel
                   control={
