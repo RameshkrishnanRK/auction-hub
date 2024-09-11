@@ -349,7 +349,7 @@ const Sell = () => {
                                         <Button onClick={() => { setStep(1) }} startIcon={<ChevronLeft />}>
                                             Back
                                         </Button>
-                                        <Box  sx={{ display: 'flex', justifyContent: 'center' , display: 'flex', flexGrow: 1}}>
+                                        <Box  sx={{ display: 'flex', justifyContent: 'center' , flexGrow: 1}}>
                                         {/* <Button variant='outlined' sx={{ mx: 5 }}>Save Draft</Button> */}
                                         <CustomButton variant="contained" color="primary" onClick={handleCreateListig} className='jus'>
                                             
