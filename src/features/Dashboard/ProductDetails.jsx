@@ -31,18 +31,7 @@ const ProductDetails = () => {
 
   const { data: products } = useSelector((state) => state.product);
 
-  window.history.replaceState(null, "/auction/dashboard");
-
-  // let product;
-  // useEffect(() => {
-  // if(products && products.length > 0) {
-  // product = products.find((product) => product?.id === parseInt(productId));
-  // }
-  //     console.log('product: ', product);
-  //     console.log('products: ', products);
-  //     console.log('productId: ', productId);
-  // }, [products, productId]);
-
+  window.history.replaceState(null, "/auction/dashboard");  
   const product =
       products.length > 0 &&
       products.find((product) => product?.id === parseInt(productId));
@@ -52,7 +41,6 @@ const ProductDetails = () => {
     formattedBid = Number(product?.currentBid).toLocaleString("en-IN");
     console.log('formattedBid: ', formattedBid);
   }
-
   const [cleanedFormattedBid, setCleanedFormattedBid] = useState(product?.currentBid || 0);
   const [addedToWatchList] = useState(false);
 
@@ -147,6 +135,17 @@ const ProductDetails = () => {
 
       if (offerAmountValue <= formattedBidValue) {
         toast.error("Bid Amount Cannot be lesser than Current Bid", {
+          position: "top-center",
+          autoClose: 3000,
+          style: {
+            width: "430px",
+            backgroundColor: "#DC2020",
+            color: "#ffffff",
+          },
+          transition: Slide,
+        });
+      } else if (offerAmountValue >= product.buyNow) {
+        toast.error("Offer Amount Cannot exceed the Buy Now Price", {
           position: "top-center",
           autoClose: 3000,
           style: {
@@ -368,7 +367,7 @@ const ProductDetails = () => {
                     <hr style={{ border: "0", borderTop: "1px solid #000" }} />
                   </Typography>
                   <Button className={Styles.buyNowBtn} onClick={handleBuyNow}>
-                    Buy Now ₹520,000.00
+                   Buy Now ₹{product?.buyNow}
                   </Button>
                   <Typography variant="body2" className={Styles.orText}>
                     <hr style={{ border: "1px solid grey", width: "200" }} />
