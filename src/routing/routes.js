@@ -8,8 +8,6 @@ import LoginPage from "../components/login/LoginPage";
 import ProductDetails from "../features/Dashboard/ProductDetails";
 import Browse from "../features/Dashboard/Browse";
 import Register from "../components/register/Register";
-import BidderDashboard from "../components/login/BidderDashboard";
-import AuctioneerDashboard from "../components/login/AuctioneerDashboard";
 
 const routes = () => {
   return (
@@ -19,8 +17,6 @@ const routes = () => {
         <Route path="/auction/home" element={<Home />} />
         <Route path="/auction/register" element={<Register />} />
         <Route path="/auction/login" element={<LoginPage />} />
-        <Route path="/bidder-dashboard" element={<BidderDashboard />} />
-        <Route path="/auctioneer-dashboard" element={<AuctioneerDashboard />} />
         <Route path="/auction/dashboard" element={<Browse />} />
         <Route path="/auction/about-us" element={<AboutUs />} />
         <Route path="/auction/product-details" element={<ProductDetails />} />
