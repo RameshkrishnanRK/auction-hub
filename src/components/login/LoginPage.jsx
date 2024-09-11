@@ -63,9 +63,8 @@ const LoginPage = () => {
 
     if (role === "Auctioneer") {
       navigate("/auctioneer-dashboard");
-    } else if (role === "bidder") {
-      navigate("/bidder-dashboard");
     } else {
+<<<<<<< HEAD
       navigate("/auction/dashboard");
 =======
     } else {
@@ -74,18 +73,15 @@ const LoginPage = () => {
       }
       dispatch(loginSuccess(userData));
 >>>>>>> parent of fc8bc4a (created skelton profile for bidder/auctioneer , modified login page accordingly,Added Styling to Product Detail page, Checkbox to subcategory and sub region, makeoffer conditioned, dynamic buyNow)
+=======
+      navigate("/bidder-dashboard");
+>>>>>>> parent of 0cf4980 (Changes suggested in Demo)
     }
 
     
 
     navigate("/auction/home");
   };
-  // const handleNavigateHome = () => {
-  //   navigate("/auction/home");
-  // };
-  // const handleNavigateBrowse = () => {
-  //   navigate("/auction/dashboard");
-  // };
 
   return (
     <Container>
@@ -175,24 +171,6 @@ const LoginPage = () => {
                 Login
               </Button>
             </form>
-            {/* <div style={{ marginTop: "20px" }}>
-              <Button
-                variant="outlined"
-                color="secondary"
-                fullWidth
-                onClick={handleNavigateHome}
-              >
-                Go to Home{" "}
-              </Button>
-              <Button
-                variant="outlined"
-                color="secondary"
-                fullWidth
-                onClick={handleNavigateBrowse}
-              >
-                Go to Browse{" "}
-              </Button>
-            </div> */}
           </div>
         </Paper>
       </div>
