@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Box, Typography, Button, FormControl, Select, MenuItem, InputLabel, RadioGroup, FormControlLabel, Radio, Grid, OutlinedInput, Breadcrumbs } from '@mui/material';
+import { Box, Typography, Button, FormControl, Select, MenuItem, InputLabel, RadioGroup, FormControlLabel, Radio, Grid, OutlinedInput, Breadcrumbs, Input } from '@mui/material';
 import { styled } from '@mui/system';
 import styles from './Sell.module.scss'
 import { ChevronLeft } from '@mui/icons-material';
@@ -32,6 +32,8 @@ const Sell = () => {
     const [subCategory, setSubCategory] = React.useState('');
     const [listingType, setListingType] = React.useState('');
     const [region, setRegion] = React.useState('');
+    const [subRegion, setSubRegion] = React.useState('');
+    const [subRegionList, setSubRegionList] = React.useState([]);
     const [subCategoryList, setSubCategoryList] = React.useState([]);
     const [title, setTitle] = React.useState('');
     const [description, setDescription] = React.useState('');
@@ -40,6 +42,7 @@ const Sell = () => {
         subCategory: false,
         listingType: false,
         region: false,
+        subRegion: false,
     });
 
     const [error, setError] = React.useState({
@@ -52,6 +55,13 @@ const Sell = () => {
 
         setSubCategoryList(selectedCategory[0]?.subcategories)
     }, [category])
+
+    useEffect(() => {
+        const selectedRegions = regionsData.filter(data => (data.name === region))
+
+        setSubRegionList(selectedRegions[0]?.subregions)
+        
+    }, [region])
 
     const handleCategoryChange = (event) => {
         setCategory(event.target.value);
@@ -71,6 +81,11 @@ const Sell = () => {
     const handleRegionChange = (event) => {
         setRegion(event.target.value);
         setErrors(prevState => ({ ...prevState, region: false }))
+    };
+
+    const handleSubRegionChange = (event) => {
+        setSubRegion(event.target.value);
+        setErrors(prevState => ({ ...prevState, subRegion: false }))
     };
 
     const handleTitleChange = (event) => {
@@ -109,7 +124,7 @@ const Sell = () => {
     const handleCreateListig = () => {
         if (step === 2) {
             if (title && description) {
-                setErrors({})                
+                setErrors({})
                 navigate(`/auction/dashboard?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`);
             } else {
                 if (!title) {
@@ -123,6 +138,12 @@ const Sell = () => {
         } else {
         }
     }
+
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        console.log(file, "upload")
+        // Process the file
+    };
 
     return (
         <>
@@ -152,7 +173,7 @@ const Sell = () => {
                                     <Grid item>
                                         <Typography variant="body2" gutterBottom >
                                             All fields marked with{" "} "
-                                            <span style={{color: "red"}}>*</span>"are required.
+                                            <span style={{ color: "red" }}>*</span>"are required.
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -231,20 +252,42 @@ const Sell = () => {
                                                 Region<span>*</span>
                                             </Typography>
                                         </Box>
-                                        <FormControl error={errors?.region} fullWidth margin="normal" className={styles.boxStyle}>
-                                            <InputLabel className={styles.boxStyle}>Select Region </InputLabel>
-                                            <Select className={styles.regionSelect} value={region} onChange={handleRegionChange} label="Select Region">
-                                                <MenuItem value="" >
-                                                    <em>Select Region</em>
-                                                </MenuItem>
-                                                {regionsData.map((data, index) => (
-                                                    <MenuItem value={data.name} key={index}>{data.name}</MenuItem>
-                                                ))}
-                                            </Select>
-                                            {errors?.region && <div style={{ color: 'red', padding: '3px 5px' }}>Region is required.</div>}
-                                        </FormControl>
+                                        <Grid container spacing={3}>
+                                            <Grid item xs={4} sm={5}>
+                                                <FormControl error={errors?.region} fullWidth margin="normal" className={styles.boxStyle}>
+                                                    <InputLabel className={styles.boxStyle}>Select Region </InputLabel>
+                                                    <Select className={styles.regionSelect} value={region} onChange={handleRegionChange} label="Select Region">
+                                                        <MenuItem value="" >
+                                                            <em>Select Region</em>
+                                                        </MenuItem>
+                                                        {regionsData.map((data, index) => (
+                                                            <MenuItem value={data.name} key={index}>{data.name}</MenuItem>
+                                                        ))}
+                                                    </Select>
+                                                    {errors?.region && <div style={{ color: 'red', padding: '3px 5px' }}>Region is required.</div>}
+                                                </FormControl>
+                                            </Grid>
+                                            <Grid item xs={4} sm={5}>
+                                                <FormControl error={errors?.region} fullWidth margin="normal" className={styles.boxStyle}>
+                                                    <InputLabel className={styles.boxStyle}>Select SubRegion </InputLabel>
+                                                    <Select className={styles.regionSelect} value={subRegion} onChange={handleSubRegionChange} label="Select SubRegion  ">
+                                                        <MenuItem value="" >
+                                                            <em>Select SubRegion</em>
+                                                        </MenuItem>
+                                            
+                                                        {subRegionList && subRegionList?.length > 0 && subRegionList.map((data, index) => (
+                                                            <MenuItem value={data.name} key={index}>{data.name}</MenuItem>
+                                                        ))}
+                                                    </Select>
+                                                    {errors?.region && <div style={{ color: 'red', padding: '3px 5px' }}>Region is required.</div>}
+                                                </FormControl>
+
+                                            </Grid>
+
+                                        </Grid>
+
                                     </FormSection>
-                                    <Box className={styles.title} sx={{display: 'flex', justifyContent: "center"}} >
+                                    <Box className={styles.title} sx={{ display: 'flex', justifyContent: "center" }} >
                                         <CustomButton variant="contained" color="primary" onClick={handleNext}>
                                             Next
                                         </CustomButton>
@@ -294,14 +337,13 @@ const Sell = () => {
                                                     <Grid container alignItems="center">
                                                         <Grid item xs={2}>
                                                             <Typography sx={{ marginBottom: 0, textAlign: 'right' }} variant="body1" gutterBottom>
-                                                                SubTitle :
+                                                                Price :
                                                             </Typography>
                                                         </Grid>
                                                         <Grid item xs={10} sx={{ paddingRight: '20px' }}>
                                                             <FormControl sx={{ m: 1, width: '100%', backgroundColor: '#F8F9F9' }} variant="outlined">
-                                                                <OutlinedInput
-                                                                    value={title} 
-                                                                    disabled                                                                  
+                                                                <OutlinedInput                                                                
+                                                                    type='number'
                                                                     size='small'
                                                                     id="outlined-adornment-weight"
                                                                     aria-describedby="outlined-weight-helper-text"
@@ -315,9 +357,9 @@ const Sell = () => {
 
                                                     <Grid container alignItems="center" marginTop={'7px'}>
                                                         <Grid item xs={2}>
-                                                        <Typography sx={{ marginBottom: 0, textAlign: 'right' }} variant="body1" gutterBottom>
-                                                        Description <span style={{ color: 'red' }}>*</span> :
-                                                            </Typography>                                                            
+                                                            <Typography sx={{ marginBottom: 0, textAlign: 'right' }} variant="body1" gutterBottom>
+                                                                Description <span style={{ color: 'red' }}>*</span> :
+                                                            </Typography>
                                                         </Grid>
                                                         <Grid item xs={10} sx={{ paddingLeft: '2px', paddingRight: '20px' }}>
 
@@ -336,8 +378,26 @@ const Sell = () => {
                                                                     value={description}
                                                                     onChange={(event) => { handleDescriptionChange(event) }}
                                                                 />
-                                                            </FormControl>                                                           
+                                                            </FormControl>
                                                             {errors?.description && <div style={{ color: 'red', padding: '3px 5px', marginTop: '-5px' }}>Description is required</div>}
+                                                        </Grid>
+                                                    </Grid>
+
+
+                                                    <Grid container alignItems="center" marginTop={'7px'}>
+                                                        <Grid item xs={2}>
+                                                            <Typography sx={{ marginBottom: 0, textAlign: 'right' }} variant="body1" gutterBottom>
+                                                                Upload Image <span style={{ color: 'red' }}>*</span> :
+                                                            </Typography>
+                                                        </Grid>
+                                                        <Grid >
+
+                                                            <FormControl  sx={{ m: 1, width: '100%' }} variant="outlined">
+                                                                <Input disableUnderline='false'
+                                                                    type='file'                                                                   
+                                                                    onChange={handleFileChange}
+                                                                />
+                                                            </FormControl>                                                           
                                                         </Grid>
                                                     </Grid>
                                                 </Box>
@@ -345,16 +405,15 @@ const Sell = () => {
                                         </Grid>
                                     </FormSection>
 
-                                    <Box  className={styles.title} sx={{ display: 'flex', justifyContent: 'space-between' , alignItems: 'center', mt:2}}>
+                                    <Box className={styles.title} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 2 }}>
                                         <Button onClick={() => { setStep(1) }} startIcon={<ChevronLeft />}>
                                             Back
                                         </Button>
-                                        <Box  sx={{ display: 'flex', justifyContent: 'center' , display: 'flex', flexGrow: 1}}>
-                                        {/* <Button variant='outlined' sx={{ mx: 5 }}>Save Draft</Button> */}
-                                        <CustomButton variant="contained" color="primary" onClick={handleCreateListig} className='jus'>
-                                            
-                                            Create Listing
-                                        </CustomButton>
+                                        <Box sx={{ display: 'flex', justifyContent: 'center', flexGrow: 1 }}>                                            
+                                            <CustomButton variant="contained" color="primary" onClick={handleCreateListig} className='jus'>
+
+                                                Create Listing
+                                            </CustomButton>
                                         </Box>
                                     </Box>
                                 </>
@@ -362,7 +421,7 @@ const Sell = () => {
 
                             <Box >
                                 <Typography className={styles.footer} fontSize="small" >
-                                © Copyright 2024 KPMG India. All Rights Reserved. No part of this web page may be reproduced in any way without the prior written permission of KPMG India.
+                                    © Copyright 2024 KPMG India. All Rights Reserved. No part of this web page may be reproduced in any way without the prior written permission of KPMG India.
                                 </Typography>
                             </Box>
                         </div>

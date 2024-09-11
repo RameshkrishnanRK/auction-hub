@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
 import kpmgImage from "../../assets/images/Auction.KPMGLogo_1_.svg";
 import styles from "./Header.module.scss";
 import { Link, useNavigate } from "react-router-dom";
@@ -73,7 +72,28 @@ export default function Header({ setSearchTerm }) {
       >
         <Toolbar sx={{ minHeight: "55px !important" }} mt={3}>
           <img alt="kpmg" src={kpmgImage} />
+
+          <Box sx={{ flexGrow: 1 }} />
+          {location.pathname.includes("/auction/view") && (
+            <>
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  onChange={(event) => {
+                    setInputValue(event.target.value);
+                    handleSearch();
+                  }}
+                  value={inputValue}
+                  placeholder="Enter keywords…"
+                  inputProps={{ "aria-label": "search" }}
+                />
+              </Search>             
+            </>
+          )}                    
         </Toolbar>
+                
         <Toolbar sx={{ minHeight: "55px !important" }}>
           <Typography
             variant="h6"
@@ -88,19 +108,40 @@ export default function Header({ setSearchTerm }) {
             noWrap
             className={styles.link}
             component="div"
-            ml={8}
+            ml={3}
           >
-            <Link to="/auction/dashboard">Browse</Link>
+            <Link to="/auction/view">Browse</Link>
           </Typography>
           <Typography
             variant="h6"
             noWrap
             component="div"
             className={styles.link}
-            ml={8}
+            ml={3}
           >
             <Link to="/auction/sell">Sell</Link>
           </Typography>
+
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            className={styles.link}
+            ml={3}
+          >
+            <Link to="/auction/contact-us">Contact Us</Link>
+          </Typography>
+
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            className={styles.link}
+            ml={3}
+          >
+            <Link to="/auction/about-us">About Us</Link>
+          </Typography>
+
           <Box sx={{ flexGrow: 1 }} />
           {userData ? (
             <>
@@ -125,53 +166,7 @@ export default function Header({ setSearchTerm }) {
               </Button>
             </>
           )}
-        </Toolbar>
-        <Divider className={styles.divider} />
-        <Toolbar sx={{ minHeight: "55px !important" }}>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            className={styles.link}
-          >
-            <Link to="/auction/contact-us">Contact Us</Link>
-          </Typography>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            className={styles.link}
-            ml={9}
-          >
-            <Link to="/auction/about-us">About Us</Link>
-          </Typography>
-          <Box sx={{ flexGrow: 1 }} />
-          {location.pathname.includes("/auction/dashboard") && (
-            <>
-              <Search>
-                <SearchIconWrapper>
-                  <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                  onChange={(event) => {
-                    setInputValue(event.target.value);
-                  }}
-                  value={inputValue}
-                  placeholder="Enter keywords…"
-                  inputProps={{ "aria-label": "search" }}
-                />
-              </Search>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleSearch}
-                className={styles.searchBtn}
-              >
-                Search
-              </Button>
-            </>
-          )}
-        </Toolbar>
+        </Toolbar>        
       </AppBar>
     </>
   );
