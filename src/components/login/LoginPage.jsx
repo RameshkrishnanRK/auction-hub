@@ -50,11 +50,31 @@ const LoginPage = () => {
 
     if (!valid) {
       return;
+
+    }
+
+    // let userRole = username.toLowerCase() === "auctioneer" ? "auctioneer" : "bidder";
+
+    const userData = {
+      user: username,
+      role: role,
+    };
+    dispatch(loginSuccess(userData));
+
+    if (role === "Auctioneer") {
+      navigate("/auctioneer-dashboard");
+    } else {
+      navigate("/auction/dashboard");
+=======
     } else {
       const userData = {
         user: username,
       }
       dispatch(loginSuccess(userData));
+>>>>>>> parent of fc8bc4a (created skelton profile for bidder/auctioneer , modified login page accordingly,Added Styling to Product Detail page, Checkbox to subcategory and sub region, makeoffer conditioned, dynamic buyNow)
+=======
+      navigate("/bidder-dashboard");
+>>>>>>> parent of 0cf4980 (Changes suggested in Demo)
     }
 
     
