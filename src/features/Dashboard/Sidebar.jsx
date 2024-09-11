@@ -8,11 +8,7 @@ import {
   ListItemText,
   Paper,
   Typography,
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of 0cf4980 (Changes suggested in Demo)
   FormControlLabel,
   Checkbox,
 =======
@@ -22,7 +18,7 @@ import {
 import styles from "./Sidebar.module.scss";
 import { useSelector } from "react-redux";
 
-const Sidebar = ({ subCatData, setSubCatData, subRegData, setSubRegData }) => {
+const Sidebar = ({  setSubCatData,  setSubRegData }) => {
   const [openCategories, setOpenCategories] = useState({});
   const [openRegions, setOpenRegions] = useState({});
   const [view, setView] = useState("main"); // "main", "subcategory", or "subregion"

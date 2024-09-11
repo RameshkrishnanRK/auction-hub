@@ -50,7 +50,7 @@ const LoginPage = () => {
 
     if (!valid) {
       return;
-<<<<<<< HEAD
+
     }
 
     // let userRole = username.toLowerCase() === "auctioneer" ? "auctioneer" : "bidder";
@@ -64,7 +64,6 @@ const LoginPage = () => {
     if (role === "Auctioneer") {
       navigate("/auctioneer-dashboard");
     } else {
-<<<<<<< HEAD
       navigate("/auction/dashboard");
 =======
     } else {
