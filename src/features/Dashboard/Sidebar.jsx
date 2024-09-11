@@ -8,13 +8,14 @@ import {
   ListItemText,
   Paper,
   Typography,
+
   FormControlLabel,
   Checkbox,
 } from "@mui/material";
 import styles from "./Sidebar.module.scss";
 import { useSelector } from "react-redux";
 
-const Sidebar = ({ subCatData, setSubCatData, subRegData, setSubRegData }) => {
+const Sidebar = ({  setSubCatData,  setSubRegData }) => {
   const [openCategories, setOpenCategories] = useState({});
   const [openRegions, setOpenRegions] = useState({});
   // const [view, setView] = useState("main"); // "main", "subcategory", or "subregion"
@@ -35,49 +36,64 @@ const Sidebar = ({ subCatData, setSubCatData, subRegData, setSubRegData }) => {
     error: regionsError,
   } = useSelector((state) => state.sideBarRegion);
 
-  const handleSubcategoryClick = (subcategory) => {
-    const updatedSubcategories = [...selectedSubcategories];
-    if (updatedSubcategories.includes(subcategory)) {
-      const index = updatedSubcategories.indexOf(subcategory);
-      updatedSubcategories.splice(index, 1);
-    } else {
-      updatedSubcategories.push(subcategory);
-    }
-    setSelectedSubcategories(updatedSubcategories);
-    setSubCatData(updatedSubcategories);
-    // setSubCatData(subcategory);
-    // setSelectedCategory(subcategory);
-    // setView("subcategory");
-  };
+  // const handleSubcategoryClick = (subcategory) => {
+  //   const updatedSubcategories = [...selectedSubcategories];
+  //   if (updatedSubcategories.includes(subcategory)) {
+  //     const index = updatedSubcategories.indexOf(subcategory);
+  //     updatedSubcategories.splice(index, 1);
+  //   } else {
+  //     updatedSubcategories.push(subcategory);
+  //   }
+  //   setSelectedSubcategories(updatedSubcategories);
+  //   setSubCatData(updatedSubcategories);
+  //   // setSubCatData(subcategory);
+  //   // setSelectedCategory(subcategory);
+  //   // setView("subcategory");
+  // };
 
-  const handleSubRegionClick = (subregion) => {
-    const updatedSubregions = [...selectedSubregions];
-    if (updatedSubregions.includes(subregion)) {
-      const index = updatedSubregions.indexOf(subregion);
-      updatedSubregions.splice(index, 1);
-    } else {
-      updatedSubregions.push(subregion);
-    }
-    setSelectedSubregions(updatedSubregions);
-    setSubRegData(updatedSubregions);
-    // setSelectedRegion(subregion);
-    // setView("subregion");
-  };
+  // const handleSubRegionClick = (subregion) => {
+  //   const updatedSubregions = [...selectedSubregions];
+  //   if (updatedSubregions.includes(subregion)) {
+  //     const index = updatedSubregions.indexOf(subregion);
+  //     updatedSubregions.splice(index, 1);
+  //   } else {
+  //     updatedSubregions.push(subregion);
+  //   }
+  //   setSelectedSubregions(updatedSubregions);
+  //   setSubRegData(updatedSubregions);
+  //   // setSelectedRegion(subregion);
+  //   // setView("subregion");
+  // };
 
-  const handleCategoryClick = (categoryName) => {
-    setOpenCategories((prevOpenCategories) => ({
-      ...prevOpenCategories,
-      [categoryName]: !prevOpenCategories[categoryName],
+  const handleCategoryClick = (category) => {
+    setOpenCategories((prevState) => ({
+      ...prevState,
+      [category]: !prevState[category],
     }));
   };
 
-  const handleRegionClick = (regionName) => {
-    setOpenRegions((prevOpenRegions) => ({
-      ...prevOpenRegions,
-      [regionName]: !prevOpenRegions[regionName],
+  const handleRegionClick = (region) => {
+    setOpenRegions((prevState) => ({
+      ...prevState,
+      [region]: !prevState[region],
     }));
   };
 
+  const handleSubcategoryChange =(subcategory) => {
+    const updatedSubcategories= selectedSubcategories.includes(subcategory)
+      ? selectedSubcategories.filter((cat) => cat !== subcategory)
+      : [...selectedSubcategories, subcategory];
+      setSelectedSubcategories(updatedSubcategories);
+      setSubCatData(updatedSubcategories);    
+  };
+
+  const handleSubregionChange =(subregion) => {
+    const updatedSubregions= selectedSubregions.includes(subregion)
+      ? selectedSubregions.filter((reg) => reg !== subregion)
+      : [...selectedSubregions, subregion];
+      setSelectedSubregions(updatedSubregions);
+      setSubCatData(updatedSubregions);    
+  };
   // const toggleMenu = () => {
   //   setIsOpen(!isOpen);
   // };
@@ -129,10 +145,10 @@ const Sidebar = ({ subCatData, setSubCatData, subRegData, setSubRegData }) => {
                                   control={
                                     <Checkbox
                                       checked={selectedSubcategories.includes(
-                                        subcategory.name,
+                                        subcategory.name
                                       )}
                                       onChange={() =>
-                                        handleSubcategoryClick(subcategory.name)
+                                        handleSubcategoryChange(subcategory.name)
                                       }
                                     />
                                   }
@@ -192,7 +208,7 @@ const Sidebar = ({ subCatData, setSubCatData, subRegData, setSubRegData }) => {
                                     subregion.name,
                                   )}
                                   onChange={() =>
-                                    handleSubRegionClick(subregion.name)
+                                    handleSubregionChange(subregion.name)
                                   }
                                 />
                               }

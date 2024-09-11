@@ -74,10 +74,18 @@ const LoginPage = () => {
 
     if (role === "Auctioneer") {
       navigate("/auctioneer-dashboard");
-    } else {
+    } else if (role === "bidder") {
       navigate("/bidder-dashboard");
+    } else {
+      navigate("/auction/dashboard");
     }
   };
+  // const handleNavigateHome = () => {
+  //   navigate("/auction/home");
+  // };
+  // const handleNavigateBrowse = () => {
+  //   navigate("/auction/dashboard");
+  // };
 
   return (
     <Container>
@@ -196,6 +204,24 @@ const LoginPage = () => {
                 Login
               </Button>
             </form>
+            {/* <div style={{ marginTop: "20px" }}>
+              <Button
+                variant="outlined"
+                color="secondary"
+                fullWidth
+                onClick={handleNavigateHome}
+              >
+                Go to Home{" "}
+              </Button>
+              <Button
+                variant="outlined"
+                color="secondary"
+                fullWidth
+                onClick={handleNavigateBrowse}
+              >
+                Go to Browse{" "}
+              </Button>
+            </div> */}
           </div>
         </Paper>
       </div>

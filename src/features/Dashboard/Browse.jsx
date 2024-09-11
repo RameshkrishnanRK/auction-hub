@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Breadcrumbs, Grid } from "@mui/material";
 import Sidebar from "./Sidebar";
 import styles from "./Browse.module.scss";
-import { categoriesData, regionsData } from "../../jsonData";
+import { categoriesData, productsData, regionsData } from "../../jsonData";
 import ControlPanel from "./ControlPanel";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -20,8 +20,9 @@ import Layout from "../../routing/components/Layout";
 
 const Browse = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [subCatData, setSubCatData] = useState("");
-  const [subRegData, setSubRegData] = useState("");
+  const [subCatData, setSubCatData] = useState([]);
+  const [subRegData, setSubRegData] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState(productsData);
 
   const dispatch = useDispatch();
 
@@ -67,10 +68,10 @@ const Browse = () => {
           </Box>
           <Grid container spacing={3}>
             <Grid item xs={3}>
-              <Sidebar  subCatData={subCatData} setSubCatData={setSubCatData} subRegData={subRegData} setSubRegData={setSubRegData}/>
+              <Sidebar  setSubCatData={setSubCatData}  setSubRegData={setSubRegData}/>
             </Grid>
             <Grid item xs={9}>
-              <ControlPanel searchTerm={searchTerm} subCatData={subCatData} subRegData={subRegData} />
+              <ControlPanel searchTerm={searchTerm} subCatData={subCatData} subRegData={subRegData} products={filteredProducts} setFilteredProducts={setFilteredProducts}/>
             </Grid>
           </Grid>
         </Box>
