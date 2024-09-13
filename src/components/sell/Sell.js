@@ -36,7 +36,8 @@ const Sell = () => {
     const [subRegionList, setSubRegionList] = React.useState([]);
     const [subCategoryList, setSubCategoryList] = React.useState([]);
     const [title, setTitle] = React.useState('');
-    const [description, setDescription] = React.useState('');
+    const [description, setDescription] = React.useState('');    
+    const [price, setPrice] = React.useState('');
     const [errors, setErrors] = React.useState({
         category: false,
         subCategory: false,
@@ -49,6 +50,7 @@ const Sell = () => {
         title: false,
         description: false,
     })
+    const[file, setFile] = React.useState();
 
     useEffect(() => {
         const selectedCategory = categoriesData.filter(data => (data.name === category))
@@ -97,6 +99,13 @@ const Sell = () => {
         setDescription(event.target.value);
     };
 
+    const handlePriceChange = (event) => {
+        const newValue = event.target.value;
+        if(/^\d*$/.test(newValue)){
+            setPrice(newValue);
+        }
+    };
+
     const handleNext = () => {
         if (step === 1) {
             if (category && subCategory && listingType && region) {
@@ -123,15 +132,18 @@ const Sell = () => {
 
     const handleCreateListig = () => {
         if (step === 2) {
-            if (title && description) {
+            if (title && description && price) {
                 setErrors({})
-                navigate(`/auction/dashboard?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`);
+                navigate(`/auction/view?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}&price=${encodeURIComponent(price)}`);
             } else {
                 if (!title) {
                     setErrors(prevState => ({ ...prevState, title: true }))
                 }
-                if (!description) {
-                    setErrors(prevState => ({ ...prevState, description: true }))
+                // if (!description) {
+                //     setErrors(prevState => ({ ...prevState, description: true }))
+                // }
+                if (!price) {
+                    setErrors(prevState => ({ ...prevState, price: true }))
                 }
                 return;
             }
@@ -140,8 +152,9 @@ const Sell = () => {
     }
 
     const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        console.log(file, "upload")
+        console.log(event.target.files);
+        setFile(URL.createObjectURL(event.target.files[0]))
+        // console.log(file, "upload")
         // Process the file
     };
 
@@ -337,19 +350,22 @@ const Sell = () => {
                                                     <Grid container alignItems="center">
                                                         <Grid item xs={2}>
                                                             <Typography sx={{ marginBottom: 0, textAlign: 'right' }} variant="body1" gutterBottom>
-                                                                Price :
+                                                               Listing Price :
                                                             </Typography>
                                                         </Grid>
                                                         <Grid item xs={10} sx={{ paddingRight: '20px' }}>
                                                             <FormControl sx={{ m: 1, width: '100%', backgroundColor: '#F8F9F9' }} variant="outlined">
                                                                 <OutlinedInput                                                                
-                                                                    type='number'
+                                                                    // type='number'
                                                                     size='small'
                                                                     id="outlined-adornment-weight"
                                                                     aria-describedby="outlined-weight-helper-text"
                                                                     inputProps={{
                                                                         'aria-label': 'SubTitle',
                                                                     }}
+                                                                    value={price}
+                                                                    onChange={handlePriceChange}
+                                                                    
                                                                 />
                                                             </FormControl>
                                                         </Grid>
@@ -393,10 +409,11 @@ const Sell = () => {
                                                         <Grid >
 
                                                             <FormControl  sx={{ m: 1, width: '100%' }} variant="outlined">
+                                                            <img src={file} width="300px" height="150px" style={{float:'right'}}  />
                                                                 <Input disableUnderline='false'
                                                                     type='file'                                                                   
                                                                     onChange={handleFileChange}
-                                                                />
+                                                                />                                                                
                                                             </FormControl>                                                           
                                                         </Grid>
                                                     </Grid>
