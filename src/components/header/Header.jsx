@@ -104,6 +104,16 @@ export default function Header({ setSearchTerm }) {
           <Box sx={{ flexGrow: 1 }} />
           {userData ? (
             <>
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                className= {styles.link}
+                ml={8}
+                margin="10px"
+              >
+                <Link to="/auction/myaccount">My Account</Link>
+              </Typography>
               Hello, {userData.user}
               <LogoutOutlinedIcon
                 onClick={handleLogout}
@@ -117,7 +127,7 @@ export default function Header({ setSearchTerm }) {
             </>
           ) : (
             <>
-            <Button color="inherit" className={styles.link}>
+              <Button color="inherit" className={styles.link}>
                 <Link to="/auction/register">Register</Link>
               </Button>
               <Button color="inherit" className={styles.link}>

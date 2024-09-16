@@ -8,6 +8,7 @@ import LoginPage from "../components/login/LoginPage";
 import ProductDetails from "../features/Dashboard/ProductDetails";
 import Browse from "../features/Dashboard/Browse";
 import Register from "../components/register/Register";
+import MyAccount from "../components/login/MyAccount";
 
 const routes = () => {
   return (
@@ -17,6 +18,7 @@ const routes = () => {
         <Route path="/auction/home" element={<Home />} />
         <Route path="/auction/register" element={<Register />} />
         <Route path="/auction/login" element={<LoginPage />} />
+        <Route path="/auction/myaccount" element={<MyAccount />} />
         <Route path="/auction/dashboard" element={<Browse />} />
         <Route path="/auction/about-us" element={<AboutUs />} />
         <Route path="/auction/product-details" element={<ProductDetails />} />

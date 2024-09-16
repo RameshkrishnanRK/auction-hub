@@ -9,36 +9,34 @@ import {
   Checkbox,
   Button,
   Link,
+  FormControl,
   InputLabel,
   Select,
-  FormControl,
   MenuItem,
 } from "@mui/material";
 import kpmgLogo from "../../assets/images/Auction.KPMG_logo_blue.png";
 import kpmgLoginImage from "../../assets/images/Auction.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../redux/slices/loginSlice";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [role, setRole] = useState(""); // Role selection state
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [role, setRole] = useState("");
   const [roleError, setRoleError] = useState("");
+
   const dispatch = useDispatch();
-
-  useSelector((state) => state.login);
-
-
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    
+
     let valid = true;
 
+    // Validate username
     if (username === "") {
       setUsernameError("This field is required");
       valid = false;
@@ -46,12 +44,15 @@ const LoginPage = () => {
       setUsernameError("");
     }
 
+    // Validate password
     if (password === "") {
       setPasswordError("This field is required");
       valid = false;
     } else {
       setPasswordError("");
     }
+
+    // Validate role selection
     if (role === "") {
       setRoleError("Please select a role");
       valid = false;
@@ -59,18 +60,19 @@ const LoginPage = () => {
       setRoleError("");
     }
 
-    if (!valid) {
-      return;
-    } else {
-      const userData = {
-        user: username,
-      }
-      dispatch(loginSuccess(userData));
-    }
+    if (!valid) return;
 
-    
+    // Dispatch login success with user data
+    const userData = {
+      user: username,
+      role: role, // Assign role from the selection
+    };
+    dispatch(loginSuccess(userData));
 
-    navigate("/auction/home");
+    localStorage.setItem("role", role);
+
+    // Navigate to "My Account" with role-based state
+    navigate("/auction/dashboard", { state: { role: role } });
   };
 
   return (
@@ -78,7 +80,7 @@ const LoginPage = () => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "2fr 1fr", 
+          gridTemplateColumns: "2fr 1fr",
           alignItems: "center",
           minHeight: "100vh",
         }}
@@ -134,6 +136,7 @@ const LoginPage = () => {
                 error={passwordError !== ""}
                 helperText={passwordError}
               />
+              {/* Role Selection Dropdown */}
               <FormControl
                 variant="standard"
                 fullWidth
@@ -148,7 +151,7 @@ const LoginPage = () => {
                   onChange={(e) => setRole(e.target.value)}
                 >
                   <MenuItem value="bidder">Bidder</MenuItem>
-                  <MenuItem value="Auctioneer">Auctioneer</MenuItem>
+                  <MenuItem value="auctioneer">Auctioneer</MenuItem>
                 </Select>
                 {roleError && (
                   <Typography variant="body2" color="error">
@@ -156,14 +159,8 @@ const LoginPage = () => {
                   </Typography>
                 )}
               </FormControl>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              ></div>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems:'center'}}>
+
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: 'center' }}>
                 <FormControlLabel
                   control={
                     <Checkbox
@@ -173,13 +170,14 @@ const LoginPage = () => {
                       onChange={(e) => setRememberMe(e.target.checked)}
                     />
                   }
-                  label={<Typography variant="body2">Remember me</Typography>} 
+                  label={<Typography variant="body2">Remember me</Typography>}
                 />
-                
+
                 <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
               </div>
+
               <Button
                 type="submit"
                 fullWidth
@@ -197,4 +195,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default LoginPage
