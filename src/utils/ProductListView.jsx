@@ -10,6 +10,7 @@ import React from "react";
 import styles from "./ProductListView.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelect } from "@mui/base";
+import currency from "../features/Dashboard/ControlPanel";
 
 const ProductListView = ({
   id,
@@ -18,6 +19,7 @@ const ProductListView = ({
   currentBid,
   timeRemaining,
   isExpired,
+  currency
 }) => {
   const navigate = useNavigate();
   const userData = useSelect((state) => state.login.user);
@@ -59,7 +61,7 @@ const ProductListView = ({
             className={styles.quickBidBtn}
             disabled={isExpired}
           >
-            Quick Bid ₹{formattedBid}
+            Quick Bid {currency} {formattedBid}
           </Button>
         ) : (
           <Button
@@ -67,7 +69,7 @@ const ProductListView = ({
             className={styles.quickBidBtn}
             onClick={handleBid}
           >
-            Quick Bid ₹{formattedBid}
+            Quick Bid {currency} {formattedBid}
           </Button>
         )}
 
@@ -85,7 +87,7 @@ const ProductListView = ({
             fontSize="medium"
             fontWeight="bold"
           >
-            ₹{formattedBid}
+            {currency}{formattedBid}
           </Typography>
           <Box className={styles.verticalDottedLine}></Box>
           <Typography variant="body2" color="text.secondary">

@@ -3,7 +3,16 @@ import ProductListView from "../../utils/ProductListView";
 import styles from "./ListView.module.scss";
 import { useSelector } from "react-redux";
 
-const ListView = ({ subCatData, subRegData, searchTerm, status, filter, sortData }) => {
+const ListView = ({
+  subCatData,
+  subRegData,
+  searchTerm,
+  status,
+  filter,
+  sortData,
+  currency,
+  currencyRates
+}) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   const { data: products } = useSelector((state) => state.product);
@@ -19,14 +28,14 @@ const ListView = ({ subCatData, subRegData, searchTerm, status, filter, sortData
     // Filter by Subcategories
     if (subCatData.length > 0) {
       filtered = filtered.filter((product) =>
-        subCatData.includes(product.subCatType)
+        subCatData.includes(product.subCatType),
       );
     }
 
     // Filter by Subregions
     if (subRegData.length > 0) {
       filtered = filtered.filter((product) =>
-        subRegData.includes(product.subregion)
+        subRegData.includes(product.subregion),
       );
     }
 
@@ -38,7 +47,7 @@ const ListView = ({ subCatData, subRegData, searchTerm, status, filter, sortData
     // Additional filtering logic (search term, etc.)
     if (searchTerm) {
       filtered = filtered.filter((product) =>
-        product.title.toLowerCase().includes(searchTerm.toLowerCase())
+        product.title.toLowerCase().includes(searchTerm.toLowerCase()),
       );
     }
 
@@ -80,7 +89,10 @@ const ListView = ({ subCatData, subRegData, searchTerm, status, filter, sortData
             id={product.id}
             image={product.image}
             title={product.title}
-            currentBid={product.currentBid}
+            currentBid={(product.currentBid * currencyRates[currency]).toFixed(
+              2,
+            )}
+            currency={currency}
             timeRemaining={product.timeRemaining}
             isExpired={product.isExpired}
           />

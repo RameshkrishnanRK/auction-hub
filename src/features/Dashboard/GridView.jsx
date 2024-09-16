@@ -3,8 +3,9 @@ import ProductGridView from "../../utils/ProductGridView";
 import { useSelector } from "react-redux";
 import { Grid } from "@mui/material";
 import styles from "../Dashboard/GridView.module.scss";
+import {currency, currencyRates} from "../Dashboard/ControlPanel";
 
-const GridView = ({ subCatData, subRegData, searchTerm, status, filter, sortData }) => {
+const GridView = ({ subCatData, subRegData, searchTerm, status, filter, sortData, currency, currencyRates }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   const { data: products } = useSelector((state) => state.product);
@@ -81,7 +82,10 @@ const GridView = ({ subCatData, subRegData, searchTerm, status, filter, sortData
               id={product.id}
               image={product.image}
               title={product.title}
-              currentBid={product.currentBid}
+              currentBid={(product.currentBid * currencyRates[currency]).toFixed(
+                2,
+              )}
+              currency={currency}
               timeRemaining={product.timeRemaining}
               isExpired={product.isExpired}
             />

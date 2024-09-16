@@ -10,6 +10,7 @@ import {
 import Styles from "./ProductGridView.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import currency from '../features/Dashboard/ControlPanel';
 
 const ProductGridView = ({
   id,
@@ -18,6 +19,7 @@ const ProductGridView = ({
   currentBid,
   timeRemaining,
   isExpired,
+  currency
 }) => {
   const navigate = useNavigate();
 
@@ -46,18 +48,10 @@ const ProductGridView = ({
         alt={title}
       />
       <CardContent>
-        <Typography variant="h6" component="div" onClick={handleViewDetails}>
-          <Link
-            to={`/auction/product-details?productId=${id}`}
-            style={{
-              color: "#337AB7",
-              fontSize: "14px",
-              textAlign: "left",
-              textDecoration: "none",
-            }}
-          >
+        <Typography variant="h6" component="div" onClick={handleViewDetails} fontSize="16px">
+          
             {title}
-          </Link>
+         
         </Typography>
         <Box className={Styles.ProductDetails}>
           <Box className={Styles.productInfo}>
@@ -70,7 +64,7 @@ const ProductGridView = ({
               fontWeight="bold"
               style={{ fontSize: "12px" }}
             >
-              ₹{formattedBid}
+              {currency} {formattedBid}
             </Typography>
           </Box>
           <Box className={Styles.productInfo}>
@@ -93,7 +87,7 @@ const ProductGridView = ({
           className={Styles.quickBidBtn}
           disabled={isExpired}
         >
-          Quick Bid ₹{formattedBid}
+          Quick Bid {currency} {formattedBid}
         </Button>
       ) : (
         <Button
@@ -101,7 +95,7 @@ const ProductGridView = ({
           className={Styles.quickBidBtn}
           onClick={handleBid}
         >
-          Quick Bid ₹{formattedBid}
+          Quick Bid {currency} {formattedBid}
         </Button>
       )}
     </Card>

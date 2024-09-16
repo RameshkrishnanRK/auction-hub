@@ -17,11 +17,28 @@ import { filterByOptions, sortOptions } from "../../jsonData";
 import GridView from "./GridView";
 import ListView from "./ListView";
 
+
+const currencyOptions =[
+  { label: " Dollar (USD)", value: "$"},
+  { label: " Rupees (INR)", value: "₹"},
+  { label: " Euro (EUR)", value: "€"},
+  { label: " Yen (JPY)", value: "¥"}
+];
+
+const currencyRates = {
+  $:1,
+  '₹': 74.85,
+  "€": 0.85,
+  "¥": 110.12,
+};
+
+
 const ControlPanel = ({ subCatData, searchTerm, subRegData }) => {
   const [view, setView] = useState("grid");
   const [status, setStatus] = useState("active");
   const [filter, setFilter] = useState("all");
   const [sortData, setSortData] = useState("");
+  const [currency, setCurrency] = useState("USD");
 
   const handleViewChange = (event, newView) => {
     if (newView !== null) {
@@ -40,6 +57,9 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData }) => {
   const handleSortChange = (event) => {
     setSortData(event.target.value);
   };
+  const handleCurrencyChange = (event) => {
+    setCurrency(event.target.value);
+  }
   return (
     <div>
       <Box
@@ -180,6 +200,24 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData }) => {
               ))}
             </Select>
           </FormControl>
+          <FormControl sx={{ m:1, minWidth: 120 }} size="small">
+            <InputLabel id='currency-select'>Currency</InputLabel>
+            <Select
+            labelId="currency-select"
+            value={currency}
+            label='Currency'
+            onChange={handleCurrencyChange}
+            sx={{
+              backgroundColor:"#ffffff",
+            }}
+            >
+              {currencyOptions.map((option) => (
+                <MenuItem key={option.value} value={option.value} >
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Box>
       </Box>
       {view === "grid" ? (
@@ -190,6 +228,8 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData }) => {
           status={status}
           filter={filter}
           sortData={sortData}
+          currency={currency}
+          currencyRates={currencyRates}
         />
       ) : (
         <ListView
@@ -199,6 +239,8 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData }) => {
           status={status}
           filter={filter}
           sortData={sortData}
+          currency={currency}
+          currencyRates={currencyRates}
         />
       )}
     </div>
