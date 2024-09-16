@@ -158,6 +158,7 @@ const GridView = ({ subCatData, subRegData, searchTerm, status, filter, sortData
         <div className={styles.noResults}>No products found</div>
       )}
     </Grid>
+    </>
   );
 };
 

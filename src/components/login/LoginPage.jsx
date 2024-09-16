@@ -72,7 +72,7 @@ const LoginPage = () => {
     localStorage.setItem("role", role);
 
     // Navigate to "My Account" with role-based state
-    navigate("/auction/dashboard", { state: { role: role } });
+    navigate("/view", { state: { role: role } });
   };
 
   return (

@@ -15,15 +15,15 @@ const routes = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/auction/home" element={<Home />} />
-        <Route path="/auction/register" element={<Register />} />
-        <Route path="/auction/login" element={<LoginPage />} />
-        <Route path="/auction/myaccount" element={<MyAccount />} />
-        <Route path="/auction/dashboard" element={<Browse />} />
-        <Route path="/auction/about-us" element={<AboutUs />} />
-        <Route path="/auction/product-details" element={<ProductDetails />} />
-        <Route path="/auction/contact-us" element={<ContactUs />} />
-        <Route path="/auction/sell" element={<Sell />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/myaccount" element={<MyAccount />} />
+        <Route path="/view" element={<Browse />} />
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/product-details" element={<ProductDetails />} />
+        <Route path="/contact-us" element={<ContactUs />} />
+        <Route path="/sell" element={<Sell />} />
       </Routes>
     </Router>
   );

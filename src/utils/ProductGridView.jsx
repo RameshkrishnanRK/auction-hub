@@ -26,15 +26,15 @@ const ProductGridView = ({
   const userData = useSelector((state) => state.login.user);
 
   const handleViewDetails = () => {
-    navigate(`/auction/product-details?productId=${id}`);
+    navigate(`/product-details?productId=${id}`);
   };
 
   const handleBid = () => {
     // const userName = userData && userData.user;
     if (userData !== null) {
-      navigate(`/auction/product-details?productId=${id}`);
+      navigate(`/product-details?productId=${id}`);
     } else {
-      navigate(`/auction/login`);
+      navigate(`/login`);
     }
   };
   const formattedBid = Number(currentBid).toLocaleString("en-IN");
