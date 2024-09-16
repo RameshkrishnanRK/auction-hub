@@ -17,7 +17,7 @@ const routes = () => {
         <Route path="/auction/home" element={<Home />} />
         <Route path="/auction/register" element={<Register />} />
         <Route path="/auction/login" element={<LoginPage />} />
-        <Route path="/auction/dashboard" element={<Browse />} />
+        <Route path="/auction/view" element={<Browse />} />
         <Route path="/auction/about-us" element={<AboutUs />} />
         <Route path="/auction/product-details" element={<ProductDetails />} />
         <Route path="/auction/contact-us" element={<ContactUs />} />

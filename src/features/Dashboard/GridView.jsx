@@ -8,6 +8,7 @@ import Styles from '../../utils/ProductGridView.module.scss'
 import house from "../../assets/images/house.jpg"
 import car from "../../assets/images/car.jpg"
 import laptop from "../../assets/images/laptop.jpg"
+import villa from "../../assets/images/FarmHouse.jpg"
 import styles from "../Dashboard/GridView.module.scss"
 
 const useQuery = () => {
@@ -88,13 +89,17 @@ useEffect(() => {
 
   const query = useQuery();
   const title = query.get("title");
+  const price = query.get("price");
   const description = query.get("description");
+  const formattedPrice = Number(price).toLocaleString("en-IN");
   let  image =  house;
     if( title ) {
       if (title.toLowerCase().includes('car'))
         image = car
       else if (title.toLowerCase().includes('laptop'))
         image = laptop
+      else if (title.toLowerCase().includes('villa'))
+        image = villa
       else
         image = house
     }
@@ -103,7 +108,7 @@ useEffect(() => {
   return (
     <>
     <Grid container spacing={2}>
-      {title && description &&
+      {title && description && price &&
         (
           (
             <Grid item xs={12} sm={6} md={4}  >
@@ -117,6 +122,9 @@ useEffect(() => {
                 <CardContent>
                   <Typography variant='h6' component='div' style={{ fontSize: '15px' }} >
                     {title}
+                  </Typography>
+                  <Typography variant='h6' component='div' style={{ fontSize: '15px' }} >
+                  ₹{formattedPrice}
                   </Typography>
                   <Typography variant='body2' style={{ fontSize: '12px' }} >
                     {description}
