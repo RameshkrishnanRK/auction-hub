@@ -10,7 +10,7 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ListIcon from "@mui/icons-material/List";
 import styles from "./ControlPanel.scss";
 import { filterByOptions, sortOptions } from "../../jsonData";
@@ -33,7 +33,7 @@ const currencyRates = {
 };
 
 
-const ControlPanel = ({ subCatData, searchTerm, subRegData }) => {
+const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilteredProducts}) => {
   const [view, setView] = useState("grid");
   const [status, setStatus] = useState("active");
   const [filter, setFilter] = useState("all");
@@ -222,6 +222,7 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData }) => {
       </Box>
       {view === "grid" ? (
         <GridView
+        products={filteredProducts}
           subCatData={subCatData}
           subRegData={subRegData}
           searchTerm={searchTerm}
@@ -233,6 +234,7 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData }) => {
         />
       ) : (
         <ListView
+        products={filteredProducts}
           subCatData={subCatData}
           subRegData={subRegData}
           searchTerm={searchTerm}

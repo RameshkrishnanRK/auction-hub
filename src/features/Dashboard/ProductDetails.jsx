@@ -4,6 +4,7 @@ import {
   Alert,
   Box,
   Breadcrumbs,
+  Breadcrumbs,
   Button,
   Card,
   CardContent,
@@ -13,11 +14,13 @@ import {
   Typography,
 } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Slide, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReusableModal from "../../utils/reusableModal";
 import Layout from "../../routing/components/Layout";
+import styles from "../Dashboard/ProductDetails.module.scss"
 import styles from "../Dashboard/ProductDetails.module.scss"
 
 const useQuery = () => {
