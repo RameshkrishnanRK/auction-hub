@@ -21,13 +21,13 @@ const Sidebar = ({ setSubCatData, setSubRegData }) => {
   const [checkedSubregions, setCheckedSubregions] = useState([]);
 
   const {
-    data: categories = [], // default to empty array if data is undefined
+    data: categories = [], 
     loading: categoryLoading,
     error: categoryError,
   } = useSelector((state) => state.sidebar);
 
   const {
-    data: regions = [], // default to empty array if data is undefined
+    data: regions = [], 
     loading: regionsLoading,
     error: regionsError,
   } = useSelector((state) => state.sideBarRegion);

@@ -28,21 +28,18 @@ const GridView = ({ subCatData, subRegData, searchTerm, status, filter, sortData
   useEffect(() => {
     let filtered = products;
 
-    // Filter by Subcategories
     if (subCatData.length > 0) {
       filtered = filtered.filter((product) =>
         subCatData.includes(product.subCatType)
       );
     }
 
-    // Filter by Subregions
     if (subRegData.length > 0) {
       filtered = filtered.filter((product) =>
         subRegData.includes(product.subregion)
       );
     }
 
-    // Filter by Status
     if (status) {
       filtered = filtered.filter((product) => product.status === status);
     }
@@ -51,14 +48,12 @@ const GridView = ({ subCatData, subRegData, searchTerm, status, filter, sortData
       filtered = filtered.filter((product)=> product.type === filter);
     }
 
-    // Additional filtering logic (search term, etc.)
     if (searchTerm) {
       filtered = filtered.filter((product) =>
         product.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
-    // Sort logic (similar to ListView)
     filtered = filtered.sort((a, b) => {
       const timeComparison =
         getTimeValue(a.timeRemaining) - getTimeValue(b.timeRemaining);
