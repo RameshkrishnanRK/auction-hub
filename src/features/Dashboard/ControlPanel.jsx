@@ -10,12 +10,13 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ListIcon from "@mui/icons-material/List";
 import styles from "./ControlPanel.scss";
 import { filterByOptions, sortOptions } from "../../jsonData";
 import GridView from "./GridView";
 import ListView from "./ListView";
+import filteredProducts from '../Dashboard/Browse';
 
 
 const currencyOptions =[
@@ -26,7 +27,7 @@ const currencyOptions =[
 ];
 
 const currencyRates = {
-  $:1,
+  '$':1,
   '₹': 74.85,
   "€": 0.85,
   "¥": 110.12,
@@ -38,7 +39,7 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilter
   const [status, setStatus] = useState("active");
   const [filter, setFilter] = useState("all");
   const [sortData, setSortData] = useState("");
-  const [currency, setCurrency] = useState("USD");
+  const [currency, setCurrency] = useState("$");
 
   const handleViewChange = (event, newView) => {
     if (newView !== null) {
