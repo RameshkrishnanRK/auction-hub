@@ -43,6 +43,9 @@ const ListView = ({
     if (status) {
       filtered = filtered.filter((product) => product.status === status);
     }
+    if (filter && filter !== "all") {
+      filtered = filtered.filter((product)=> product.type === filter);
+    }
 
     // Additional filtering logic (search term, etc.)
     if (searchTerm) {

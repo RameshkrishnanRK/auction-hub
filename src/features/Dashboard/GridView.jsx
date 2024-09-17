@@ -47,6 +47,10 @@ const GridView = ({ subCatData, subRegData, searchTerm, status, filter, sortData
       filtered = filtered.filter((product) => product.status === status);
     }
 
+    if (filter && filter !== "all") {
+      filtered = filtered.filter((product)=> product.type === filter);
+    }
+
     // Additional filtering logic (search term, etc.)
     if (searchTerm) {
       filtered = filtered.filter((product) =>

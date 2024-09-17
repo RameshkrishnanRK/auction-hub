@@ -54,7 +54,7 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilter
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
   };
-
+  
   const handleSortChange = (event) => {
     setSortData(event.target.value);
   };
