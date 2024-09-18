@@ -83,19 +83,21 @@ const Sidebar = ({ setSubCatData, setSubRegData }) => {
                 </ListItem>
                 {category.subcategories?.length > 0 && (
                   <Collapse in={openCategories[category.name]} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
+                    <List component="div" >
                       {category.subcategories.map((subcategory, subIndex) => (
-                        <ListItem key={subIndex} className={styles.nested}>
+                        <ListItem key={subIndex} sx={{padding:"0px 15px"}}>
                           <FormControlLabel
                             control={
                               <Checkbox
                                 checked={checkedSubcategories.includes(subcategory.name)}
                                 onChange={() => handleSubcategoryCheck(subcategory.name)}
                                 name={subcategory.name}
+                                sx={{ transform: "scale(0.5)" }}
                               />
+                              
                             }
                             label={subcategory.name}
-                          />
+                            sx={{ fontSize: 'small'}}/>
                         </ListItem>
                       ))}
                     </List>
@@ -124,7 +126,7 @@ const Sidebar = ({ setSubCatData, setSubRegData }) => {
                 </ListItem>
                 {region.subregions?.length > 0 && (
                   <Collapse in={openRegions[region.name]} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
+                    <List component="div" >
                       {region.subregions.map((subregion, subIndex) => (
                         <ListItem key={subIndex} className={styles.nested}>
                           <FormControlLabel
@@ -133,10 +135,11 @@ const Sidebar = ({ setSubCatData, setSubRegData }) => {
                                 checked={checkedSubregions.includes(subregion.name)}
                                 onChange={() => handleSubregionCheck(subregion.name)}
                                 name={subregion.name}
+                                sx={{ transform: "scale(0.5)" }}
                               />
                             }
                             label={subregion.name}
-                          />
+                            sx={{ fontSize: 'small'}}/>
                         </ListItem>
                       ))}
                     </List>
