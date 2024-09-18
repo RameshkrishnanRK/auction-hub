@@ -69,7 +69,7 @@ export const productsData = [
     title: "Luxury Home",
     currentBid: 3000000,
     buyNow:45000000,
-    timeRemaining: "Expired",
+    timeRemaining: "2",
     isExpired: false,
     status: "active",
     type: "classified",

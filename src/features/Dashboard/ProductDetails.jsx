@@ -19,7 +19,7 @@ import { Slide, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReusableModal from "../../utils/reusableModal";
 import Layout from "../../routing/components/Layout";
-import styles from "../Dashboard/ProductDetails.module.scss"
+import styles from "../Dashboard/ProductDetails.module.scss";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -34,17 +34,10 @@ const ProductDetails = () => {
 
   const { data: products } = useSelector((state) => state.product);
 
+  const { currency } = useSelector((state) => state.currency);
   window.history.replaceState(null, "/view");
 
-  // let product;
-  // useEffect(() => {
-  // if(products && products.length > 0) {
-  // product = products.find((product) => product?.id === parseInt(productId));
-  // }
-  //     console.log('product: ', product);
-  //     console.log('products: ', products);
-  //     console.log('productId: ', productId);
-  // }, [products, productId]);
+  
 
   const product =
       products.length > 0 &&
@@ -246,7 +239,7 @@ const ProductDetails = () => {
         id="modal-modal-description"
         sx={{ mt: 2, color: "#3C763D", fontSize: "14px", fontWeight: "bold" }}
       >
-        Confirm your bid of INR {cleanedFormattedBid}
+        Confirm your bid of {currency} {cleanedFormattedBid}
       </Typography>
     </Box>
   );
@@ -346,7 +339,7 @@ const ProductDetails = () => {
                 <Box className={Styles.productInfoLeft}>
                   <Typography variant="h6" className={Styles.productPriceTitle}>
                     Current Price{" "}
-                    <span className={Styles.productPrice}>₹{formattedBid}</span>
+                    <span className={Styles.productPrice}>{currency} {formattedBid}</span>
                   </Typography>
                   <Button
                     variant="contained"
@@ -354,12 +347,12 @@ const ProductDetails = () => {
                     className={Styles.quickBidBtn}
                     onClick={handleQuickBid}
                   >
-                    Quick Bid ₹{formattedBid}
+                    Quick Bid {currency} {formattedBid}
                   </Button>
                   <Box className={Styles.bidSection}>
                     <TextField
                       inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-                      label={`Minimum Bid ₹${formattedBid}`}
+                      label={`Minimum Bid ${currency} ${formattedBid}`}
                       variant="outlined"
                       size="small"
                       className={Styles.bidInput}
@@ -392,7 +385,7 @@ const ProductDetails = () => {
                     <hr style={{ border: "0", borderTop: "1px solid #000" }} />
                   </Typography>
                   <Button className={Styles.buyNowBtn} onClick={handleBuyNow}>
-                    Buy Now ₹ {product.buyNow}
+                  Buy Now {currency} {product.buyNow}
                   </Button>
                   <Typography variant="body2" className={Styles.orText}>
                     <hr style={{ border: "1px solid grey", width: "200" }} />

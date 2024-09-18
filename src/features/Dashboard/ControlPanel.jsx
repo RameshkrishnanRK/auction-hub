@@ -17,6 +17,8 @@ import { filterByOptions, sortOptions } from "../../jsonData";
 import GridView from "./GridView";
 import ListView from "./ListView";
 import filteredProducts from '../Dashboard/Browse';
+import { useDispatch } from "react-redux";
+import {setCurrency} from '../../redux/slices/currencySlice';
 
 
 const currencyOptions =[
@@ -39,7 +41,9 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilter
   const [status, setStatus] = useState("active");
   const [filter, setFilter] = useState("all");
   const [sortData, setSortData] = useState("");
-  const [currency, setCurrency] = useState("$");
+  const [currency, setCurrencyState] = useState("$");
+
+  const dispatch = useDispatch();
 
   const handleViewChange = (event, newView) => {
     if (newView !== null) {
@@ -59,8 +63,10 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilter
     setSortData(event.target.value);
   };
   const handleCurrencyChange = (event) => {
-    setCurrency(event.target.value);
-  }
+    const selectedCurrency = event.target.value;
+    setCurrencyState(selectedCurrency);
+    dispatch(setCurrency(selectedCurrency));
+  };
   return (
     <div>
       <Box

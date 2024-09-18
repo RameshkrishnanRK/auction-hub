@@ -5,6 +5,7 @@ import contactReducer from "../slices/contactSlice";
 import sideBarRegionReducer from "../slices/sideBarRegionSlice";
 import loginReducer from "../slices/loginSlice";
 import registerReducer from "../slices/registerSlice";
+import currencyReducer from "../slices/currencySlice";
 
 const rootReducer = combineReducers({
   product: productReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   sideBarRegion: sideBarRegionReducer,
   login: loginReducer,
   register: registerReducer,
+  currency: currencyReducer,
 });
 
 export default rootReducer;
