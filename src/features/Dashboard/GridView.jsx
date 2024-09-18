@@ -154,7 +154,7 @@ const GridView = ({ subCatData, subRegData, searchTerm, status, filter, sortData
           </Grid>
         ))
       ) : (
-        <div className={styles.noResults}>No products found</div>
+        <div className={styles.noResults}>Search not found</div>
       )}
     </Grid>
     </>
