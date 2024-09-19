@@ -1,4 +1,4 @@
-// src/data/dummyData.js
+
 export const bidderData = {
     previousBids: ["Bid #1", "Bid #2", "Bid #3"],
     paymentsDone: ["Payment #1", "Payment #2"],

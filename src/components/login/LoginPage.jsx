@@ -36,7 +36,6 @@ const LoginPage = () => {
 
     let valid = true;
 
-    // Validate username
     if (username === "") {
       setUsernameError("This field is required");
       valid = false;
@@ -44,7 +43,6 @@ const LoginPage = () => {
       setUsernameError("");
     }
 
-    // Validate password
     if (password === "") {
       setPasswordError("This field is required");
       valid = false;
@@ -52,7 +50,6 @@ const LoginPage = () => {
       setPasswordError("");
     }
 
-    // Validate role selection
     if (role === "") {
       setRoleError("Please select a role");
       valid = false;
@@ -62,16 +59,14 @@ const LoginPage = () => {
 
     if (!valid) return;
 
-    // Dispatch login success with user data
     const userData = {
       user: username,
-      role: role, // Assign role from the selection
+      role: role, 
     };
     dispatch(loginSuccess(userData));
 
     localStorage.setItem("role", role);
 
-    // Navigate to "My Account" with role-based state
     navigate("/view", { state: { role: role } });
   };
 
@@ -136,7 +131,6 @@ const LoginPage = () => {
                 error={passwordError !== ""}
                 helperText={passwordError}
               />
-              {/* Role Selection Dropdown */}
               <FormControl
                 variant="standard"
                 fullWidth

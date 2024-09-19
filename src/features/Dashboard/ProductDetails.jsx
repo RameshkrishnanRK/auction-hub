@@ -48,6 +48,7 @@ const ProductDetails = () => {
     formattedBid = Number(product?.currentBid).toLocaleString("en-IN");
     console.log('formattedBid: ', formattedBid);
   }
+  const buyNowPrice = Number(product?.buyNow).toLocaleString("en-IN");
 
   const [cleanedFormattedBid, setCleanedFormattedBid] = useState(product?.currentBid || 0);
   const [addedToWatchList] = useState(false);
@@ -385,7 +386,7 @@ const ProductDetails = () => {
                     <hr style={{ border: "0", borderTop: "1px solid #000" }} />
                   </Typography>
                   <Button className={Styles.buyNowBtn} onClick={handleBuyNow}>
-                  Buy Now {currency} {product.buyNow}
+                  Buy Now {currency} {buyNowPrice}
                   </Button>
                   <Typography variant="body2" className={Styles.orText}>
                     <hr style={{ border: "1px solid grey", width: "200" }} />

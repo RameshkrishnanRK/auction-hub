@@ -7,7 +7,6 @@ import styles from "../login/myAccount.module.scss";
 
 const MyAccount = () => {
   const location = useLocation();
-  //   const { role } = location.state;
   const storedRole = localStorage.getItem("role");
   const [accountData, setAccountData] = useState({});
 

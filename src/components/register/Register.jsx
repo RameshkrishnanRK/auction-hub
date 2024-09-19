@@ -27,8 +27,7 @@ const Register = () => {
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
   const dispatch = useDispatch();
-  useSelector((state) => state.register); // Updated state selector for registration
-
+  useSelector((state) => state.register); 
   const navigate = useNavigate();
 
   const handleRegister = (e) => {
@@ -72,7 +71,7 @@ const Register = () => {
         username,
         email,
       };
-      dispatch(registerSuccess(userData)); // Dispatching registration success action
+      dispatch(registerSuccess(userData)); 
     }
 
     navigate("home");
