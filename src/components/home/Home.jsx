@@ -5,11 +5,9 @@ import Layout from "../../routing/components/Layout";
 import { useSelector } from "react-redux";
 
 const Home = () => {
-  // To  fetch users details from store
   const userStore = useSelector((state) => state.register.user);
   console.log('Registered-users from store: ', userStore);
 
-  // To  fetch users details from localstorage
   const userLocal = localStorage.getItem("user");
   console.log('Registered-users from local: ', userLocal);
 
@@ -21,9 +19,11 @@ const Home = () => {
           className={Styles.auctionTitle}
           component="h1"
           fontWeight="bold"
-          fontSize="1.5rem"
+          fontSize="1.75rem"
           marginLeft="40px"
           margin-top="5px"
+          paddingTop='20px'
+          paddingBottom='20px'
         >
           Welcome to KPMG Auction Platform!
         </Typography>
@@ -31,6 +31,7 @@ const Home = () => {
           className={Styles.auctionDescription}
           component="p"
           margin="20px"
+          marginTop='10px'
         >
           KPMG Auction platform is a dynamic platform for buying and selling of
           Goods and Properties. It's a all in one Platform that provides users,
