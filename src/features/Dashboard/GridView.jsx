@@ -15,56 +15,50 @@ const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
 
-const GridView = ({subCatData, subRegData, searchTerm, status, filter, sortData }) => {
+const GridView = ({ subCatData, subRegData, searchTerm, status, filter, sortData, currency, currencyRates }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
-    
-  const {
-    data: products,  
-  } = useSelector((state) => state.product);
+
+  const { data: products } = useSelector((state) => state.product);
 
   const getTimeValue = (timeVal) => {
     if (timeVal === "expired") return Number.MAX_SAFE_INTEGER;
     return parseInt(timeVal, 10) || Number.MAX_SAFE_INTEGER;
   };
 
-  
+  useEffect(() => {
+    let filtered = products;
 
-useEffect(() => {
-    const filtered = products
-    .filter((product) => {
-      const matchStatusFilter =
-        (status === "active" &&
-          product.status === "active" &&
-          product.isExpired === false) ||
-        (status === "completed" &&
-          product.status === "completed" &&
-          product.isExpired === true);
+    if (subCatData.length > 0) {
+      filtered = filtered.filter((product) =>
+        subCatData.includes(product.subCatType)
+      );
+    }
 
-          
-      const matchTypeSubCat =
-      subCatData && subCatData.length > 0
-        ? product.subCatType === subCatData || subCatData === "all"
-        : true; 
-        const matchTypeSubReg =
-        subRegData && subRegData.length > 0
-          ? product.subregion === subRegData || subRegData === "all"
-          : true; 
-    const matchTypeFilter =
-      filter && filter !== "all"
-        ? product.type === filter
-        : true; 
+    if (subRegData.length > 0) {
+      filtered = filtered.filter((product) =>
+        subRegData.includes(product.subregion)
+      );
+    }
 
-      const matchTermFilter =
-        product.title?.toLowerCase()?.includes(searchTerm?.toLowerCase()) ||
-        searchTerm === (null || "");
-      return matchStatusFilter && matchTypeFilter && matchTypeSubCat && matchTypeSubReg && matchTermFilter;
-    })
-    .sort((a, b) => {
+    if (status) {
+      filtered = filtered.filter((product) => product.status === status);
+    }
+
+    if (filter && filter !== "all") {
+      filtered = filtered.filter((product)=> product.type === filter);
+    }
+
+    if (searchTerm) {
+      filtered = filtered.filter((product) =>
+        product.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    filtered = filtered.sort((a, b) => {
       const timeComparison =
-        getTimeValue(a.timeRemaining) - getTimeValue(b.timeRemaining);    
+        getTimeValue(a.timeRemaining) - getTimeValue(b.timeRemaining);
 
       if (timeComparison === 0) {
-        
         if (sortData === "title-a-to-z") {
           return a.title.localeCompare(b.title);
         } else if (sortData === "title-z-to-a") {
@@ -84,6 +78,7 @@ useEffect(() => {
 
       return sortData === "title-a-to-z" ? -timeComparison : timeComparison;
     });
+
     setFilteredProducts(filtered);
   }, [products, subCatData, subRegData, searchTerm, status, filter, sortData]); 
 
@@ -149,19 +144,19 @@ useEffect(() => {
               id={product.id}
               image={product.image}
               title={product.title}
-              currentBid={product.currentBid}
+              currentBid={(product.currentBid * currencyRates[currency]).toFixed(
+                2,
+              )}
+              currency={currency}
               timeRemaining={product.timeRemaining}
               isExpired={product.isExpired}
             />
           </Grid>
         ))
       ) : (
-        <div className={styles.noResults}>
-          Search not found
-        </div>
+        <div className={styles.noResults}>Search not found</div>
       )}
-      
-      </Grid>
+    </Grid>
     </>
   );
 };

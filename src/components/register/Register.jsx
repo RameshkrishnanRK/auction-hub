@@ -75,7 +75,7 @@ const Register = () => {
       dispatch(registerSuccess(userData)); // Dispatching registration success action
     }
 
-    navigate("/auction/home");
+    navigate("home");
   };
   return (
     <Container>
@@ -194,7 +194,7 @@ const Register = () => {
               </Button>
               <span>Already have an account? {" "}</span>
               <Button color="inherit">
-                <Link to="/auction/login">Login here</Link>
+                <Link to="/login">Login here</Link>
               </Button>
             </form>
           </div>

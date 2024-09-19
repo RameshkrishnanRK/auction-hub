@@ -56,7 +56,7 @@ export default function Header({ setSearchTerm }) {
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate("/auction/login");
+    navigate("/login");
   };
 
   const handleSearch = () => {
@@ -74,7 +74,7 @@ export default function Header({ setSearchTerm }) {
           <img alt="kpmg" src={kpmgImage} />
 
           <Box sx={{ flexGrow: 1 }} />
-          {location.pathname.includes("/auction/view") && (
+          {location.pathname.includes("/view") && (
             <>
               <Search>
                 <SearchIconWrapper>
@@ -110,7 +110,7 @@ export default function Header({ setSearchTerm }) {
             component="div"
             ml={3}
           >
-            <Link to="/auction/view">Browse</Link>
+            <Link to="/view">Browse</Link>
           </Typography>
           <Typography
             variant="h6"
@@ -119,17 +119,7 @@ export default function Header({ setSearchTerm }) {
             className={styles.link}
             ml={3}
           >
-            <Link to="/auction/sell">Sell</Link>
-          </Typography>
-
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            className={styles.link}
-            ml={3}
-          >
-            <Link to="/auction/contact-us">Contact Us</Link>
+            <Link to="/sell">Sell</Link>
           </Typography>
 
           <Typography
@@ -139,12 +129,32 @@ export default function Header({ setSearchTerm }) {
             className={styles.link}
             ml={3}
           >
-            <Link to="/auction/about-us">About Us</Link>
+            <Link to="/contact-us">Contact Us</Link>
+          </Typography>
+
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            className={styles.link}
+            ml={3}
+          >
+            <Link to="/about-us">About Us</Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1 }} />
           {userData ? (
             <>
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                className= {styles.link}
+                ml={8}
+                margin="10px"
+              >
+                <Link to="/myaccount">My Account</Link>
+              </Typography>
               Hello, {userData.user}
               <LogoutOutlinedIcon
                 onClick={handleLogout}
@@ -158,11 +168,11 @@ export default function Header({ setSearchTerm }) {
             </>
           ) : (
             <>
-            <Button color="inherit" className={styles.link}>
-                <Link to="/auction/register">Register</Link>
+              <Button color="inherit" className={styles.link}>
+                <Link to="/register">Register</Link>
               </Button>
               <Button color="inherit" className={styles.link}>
-                <Link to="/auction/login">Login</Link>
+                <Link to="/login">Login</Link>
               </Button>
             </>
           )}

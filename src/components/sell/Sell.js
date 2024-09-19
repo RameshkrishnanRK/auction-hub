@@ -134,7 +134,7 @@ const Sell = () => {
         if (step === 2) {
             if (title && description && price) {
                 setErrors({})
-                navigate(`/auction/view?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}&price=${encodeURIComponent(price)}`);
+                navigate(`/view?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}&price=${encodeURIComponent(price)}`);
             } else {
                 if (!title) {
                     setErrors(prevState => ({ ...prevState, title: true }))
