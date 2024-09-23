@@ -17,7 +17,6 @@ const registerSlice = createSlice({
     registerSuccess: (state, action) => {
       state.loading = false;
       state.user = action.payload;
-      // To store in local
       localStorage.setItem("user", JSON.stringify(action.payload));
     },
     registerFailure: (state, action) => {

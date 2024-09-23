@@ -36,7 +36,6 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilter
   const [status, setStatus] = useState("active");
   const [filter, setFilter] = useState("all");
   const [sortData, setSortData] = useState("");
-  // const [currency, setCurrencyState] = useState("$");
 
   const {currency, currencyRates} = useSelector((state)=> state.currency);
 
@@ -61,7 +60,6 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilter
   };
   const handleCurrencyChange = (event) => {
     const selectedCurrency = event.target.value;
-    // setCurrencyState(selectedCurrency);
     dispatch(setCurrency(selectedCurrency));
   };
   const currentCurrencyRate= currencyRates?.[currency] || 1;

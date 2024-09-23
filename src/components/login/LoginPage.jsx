@@ -18,13 +18,13 @@ import kpmgLogo from "../../assets/images/Auction.KPMG_logo_blue.png";
 import kpmgLoginImage from "../../assets/images/Auction.png";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../../redux/slices/loginSlice";
-import { fetchRoles } from "../../redux/slices/roleSlice"; // Import the action
+import { fetchRoles } from "../../redux/slices/roleSlice"; 
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-  const [role, setRole] = useState(""); // Role selection state
+  const [role, setRole] = useState(""); 
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [roleError, setRoleError] = useState("");
@@ -32,11 +32,11 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const roles = useSelector((state) => state.roles.roles); // Access roles from Redux
+  const roles = useSelector((state) => state.roles.roles); 
 
-  // Fetch roles on component mount
+  
   useEffect(() => {
-    dispatch(fetchRoles()); // Dispatch fetchRoles action
+    dispatch(fetchRoles()); 
   }, [dispatch]);
 
   const handleLogin = (e) => {
