@@ -4,7 +4,6 @@ import {
   Alert,
   Box,
   Breadcrumbs,
-  
   Button,
   Card,
   CardContent,
@@ -34,7 +33,7 @@ const ProductDetails = () => {
 
   const { data: products } = useSelector((state) => state.product);
 
-  const { currency } = useSelector((state) => state.currency);
+  const { currency, currencyRates } = useSelector((state) => state.currency);
   window.history.replaceState(null, "/view");
 
   
@@ -43,12 +42,15 @@ const ProductDetails = () => {
       products.length > 0 &&
       products.find((product) => product?.id === parseInt(productId));
 
-  let formattedBid = 0;
-  if (product && product?.currentBid !== undefined) {
-    formattedBid = Number(product?.currentBid).toLocaleString("en-IN");
-    console.log('formattedBid: ', formattedBid);
-  }
-  const buyNowPrice = Number(product?.buyNow).toLocaleString("en-IN");
+  const currentCurrencyRate = currencyRates?.[currency] || 1;
+
+  const formattedBid = product?.currentBid
+  ? (product.currentBid* currentCurrencyRate).toLocaleString('en-IN')
+  : '0.00';
+  const buyNowPrice = product?.buyNow
+  ?(product.buyNow* currentCurrencyRate).toLocaleString('en-IN')
+  :'0.00';
+ 
 
   const [cleanedFormattedBid, setCleanedFormattedBid] = useState(product?.currentBid || 0);
   const [addedToWatchList] = useState(false);

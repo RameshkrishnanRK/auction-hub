@@ -17,7 +17,7 @@ import { filterByOptions, sortOptions } from "../../jsonData";
 import GridView from "./GridView";
 import ListView from "./ListView";
 import filteredProducts from '../Dashboard/Browse';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {setCurrency} from '../../redux/slices/currencySlice';
 
 
@@ -28,12 +28,7 @@ const currencyOptions =[
   { label: " Yen (JPY)", value: "¥"}
 ];
 
-const currencyRates = {
-  '$':1,
-  '₹': 74.85,
-  "€": 0.85,
-  "¥": 110.12,
-};
+
 
 
 const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilteredProducts}) => {
@@ -41,7 +36,9 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilter
   const [status, setStatus] = useState("active");
   const [filter, setFilter] = useState("all");
   const [sortData, setSortData] = useState("");
-  const [currency, setCurrencyState] = useState("$");
+  // const [currency, setCurrencyState] = useState("$");
+
+  const {currency, currencyRates} = useSelector((state)=> state.currency);
 
   const dispatch = useDispatch();
 
@@ -64,9 +61,17 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilter
   };
   const handleCurrencyChange = (event) => {
     const selectedCurrency = event.target.value;
-    setCurrencyState(selectedCurrency);
+    // setCurrencyState(selectedCurrency);
     dispatch(setCurrency(selectedCurrency));
   };
+  const currentCurrencyRate= currencyRates?.[currency] || 1;
+
+  const adjustedProducts = products.map(product=> ({
+    ...products,
+    currentBid: (products.currentBid* currentCurrencyRate).toFixed(2),
+    buyNow: (product.buyNow* currentCurrencyRate).toFixed(2),
+  }));
+
   return (
     <div>
       <Box
@@ -229,7 +234,7 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilter
       </Box>
       {view === "grid" ? (
         <GridView
-        products={filteredProducts}
+        products={adjustedProducts}
           subCatData={subCatData}
           subRegData={subRegData}
           searchTerm={searchTerm}
@@ -241,7 +246,7 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilter
         />
       ) : (
         <ListView
-        products={filteredProducts}
+        products={adjustedProducts}
           subCatData={subCatData}
           subRegData={subRegData}
           searchTerm={searchTerm}
