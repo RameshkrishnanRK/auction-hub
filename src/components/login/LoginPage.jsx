@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Container,
@@ -16,8 +16,9 @@ import {
 } from "@mui/material";
 import kpmgLogo from "../../assets/images/Auction.KPMG_logo_blue.png";
 import kpmgLoginImage from "../../assets/images/Auction.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../../redux/slices/loginSlice";
+import { fetchRoles } from "../../redux/slices/roleSlice"; // Import the action
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -30,6 +31,13 @@ const LoginPage = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const roles = useSelector((state) => state.roles.roles); // Access roles from Redux
+
+  // Fetch roles on component mount
+  useEffect(() => {
+    dispatch(fetchRoles()); // Dispatch fetchRoles action
+  }, [dispatch]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -61,7 +69,7 @@ const LoginPage = () => {
 
     const userData = {
       user: username,
-      role: role, 
+      role: role,
     };
     dispatch(loginSuccess(userData));
 
@@ -144,8 +152,17 @@ const LoginPage = () => {
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
                 >
-                  <MenuItem value="bidder">Bidder</MenuItem>
-                  <MenuItem value="auctioneer">Auctioneer</MenuItem>
+                  {roles.length > 0 ? (
+                    roles.map((r) => (
+                      <MenuItem key={r.id} value={r.name}>
+                        {r.name}
+                      </MenuItem>
+                    ))
+                  ) : (
+                    <MenuItem value="" disabled>
+                      Loading roles...
+                    </MenuItem>
+                  )}
                 </Select>
                 {roleError && (
                   <Typography variant="body2" color="error">
@@ -154,7 +171,13 @@ const LoginPage = () => {
                 )}
               </FormControl>
 
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: 'center' }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
                 <FormControlLabel
                   control={
                     <Checkbox
@@ -183,10 +206,9 @@ const LoginPage = () => {
               </Button>
             </form>
           </div>
-        </Paper>
-      </div>
-    </Container>
+          </Paper>
+          </div>
+          </Container>
   );
 };
-
-export default LoginPage
+export default LoginPage;

@@ -4,12 +4,14 @@ import { bidderData, auctioneerData } from "../login/data/dummyData";
 import Layout from "../../routing/components/Layout";
 import { Box, Breadcrumbs } from "@mui/material";
 import styles from "../login/myAccount.module.scss";
+import { useSelector } from "react-redux";
 
 const MyAccount = () => {
   const location = useLocation();
   const storedRole = localStorage.getItem("role");
   const [accountData, setAccountData] = useState({});
 
+  const rolesData = useSelector((state)=> state.roles);
   const role = location.state?.role || storedRole || "bidder";
 
   useEffect(() => {

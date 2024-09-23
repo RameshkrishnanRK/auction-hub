@@ -18,7 +18,7 @@ export const productsData = [
   {
     id: 1,
     image: process.env.PUBLIC_URL + "/images/villa.jfif",
-    title: "2018 Private Villa at Drass",
+    title: "Private Villa at Drass",
     currentBid: 120000000,
     buyNow:140000000,
     timeRemaining: "Expired",
@@ -65,7 +65,7 @@ export const productsData = [
   },
   {
     id: 4,
-    image: process.env.PUBLIC_URL + "/images/Home.png",
+    image: process.env.PUBLIC_URL + "/images/villa.jfif",
     title: "Luxury Home",
     currentBid: 3000000,
     buyNow:45000000,

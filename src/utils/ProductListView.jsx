@@ -27,7 +27,6 @@ const ProductListView = ({
     navigate(`/product-details?productId=${id}`);
   };
   const handleBid = () => {
-    // const userName = userData && userData.user;
     if (userData !== null) {
       navigate(`/product-details?productId=${id}`);
     } else {
@@ -45,13 +44,8 @@ const ProductListView = ({
         className={styles.productListImage}
       />
       <CardContent className={styles.productListTitle}>
-        <Typography variant="h6" component="div" onClick={handleViewDetails}>
-          <Link
-            to={`/product-details?productId=${id}`}
-            style={{ textDecoration: "none" }}
-          >
+        <Typography variant="h6" component="div" >
             {title}
-          </Link>
         </Typography>
       </CardContent>
       <Box className={styles.productListActions}>

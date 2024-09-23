@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import Styles from "./ProductGridView.module.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import currency from '../features/Dashboard/ControlPanel';
 
@@ -30,7 +30,6 @@ const ProductGridView = ({
   };
 
   const handleBid = () => {
-    // const userName = userData && userData.user;
     if (userData !== null) {
       navigate(`/product-details?productId=${id}`);
     } else {
