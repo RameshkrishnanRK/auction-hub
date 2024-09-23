@@ -11,3 +11,4 @@ export const bidderData = {
     savedAuctions: ["Saved Auction #1", "Saved Auction #2"],
     wishlists: ["Wishlist Item #1", "Wishlist Item #2"],
   };
+  export const guestdata ={};

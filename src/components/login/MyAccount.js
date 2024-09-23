@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { bidderData, auctioneerData } from "../login/data/dummyData";
+import { bidderData, auctioneerData, guestdata } from "../login/data/dummyData";
 import Layout from "../../routing/components/Layout";
 import { Box, Breadcrumbs } from "@mui/material";
 import styles from "../login/myAccount.module.scss";
@@ -10,15 +10,24 @@ const MyAccount = () => {
   const storedRole = localStorage.getItem("role");
   const [accountData, setAccountData] = useState({});
 
-  const role = location.state?.role || storedRole || "bidder";
+  const role = location.state?.role || storedRole || "guest";
 
   useEffect(() => {
-    if (role === "bidder") {
-      setAccountData(bidderData);
-    } else if (role === "auctioneer") {
-      setAccountData(auctioneerData);
+    switch (role) {
+      case "bidder":
+        setAccountData(bidderData);
+        break;
+        case "auctioneer":
+          setAccountData(auctioneerData);
+          break;
+          case "guest":
+            setAccountData(guestdata);
+            break;
+          default:
+            setAccountData({});
     }
   }, [role]);
+  
 
   return (
     <div>
@@ -91,6 +100,9 @@ const MyAccount = () => {
               ))}
             </ul>
           </>
+        )}
+        {role === 'guest' && (
+          <p>Welcome, Guest! you have no account data available.</p>
         )}
       </div>
     </div>
