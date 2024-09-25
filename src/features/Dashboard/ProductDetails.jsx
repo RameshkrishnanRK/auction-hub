@@ -19,6 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ReusableModal from "../../utils/reusableModal";
 import Layout from "../../routing/components/Layout";
 import styles from "../Dashboard/ProductDetails.module.scss";
+import BidHistory from "./BidHistory";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -30,6 +31,7 @@ const ProductDetails = () => {
 
   const [openBidModal, setOpenBidModal] = useState(false);
   const [openOfferModal, setOpenOfferModal] = useState(false);
+  const [openBidhistoryModal, setOpenBidHistoryModal] = useState(false);
 
   const { data: products } = useSelector((state) => state.product);
 
@@ -298,6 +300,10 @@ const ProductDetails = () => {
     </Box>
   );
 
+  const handleBidHistoryClick=()=>{
+    setOpenBidHistoryModal(true);
+  }
+
   return (
     <>
       <Layout />
@@ -443,13 +449,17 @@ const ProductDetails = () => {
                         variant="body2"
                         style={{ fontSize: "18px", fontWeight: "bold" }}
                       >
-                        1 Bid (s)
+                        3 Bid (s)
                       </Typography>
                       <Typography
                         variant="body2"
                         style={{ fontSize: "18px", fontWeight: "bold" }}
                       >
-                        Bid History {">"}
+                        {/* Bid History {">"} */}
+                        <Button onClick={handleBidHistoryClick} variant="contained"
+                      color="primary"
+                      className={Styles.addWatchListBtn} style={{ textTransform:"none"}}
+                        >Show Bid History</Button>
                       </Typography>
                     </Box>
                   </Box>
@@ -482,6 +492,10 @@ const ProductDetails = () => {
             </CardContent>
           </Box>
         </Card>
+        <BidHistory 
+        open={openBidhistoryModal}
+        onClose={()=>setOpenBidHistoryModal(false)}
+        />
         <ReusableModal
           open={openBidModal}
           onClose={handleBidModalClose}
