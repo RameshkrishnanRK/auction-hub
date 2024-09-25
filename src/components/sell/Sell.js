@@ -139,9 +139,7 @@ const Sell = () => {
                 if (!title) {
                     setErrors(prevState => ({ ...prevState, title: true }))
                 }
-                // if (!description) {
-                //     setErrors(prevState => ({ ...prevState, description: true }))
-                // }
+                
                 if (!price) {
                     setErrors(prevState => ({ ...prevState, price: true }))
                 }
@@ -154,8 +152,7 @@ const Sell = () => {
     const handleFileChange = (event) => {
         console.log(event.target.files);
         setFile(URL.createObjectURL(event.target.files[0]))
-        // console.log(file, "upload")
-        // Process the file
+        
     };
 
     return (
@@ -356,7 +353,6 @@ const Sell = () => {
                                                         <Grid item xs={10} sx={{ paddingRight: '20px' }}>
                                                             <FormControl sx={{ m: 1, width: '100%', backgroundColor: '#F8F9F9' }} variant="outlined">
                                                                 <OutlinedInput                                                                
-                                                                    // type='number'
                                                                     size='small'
                                                                     id="outlined-adornment-weight"
                                                                     aria-describedby="outlined-weight-helper-text"
@@ -409,7 +405,7 @@ const Sell = () => {
                                                         <Grid >
 
                                                             <FormControl  sx={{ m: 1, width: '100%' }} variant="outlined">
-                                                            <img src={file} width="300px" height="150px" style={{float:'right'}}  />
+                                                            <img src={file} width="300px" height="150px" style={{float:'right'}} alt='' />
                                                                 <Input disableUnderline='false'
                                                                     type='file'                                                                   
                                                                     onChange={handleFileChange}
