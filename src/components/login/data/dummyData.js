@@ -4,7 +4,12 @@ export const bidderData = {
     paymentsDone: ["Payment #1", "Payment #2"],
     savedBids: ["Saved Bid #1", "Saved Bid #2"],
   };
-  
+  export const bids = [
+    { bidderName: "Smith", time: "12:30 PM", date: "2024-09-21", amount: 1500, status: "lowest" },
+    { bidderName: "Virat", time: "01:00 PM", date: "2024-09-21", amount: 3000, status: "highest" },
+    { bidderName: "Anne", time: "01:30 PM", date: "2024-09-21", amount: 2200, status: "" },
+  ];
+
   export const auctioneerData = {
     previousAuctions: ["Auction #1", "Auction #2"],
     paymentsReceived: ["Payment Received #1", "Payment Received #2"],
