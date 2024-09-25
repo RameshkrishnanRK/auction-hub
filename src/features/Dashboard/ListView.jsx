@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ProductListView from "../../utils/ProductListView";
 import styles from "./ListView.module.scss";
 import { useSelector } from "react-redux";
-import { Grid } from "@mui/material";
+import { Grid, Pagination } from "@mui/material";
 
 const ListView = ({
   subCatData,
@@ -15,6 +15,8 @@ const ListView = ({
   currencyRates
 }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
   const { data: products } = useSelector((state) => state.product);
 
@@ -77,12 +79,25 @@ const ListView = ({
     });
 
     setFilteredProducts(filtered);
+    setCurrentPage(1);
   }, [products, subCatData, subRegData, searchTerm, status, filter, sortData]);
+
+  const indexOfLastProduct = currentPage * itemsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct,
+  );
+
+  const handlePageChange = (event, newPage) => {
+    setCurrentPage(newPage);
+  };
+
 
   return (
     <div className={styles.listViewProducts}>
-      {filteredProducts.length > 0 ? (
-        filteredProducts.map((product) => (
+      {currentProducts.length > 0 ? (
+        currentProducts.map((product) => (
           <Grid item xs={12} key={product.id}>
             <ProductListView
               key={product.id}
@@ -101,7 +116,17 @@ const ListView = ({
       ) : (
         <div className={styles.noResults}>Search not found</div>
       )}
+      <Grid container justifyContent="center" style={{ marginTop: "20px" }}>
+        <Pagination
+          count={Math.ceil(filteredProducts.length / itemsPerPage)}
+          page={currentPage}
+          onChange={handlePageChange}
+          color="primary"
+          style={{ marginTop: "10px", marginBottom:'20px' }}
+        />
+      </Grid>
     </div>
+    
   );
 };
 
