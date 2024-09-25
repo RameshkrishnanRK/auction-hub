@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Box, Typography, List, ListItem } from "@mui/material";
+import { Modal, Box, Typography, List, ListItem, IconButton } from "@mui/material";
 import { bidderData } from '../../components/login/data/dummyData';
+import CloseIcon from '@mui/icons-material/Close';
+
 const BidHistory = ({ open, onClose }) => {
   const [bidHistory, setBidHistory] = useState([]);
 
-  // Fetch bid history from an API or local data (like bidderData) when the component mounts
   useEffect(() => {
     if (open) {
-      // Here you can fetch from an external API if needed. For now, we'll use mock data.
       setBidHistory(bidderData.previousBids);
     }
   }, [open]);
@@ -22,14 +22,18 @@ const BidHistory = ({ open, onClose }) => {
           transform: "translate(-50%, -50%)",
           width: 400,
           bgcolor: "background.paper",
-          border: "2px solid #000",
           boxShadow: 24,
-          p: 4,
+          p: 2,
         }}
       >
+       <Box sx={{display:"flex", justifyContent:"space-between", alignItems:"center", mb:2}}>
         <Typography variant="h6" component="h2">
           Bid History
         </Typography>
+        <IconButton onClick={onClose}>
+            <CloseIcon />
+        </IconButton>
+        </Box>
         <List>
           {bidHistory.map((bid, index) => (
             <ListItem key={index}>{bid}</ListItem>
