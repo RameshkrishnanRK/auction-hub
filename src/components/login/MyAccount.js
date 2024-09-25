@@ -14,13 +14,13 @@ const MyAccount = () => {
 
   useEffect(() => {
     switch (role) {
-      case "bidder":
+      case "Bidder":
         setAccountData(bidderData);
         break;
-        case "auctioneer":
+        case "Auctioneer":
           setAccountData(auctioneerData);
           break;
-          case "guest":
+          case "Guest":
             setAccountData(guestdata);
             break;
           default:
@@ -45,7 +45,7 @@ const MyAccount = () => {
 
       <div  className="my-account-page" style={{ paddingLeft: "55px", paddingTop: "10px"}}>
         <h2 >My Account</h2>
-        {role === "bidder" && (
+        {role === "Bidder" && (
           <>
             <h3 >Previous Bids</h3>
             <ul>
@@ -70,7 +70,7 @@ const MyAccount = () => {
           </>
         )}
 
-        {role === "auctioneer" && (
+        {role === "Auctioneer" && (
           <>
             <h3>Previous Auctions</h3>
             <ul>
@@ -101,7 +101,7 @@ const MyAccount = () => {
             </ul>
           </>
         )}
-        {role === 'guest' && (
+        {role === 'Guest' && (
           <p>Welcome, Guest! you have no account data available.</p>
         )}
       </div>

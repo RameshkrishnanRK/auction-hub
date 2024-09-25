@@ -135,28 +135,29 @@ const GridView = ({ subCatData, subRegData, searchTerm, status, filter, sortData
           ))
       }
     </Grid>
-      <Grid container spacing={2}>
+    <Grid container>
         {filteredProducts.length > 0 ? (
-        title === null &&        
-        filteredProducts.map((product) => (
-          <Grid item xs={12} sm={6} md={4} mt={2} key={product.id}>
-            <ProductGridView
-              id={product.id}
-              image={product.image}
-              title={product.title}
-              currentBid={(product.currentBid * currencyRates[currency]).toFixed(
-                2,
-              )}
-              currency={currency}
-              timeRemaining={product.timeRemaining}
-              isExpired={product.isExpired}
-            />
-          </Grid>
-        ))
-      ) : (
-        <div className={styles.noResults}>Search not found</div>
-      )}
-    </Grid>
+          title === null &&
+          filteredProducts.map((product) => (
+            <Grid item xs={12} sm={6} md={4} key={product.id}>
+              <ProductGridView
+                id={product.id}
+                image={product.image}
+                title={product.title}
+                currentBid={(product.currentBid * currencyRates[currency]).toFixed(
+                  2,
+                )}
+                currency={currency}
+                timeRemaining={product.timeRemaining}
+                isExpired={product.isExpired}
+              />
+            </Grid>
+          ))
+        ) : (
+          <div className={styles.noResults}>Search not found</div>
+        )}
+      </Grid>
+      
     </>
   );
 };

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ProductListView from "../../utils/ProductListView";
 import styles from "./ListView.module.scss";
 import { useSelector } from "react-redux";
+import { Grid } from "@mui/material";
 
 const ListView = ({
   subCatData,
@@ -82,18 +83,20 @@ const ListView = ({
     <div className={styles.listViewProducts}>
       {filteredProducts.length > 0 ? (
         filteredProducts.map((product) => (
-          <ProductListView
-            key={product.id}
-            id={product.id}
-            image={product.image}
-            title={product.title}
-            currentBid={(product.currentBid * currencyRates[currency]).toFixed(
-              2,
-            )}
-            currency={currency}
-            timeRemaining={product.timeRemaining}
-            isExpired={product.isExpired}
-          />
+          <Grid item xs={12} key={product.id}>
+            <ProductListView
+              key={product.id}
+              id={product.id}
+              image={product.image}
+              title={product.title}
+              currentBid={(product.currentBid * currencyRates[currency]).toFixed(
+                2,
+              )}
+              currency={currency}
+              timeRemaining={product.timeRemaining}
+              isExpired={product.isExpired}
+            />
+          </Grid>
         ))
       ) : (
         <div className={styles.noResults}>Search not found</div>

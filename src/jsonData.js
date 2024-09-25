@@ -283,3 +283,9 @@ export const filterByOptions = [
   { value: "fixed-price", label: "Fixed Price" },
   { value: "classified", label: "Classified" },
 ];
+export const currencyOptions =[
+  { label: " Dollar (USD)", value: "$"},
+  { label: " Rupees (INR)", value: "₹"},
+  { label: " Euro (EUR)", value: "€"},
+  { label: " Yen (JPY)", value: "¥"}
+];
