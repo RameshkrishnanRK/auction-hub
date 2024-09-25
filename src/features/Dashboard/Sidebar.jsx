@@ -96,13 +96,11 @@ const Sidebar = ({ setSubCatData, setSubRegData }) => {
                               />
                               
                             }
-                            // label={subcategory.name}
                             label={
                               <Typography sx={{ fontSize: "12px"}}>
                                 {subcategory.name}
                               </Typography>
                             }
-                            // sx={{ fontSize: 'small'}}
                             sx={{ margin: 0, padding: 0 }}
                             />
                         </ListItem>
@@ -145,13 +143,11 @@ const Sidebar = ({ setSubCatData, setSubRegData }) => {
                                 sx={{ transform: "scale(0.5)" }}
                               />
                             }
-                            // label={subregion.name}
                             label={
                               <Typography sx={{ fontSize: "12px"}}>
                                 {subregion.name}
                               </Typography>
                             }
-                            // sx={{ fontSize: '5px'}}
                             sx={{ margin: 0, padding: 0 }}
                             />
                         </ListItem>

@@ -102,7 +102,7 @@ const MyAccount = () => {
           </>
         )}
         {role === 'Guest' && (
-          <p>Welcome, Guest! you have no account data available.</p>
+          <p>Welcome, you have no account data available.</p>
         )}
       </div>
     </div>

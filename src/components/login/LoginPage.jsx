@@ -70,13 +70,23 @@ const LoginPage = () => {
     const userData = {
       user: username,
       role: role,
+      rememberMe,
     };
     dispatch(loginSuccess(userData));
+    if (rememberMe){
+      localStorage.setItem("userData", JSON.stringify(userData));
+    } else {
+      sessionStorage.setItem("userData", JSON.stringify(userData));
+    }
 
     localStorage.setItem("role", role);
 
     navigate("/view", { state: { role: role } });
   };
+  const storedUserData= JSON.stringify(localStorage.getItem("userData")) || JSON.parse(sessionStorage.getItem("userData"));
+  if (storedUserData){
+    console.log("Stored User Details:", storedUserData);
+  }
 
   return (
     <Container>
