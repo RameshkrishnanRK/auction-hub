@@ -122,37 +122,37 @@ export const categoriesData = [
   {
     name: "Consumer Electronics",
     quantity: 1,
-    subcategories: ["Laptop"]
+    subcategories: ["Laptop", "Mobiles"]
   },
   
   
   {
     name: "Real Estate",
     quantity: 2,
-    subcategories: [ "Villas", "Independent Houses"],
+    subcategories: [ "Villas", "Independent Houses", "Lands","Bunglows"],
   },
   
 ];
 
 export const regionsData = [
   {
-    name: "Region A",
+    name: "India South",
     quantity: 2,
-    subregions: [{ name: "Subregion 1" }, { name: "Subregion 2" }],
+    subregions: [{ name: "Bombay region" }, { name: "Madras Region" }],
   },
   {
-    name: "Region B",
+    name: "India North",
     quantity: 3,
     subregions: [
-      { name: "Subregion 4" },
-      { name: "Subregion 5" },
-      { name: "Subregion 6" },
+      { name: "Delhi NCR Region" },
+      { name: "Lucknow Region" },
+      { name: "Bengal Region" },
     ],
   },
   {
-    name: "Region C",
+    name: "India North East",
     quantity: 1,
-    subregions: [{ name: "Subregion 7" }],
+    subregions: [{ name: "Guwahati Region" }],
   },
 ];
 
