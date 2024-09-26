@@ -622,7 +622,7 @@ const Sell = () => {
                                   />
                                 )}
                                 <Input
-                                  disableUnderline={false}
+                                  disableUnderline={true}
                                   type="file"
                                   onChange={handleFileChange}
                                   inputProps={{
@@ -646,7 +646,6 @@ const Sell = () => {
                   </FormSection>
 
                   <Box
-                    className={styles.title}
                     sx={{
                       display: "flex",
                       justifyContent: "space-between",
