@@ -126,33 +126,23 @@ const ContactUs = () => {
                 autoComplete="off"
                 onSubmit={handleSubmit}
               >
-                <Grid container spacing={1} sx={{ alignItems: "center" }}>
-                  <Grid item xs={2}>
-                    <Typography variant="body2" className={styles.text}>
-                      First Name <span>*</span>
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={5}>
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
                     <TextField
                       required
                       id="firstName"
+                      label="First Name"
                       value={formState.firstName}
                       onChange={handleChange}
                       error={Boolean(errors.firstName)}
                       helperText={errors.firstName}
                     />
                   </Grid>
-                </Grid>
-                <Grid container spacing={1} sx={{ alignItems: "center" }}>
-                  <Grid item xs={2}>
-                    <Typography variant="body2" className={styles.text}>
-                      Last Name <span>*</span>
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={5}>
+                  <Grid item xs={6}>
                     <TextField
                       required
                       id="lastName"
+                      label="Last Name"
                       value={formState.lastName}
                       onChange={handleChange}
                       error={Boolean(errors.lastName)}
@@ -160,35 +150,26 @@ const ContactUs = () => {
                     />
                   </Grid>
                 </Grid>
-                <Grid container spacing={1}>
-                  <Grid item xs={2}>
-                    <Typography mt={2} className={styles.text}>
-                      Email <span>*</span>
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={5}>
+
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
                     <TextField
                       required
                       id="email"
+                      label="Email"
                       value={formState.email}
                       onChange={handleChange}
                       error={Boolean(errors.email)}
                       helperText={errors.email}
                     />
                   </Grid>
-                </Grid>
-                <Grid container spacing={1}>
-                  <Grid item xs={2}>
-                    <Typography mt={2} className={styles.text}>
-                      Message
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={5}>
+                  <Grid item xs={6}>
                     <TextField
                       multiline={true}
                       minRows={4}
                       required
-                      id="Message"
+                      id="message"
+                      label="Message"
                       value={formState.message}
                       error={Boolean(errors.message)}
                       helperText={errors.message}
@@ -201,32 +182,32 @@ const ContactUs = () => {
                     />
                   </Grid>
                 </Grid>
-                <Grid container spacing={1} >
-                  <Grid item xs={2}>
-                    <Typography mt={2} className={styles.text}>
-                      Captcha
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={5}>
+
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
                     <TextField
                       required
                       id="captcha"
+                      label="Captcha"
                       value={formState.captcha}
                       onChange={handleChange}
                       error={Boolean(errors.captcha)}
                       helperText={errors.captcha}
                     />
                   </Grid>
-                  <Grid item xs={4} mt={2}>
-                    <Box display="flex" alignItems="center" >                      
-                        <Button
-                          size="medium"
-                          variant='contained'
-                          className={styles.captchaBtn}
-                          color='primary'>
-                          {captchaCode}
-                        </Button>                     
-                        <Button onClick={resetCaptcha}><FiRefreshCcw size={20}></FiRefreshCcw></Button>                      
+                  <Grid item xs={6} mt={2}>
+                    <Box display="flex" alignItems="center">
+                      <Button
+                        size="medium"
+                        variant="contained"
+                        className={styles.captchaBtn}
+                        color="primary"
+                      >
+                        {captchaCode}
+                      </Button>
+                      <Button onClick={resetCaptcha}>
+                        <FiRefreshCcw size={20} />
+                      </Button>
                     </Box>
                   </Grid>
                 </Grid>
