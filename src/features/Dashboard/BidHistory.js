@@ -3,7 +3,6 @@ import { Modal, Box, Typography, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useTable } from "react-table";
 import { bids} from '../../components/login/data/dummyData';
-import {currency} from '../Dashboard/ControlPanel';
 
 const BidHistory = ({ open, onClose }) => {
   const [bidHistory, setBidHistory] = useState([]);
@@ -45,7 +44,7 @@ const BidHistory = ({ open, onClose }) => {
               fontWeight: "bold",
             }}
           >
-            {value === "highest" ? "Highest" : value === "lowest" ? "Lowest" : ""}
+            {value === "highest" ? "Highest" : value === "lowest" ? "Outbid" : ""}
           </span>
         ),
       },
