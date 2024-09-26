@@ -114,8 +114,7 @@ const ContactUs = () => {
                 gutterBottom
                 className={styles.disclaimer}
               >
-                All fields marked with{" "} 
-                <span style={{color: "red"}}>*</span> are required.
+                <b>Please fill all the fields. We will reach you shortly.</b>
               </Typography>
               <Box
                 component="form"
@@ -166,8 +165,7 @@ const ContactUs = () => {
                   <Grid item xs={6}>
                     <TextField
                       multiline={true}
-                      minRows={4}
-                      required
+                      minRows={1}
                       id="message"
                       label="Message"
                       value={formState.message}
