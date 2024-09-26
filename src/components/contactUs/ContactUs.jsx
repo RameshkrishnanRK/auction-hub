@@ -7,22 +7,22 @@ import {
   Grid,
   Snackbar,
   Alert,
-  Breadcrumbs,
 } from "@mui/material";
 import styles from "./ContactUs.module.scss";
 import Layout from "../../routing/components/Layout";
-import { Link } from "react-router-dom";
 import { FiRefreshCcw } from "react-icons/fi";
 
 const initialFormState = {
   firstName: "",
   lastName: "",
+  mobileNumber: "",
   email: "",
   message: "",
   captcha: "",
 };
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const mobileNumberRegex = /^[0-9]{10}$/;
 
 const ContactUs = () => {
   const generateCaptcha = () => Math.random().toString(36).substring(2, 8);
@@ -42,7 +42,7 @@ const ContactUs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateForm()) {     
+    if (validateForm()) {
       setOpenSnackBar(true);
       setFormState(initialFormState);
       resetCaptcha();
@@ -50,7 +50,7 @@ const ContactUs = () => {
   };
 
   const validateForm = () => {
-    const { firstName, lastName, email, captcha } = formState;
+    const { firstName, lastName, mobileNumber, email, captcha } = formState;
     const newErrors = {};
 
     if (!firstName) {
@@ -59,6 +59,12 @@ const ContactUs = () => {
 
     if (!lastName) {
       newErrors.lastName = "Last Name is required.";
+    }
+
+    if (!mobileNumber) {
+      newErrors.mobileNumber = "Mobile Number is required.";
+    } else if (!mobileNumberRegex.test(mobileNumber)) {
+      newErrors.mobileNumber = "Enter a valid 10-digit mobile number.";
     }
 
     if (!email) {
@@ -85,153 +91,172 @@ const ContactUs = () => {
   };
 
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       <Layout />
-      <Box>
-        <Box className={styles.box}>
-          <Breadcrumbs>
-            <Link to="/" style={{ textDecoration: "none" }}>
-              Home
-            </Link>
-            <Link style={{ textDecoration: "none" }}>Contact Us</Link>
-          </Breadcrumbs>
+      <Box
+        sx={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          backgroundImage: "url(/images/GetInTouchWithUs.jpg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          zIndex: -1,
+        }}
+      />
+
+      <Box
+        sx={{
+          position: "relative",
+          maxWidth: "800px",
+          mx: "auto",
+          p: 4,
+          mt: 4,
+          backgroundColor: "rgba(255, 255, 255, 0.9)",
+          borderRadius: 2,
+          boxShadow: 3,
+        }}
+      >
+        <Typography variant="h4" mb={3} textAlign="center" color="primary">
+          Get in touch with us
+        </Typography>
+
+        <Box component="form" noValidate onSubmit={handleSubmit}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6}>
+              <TextField
+                required
+                id="firstName"
+                label="First Name"
+                value={formState.firstName}
+                onChange={handleChange}
+                error={Boolean(errors.firstName)}
+                helperText={errors.firstName}
+                fullWidth
+                size="small"
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <TextField
+                required
+                id="lastName"
+                label="Last Name"
+                value={formState.lastName}
+                onChange={handleChange}
+                error={Boolean(errors.lastName)}
+                helperText={errors.lastName}
+                fullWidth
+                size="small"
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <TextField
+                required
+                id="mobileNumber"
+                label="Mobile Number"
+                value={formState.mobileNumber}
+                onChange={handleChange}
+                error={Boolean(errors.mobileNumber)}
+                helperText={errors.mobileNumber}
+                fullWidth
+                size="small"
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <TextField
+                required
+                id="email"
+                label="Email"
+                value={formState.email}
+                onChange={handleChange}
+                error={Boolean(errors.email)}
+                helperText={errors.email}
+                fullWidth
+                size="small"
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                id="message"
+                label="Message"
+                multiline
+                rows={4}
+                value={formState.message}
+                onChange={handleChange}
+                error={Boolean(errors.message)}
+                helperText={errors.message}
+                fullWidth
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <TextField
+                required
+                id="captcha"
+                label="Captcha"
+                value={formState.captcha}
+                onChange={handleChange}
+                error={Boolean(errors.captcha)}
+                helperText={errors.captcha}
+                fullWidth
+                size="small"
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="flex-start"
+                gap="4px"
+              >
+                <Button
+                  size="medium"
+                  variant="contained"
+                  className={styles.captchaBtn}
+                  color="primary"
+                >
+                  {captchaCode}
+                </Button>
+                <Button onClick={resetCaptcha} size="medium" variant="outlined">
+                  <FiRefreshCcw size={20} />
+                </Button>
+              </Box>
+            </Grid>
+            <Grid item xs={12} display="flex" justifyContent="center">
+              <Button type="submit" variant="contained" color="primary">
+                Send
+              </Button>
+            </Grid>
+          </Grid>
         </Box>
       </Box>
-      <div className={styles.mainContainer}>
-        <Box mt={8} className={styles.box1}>
-          <Typography
-            p={2}
-            className={styles.title}
-            marginLeft="15px"
-            marginRight="25px"
-          >
-            Contact Us
-          </Typography>
-          <Box mt={8} className={styles.container} marginTop="20px">
-            <Box p={5}>
-              {/* <Typography
-                variant="body1"
-                gutterBottom
-                className={styles.disclaimer}
-              >
-                <b>Please fill all the fields. We will reach you shortly.</b>
-              </Typography> */}
-              <Box
-                component="form"
-                sx={{
-                  "& .MuiTextField-root": { mb: 2, width: "100%" },
-                }}
-                noValidate
-                autoComplete="off"
-                onSubmit={handleSubmit}
-              >
-                <Grid container spacing={2}>
-                  <Grid item xs={6}>
-                    <TextField
-                      required
-                      id="firstName"
-                      label="First Name"
-                      value={formState.firstName}
-                      onChange={handleChange}
-                      error={Boolean(errors.firstName)}
-                      helperText={errors.firstName}
-                    />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <TextField
-                      required
-                      id="lastName"
-                      label="Last Name"
-                      value={formState.lastName}
-                      onChange={handleChange}
-                      error={Boolean(errors.lastName)}
-                      helperText={errors.lastName}
-                    />
-                  </Grid>
-                </Grid>
-
-                <Grid container spacing={2}>
-                  <Grid item xs={6}>
-                    <TextField
-                      required
-                      id="email"
-                      label="Email"
-                      value={formState.email}
-                      onChange={handleChange}
-                      error={Boolean(errors.email)}
-                      helperText={errors.email}
-                    />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <TextField
-                      multiline={true}
-                      minRows={1}
-                      id="message"
-                      label="Message"
-                      value={formState.message}
-                      error={Boolean(errors.message)}
-                      helperText={errors.message}
-                      onChange={(e) =>
-                        setFormState((prevState) => ({
-                          ...prevState,
-                          message: e.target.value,
-                        }))
-                      }
-                    />
-                  </Grid>
-                </Grid>
-
-                <Grid container spacing={2}>
-                  <Grid item xs={6}>
-                    <TextField
-                      required
-                      id="captcha"
-                      label="Captcha"
-                      value={formState.captcha}
-                      onChange={handleChange}
-                      error={Boolean(errors.captcha)}
-                      helperText={errors.captcha}
-                    />
-                  </Grid>
-                  <Grid item xs={6} mt={2}>
-                    <Box display="flex" alignItems="center">
-                      <Button
-                        size="medium"
-                        variant="contained"
-                        className={styles.captchaBtn}
-                        color="primary"
-                      >
-                        {captchaCode}
-                      </Button>
-                      <Button onClick={resetCaptcha}>
-                        <FiRefreshCcw size={20} />
-                      </Button>
-                    </Box>
-                  </Grid>
-                </Grid>
-                <Box display="flex" justifyContent="center" mt={2}>
-                  <Button type="submit" variant="contained" color="primary">
-                    Send
-                  </Button>
-                </Box>
-              </Box>
-            </Box>
-          </Box>
-        </Box>
-      </div>
       <Snackbar
         open={openSnackBar}
         autoHideDuration={6000}
         onClose={handleCloseSnackBar}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
-        <Alert onClose={handleCloseSnackBar} variant="filled" severity="success">
-          Thank you for contacting us. we will reach out you shortly
+        <Alert
+          onClose={handleCloseSnackBar}
+          variant="filled"
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Thank you for contacting us. We will reach out to you shortly.
         </Alert>
       </Snackbar>
       <Box className={styles.footer}>
         <Typography className={styles.footerText} fontSize="small">
-        © Copyright 2024 KPMG India. All Rights Reserved. No part of this web page may be reproduced in any way without the prior written permission of KPMG India.
+          © Copyright 2024 KPMG India. All Rights Reserved. No part of this web
+          page may be reproduced in any way without the prior written permission
+          of KPMG India.
         </Typography>
       </Box>
     </div>
