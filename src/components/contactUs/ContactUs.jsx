@@ -112,14 +112,14 @@ const ContactUs = () => {
           position: "relative",
           maxWidth: "800px",
           mx: "auto",
-          p: 4,
-          mt: 4,
+          p: 2,
+          mt: 1,
           backgroundColor: "rgba(255, 255, 255, 0.9)",
           borderRadius: 2,
           boxShadow: 3,
         }}
       >
-        <Typography variant="h4" mb={3} textAlign="center" color="primary">
+        <Typography variant="h5" mb={1} textAlign="center" color="primary">
           Get in touch with us
         </Typography>
 

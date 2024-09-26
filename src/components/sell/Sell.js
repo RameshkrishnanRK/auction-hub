@@ -12,7 +12,6 @@ import {
   Radio,
   Grid,
   OutlinedInput,
-  Breadcrumbs,
   Input,
   Alert,
 } from "@mui/material";
@@ -189,30 +188,23 @@ const Sell = () => {
   return (
     <>
       <Layout>
-        <>
-          <Box className={styles.breadcrumbs}>
-            <Box sx={{ paddingLeft: "5px", paddingTop: "10px" }}>
-              <Breadcrumbs className="breadcrumb" arial-label="breadcrumb">
-                <Link to="/" style={{ textDecoration: "none" }}>
-                  Home
-                </Link>
-                <Link style={{ textDecoration: "none" }}>Sell</Link>
-              </Breadcrumbs>
-            </Box>
-          </Box>
-          <MainContainer marginLeft="2px">
+          <Box
+          sx={{
+            position: "relative",
+            mx: "auto",
+            p: 1,
+            mt: 2,
+            backgroundColor: "rgba(255, 255, 255, 0.9)",
+            borderRadius: 2,
+            boxShadow: 3,
+          }}>
+          <MainContainer>
             <div className={styles.mainContainer}>
-              <Box className={styles.title}>
-                <Grid container justifyContent="space-between">
+              <Box>
+                <Grid container justifyContent="center">
                   <Grid item>
-                    <Typography variant="h5" gutterBottom fontSize="16px">
+                    <Typography variant="h5" textAlign="center" color="primary">
                       Create Listing - Step {step} of 2
-                    </Typography>
-                  </Grid>
-                  <Grid item>
-                    <Typography variant="body2" gutterBottom>
-                      All fields marked with "
-                      <span style={{ color: "red" }}>*</span>"are required.
                     </Typography>
                   </Grid>
                 </Grid>
@@ -238,6 +230,7 @@ const Sell = () => {
                           className={styles.boxStyle}
                           fullWidth
                           margin="normal"
+                          size="small"
                         >
                           <InputLabel className={styles.boxStyle}>
                             Select Category
@@ -246,6 +239,7 @@ const Sell = () => {
                             value={category}
                             onChange={handleCategoryChange}
                             label="Select Category"
+                            size="small"
                           >
                             <MenuItem value="">
                               <em>Select Category</em>
@@ -275,12 +269,14 @@ const Sell = () => {
                           error={errors?.subCategory}
                           fullWidth
                           margin="normal"
+                          size="small"
                         >
                           <InputLabel>Select Subcategory </InputLabel>
                           <Select
                             value={subCategory}
                             onChange={handleSubCategoryChange}
                             label="Select Sub Category"
+                            size="small"
                           >
                             <MenuItem value="">
                               <em>Select Subcategory</em>
@@ -380,6 +376,7 @@ const Sell = () => {
                           fullWidth
                           margin="normal"
                           className={styles.boxStyle}
+                          size="small"
                         >
                           <InputLabel className={styles.boxStyle}>
                             Select Region{" "}
@@ -389,6 +386,7 @@ const Sell = () => {
                             value={region}
                             onChange={handleRegionChange}
                             label="Select Region"
+                            size="small"
                           >
                             <MenuItem value="">
                               <em>Select Region</em>
@@ -412,6 +410,7 @@ const Sell = () => {
                           fullWidth
                           margin="normal"
                           className={styles.boxStyle}
+                          size="small"
                         >
                           <InputLabel className={styles.boxStyle}>
                             Select SubRegion{" "}
@@ -421,6 +420,7 @@ const Sell = () => {
                             value={subRegion}
                             onChange={handleSubRegionChange}
                             label="Select SubRegion  "
+                            size="small"
                           >
                             <MenuItem value="">
                               <em>Select SubRegion</em>
@@ -444,7 +444,6 @@ const Sell = () => {
                     </Grid>
                   </FormSection>
                   <Box
-                    className={styles.title}
                     sx={{ display: "flex", justifyContent: "center" }}
                   >
                     <CustomButton
@@ -682,18 +681,17 @@ const Sell = () => {
                   </Box>
                 </>
               )}
-
-              <Box>
-                <Typography className={styles.footer} fontSize="small">
-                  © Copyright 2024 KPMG India. All Rights Reserved. No part of
-                  this web page may be reproduced in any way without the prior
-                  written permission of KPMG India.
-                </Typography>
-              </Box>
             </div>
             <ToastContainer />
           </MainContainer>
-        </>
+          </Box>
+          <Box className={styles.footer} mt={2}>
+        <Typography className={styles.footerText} fontSize="small">
+          © Copyright 2024 KPMG India. All Rights Reserved. No part of this web
+          page may be reproduced in any way without the prior written permission
+          of KPMG India.
+        </Typography>
+      </Box>
       </Layout>
     </>
   );
