@@ -109,13 +109,13 @@ const ContactUs = () => {
           </Typography>
           <Box mt={8} className={styles.container} marginTop="20px">
             <Box p={5}>
-              <Typography
+              {/* <Typography
                 variant="body1"
                 gutterBottom
                 className={styles.disclaimer}
               >
                 <b>Please fill all the fields. We will reach you shortly.</b>
-              </Typography>
+              </Typography> */}
               <Box
                 component="form"
                 sx={{
