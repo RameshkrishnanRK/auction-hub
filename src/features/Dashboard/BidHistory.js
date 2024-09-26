@@ -58,7 +58,10 @@ const BidHistory = ({ open, onClose }) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
 
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal open={open} onClose={onClose}
+    BackdropProps={{
+      style:{ pointerEvents:'none'},
+    }}>
       <Box
         sx={{
           position: "absolute",
