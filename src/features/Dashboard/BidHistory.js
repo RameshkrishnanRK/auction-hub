@@ -45,7 +45,7 @@ const BidHistory = ({ open, onClose }) => {
               fontWeight: "bold",
             }}
           >
-            {value === "highest" ? "Highest" : value === "lowest" ? "Lowest" : "In Progress"}
+            {value === "highest" ? "Highest" : value === "lowest" ? "Lowest" : ""}
           </span>
         ),
       },
@@ -67,7 +67,6 @@ const BidHistory = ({ open, onClose }) => {
           transform: "translate(-50%, -50%)",
           width: 600,
           bgcolor: "background.paper",
-        //   border: "2px solid #000",
           boxShadow: 24,
           p: 4,
           borderRadius: 2,
