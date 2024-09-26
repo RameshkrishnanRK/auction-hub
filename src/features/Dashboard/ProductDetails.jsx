@@ -425,7 +425,7 @@ const ProductDetails = () => {
                     Remaining Time :{" "}
                     {product?.isExpired
                       ? "Expired"
-                      : `${product?.timeRemaining} hrs`}
+                      : `${product?.timeRemaining} ${product?.timeRemaining > 1 ? 'Hrs' : 'Hr'}`}
                   </Typography>
                 </Box>
                 <Box className={Styles.productInfoRight}>

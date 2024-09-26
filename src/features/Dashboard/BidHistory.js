@@ -3,6 +3,7 @@ import { Modal, Box, Typography, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useTable } from "react-table";
 import { bids} from '../../components/login/data/dummyData';
+import {currency} from '../Dashboard/ControlPanel';
 
 const BidHistory = ({ open, onClose }) => {
   const [bidHistory, setBidHistory] = useState([]);
@@ -21,17 +22,18 @@ const BidHistory = ({ open, onClose }) => {
         accessor: "bidderName", 
       },
       {
-        Header: "Time",
-        accessor: "time",
-      },
-      {
         Header: "Date",
         accessor: "date",
       },
       {
+        Header: "Time",
+        accessor: "time",
+      },
+      
+      {
         Header: "Amount",
         accessor: "amount",
-        Cell: ({ value }) => `₹${Number(value).toLocaleString("en-IN")}`, 
+        Cell: ({ value }) => `$ ${Number(value).toLocaleString("en-IN")}`, 
     },
       {
         Header: "Status",

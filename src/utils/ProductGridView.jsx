@@ -55,27 +55,12 @@ const ProductGridView = ({
         <Box className={Styles.ProductDetails}>
           <Box className={Styles.productInfo}>
             <Typography variant="body2" style={{ fontSize: "12px" }}>
-              CURRENT BID
-            </Typography>
-            <Typography
-              variant="h6"
-              color="green"
-              fontWeight="bold"
-              style={{ fontSize: "12px" }}
-            >
-              {currency} {formattedBid}
+              CURRENT BID  : <span style={{ color: "green", fontWeight:"bold", fontSize: "12px" }}>{currency} {formattedBid}</span>
             </Typography>
           </Box>
           <Box className={Styles.productInfo}>
             <Typography variant="body2" style={{ fontSize: "12px" }}>
-              TIME REMAINING
-            </Typography>
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              style={{ fontSize: "12px" }}
-            >
-              {isExpired ? "Expired" : `${timeRemaining} Hrs`}
+              TIME REMAINING :  <span style={{ color: "brown", fontWeight:"bold", fontSize: "12px" }}>{isExpired ? "Expired" : `${timeRemaining} ${timeRemaining > 1 ? 'Hrs' : 'Hr'}`}</span>
             </Typography>
           </Box>
         </Box>

@@ -72,7 +72,7 @@ const ProductListView = ({
           color="text.secondary"
           className={styles.expiredText}
         >
-          {isExpired ? "Expired" : ` Time Remaining : ${timeRemaining} Hrs`}
+          {isExpired ? "Expired" : ` Time Remaining : ${timeRemaining} ${timeRemaining > 1 ? 'Hrs': 'Hr'}`}
         </Typography>
         <Box className={styles.productListDetails}>
           <Typography
