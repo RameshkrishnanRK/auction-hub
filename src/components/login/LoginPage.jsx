@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Container,
@@ -16,14 +16,15 @@ import {
 } from "@mui/material";
 import kpmgLogo from "../../assets/images/Auction.KPMG_logo_blue.png";
 import kpmgLoginImage from "../../assets/images/Auction.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../../redux/slices/loginSlice";
+import { fetchRoles } from "../../redux/slices/roleSlice"; 
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-  const [role, setRole] = useState(""); // Role selection state
+  const [role, setRole] = useState(""); 
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [roleError, setRoleError] = useState("");
@@ -31,12 +32,18 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const roles = useSelector((state) => state.roles.roles); 
+
+  
+  useEffect(() => {
+    dispatch(fetchRoles()); 
+  }, [dispatch]);
+
   const handleLogin = (e) => {
     e.preventDefault();
 
     let valid = true;
 
-    // Validate username
     if (username === "") {
       setUsernameError("This field is required");
       valid = false;
@@ -44,7 +51,6 @@ const LoginPage = () => {
       setUsernameError("");
     }
 
-    // Validate password
     if (password === "") {
       setPasswordError("This field is required");
       valid = false;
@@ -52,7 +58,6 @@ const LoginPage = () => {
       setPasswordError("");
     }
 
-    // Validate role selection
     if (role === "") {
       setRoleError("Please select a role");
       valid = false;
@@ -62,18 +67,26 @@ const LoginPage = () => {
 
     if (!valid) return;
 
-    // Dispatch login success with user data
     const userData = {
       user: username,
-      role: role, // Assign role from the selection
+      role: role,
+      rememberMe,
     };
     dispatch(loginSuccess(userData));
+    if (rememberMe){
+      localStorage.setItem("userData", JSON.stringify(userData));
+    } else {
+      sessionStorage.setItem("userData", JSON.stringify(userData));
+    }
 
     localStorage.setItem("role", role);
 
-    // Navigate to "My Account" with role-based state
     navigate("/view", { state: { role: role } });
   };
+  const storedUserData= JSON.stringify(localStorage.getItem("userData")) || JSON.parse(sessionStorage.getItem("userData"));
+  if (storedUserData){
+    console.log("Stored User Details:", storedUserData);
+  }
 
   return (
     <Container>
@@ -136,7 +149,6 @@ const LoginPage = () => {
                 error={passwordError !== ""}
                 helperText={passwordError}
               />
-              {/* Role Selection Dropdown */}
               <FormControl
                 variant="standard"
                 fullWidth
@@ -150,8 +162,17 @@ const LoginPage = () => {
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
                 >
-                  <MenuItem value="bidder">Bidder</MenuItem>
-                  <MenuItem value="auctioneer">Auctioneer</MenuItem>
+                  {roles.length > 0 ? (
+                    roles.map((r) => (
+                      <MenuItem key={r.id} value={r.name}>
+                        {r.name}
+                      </MenuItem>
+                    ))
+                  ) : (
+                    <MenuItem value="" disabled>
+                      Loading roles...
+                    </MenuItem>
+                  )}
                 </Select>
                 {roleError && (
                   <Typography variant="body2" color="error">
@@ -160,7 +181,13 @@ const LoginPage = () => {
                 )}
               </FormControl>
 
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: 'center' }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
                 <FormControlLabel
                   control={
                     <Checkbox
@@ -189,10 +216,9 @@ const LoginPage = () => {
               </Button>
             </form>
           </div>
-        </Paper>
-      </div>
-    </Container>
+          </Paper>
+          </div>
+          </Container>
   );
 };
-
-export default LoginPage
+export default LoginPage;

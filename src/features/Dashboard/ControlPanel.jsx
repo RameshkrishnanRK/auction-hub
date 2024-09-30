@@ -13,36 +13,26 @@ import {
 import React, { useState } from "react";
 import ListIcon from "@mui/icons-material/List";
 import styles from "./ControlPanel.scss";
-import { filterByOptions, sortOptions } from "../../jsonData";
+import { filterByOptions, sortOptions, currencyOptions } from "../../jsonData";
 import GridView from "./GridView";
 import ListView from "./ListView";
-import filteredProducts from '../Dashboard/Browse';
-import { useDispatch } from "react-redux";
-import {setCurrency} from '../../redux/slices/currencySlice';
+import filteredProducts from "../Dashboard/Browse";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrency } from "../../redux/slices/currencySlice";
 
-
-const currencyOptions =[
-  { label: " Dollar (USD)", value: "$"},
-  { label: " Rupees (INR)", value: "₹"},
-  { label: " Euro (EUR)", value: "€"},
-  { label: " Yen (JPY)", value: "¥"}
-];
-
-const currencyRates = {
-  '$':1,
-  '₹': 74.85,
-  "€": 0.85,
-  "¥": 110.12,
-};
-
-
-const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilteredProducts}) => {
+const ControlPanel = ({
+  subCatData,
+  searchTerm,
+  subRegData,
+  products,
+  setFilteredProducts,
+}) => {
   const [view, setView] = useState("grid");
   const [status, setStatus] = useState("active");
   const [filter, setFilter] = useState("all");
   const [sortData, setSortData] = useState("");
-  const [currency, setCurrencyState] = useState("$");
 
+  const { currency, currencyRates } = useSelector((state) => state.currency);
   const dispatch = useDispatch();
 
   const handleViewChange = (event, newView) => {
@@ -58,15 +48,22 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilter
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
   };
-  
+
   const handleSortChange = (event) => {
     setSortData(event.target.value);
   };
   const handleCurrencyChange = (event) => {
     const selectedCurrency = event.target.value;
-    setCurrencyState(selectedCurrency);
     dispatch(setCurrency(selectedCurrency));
   };
+  const currentCurrencyRate = currencyRates?.[currency] || 1;
+
+  const adjustedProducts = products.map((product) => ({
+    ...products,
+    currentBid: (products.currentBid * currentCurrencyRate).toFixed(2),
+    buyNow: (product.buyNow * currentCurrencyRate).toFixed(2),
+  }));
+
   return (
     <div>
       <Box
@@ -92,12 +89,12 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilter
           sx={{
             "& .MuiToggleButton-root": {
               "&.Mui-selected": {
-                backgroundColor: "#1768ac",
+                backgroundColor: "#337ab7",
                 color: "#ffffff",
               },
               "&:not(.Mui-selected)": {
                 backgroundColor: "#ffffff",
-                color: "#1768ac",
+                color: "#337ab7",
               },
             },
           }}
@@ -107,8 +104,8 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilter
             aria-label="grid view"
             className={view === "grid" ? "active" : ""}
             sx={{
-              backgroundColor: view === "grid" ? "#1768ac" : "#ffffff",
-              color: view === "grid" ? "#ffffff" : "#1768ac",
+              backgroundColor: view === "grid" ? "#337ab7" : "#ffffff",
+              color: view === "grid" ? "#ffffff" : "#337ab7",
             }}
           >
             <GridViewOutlined />
@@ -118,8 +115,8 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilter
             aria-label="list view"
             className={view === "list" ? "active" : ""}
             sx={{
-              backgroundColor: view === "list" ? "#ffffff" : "#1768ac",
-              color: view === "list" ? "#1768ac" : "#ffffff",
+              backgroundColor: view === "list" ? "#ffffff" : "#337ab7",
+              color: view === "list" ? "#337ab7" : "#ffffff",
             }}
           >
             <ListIcon />
@@ -147,9 +144,9 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilter
             value="active"
             label="Active"
             sx={{
-              backgroundColor: status === "active" ? "#1768ac" : "#ffffff",
+              backgroundColor: status === "active" ? "#337ab7" : "#ffffff",
               "&.Mui-selected": {
-                color: status === "active" ? "#ffffff" : "#1768ac",
+                color: status === "active" ? "#ffffff" : "#337ab7",
               },
             }}
             style={{ minHeight: "40px" }}
@@ -158,9 +155,9 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilter
             value="completed"
             label="Completed"
             sx={{
-              backgroundColor: status === "completed" ? "#1768ac" : "#ffffff",
+              backgroundColor: status === "completed" ? "#337ab7" : "#ffffff",
               "&.Mui-selected": {
-                color: status === "completed" ? "#ffffff" : "#1768ac",
+                color: status === "completed" ? "#ffffff" : "#337ab7",
               },
             }}
             style={{ minHeight: "40px" }}
@@ -207,19 +204,19 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilter
               ))}
             </Select>
           </FormControl>
-          <FormControl sx={{ m:1, minWidth: 120 }} size="small">
-            <InputLabel id='currency-select'>Currency</InputLabel>
+          <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+            <InputLabel id="currency-select">Currency</InputLabel>
             <Select
-            labelId="currency-select"
-            value={currency}
-            label='Currency'
-            onChange={handleCurrencyChange}
-            sx={{
-              backgroundColor:"#ffffff",
-            }}
+              labelId="currency-select"
+              value={currency}
+              label="Currency"
+              onChange={handleCurrencyChange}
+              sx={{
+                backgroundColor: "#ffffff",
+              }}
             >
               {currencyOptions.map((option) => (
-                <MenuItem key={option.value} value={option.value} >
+                <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
               ))}
@@ -227,30 +224,73 @@ const ControlPanel = ({ subCatData, searchTerm, subRegData , products, setFilter
           </FormControl>
         </Box>
       </Box>
+      {/* <Box
+        sx={{
+          marginTop: "1rem",
+        }}
+      >
+        {view === "grid" ? (
+          <GridView
+            products={adjustedProducts}
+            subCatData={subCatData}
+            subRegData={subRegData}
+            searchTerm={searchTerm}
+            status={status}
+            filter={filter}
+            sortData={sortData}
+            currency={currency}
+            currencyRates={currencyRates}
+          />
+        ) : (
+          <ListView
+            products={adjustedProducts}
+            subCatData={subCatData}
+            subRegData={subRegData}
+            searchTerm={searchTerm}
+            status={status}
+            filter={filter}
+            sortData={sortData}
+            currency={currency}
+            currencyRates={currencyRates}
+          />
+        )}
+      </Box> */}
       {view === "grid" ? (
-        <GridView
-        products={filteredProducts}
-          subCatData={subCatData}
-          subRegData={subRegData}
-          searchTerm={searchTerm}
-          status={status}
-          filter={filter}
-          sortData={sortData}
-          currency={currency}
-          currencyRates={currencyRates}
-        />
+        <Box
+          sx={{
+            marginTop: "1rem",
+          }}
+        >
+          <GridView
+            products={adjustedProducts}
+            subCatData={subCatData}
+            subRegData={subRegData}
+            searchTerm={searchTerm}
+            status={status}
+            filter={filter}
+            sortData={sortData}
+            currency={currency}
+            currencyRates={currencyRates}
+          />
+        </Box>
       ) : (
-        <ListView
-        products={filteredProducts}
-          subCatData={subCatData}
-          subRegData={subRegData}
-          searchTerm={searchTerm}
-          status={status}
-          filter={filter}
-          sortData={sortData}
-          currency={currency}
-          currencyRates={currencyRates}
-        />
+        <Box
+          sx={{
+            marginTop: "0.5rem",
+          }}
+        >
+          <ListView
+            products={adjustedProducts}
+            subCatData={subCatData}
+            subRegData={subRegData}
+            searchTerm={searchTerm}
+            status={status}
+            filter={filter}
+            sortData={sortData}
+            currency={currency}
+            currencyRates={currencyRates}
+          />
+        </Box>
       )}
     </div>
   );

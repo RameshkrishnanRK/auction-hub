@@ -1,25 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { bidderData, auctioneerData } from "../login/data/dummyData";
+import { bidderData, auctioneerData, guestdata } from "../login/data/dummyData";
 import Layout from "../../routing/components/Layout";
 import { Box, Breadcrumbs } from "@mui/material";
 import styles from "../login/myAccount.module.scss";
 
 const MyAccount = () => {
   const location = useLocation();
-  //   const { role } = location.state;
   const storedRole = localStorage.getItem("role");
   const [accountData, setAccountData] = useState({});
 
-  const role = location.stste?.role || storedRole || "bidder";
+  const role = location.state?.role || storedRole || "guest";
 
   useEffect(() => {
-    if (role === "bidder") {
-      setAccountData(bidderData);
-    } else if (role === "auctioneer") {
-      setAccountData(auctioneerData);
+    switch (role) {
+      case "Bidder":
+        setAccountData(bidderData);
+        break;
+        case "Auctioneer":
+          setAccountData(auctioneerData);
+          break;
+          case "Guest":
+            setAccountData(guestdata);
+            break;
+          default:
+            setAccountData({});
     }
   }, [role]);
+  
 
   return (
     <div>
@@ -37,7 +45,7 @@ const MyAccount = () => {
 
       <div  className="my-account-page" style={{ paddingLeft: "55px", paddingTop: "10px"}}>
         <h2 >My Account</h2>
-        {role === "bidder" && (
+        {role === "Bidder" && (
           <>
             <h3 >Previous Bids</h3>
             <ul>
@@ -62,7 +70,7 @@ const MyAccount = () => {
           </>
         )}
 
-        {role === "auctioneer" && (
+        {role === "Auctioneer" && (
           <>
             <h3>Previous Auctions</h3>
             <ul>
@@ -92,6 +100,9 @@ const MyAccount = () => {
               ))}
             </ul>
           </>
+        )}
+        {role === 'Guest' && (
+          <p>Welcome, you have no account data available.</p>
         )}
       </div>
     </div>

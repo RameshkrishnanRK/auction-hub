@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { logout } from "../../redux/slices/loginSlice";
 import { useLocation } from "react-router-dom";
+import { Avatar, IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -53,6 +54,8 @@ export default function Header({ setSearchTerm }) {
   const [inputValue, setInputValue] = React.useState("");
   const userData = useSelector((state) => state.login.user);
   const location = useLocation();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -63,12 +66,23 @@ export default function Header({ setSearchTerm }) {
     setSearchTerm(inputValue);
   };
 
+  const handleAvatarClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+  const handleMenuItemClick = (path) => {
+    navigate(path);
+    handleMenuClose();
+  };
+
   return (
     <>
       <AppBar
         position="sticky"
+        sx={{backgroundColor: "#337ab7 !important"}}
         className={styles.headerColor}
-        backgroundColor="#337ab7"
       >
         <Toolbar sx={{ minHeight: "55px !important" }} mt={3}>
           <img alt="kpmg" src={kpmgImage} />
@@ -89,11 +103,11 @@ export default function Header({ setSearchTerm }) {
                   placeholder="Enter keywords…"
                   inputProps={{ "aria-label": "search" }}
                 />
-              </Search>             
+              </Search>
             </>
-          )}                    
+          )}
         </Toolbar>
-                
+
         <Toolbar sx={{ minHeight: "55px !important" }}>
           <Typography
             variant="h6"
@@ -145,26 +159,42 @@ export default function Header({ setSearchTerm }) {
           <Box sx={{ flexGrow: 1 }} />
           {userData ? (
             <>
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                className= {styles.link}
-                ml={8}
-                margin="10px"
-              >
-                <Link to="/myaccount">My Account</Link>
-              </Typography>
-              Hello, {userData.user}
-              <LogoutOutlinedIcon
-                onClick={handleLogout}
-                style={{
-                  fontSize: "15px",
-                  fontWeight: "bold",
-                  paddingLeft: "4px",
-                  cursor: "pointer",
+              <Tooltip title="open user menu">
+                <IconButton onClick={handleAvatarClick} sx={{ p: 0 }}>
+                  <Avatar sx={{ bgcolor: "#1768ac" }}>
+                    {userData?.user?.[0]?.toUpperCase()}
+                  </Avatar>
+                </IconButton>
+              </Tooltip>
+              <Menu
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleMenuClose}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
                 }}
-              />
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+              >
+                <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>
+                  History
+                </MenuItem>
+                <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>
+                  My Payments
+                </MenuItem>
+                <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>
+                  Watchlists
+                </MenuItem>
+                <MenuItem onClick={handleLogout}>
+                  Logout
+                  <LogoutOutlinedIcon
+                    style={{ fontSize: "15px", paddingLeft: "4px" }}
+                  />
+                </MenuItem>
+              </Menu>
             </>
           ) : (
             <>
@@ -176,7 +206,7 @@ export default function Header({ setSearchTerm }) {
               </Button>
             </>
           )}
-        </Toolbar>        
+        </Toolbar>
       </AppBar>
     </>
   );

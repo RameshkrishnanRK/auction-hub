@@ -4,7 +4,6 @@ import {
   Alert,
   Box,
   Breadcrumbs,
-  
   Button,
   Card,
   CardContent,
@@ -20,6 +19,8 @@ import "react-toastify/dist/ReactToastify.css";
 import ReusableModal from "../../utils/reusableModal";
 import Layout from "../../routing/components/Layout";
 import styles from "../Dashboard/ProductDetails.module.scss";
+import BidHistory from "./BidHistory";
+import {bids} from '../../components/login/data/dummyData';
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -31,10 +32,11 @@ const ProductDetails = () => {
 
   const [openBidModal, setOpenBidModal] = useState(false);
   const [openOfferModal, setOpenOfferModal] = useState(false);
+  const [openBidhistoryModal, setOpenBidHistoryModal] = useState(false);
 
   const { data: products } = useSelector((state) => state.product);
 
-  const { currency } = useSelector((state) => state.currency);
+  const { currency, currencyRates } = useSelector((state) => state.currency);
   window.history.replaceState(null, "/view");
 
   
@@ -43,11 +45,15 @@ const ProductDetails = () => {
       products.length > 0 &&
       products.find((product) => product?.id === parseInt(productId));
 
-  let formattedBid = 0;
-  if (product && product?.currentBid !== undefined) {
-    formattedBid = Number(product?.currentBid).toLocaleString("en-IN");
-    console.log('formattedBid: ', formattedBid);
-  }
+  const currentCurrencyRate = currencyRates?.[currency] || 1;
+
+  const formattedBid = product?.currentBid
+  ? (product.currentBid* currentCurrencyRate).toLocaleString('en-IN')
+  : '0.00';
+  const buyNowPrice = product?.buyNow
+  ?(product.buyNow* currentCurrencyRate).toLocaleString('en-IN')
+  :'0.00';
+ 
 
   const [cleanedFormattedBid, setCleanedFormattedBid] = useState(product?.currentBid || 0);
   const [addedToWatchList] = useState(false);
@@ -295,6 +301,13 @@ const ProductDetails = () => {
     </Box>
   );
 
+  const handleBidHistoryClick=()=>{
+    setOpenBidHistoryModal(true);
+  };
+
+  const numberOfBids = bids.length;
+
+
   return (
     <>
       <Layout />
@@ -385,7 +398,7 @@ const ProductDetails = () => {
                     <hr style={{ border: "0", borderTop: "1px solid #000" }} />
                   </Typography>
                   <Button className={Styles.buyNowBtn} onClick={handleBuyNow}>
-                  Buy Now {currency} {product.buyNow}
+                  Buy Now {currency} {buyNowPrice}
                   </Button>
                   <Typography variant="body2" className={Styles.orText}>
                     <hr style={{ border: "1px solid grey", width: "200" }} />
@@ -416,7 +429,7 @@ const ProductDetails = () => {
                     Remaining Time :{" "}
                     {product?.isExpired
                       ? "Expired"
-                      : `${product?.timeRemaining} hrs`}
+                      : `${product?.timeRemaining} ${product?.timeRemaining > 1 ? 'Hrs' : 'Hr'}`}
                   </Typography>
                 </Box>
                 <Box className={Styles.productInfoRight}>
@@ -440,13 +453,17 @@ const ProductDetails = () => {
                         variant="body2"
                         style={{ fontSize: "18px", fontWeight: "bold" }}
                       >
-                        1 Bid (s)
+                        {numberOfBids} Bid (s)
                       </Typography>
                       <Typography
                         variant="body2"
                         style={{ fontSize: "18px", fontWeight: "bold" }}
                       >
-                        Bid History {">"}
+                        {/* Bid History {">"} */}
+                        <Button onClick={handleBidHistoryClick} variant="contained"
+                      color="primary"
+                      className={Styles.addWatchListBtn} style={{ textTransform:"none"}}
+                        >Show Bid History</Button>
                       </Typography>
                     </Box>
                   </Box>
@@ -479,6 +496,12 @@ const ProductDetails = () => {
             </CardContent>
           </Box>
         </Card>
+        <BidHistory 
+        open={openBidhistoryModal}
+        onClose={()=>setOpenBidHistoryModal(false)}
+        currency={currency}
+        currencyRates={currencyRates}
+        />
         <ReusableModal
           open={openBidModal}
           onClose={handleBidModalClose}

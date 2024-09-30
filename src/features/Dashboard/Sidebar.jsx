@@ -85,7 +85,7 @@ const Sidebar = ({ setSubCatData, setSubRegData }) => {
                   <Collapse in={openCategories[category.name]} timeout="auto" unmountOnExit>
                     <List component="div" >
                       {category.subcategories.map((subcategory, subIndex) => (
-                        <ListItem key={subIndex} sx={{padding:"0px 15px"}}>
+                        <ListItem key={subIndex} sx={{padding:"0px 16px"}}>
                           <FormControlLabel
                             control={
                               <Checkbox
@@ -96,8 +96,13 @@ const Sidebar = ({ setSubCatData, setSubRegData }) => {
                               />
                               
                             }
-                            label={subcategory.name}
-                            sx={{ fontSize: 'small'}}/>
+                            label={
+                              <Typography sx={{ fontSize: "12px"}}>
+                                {subcategory.name}
+                              </Typography>
+                            }
+                            sx={{ margin: 0, padding: 0 }}
+                            />
                         </ListItem>
                       ))}
                     </List>
@@ -128,7 +133,7 @@ const Sidebar = ({ setSubCatData, setSubRegData }) => {
                   <Collapse in={openRegions[region.name]} timeout="auto" unmountOnExit>
                     <List component="div" >
                       {region.subregions.map((subregion, subIndex) => (
-                        <ListItem key={subIndex} className={styles.nested}>
+                        <ListItem key={subIndex} sx={{padding:"0px 16px"}}>
                           <FormControlLabel
                             control={
                               <Checkbox
@@ -138,8 +143,13 @@ const Sidebar = ({ setSubCatData, setSubRegData }) => {
                                 sx={{ transform: "scale(0.5)" }}
                               />
                             }
-                            label={subregion.name}
-                            sx={{ fontSize: 'small'}}/>
+                            label={
+                              <Typography sx={{ fontSize: "12px"}}>
+                                {subregion.name}
+                              </Typography>
+                            }
+                            sx={{ margin: 0, padding: 0 }}
+                            />
                         </ListItem>
                       ))}
                     </List>
