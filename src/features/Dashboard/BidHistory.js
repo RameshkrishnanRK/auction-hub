@@ -35,7 +35,7 @@ const BidHistory = ({ open, onClose, currency, currencyRates }) => {
         accessor: "amount",
         Cell: ({ value }) => {
           const bid= Number(value);
-          const rate= currencyRates && isNaN(currencyRates) ? currencyRates : 1;
+          const rate= currencyRates && !isNaN(currencyRates) ? currencyRates : 1;
 
           if (!isNaN(bid) && !isNaN(rate)){
           return `${currency} ${(bid * rate).toLocaleString("en-IN")}`;
