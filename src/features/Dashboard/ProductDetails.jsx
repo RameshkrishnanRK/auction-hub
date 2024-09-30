@@ -20,6 +20,7 @@ import ReusableModal from "../../utils/reusableModal";
 import Layout from "../../routing/components/Layout";
 import styles from "../Dashboard/ProductDetails.module.scss";
 import BidHistory from "./BidHistory";
+import {bids} from '../../components/login/data/dummyData';
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -302,7 +303,10 @@ const ProductDetails = () => {
 
   const handleBidHistoryClick=()=>{
     setOpenBidHistoryModal(true);
-  }
+  };
+
+  const numberOfBids = bids.length;
+
 
   return (
     <>
@@ -449,7 +453,7 @@ const ProductDetails = () => {
                         variant="body2"
                         style={{ fontSize: "18px", fontWeight: "bold" }}
                       >
-                        3 Bid (s)
+                        {numberOfBids} Bid (s)
                       </Typography>
                       <Typography
                         variant="body2"
