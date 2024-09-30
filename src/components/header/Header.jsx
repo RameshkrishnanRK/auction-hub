@@ -81,8 +81,8 @@ export default function Header({ setSearchTerm }) {
     <>
       <AppBar
         position="sticky"
+        sx={{backgroundColor: "#337ab7 !important"}}
         className={styles.headerColor}
-        backgroundColor="#337ab7"
       >
         <Toolbar sx={{ minHeight: "55px !important" }} mt={3}>
           <img alt="kpmg" src={kpmgImage} />
@@ -161,7 +161,7 @@ export default function Header({ setSearchTerm }) {
             <>
               <Tooltip title="open user menu">
                 <IconButton onClick={handleAvatarClick} sx={{ p: 0 }}>
-                  <Avatar sx={{ bgcolor: "#337ab7" }}>
+                  <Avatar sx={{ bgcolor: "#1768ac" }}>
                     {userData?.user?.[0]?.toUpperCase()}
                   </Avatar>
                 </IconButton>
