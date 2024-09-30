@@ -89,12 +89,12 @@ const ControlPanel = ({
           sx={{
             "& .MuiToggleButton-root": {
               "&.Mui-selected": {
-                backgroundColor: "#1768ac",
+                backgroundColor: "#337ab7",
                 color: "#ffffff",
               },
               "&:not(.Mui-selected)": {
                 backgroundColor: "#ffffff",
-                color: "#1768ac",
+                color: "#337ab7",
               },
             },
           }}
@@ -104,8 +104,8 @@ const ControlPanel = ({
             aria-label="grid view"
             className={view === "grid" ? "active" : ""}
             sx={{
-              backgroundColor: view === "grid" ? "#1768ac" : "#ffffff",
-              color: view === "grid" ? "#ffffff" : "#1768ac",
+              backgroundColor: view === "grid" ? "#337ab7" : "#ffffff",
+              color: view === "grid" ? "#ffffff" : "#337ab7",
             }}
           >
             <GridViewOutlined />
@@ -115,8 +115,8 @@ const ControlPanel = ({
             aria-label="list view"
             className={view === "list" ? "active" : ""}
             sx={{
-              backgroundColor: view === "list" ? "#ffffff" : "#1768ac",
-              color: view === "list" ? "#1768ac" : "#ffffff",
+              backgroundColor: view === "list" ? "#ffffff" : "#337ab7",
+              color: view === "list" ? "#337ab7" : "#ffffff",
             }}
           >
             <ListIcon />
@@ -144,9 +144,9 @@ const ControlPanel = ({
             value="active"
             label="Active"
             sx={{
-              backgroundColor: status === "active" ? "#1768ac" : "#ffffff",
+              backgroundColor: status === "active" ? "#337ab7" : "#ffffff",
               "&.Mui-selected": {
-                color: status === "active" ? "#ffffff" : "#1768ac",
+                color: status === "active" ? "#ffffff" : "#337ab7",
               },
             }}
             style={{ minHeight: "40px" }}
@@ -155,9 +155,9 @@ const ControlPanel = ({
             value="completed"
             label="Completed"
             sx={{
-              backgroundColor: status === "completed" ? "#1768ac" : "#ffffff",
+              backgroundColor: status === "completed" ? "#337ab7" : "#ffffff",
               "&.Mui-selected": {
-                color: status === "completed" ? "#ffffff" : "#1768ac",
+                color: status === "completed" ? "#ffffff" : "#337ab7",
               },
             }}
             style={{ minHeight: "40px" }}
