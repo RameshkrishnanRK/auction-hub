@@ -10,7 +10,8 @@ const BidHistory = ({ open, onClose, currency, currencyRates }) => {
   
   useEffect(() => {
     if (open) {
-      setBidHistory(bids); 
+      const sortedBids =[...bids].sort((a,b)=> b.amount - a.amount);
+      setBidHistory(sortedBids); 
     }
   }, [open]);
 
@@ -45,19 +46,32 @@ const BidHistory = ({ open, onClose, currency, currencyRates }) => {
       {
         Header: "Status",
         accessor: "status",
-        Cell: ({ value }) => (
-          <span
-            style={{
-              color: value === "highest" ? "green" : value === "lowest" ? "red" : "black",
-              fontWeight: "bold",
-            }}
-          >
-            {value === "highest" ? "Highest" : value === "lowest" ? "Outbid" : ""}
-          </span>
-        ),
+        Cell: ({ row }) => {
+          const amount = row.original.amount;
+          if (amount=== bidHistory[0]?.amount){
+            return (
+              <span style={{color:"green", fontWeight:'bold'}}>Highest</span>
+            );
+          }
+          if (amount === bidHistory[1]?.amount){
+            return (
+              <span style={{color:'red', fontWeight:'bold'}}>Outbid</span>
+            );
+          }
+          return "";
+        },
+        //   <span
+        //     style={{
+        //       color: value === "highest" ? "green" : value === "lowest" ? "red" : "black",
+        //       fontWeight: "bold",
+        //     }}
+        //   >
+        //     {value === "highest" ? "Highest" : value === "lowest" ? "Outbid" : ""}
+        //   </span>
+        // ),
       },
     ],
-    [currency, currencyRates]
+    [currency, currencyRates, bidHistory]
   );
   const data = React.useMemo(() => bidHistory, [bidHistory]);
   const tableInstance = useTable({ columns, data });
