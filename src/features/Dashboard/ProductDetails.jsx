@@ -495,6 +495,8 @@ const ProductDetails = () => {
         <BidHistory 
         open={openBidhistoryModal}
         onClose={()=>setOpenBidHistoryModal(false)}
+        currency={currency}
+        currencyRates={currencyRates}
         />
         <ReusableModal
           open={openBidModal}

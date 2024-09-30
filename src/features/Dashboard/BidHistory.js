@@ -4,7 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useTable } from "react-table";
 import { bids} from '../../components/login/data/dummyData';
 
-const BidHistory = ({ open, onClose }) => {
+const BidHistory = ({ open, onClose, currency, currencyRates }) => {
   const [bidHistory, setBidHistory] = useState([]);
 
   
@@ -32,7 +32,15 @@ const BidHistory = ({ open, onClose }) => {
       {
         Header: "Amount",
         accessor: "amount",
-        Cell: ({ value }) => `$ ${Number(value).toLocaleString("en-IN")}`, 
+        Cell: ({ value }) => {
+          const bid= Number(value);
+          const rate= currencyRates && isNaN(currencyRates) ? currencyRates : 1;
+
+          if (!isNaN(bid) && !isNaN(rate)){
+          return `${currency} ${(bid * rate).toLocaleString("en-IN")}`;
+          }
+          return `${currency} --`
+        },
     },
       {
         Header: "Status",
@@ -49,7 +57,7 @@ const BidHistory = ({ open, onClose }) => {
         ),
       },
     ],
-    []
+    [currency, currencyRates]
   );
   const data = React.useMemo(() => bidHistory, [bidHistory]);
   const tableInstance = useTable({ columns, data });
