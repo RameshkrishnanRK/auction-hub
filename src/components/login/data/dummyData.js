@@ -5,11 +5,12 @@ export const bidderData = {
     savedBids: ["Saved Bid #1", "Saved Bid #2"],
   };
   export const bids = [
-    { bidderName: "Smith", time: "11:30 PM", date: "2024-09-21", amount: 25000, status: "" },
-    { bidderName: "Anahita", time: "1:30 PM", date: "2024-09-21", amount: 27000, status: "lowest" },
-
-    { bidderName: "Virat", time: "01:45 PM", date: "2024-09-21", amount: 30000, status: "highest" },
-    { bidderName: "Anne", time: "12:30 PM", date: "2024-09-21", amount: 11000, status: "" },
+    { bidderName: "Smith", time: "11:30 AM", date: "2024-09-21", amount: 15000, status: "" },
+    { bidderName: "Chethan", time: "12:30 AM", date: "2024-09-21", amount: 35000, status: "" },
+    { bidderName: "Megha", time: "1:30 PM", date: "2024-09-21", amount: 45000, status: "" },
+    { bidderName: "Anahita", time: "2:30 PM", date: "2024-09-21", amount: 55000, status: "lowest" },
+    { bidderName: "Virat", time: "3:45 PM", date: "2024-09-21", amount: 60000, status: "highest" },
+    { bidderName: "Anne", time: "4:30 PM", date: "2024-09-21", amount: 70000, status: "" },
   ];
 
   export const auctioneerData = {

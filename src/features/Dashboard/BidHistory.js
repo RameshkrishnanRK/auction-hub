@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Box, Typography, IconButton } from "@mui/material";
+import { Modal, Box, Typography, IconButton, Grid, Button } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useTable } from "react-table";
 import { bids} from '../../components/login/data/dummyData';
 
 const BidHistory = ({ open, onClose, currency, currencyRates }) => {
   const [bidHistory, setBidHistory] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const entriesPerPage=5;
+
+  const totalPages= Math.ceil(bidHistory.length / entriesPerPage);
 
   
   useEffect(() => {
@@ -14,6 +18,16 @@ const BidHistory = ({ open, onClose, currency, currencyRates }) => {
       setBidHistory(sortedBids); 
     }
   }, [open]);
+  const handleNextPage=()=>{
+    if (currentPage< totalPages){
+      setCurrentPage(currentPage + 1);
+    }
+  };
+  const handlePreviousPage=()=>{
+    if(currentPage>1){
+      setCurrentPage(currentPage-1);
+    }
+  }
 
   const columns = React.useMemo(
     () => [
@@ -64,7 +78,7 @@ const BidHistory = ({ open, onClose, currency, currencyRates }) => {
     ],
     [currency, currencyRates, bidHistory]
   );
-  const data = React.useMemo(() => bidHistory, [bidHistory]);
+  const data = React.useMemo(() => bidHistory.slice((currentPage- 1)* entriesPerPage, currentPage*entriesPerPage), [bidHistory, currentPage]);
   const tableInstance = useTable({ columns, data });
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
@@ -136,6 +150,11 @@ const BidHistory = ({ open, onClose, currency, currencyRates }) => {
             })}
           </tbody>
         </table>
+        <Grid container justifyContent='space-between' mt={2}>
+          <Button onClick={handlePreviousPage} disabled={currentPage===1}>Previous</Button>
+          <Typography variant="body2">Page {currentPage} of {totalPages}</Typography>
+          <Button onClick={handleNextPage} disabled={currentPage === totalPages}>Next</Button>
+        </Grid>
       </Box>
     </Modal>
   );
