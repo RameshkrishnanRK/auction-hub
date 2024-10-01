@@ -216,17 +216,28 @@ const ContactUs = () => {
                 justifyContent="flex-start"
                 gap="4px"
               >
-                <Button
+                <Box
                   size="medium"
                   variant="contained"
                   className={styles.captchaBtn}
-                  color="primary"
+                  sx={{
+                    backgroundColor: 'none',
+                    color: 'black',
+                    fontStyle:'italic',
+                    border:'0px',
+                    padding:'8px 16px',
+                    boxShadow:'none',
+                    transform:'rotate(-10deg)',
+                    width:"auto",
+                    display:'inline-block'
+
+                  }}
                 >
                   {captchaCode}
-                </Button>
-                <Button onClick={resetCaptcha} size="medium" variant="outlined">
-                  <FiRefreshCcw size={20} />
-                </Button>
+                </Box>
+                <box onClick={resetCaptcha} size="small" variant="outlined">
+                  <FiRefreshCcw size={15} />
+                </box>
               </Box>
             </Grid>
             <Grid item xs={12} display="flex" justifyContent="center">
