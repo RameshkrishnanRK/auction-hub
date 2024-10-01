@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Container, Grid, Typography, Button } from "@mui/material";
-import Banner from "../../assets/images/HomePage1.png";
+import Banner from "../../assets/images/kpmgHome.png";
 
 const HomeBanner = () => {
   const navigate = useNavigate();
@@ -55,7 +55,7 @@ const HomeBanner = () => {
               sx={{ mt: -4, mb: 2 }}
               color="primary"
             >
-              Welcome to Our Platform
+              {/* Welcome to Our Platform */}
             </Typography>
           </Grid>
         </Grid>
