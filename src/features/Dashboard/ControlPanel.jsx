@@ -224,37 +224,7 @@ const ControlPanel = ({
           </FormControl>
         </Box>
       </Box>
-      {/* <Box
-        sx={{
-          marginTop: "1rem",
-        }}
-      >
-        {view === "grid" ? (
-          <GridView
-            products={adjustedProducts}
-            subCatData={subCatData}
-            subRegData={subRegData}
-            searchTerm={searchTerm}
-            status={status}
-            filter={filter}
-            sortData={sortData}
-            currency={currency}
-            currencyRates={currencyRates}
-          />
-        ) : (
-          <ListView
-            products={adjustedProducts}
-            subCatData={subCatData}
-            subRegData={subRegData}
-            searchTerm={searchTerm}
-            status={status}
-            filter={filter}
-            sortData={sortData}
-            currency={currency}
-            currencyRates={currencyRates}
-          />
-        )}
-      </Box> */}
+      
       {view === "grid" ? (
         <Box
           sx={{

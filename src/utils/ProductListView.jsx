@@ -85,7 +85,8 @@ const ProductListView = ({
           </Typography>
           <Box className={styles.verticalDottedLine}></Box>
           <Typography variant="body2" color="text.secondary">
-            1 Bid(s)
+            1 Bid
+            {/* 1 {numberOfBids > 1 ? 'Bids' : 'Bid'} */}
           </Typography>
           <Button
             variant="outlined"

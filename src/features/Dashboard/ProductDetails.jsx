@@ -453,7 +453,7 @@ const ProductDetails = () => {
                         variant="body2"
                         style={{ fontSize: "18px", fontWeight: "bold" }}
                       >
-                        {numberOfBids} Bid (s)
+                        {numberOfBids} {numberOfBids > 1 ? 'Bids' : 'Bid'}
                       </Typography>
                       <Typography
                         variant="body2"
