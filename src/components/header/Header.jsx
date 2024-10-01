@@ -44,7 +44,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   width: "100%",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    paddingLeft: `calc(1.5em + ${theme.spacing(4)})`,
   },
 }));
 
@@ -79,17 +79,12 @@ export default function Header({ setSearchTerm }) {
 
   return (
     <>
-      <AppBar
-        position="sticky"
-        sx={{backgroundColor: "#337ab7 !important"}}
-        className={styles.headerColor}
-      >
-        <Toolbar sx={{ minHeight: "55px !important" }} mt={3}>
-          <img alt="kpmg" src={kpmgImage} />
-
-          <Box sx={{ flexGrow: 1 }} />
-          {location.pathname.includes("/view") && (
-            <>
+      <AppBar position="sticky" sx={{ backgroundColor: "#337ab7 !important" }} className={styles.headerColor}>
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between", minHeight: "55px !important" }}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <img alt="kpmg" src={kpmgImage} style={{marginRight:"20px"}} />
+            </Box>
+            {location.pathname.includes("/view") && (
               <Search>
                 <SearchIconWrapper>
                   <SearchIcon />
@@ -104,109 +99,68 @@ export default function Header({ setSearchTerm }) {
                   inputProps={{ "aria-label": "search" }}
                 />
               </Search>
-            </>
-          )}
-        {/* </Toolbar> */}
+            )}
+          
 
-        {/* <Toolbar sx={{ minHeight: "55px !important" }}> */}
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            className={styles.link}
-            marginLeft={'15px'}
-          >
-            <Link to="/">Home</Link>
-          </Typography>
-          <Typography
-            variant="h6"
-            noWrap
-            className={styles.link}
-            component="div"
-            ml={3}
-          >
-            <Link to="/view">Browse</Link>
-          </Typography>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            className={styles.link}
-            ml={3}
-          >
-            <Link to="/sell">Sell</Link>
-          </Typography>
+          <Box sx={{ display: "flex", alignItems: "center", gap:2 }}>
+            <Typography variant="h6" noWrap component="div" className={styles.link} ml={2}>
+              <Link to="/">Home</Link>
+            </Typography>
+            <Typography variant="h6" noWrap className={styles.link} component="div" ml={2}>
+              <Link to="/view">Browse</Link>
+            </Typography>
+            <Typography variant="h6" noWrap component="div" className={styles.link} ml={2}>
+              <Link to="/sell">Sell</Link>
+            </Typography>
+            <Typography variant="h6" noWrap component="div" className={styles.link} ml={2}>
+              <Link to="/about-us">About Us</Link>
+            </Typography>
+            <Typography variant="h6" noWrap component="div" className={styles.link} ml={2}>
+              <Link to="/contact-us">Contact Us</Link>
+            </Typography>
 
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            className={styles.link}
-            ml={3}
-          >
-            <Link to="/contact-us">Contact Us</Link>
-          </Typography>
-
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            className={styles.link}
-            ml={3}
-          >
-            <Link to="/about-us">About Us</Link>
-          </Typography>
-
-          <Box sx={{ flexGrow: 1 }} />
-          {userData ? (
-            <>
-              <Tooltip title="open user menu">
-                <IconButton onClick={handleAvatarClick} sx={{ p: 0 }}>
-                  <Avatar sx={{ bgcolor: "#1768ac" }}>
-                    {userData?.user?.[0]?.toUpperCase()}
-                  </Avatar>
-                </IconButton>
-              </Tooltip>
-              <Menu
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleMenuClose}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-              >
-                <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>
-                  History
-                </MenuItem>
-                <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>
-                  My Payments
-                </MenuItem>
-                <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>
-                  Watchlists
-                </MenuItem>
-                <MenuItem onClick={handleLogout}>
-                  Logout
-                  <LogoutOutlinedIcon
-                    style={{ fontSize: "15px", paddingLeft: "4px" }}
-                  />
-                </MenuItem>
-              </Menu>
-            </>
-          ) : (
-            <>
-              <Button color="inherit" className={styles.link}>
-                <Link to="/register">Register</Link>
-              </Button>
-              <Button color="inherit" className={styles.link}>
-                <Link to="/login">Login</Link>
-              </Button>
-            </>
-          )}
+            {userData ? (
+              <>
+                <Tooltip title="open user menu">
+                  <IconButton onClick={handleAvatarClick} sx={{ p: 0 }}>
+                    <Avatar sx={{ bgcolor: "#1768ac" }}>
+                      {userData?.user?.[0]?.toUpperCase()}
+                    </Avatar>
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleMenuClose}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                >
+                  <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>History</MenuItem>
+                  <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>My Payments</MenuItem>
+                  <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>Watchlists</MenuItem>
+                  <MenuItem onClick={handleLogout}>
+                    Logout
+                    <LogoutOutlinedIcon style={{ fontSize: "15px", paddingLeft: "4px" }} />
+                  </MenuItem>
+                </Menu>
+              </>
+            ) : (
+              <>
+                <Button color="inherit" className={styles.link} ml={2}>
+                  <Link to="/register">Register</Link>
+                </Button>
+                <Button color="inherit" className={styles.link} ml={2}>
+                  <Link to="/login">Login</Link>
+                </Button>
+              </>
+            )}
+          </Box>
         </Toolbar>
       </AppBar>
     </>
