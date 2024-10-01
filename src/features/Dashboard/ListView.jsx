@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ProductListView from "../../utils/ProductListView";
 import styles from "./ListView.module.scss";
 import { useSelector } from "react-redux";
-import { Grid, Pagination } from "@mui/material";
+import { Grid, Pagination, Typography } from "@mui/material";
 
 const ListView = ({
   subCatData,
@@ -12,7 +12,7 @@ const ListView = ({
   filter,
   sortData,
   currency,
-  currencyRates
+  currencyRates,
 }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -44,7 +44,7 @@ const ListView = ({
       filtered = filtered.filter((product) => product.status === status);
     }
     if (filter && filter !== "all") {
-      filtered = filtered.filter((product)=> product.type === filter);
+      filtered = filtered.filter((product) => product.type === filter);
     }
 
     if (searchTerm) {
@@ -88,11 +88,11 @@ const ListView = ({
     indexOfFirstProduct,
     indexOfLastProduct,
   );
+  const totalPages=Math.ceil(filteredProducts.length / itemsPerPage);
 
   const handlePageChange = (event, newPage) => {
     setCurrentPage(newPage);
   };
-
 
   return (
     <div className={styles.listViewProducts}>
@@ -104,9 +104,9 @@ const ListView = ({
               id={product.id}
               image={product.image}
               title={product.title}
-              currentBid={(product.currentBid * currencyRates[currency]).toFixed(
-                2,
-              )}
+              currentBid={(
+                product.currentBid * currencyRates[currency]
+              ).toFixed(2)}
               currency={currency}
               timeRemaining={product.timeRemaining}
               isExpired={product.isExpired}
@@ -118,12 +118,21 @@ const ListView = ({
       )}
       <Grid container justifyContent="center" style={{ marginTop: "20px" }}>
         <Pagination
-          count={Math.ceil(filteredProducts.length / itemsPerPage)}
+          count={totalPages}
           page={currentPage}
           onChange={handlePageChange}
           color="primary"
-          style={{ marginTop: "10px", marginBottom:'20px' }}
+          style={{ marginTop: "10px", marginBottom: "20px" }}
         />
+      </Grid>
+      <Grid
+        container
+        justifyContent="center"
+        style={{ marginTop: "0px", marginBottom: "15px" }}
+      >
+        <Typography variant="body2">
+          Page {currentPage} of {totalPages}
+        </Typography>
       </Grid>
     </div>
   );

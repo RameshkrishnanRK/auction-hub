@@ -118,6 +118,7 @@ const GridView = ({
     indexOfFirstProduct,
     indexOfLastProduct,
   );
+const totalPages=Math.ceil(filteredProducts.length / itemsPerPage);
 
   const handlePageChange = (event, newPage) => {
     setCurrentPage(newPage);
@@ -186,12 +187,15 @@ const GridView = ({
       </Grid>
       <Grid container justifyContent="center" style={{ marginTop: "20px" }}>
         <Pagination
-          count={Math.ceil(filteredProducts.length / itemsPerPage)}
+          count={totalPages}
           page={currentPage}
           onChange={handlePageChange}
           color="primary"
           style={{ marginTop: "10px", marginBottom:'20px' }}
         />
+      </Grid>
+      <Grid container justifyContent='center' style={{marginTop:'0px', marginBottom:'15px'}}>
+        <Typography variant='body2'>Page {currentPage} of {totalPages}</Typography>
       </Grid>
     </>
   );
