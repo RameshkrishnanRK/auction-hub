@@ -13,7 +13,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/slices/loginSlice";
 import { useLocation } from "react-router-dom";
-import { Avatar, IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
+import { Avatar, IconButton, Menu, MenuItem } from "@mui/material";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -64,8 +65,7 @@ export default function Header({ setSearchTerm }) {
   const handleSearch = () => {
     setSearchTerm(inputValue);
   };
-
-  const handleAvatarClick = (event) => {
+  const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleMenuClose = () => {
@@ -78,55 +78,116 @@ export default function Header({ setSearchTerm }) {
 
   return (
     <>
-      <AppBar position="sticky" sx={{ backgroundColor: "#337ab7 !important" }} className={styles.headerColor}>
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between", minHeight: "55px !important" }}>
+      <AppBar
+        position="sticky"
+        sx={{ backgroundColor: "#337ab7 !important" }}
+        className={styles.headerColor}
+      >
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            minHeight: "55px !important",
+          }}
+        >
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <img alt="kpmg" src={kpmgImage} style={{marginRight:"20px"}} />
-            </Box>
-            {location.pathname.includes("/view") && (
-              <Search>
-                <SearchIconWrapper>
-                  <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                  onChange={(event) => {
-                    setInputValue(event.target.value);
-                    handleSearch();
-                  }}
-                  value={inputValue}
-                  placeholder="Search here…"
-                  inputProps={{ "aria-label": "search" }}
-                />
-              </Search>
-            )}
-          
+            <img alt="kpmg" src={kpmgImage} style={{ marginRight: "20px" }} />
+          </Box>
+          {location.pathname.includes("/view") && (
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                onChange={(event) => {
+                  setInputValue(event.target.value);
+                  handleSearch();
+                }}
+                value={inputValue}
+                placeholder="Search here…"
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+          )}
 
-          <Box sx={{ display: "flex", alignItems: "center", gap:2 }}>
-            <Typography variant="h6" noWrap component="div" className={styles.link} ml={2}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              className={styles.link}
+              ml={2}
+            >
               <Link to="/">Home</Link>
             </Typography>
-            <Typography variant="h6" noWrap className={styles.link} component="div" ml={2}>
+            <Typography
+              variant="h6"
+              noWrap
+              className={styles.link}
+              component="div"
+              ml={2}
+            >
               <Link to="/view">Browse</Link>
             </Typography>
-            <Typography variant="h6" noWrap component="div" className={styles.link} ml={2}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              className={styles.link}
+              ml={2}
+            >
               <Link to="/sell">Sell</Link>
             </Typography>
-            <Typography variant="h6" noWrap component="div" className={styles.link} ml={2}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              className={styles.link}
+              ml={2}
+            >
               <Link to="/about-us">About Us</Link>
             </Typography>
-            <Typography variant="h6" noWrap component="div" className={styles.link} ml={2}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              className={styles.link}
+              ml={2}
+            >
               <Link to="/contact-us">Contact Us</Link>
             </Typography>
 
             {userData ? (
-              <>
-                <Tooltip title="open user menu">
-                  <IconButton onClick={handleAvatarClick} sx={{ p: 0 }}>
-                    <Avatar sx={{ bgcolor: "#1768ac" }}>
-                      {userData?.user?.[0]?.toUpperCase()}
-                    </Avatar>
-                  </IconButton>
-                </Tooltip>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <Avatar sx={{ bgcolor: "#1768ac" }}>
+                  {userData?.user?.[0]?.toUpperCase()}
+                </Avatar>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    ml: 1,
+                  }}
+                >
+                  <Typography
+                    variant="body1"
+                    fontWeight="bold"
+                    sx={{ lineHeight: "1.2" }}
+                  >
+                    {userData?.user}
+                  </Typography>
+                  <Typography
+                    variant="caption"
+                    color="textSecondary"
+                    sx={{ lineHeight: "1.2", mt: "2px" }}
+                  >
+                    {userData?.role}
+                  </Typography>
+                </Box>
+                <IconButton onClick={handleMenuClick} sx={{ ml: 1 }}>
+                  <ArrowDropDownIcon />
+                </IconButton>
                 <Menu
                   anchorEl={anchorEl}
                   open={open}
@@ -140,14 +201,18 @@ export default function Header({ setSearchTerm }) {
                     horizontal: "right",
                   }}
                 >
-                  <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>Account</MenuItem>
-                  <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>Bid History</MenuItem>
-                  <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>Watchlists</MenuItem>
-                  <MenuItem onClick={handleLogout}>
-                    Logout
+                  <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>
+                    Account
                   </MenuItem>
+                  <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>
+                    Bid History
+                  </MenuItem>
+                  <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>
+                    Watchlists
+                  </MenuItem>
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </Menu>
-              </>
+              </Box>
             ) : (
               <>
                 <Button color="inherit" className={styles.link} ml={2}>
