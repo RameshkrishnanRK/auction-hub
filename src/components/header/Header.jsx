@@ -100,20 +100,21 @@ export default function Header({ setSearchTerm }) {
                     handleSearch();
                   }}
                   value={inputValue}
-                  placeholder="Enter keywords…"
+                  placeholder="Search here…"
                   inputProps={{ "aria-label": "search" }}
                 />
               </Search>
             </>
           )}
-        </Toolbar>
+        {/* </Toolbar> */}
 
-        <Toolbar sx={{ minHeight: "55px !important" }}>
+        {/* <Toolbar sx={{ minHeight: "55px !important" }}> */}
           <Typography
             variant="h6"
             noWrap
             component="div"
             className={styles.link}
+            marginLeft={'15px'}
           >
             <Link to="/">Home</Link>
           </Typography>
