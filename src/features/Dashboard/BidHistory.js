@@ -60,15 +60,6 @@ const BidHistory = ({ open, onClose, currency, currencyRates }) => {
           }
           return "";
         },
-        //   <span
-        //     style={{
-        //       color: value === "highest" ? "green" : value === "lowest" ? "red" : "black",
-        //       fontWeight: "bold",
-        //     }}
-        //   >
-        //     {value === "highest" ? "Highest" : value === "lowest" ? "Outbid" : ""}
-        //   </span>
-        // ),
       },
     ],
     [currency, currencyRates, bidHistory]
