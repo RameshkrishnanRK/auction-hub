@@ -11,7 +11,6 @@ import kpmgImage from "../../assets/images/Auction.KPMGLogo_1_.svg";
 import styles from "./Header.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { logout } from "../../redux/slices/loginSlice";
 import { useLocation } from "react-router-dom";
 import { Avatar, IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
@@ -141,12 +140,11 @@ export default function Header({ setSearchTerm }) {
                     horizontal: "right",
                   }}
                 >
-                  <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>History</MenuItem>
-                  <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>My Payments</MenuItem>
+                  <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>Account</MenuItem>
+                  <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>Bid History</MenuItem>
                   <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>Watchlists</MenuItem>
                   <MenuItem onClick={handleLogout}>
                     Logout
-                    <LogoutOutlinedIcon style={{ fontSize: "15px", paddingLeft: "4px" }} />
                   </MenuItem>
                 </Menu>
               </>
