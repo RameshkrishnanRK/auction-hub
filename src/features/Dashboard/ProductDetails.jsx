@@ -20,7 +20,7 @@ import ReusableModal from "../../utils/reusableModal";
 import Layout from "../../routing/components/Layout";
 import styles from "../Dashboard/ProductDetails.module.scss";
 import BidHistory from "./BidHistory";
-import {bids} from '../../components/login/data/dummyData';
+import { bids } from "../../components/login/data/dummyData";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -33,29 +33,29 @@ const ProductDetails = () => {
   const [openBidModal, setOpenBidModal] = useState(false);
   const [openOfferModal, setOpenOfferModal] = useState(false);
   const [openBidhistoryModal, setOpenBidHistoryModal] = useState(false);
+  const [isInWatchlist, setIsInWatchList] = useState(false);
 
   const { data: products } = useSelector((state) => state.product);
 
   const { currency, currencyRates } = useSelector((state) => state.currency);
   window.history.replaceState(null, "/view");
 
-  
-
   const product =
-      products.length > 0 &&
-      products.find((product) => product?.id === parseInt(productId));
+    products.length > 0 &&
+    products.find((product) => product?.id === parseInt(productId));
 
   const currentCurrencyRate = currencyRates?.[currency] || 1;
 
   const formattedBid = product?.currentBid
-  ? (product.currentBid* currentCurrencyRate).toLocaleString('en-IN')
-  : '0.00';
+    ? (product.currentBid * currentCurrencyRate).toLocaleString("en-IN")
+    : "0.00";
   const buyNowPrice = product?.buyNow
-  ?(product.buyNow* currentCurrencyRate).toLocaleString('en-IN')
-  :'0.00';
- 
+    ? (product.buyNow * currentCurrencyRate).toLocaleString("en-IN")
+    : "0.00";
 
-  const [cleanedFormattedBid, setCleanedFormattedBid] = useState(product?.currentBid || 0);
+  const [cleanedFormattedBid, setCleanedFormattedBid] = useState(
+    product?.currentBid || 0,
+  );
   const [addedToWatchList] = useState(false);
 
   const [bidAmount, setBidAmount] = useState("");
@@ -108,20 +108,6 @@ const ProductDetails = () => {
     setOpenOfferModal(true);
     setCleanedFormattedBid(formattedBid.replace(/,/g, ""));
   };
-
-  const handleAddToWatchList = () => {
-    toast.success("Added to watch list", {
-      position: "top-center",
-      autoClose: 2000,
-      style: {
-        width: "430px",
-        backgroundColor: "#009933",
-        color: "#ffffff",
-      },
-      transition: Slide,
-    });
-  };
-
   const handleQuickBid = () => {
     setOpenBidModal(true);
     setCleanedFormattedBid(formattedBid.replace(/,/g, ""));
@@ -301,12 +287,37 @@ const ProductDetails = () => {
     </Box>
   );
 
-  const handleBidHistoryClick=()=>{
+  const handleBidHistoryClick = () => {
     setOpenBidHistoryModal(true);
   };
 
   const numberOfBids = bids.length;
-
+  const handleAddToWatchList = () => {
+    if (isInWatchlist) {
+      toast.error("Removed from watch list", {
+        position: "top-center",
+        autoClose: 2000,
+        style: {
+          width: "430px",
+          backgroundColor: "#DC2020",
+          color: "#ffffff",
+        },
+        transition: Slide,
+      });
+    } else {
+      toast.success("Added to watch list", {
+        position: "top-center",
+        autoClose: 2000,
+        style: {
+          width: "430px",
+          backgroundColor: "#009933",
+          color: "#ffffff",
+        },
+        transition: Slide,
+      });
+    }
+    setIsInWatchList(!isInWatchlist);
+  };
 
   return (
     <>
@@ -317,7 +328,9 @@ const ProductDetails = () => {
             <Link to="/" style={{ textDecoration: "none" }}>
               Home
             </Link>
-            <Link to="/view"style={{ textDecoration: "none" }}>Browse</Link>
+            <Link to="/view" style={{ textDecoration: "none" }}>
+              Browse
+            </Link>
           </Breadcrumbs>
         </Box>
       </Box>
@@ -344,25 +357,33 @@ const ProductDetails = () => {
                 variant="h5"
                 component="div"
                 className={Styles.productTitle}
-                style={{ display:"flex", justifyContent:"space-between", alignItems:"center"}}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
               >
                 <span>{product?.title}</span>
                 <Button
-                variant="contained"
-                color="primary"
-                className="{styles.addWatchListBtn"
-                onClick={handleAddToWatchList}
-                style={{ textTransform:"none"}}
+                  variant="contained"
+                  color="primary"
+                  className="{styles.addWatchListBtn"
+                  onClick={handleAddToWatchList}
+                  style={{ textTransform: "none", backgroundColor: isInWatchlist ? '#DC2020' : '#1976d2', color:'#fff' }}
                 >
-                   + Add to Watchlist
-              </Button>
+                  {isInWatchlist
+                    ? " - Remove from Watchlist"
+                    : "+ Add to Watchlist"}
+                </Button>
               </Typography>
               <Divider />
               <Box className={Styles.productInfo}>
                 <Box className={Styles.productInfoLeft}>
                   <Typography variant="h6" className={Styles.productPriceTitle}>
                     Current Price{" "}
-                    <span className={Styles.productPrice}>{currency} {formattedBid}</span>
+                    <span className={Styles.productPrice}>
+                      {currency} {formattedBid}
+                    </span>
                   </Typography>
                   <Button
                     variant="contained"
@@ -408,7 +429,7 @@ const ProductDetails = () => {
                     <hr style={{ border: "0", borderTop: "1px solid #000" }} />
                   </Typography>
                   <Button className={Styles.buyNowBtn} onClick={handleBuyNow}>
-                  Buy Now {currency} {buyNowPrice}
+                    Buy Now {currency} {buyNowPrice}
                   </Button>
                   <Typography variant="body2" className={Styles.orText}>
                     <hr style={{ border: "1px solid grey", width: "200" }} />
@@ -439,21 +460,10 @@ const ProductDetails = () => {
                     Remaining Time :{" "}
                     {product?.isExpired
                       ? "Expired"
-                      : `${product?.timeRemaining} ${product?.timeRemaining > 1 ? 'Hrs' : 'Hr'}`}
+                      : `${product?.timeRemaining} ${product?.timeRemaining > 1 ? "Hrs" : "Hr"}`}
                   </Typography>
                 </Box>
                 <Box className={Styles.productInfoRight}>
-                  {/* <Box className={Styles.watchListBox}>
-                    <Typography variant="body2">1Watching</Typography>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      className={Styles.addWatchListBtn}
-                      onClick={handleAddToWatchList}
-                    >
-                      + Add to watch list
-                    </Button>
-                  </Box> */}
                   <Box className={Styles.highBidderBox}>
                     <Typography className={Styles.highBidder}>
                       <div>High Bidder:</div> <div>Bidder</div>
@@ -463,17 +473,21 @@ const ProductDetails = () => {
                         variant="body2"
                         style={{ fontSize: "18px", fontWeight: "bold" }}
                       >
-                        {numberOfBids} {numberOfBids > 1 ? 'Bids' : 'Bid'}
+                        {numberOfBids} {numberOfBids > 1 ? "Bids" : "Bid"}
                       </Typography>
                       <Typography
                         variant="body2"
                         style={{ fontSize: "18px", fontWeight: "bold" }}
                       >
-                        {/* Bid History {">"} */}
-                        <Button onClick={handleBidHistoryClick} variant="contained"
-                      color="primary"
-                      className={Styles.addWatchListBtn} style={{ textTransform:"none"}}
-                        >Show Bid History</Button>
+                        <Button
+                          onClick={handleBidHistoryClick}
+                          variant="contained"
+                          color="primary"
+                          className={Styles.addWatchListBtn}
+                          style={{ textTransform: "none" }}
+                        >
+                          Show Bid History
+                        </Button>
                       </Typography>
                     </Box>
                   </Box>
@@ -488,7 +502,6 @@ const ProductDetails = () => {
                   KPMG will bid incrementally for you upto your maximun bid.
                   Your maximum bid is kept a secret from other users.
                 </Typography>
-
                 <Typography
                   variant="body2"
                   color="text.secondary"
@@ -506,11 +519,11 @@ const ProductDetails = () => {
             </CardContent>
           </Box>
         </Card>
-        <BidHistory 
-        open={openBidhistoryModal}
-        onClose={()=>setOpenBidHistoryModal(false)}
-        currency={currency}
-        currencyRates={currencyRates}
+        <BidHistory
+          open={openBidhistoryModal}
+          onClose={() => setOpenBidHistoryModal(false)}
+          currency={currency}
+          currencyRates={currencyRates}
         />
         <ReusableModal
           open={openBidModal}
@@ -518,14 +531,12 @@ const ProductDetails = () => {
           onSubmit={handleBidModalSuccess}
           bodyContent={modalBidContent}
         />
-
         <ReusableModal
           open={openOfferModal}
           onClose={handleOfferModalClose}
           onSubmit={handleOfferModalSuccess}
           bodyContent={modalOfferContent}
         />
-
         <ToastContainer />
       </div>
     </>
