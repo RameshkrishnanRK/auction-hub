@@ -344,8 +344,18 @@ const ProductDetails = () => {
                 variant="h5"
                 component="div"
                 className={Styles.productTitle}
+                style={{ display:"flex", justifyContent:"space-between", alignItems:"center"}}
               >
-                {product?.title}
+                <span>{product?.title}</span>
+                <Button
+                variant="contained"
+                color="primary"
+                className="{styles.addWatchListBtn"
+                onClick={handleAddToWatchList}
+                style={{ textTransform:"none"}}
+                >
+                   + Add to Watchlist
+              </Button>
               </Typography>
               <Divider />
               <Box className={Styles.productInfo}>
@@ -433,7 +443,7 @@ const ProductDetails = () => {
                   </Typography>
                 </Box>
                 <Box className={Styles.productInfoRight}>
-                  <Box className={Styles.watchListBox}>
+                  {/* <Box className={Styles.watchListBox}>
                     <Typography variant="body2">1Watching</Typography>
                     <Button
                       variant="contained"
@@ -443,7 +453,7 @@ const ProductDetails = () => {
                     >
                       + Add to watch list
                     </Button>
-                  </Box>
+                  </Box> */}
                   <Box className={Styles.highBidderBox}>
                     <Typography className={Styles.highBidder}>
                       <div>High Bidder:</div> <div>Bidder</div>
