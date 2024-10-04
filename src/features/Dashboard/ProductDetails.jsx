@@ -487,14 +487,14 @@ const ProductDetails = () => {
                         >
                       <Typography
                         variant="body2"
-                        style={{ fontSize: "18px", fontWeight: "bold" }}
+                        style={{ fontSize: "18px", fontWeight: "bold", justifyContent:'center' }}
                       >
                         {numberOfBids} {numberOfBids > 1 ? "Bids" : "Bid"}
                       </Typography>                     
                         <Button
                           onClick={handleBidHistoryClick}
                           variant="contained"
-                          color="primary"
+                          // color="primary"
                           className={Styles.addWatchListBtn}
                           style={{ textTransform: "none" }}
                         >

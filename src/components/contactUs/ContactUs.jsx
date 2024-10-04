@@ -225,7 +225,7 @@ const ContactUs = () => {
                     color: 'black',
                     fontStyle:'italic',
                     border:'0px',
-                    padding:'8px 16px',
+                    padding:'8px 0px',
                     boxShadow:'none',
                     transform:'rotate(-10deg)',
                     width:"auto",
@@ -235,8 +235,8 @@ const ContactUs = () => {
                 >
                   {captchaCode}
                 </Box>
-                <box onClick={resetCaptcha} size="small" variant="outlined">
-                  <FiRefreshCcw size={15} />
+                <box onClick={resetCaptcha} size="small" variant="outlined" >
+                  <FiRefreshCcw size={14} />
                 </box>
               </Box>
             </Grid>
