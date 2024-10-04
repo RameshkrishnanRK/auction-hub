@@ -29,6 +29,15 @@ const BidHistory = ({ open, onClose, currency, currencyRates }) => {
     }
   }
 
+  const handleModalClose = () => {
+    if (bidHistory.length > 0) {
+      const highestBidder = bidHistory[0].bidderName;
+      onClose(highestBidder);
+    } else {
+      onClose(null);
+    }
+  };
+
   const columns = React.useMemo(
     () => [
       {
@@ -67,12 +76,10 @@ const BidHistory = ({ open, onClose, currency, currencyRates }) => {
               <span style={{color:"green", fontWeight:'bold'}}>Highest</span>
             );
           }
-          if (amount === bidHistory[1]?.amount){
-            return (
-              <span style={{color:'red', fontWeight:'bold'}}>Outbid</span>
-            );
-          }
-          return "";
+          return (
+            <span style={{color:'red', fontWeight:'bold'}}>Outbid</span>
+
+          );
         },
       },
     ],
@@ -84,7 +91,7 @@ const BidHistory = ({ open, onClose, currency, currencyRates }) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
 
   return (
-    <Modal open={open} onClose={onClose}
+    <Modal open={open} onClose={handleModalClose}
     BackdropProps={{
       style:{ pointerEvents:'none'},
     }}>
@@ -105,7 +112,7 @@ const BidHistory = ({ open, onClose, currency, currencyRates }) => {
           <Typography variant="h6" component="h2">
             Bid History
           </Typography>
-          <IconButton onClick={onClose}>
+          <IconButton onClick={handleModalClose}>
             <CloseIcon />
           </IconButton>
         </Box>

@@ -33,6 +33,7 @@ const ProductDetails = () => {
   const [openOfferModal, setOpenOfferModal] = useState(false);
   const [openBidhistoryModal, setOpenBidHistoryModal] = useState(false);
   const [isInWatchlist, setIsInWatchList] = useState(false);
+  const [highestBidder, setHighestBidder] = useState("Bidder");
 
   const { data: products } = useSelector((state) => state.product);
 
@@ -70,6 +71,8 @@ const ProductDetails = () => {
       setBidAmount(newValue);
     }
   };
+
+ 
 
   const handleOfferAmount = (event) => {
     const newValue = event.target.value;
@@ -184,6 +187,13 @@ const ProductDetails = () => {
     }
   };
 
+  useEffect(()=>{
+    const sortedBids = [...bids].sort((a, b) => b.amount - a.amount);
+    if (sortedBids.length > 0) {
+      setHighestBidder(sortedBids[0].bidderName);
+    }
+  }, [])
+
   const handleBidModalClose = () => {
     let formattedBid;
     if (product && product?.currentBid !== undefined) {
@@ -289,6 +299,12 @@ const ProductDetails = () => {
   const handleBidHistoryClick = () => {
     setOpenBidHistoryModal(true);
   };
+  const handleBidHistoryClose = (highestBidder) => {
+    setOpenBidHistoryModal(false);
+    if (highestBidder) {
+      setHighestBidder(highestBidder);
+    }
+  };
 
   const numberOfBids = bids.length;
   const handleAddToWatchList = () => {
@@ -375,7 +391,6 @@ const ProductDetails = () => {
                     : "+ Add to Watchlist"}
                 </Button>
               </Typography>
-              {/* <Divider /> */}
               <Box className={Styles.productInfo}>
                 <Box className={Styles.productInfoLeft}>
                   <Typography variant="h6" className={Styles.productPriceTitle}>
@@ -465,7 +480,7 @@ const ProductDetails = () => {
                 <Box className={Styles.productInfoRight}>
                   <Box className={Styles.highBidderBox} >
                     <Typography className={Styles.highBidder}>
-                      <div>High Bidder:</div> <div><b>Anne</b></div>
+                      <div>High Bidder:</div> <div><b>{highestBidder}</b></div>
                     </Typography>
                     <Box className={Styles.highBidderSecond}
                         sx={{display:"flex", alignItems:"center", gap:2 }}
@@ -475,11 +490,7 @@ const ProductDetails = () => {
                         style={{ fontSize: "18px", fontWeight: "bold" }}
                       >
                         {numberOfBids} {numberOfBids > 1 ? "Bids" : "Bid"}
-                      </Typography>
-                      {/* <Typography
-                        variant="body2"
-                        style={{ fontSize: "18px", fontWeight: "bold" }}
-                      > */}
+                      </Typography>                     
                         <Button
                           onClick={handleBidHistoryClick}
                           variant="contained"
@@ -488,8 +499,7 @@ const ProductDetails = () => {
                           style={{ textTransform: "none" }}
                         >
                           Show Bid History
-                        </Button>
-                      {/* </Typography> */}
+                        </Button>                      
                     </Box>
                   </Box>
                 </Box>
@@ -522,7 +532,7 @@ const ProductDetails = () => {
         </Card>
         <BidHistory
           open={openBidhistoryModal}
-          onClose={() => setOpenBidHistoryModal(false)}
+          onClose={handleBidHistoryClose}
           currency={currency}
           currencyRates={currencyRates}
         />
