@@ -8,7 +8,6 @@ import {
   Card,
   CardContent,
   CardMedia,
-  Divider,
   TextField,
   Typography,
 } from "@mui/material";
@@ -376,7 +375,7 @@ const ProductDetails = () => {
                     : "+ Add to Watchlist"}
                 </Button>
               </Typography>
-              <Divider />
+              {/* <Divider /> */}
               <Box className={Styles.productInfo}>
                 <Box className={Styles.productInfoLeft}>
                   <Typography variant="h6" className={Styles.productPriceTitle}>
@@ -464,21 +463,23 @@ const ProductDetails = () => {
                   </Typography>
                 </Box>
                 <Box className={Styles.productInfoRight}>
-                  <Box className={Styles.highBidderBox}>
+                  <Box className={Styles.highBidderBox} >
                     <Typography className={Styles.highBidder}>
-                      <div>High Bidder:</div> <div>Bidder</div>
+                      <div>High Bidder:</div> <div><b>Anne</b></div>
                     </Typography>
-                    <Box className={Styles.highBidderSecond}>
+                    <Box className={Styles.highBidderSecond}
+                        sx={{display:"flex", alignItems:"center", gap:2 }}
+                        >
                       <Typography
                         variant="body2"
                         style={{ fontSize: "18px", fontWeight: "bold" }}
                       >
                         {numberOfBids} {numberOfBids > 1 ? "Bids" : "Bid"}
                       </Typography>
-                      <Typography
+                      {/* <Typography
                         variant="body2"
                         style={{ fontSize: "18px", fontWeight: "bold" }}
-                      >
+                      > */}
                         <Button
                           onClick={handleBidHistoryClick}
                           variant="contained"
@@ -488,7 +489,7 @@ const ProductDetails = () => {
                         >
                           Show Bid History
                         </Button>
-                      </Typography>
+                      {/* </Typography> */}
                     </Box>
                   </Box>
                 </Box>
