@@ -12,7 +12,7 @@ import styles from "./Header.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/slices/loginSlice";
-// import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Avatar, IconButton, Menu, MenuItem } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
@@ -53,7 +53,7 @@ export default function Header({ setSearchTerm }) {
   const navigate = useNavigate();
   const [inputValue, setInputValue] = React.useState("");
   const userData = useSelector((state) => state.login.user);
-  // const location = useLocation();
+  const location = useLocation();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -93,7 +93,7 @@ export default function Header({ setSearchTerm }) {
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <img alt="kpmg" src={kpmgImage} style={{ marginRight: "20px" }} />
         </Box>
-
+        {location.pathname === "/view" && (
         <Box sx={{ flexGrow: 1, maxWidth: "600px", margin: "0 20px" }}>
           <Search>
             <SearchIconWrapper>
@@ -110,6 +110,7 @@ export default function Header({ setSearchTerm }) {
             />
           </Search>
         </Box>
+        )}
 
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
           {userData ? (
