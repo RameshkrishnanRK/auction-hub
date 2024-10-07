@@ -9,9 +9,7 @@ import {
 import React from "react";
 import styles from "./ProductListView.module.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelect } from "@mui/base";
 import { useSelector } from "react-redux";
-import currency from "../features/Dashboard/ControlPanel";
 
 const ProductListView = ({
   id,
