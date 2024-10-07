@@ -20,7 +20,7 @@ import Layout from "../../routing/components/Layout";
 import styles from "../Dashboard/ProductDetails.module.scss";
 import BidHistory from "./BidHistory";
 import { bids } from "../../components/login/data/dummyData";
-import role from '../../components/login/MyAccount';
+// import role from '../../components/login/MyAccount';
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -35,6 +35,7 @@ const ProductDetails = () => {
   const [openBidhistoryModal, setOpenBidHistoryModal] = useState(false);
   const [isInWatchlist, setIsInWatchList] = useState(false);
   const [highestBidder, setHighestBidder] = useState("Bidder");
+  const [role, setRole] = useState("");
 
   const { data: products } = useSelector((state) => state.product);
 
@@ -72,7 +73,12 @@ const ProductDetails = () => {
       setBidAmount(newValue);
     }
   };
-
+useEffect(()=>{
+  const storedRole = localStorage.getItem("role") || sessionStorage.getItem("role");
+  if(storedRole){
+    setRole(storedRole);
+  }
+}, []);
  
 
   const handleOfferAmount = (event) => {
