@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { dummyRoles } from "../../api/roles";
+import { dummyRoles } from "../api/roles";
 
 const initialState = {
   roles: [], 

@@ -20,6 +20,7 @@ import Layout from "../../routing/components/Layout";
 import styles from "../Dashboard/ProductDetails.module.scss";
 import BidHistory from "./BidHistory";
 import { bids } from "../../components/login/data/dummyData";
+import role from '../../components/login/MyAccount';
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -477,6 +478,7 @@ const ProductDetails = () => {
                       : `${product?.timeRemaining} ${product?.timeRemaining > 1 ? "Hrs" : "Hr"}`}
                   </Typography>
                 </Box>
+                {role === 'Auctioneer' && (
                 <Box className={Styles.productInfoRight}>
                   <Box className={Styles.highBidderBox} >
                     <Typography className={Styles.highBidder}>
@@ -503,6 +505,7 @@ const ProductDetails = () => {
                     </Box>
                   </Box>
                 </Box>
+                )}
               </Box>
               <Box className={Styles.productExtraInfo}>
                 <Typography
