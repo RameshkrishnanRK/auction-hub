@@ -10,6 +10,7 @@ import React from "react";
 import styles from "./ProductListView.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelect } from "@mui/base";
+import { useSelector } from "react-redux";
 import currency from "../features/Dashboard/ControlPanel";
 
 const ProductListView = ({
@@ -22,9 +23,13 @@ const ProductListView = ({
   currency
 }) => {
   const navigate = useNavigate();
-  const userData = useSelect((state) => state.login.user);
+  const userData = useSelector ((state) => state.login.user);
   const handleViewDetails = () => {
-    navigate(`/product-details?productId=${id}`);
+    if (userData !== null) {
+      navigate(`/product-details?productId=${id}`);
+    } else {
+      navigate(`/login`);
+    }
   };
   const handleBid = () => {
     if (userData !== null) {
