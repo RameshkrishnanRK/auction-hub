@@ -20,7 +20,6 @@ import Layout from "../../routing/components/Layout";
 import styles from "../Dashboard/ProductDetails.module.scss";
 import BidHistory from "./BidHistory";
 import { bids } from "../../components/login/data/dummyData";
-// import role from '../../components/login/MyAccount';
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -97,6 +96,7 @@ useEffect(()=>{
     let bidAmountValue = Number(bidAmount) || 0;
 
     if (bidAmountValue === 0 || bidAmountValue < formattedBidValue) {
+      toast.dismiss();
       toast.error("Bid Amount Cannot be lesser than Current Bid", {
         position: "top-center",
         autoClose: 3000,
@@ -124,10 +124,11 @@ useEffect(()=>{
 
   const handleBidModalSuccess = async () => {
     setOpenBidModal(false);
+    toast.dismiss();
 
     toast.success("Your Bid has been successfully Submitted", {
       position: "top-center",
-      autoClose: 2000,
+      autoClose: 1000,
       style: {
         width: "430px",
         backgroundColor: "#009933",
@@ -143,6 +144,8 @@ useEffect(()=>{
       let offerAmountValue = Number(offerAmount);
 
       if (offerAmountValue <= formattedBidValue) {
+    toast.dismiss();
+
         toast.error("Bid Amount Cannot be lesser than Current Bid", {
           position: "top-center",
           autoClose: 3000,
@@ -170,7 +173,7 @@ useEffect(()=>{
 
         toast.success("Your Bid has been successfully Submitted", {
           position: "top-center",
-          autoClose: 2000,
+          autoClose: 1000,
           style: {
             width: "430px",
             backgroundColor: "#009933",
@@ -216,9 +219,10 @@ useEffect(()=>{
   };
 
   const handleBuyNow = () => {
+    toast.dismiss();
     toast.success("Congratulations! We will react out to you soon.", {
       position: "top-center",
-      autoClose: 2000,
+      autoClose: 1000,
       style: {
         width: "430px",
         backgroundColor: "#009933",
@@ -315,32 +319,26 @@ useEffect(()=>{
 
   const numberOfBids = bids.length;
   const handleAddToWatchList = () => {
-    if (isInWatchlist) {
-      toast.error("Removed from watch list", {
-        position: "top-center",
-        autoClose: 2000,
-        style: {
-          width: "430px",
-          backgroundColor: "#DC2020",
-          color: "#ffffff",
-        },
-        transition: Slide,
-      });
-    } else {
-      toast.success("Added to watch list", {
-        position: "top-center",
-        autoClose: 2000,
-        style: {
-          width: "430px",
-          backgroundColor: "#009933",
-          color: "#ffffff",
-        },
-        transition: Slide,
-      });
-    }
+    const message = isInWatchlist ? "Removed from watch list" : "Added to watch list";
+    const backgroundColor = isInWatchlist ? "#DC2020" : "#009933";
+    const toastFunction = isInWatchlist ? toast.error : toast.success;
+  
+    toast.dismiss();
+  
+    toastFunction(message, {
+      position: "top-center",
+      autoClose: 1000,
+      style: {
+        width: "430px",
+        backgroundColor,
+        color: "#ffffff",
+      },
+      transition: Slide,
+    });
+  
     setIsInWatchList(!isInWatchlist);
   };
-
+ 
   return (
     <>
       <Layout />
@@ -394,8 +392,8 @@ useEffect(()=>{
                   style={{ textTransform: "none", backgroundColor: isInWatchlist ? '#DC2020' : '#1976d2', color:'#fff' }}
                 >
                   {isInWatchlist
-                    ? " - Remove from Watchlist"
-                    : "+ Add to Watchlist"}
+                    ? "Remove from Watchlist"
+                    : "Add to Watchlist"}
                 </Button>
               </Typography>
               <Box className={Styles.productInfo}>
@@ -502,7 +500,6 @@ useEffect(()=>{
                         <Button
                           onClick={handleBidHistoryClick}
                           variant="contained"
-                          // color="primary"
                           className={Styles.addWatchListBtn}
                           style={{ textTransform: "none" }}
                         >
