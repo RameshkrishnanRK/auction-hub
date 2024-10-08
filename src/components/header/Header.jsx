@@ -124,6 +124,7 @@ export default function Header({ setSearchTerm }) {
                   flexDirection: "column",
                   alignItems: "flex-start",
                   ml: 1,
+                  paddingRight:'1px',
                 }}
               >
                 <Typography
@@ -149,7 +150,7 @@ export default function Header({ setSearchTerm }) {
                 open={open}
                 onClose={handleMenuClose}
                 anchorOrigin={{
-                  vertical: "top",
+                  vertical: "bottom",
                   horizontal: "right",
                 }}
                 transformOrigin={{
