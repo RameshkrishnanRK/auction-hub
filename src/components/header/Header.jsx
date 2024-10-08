@@ -158,12 +158,15 @@ export default function Header({ setSearchTerm }) {
                   horizontal: "right",
                 }}
               >
-                <MenuItem onClick={() => handleMenuItemClick("/account")}>
-                  Account
-                </MenuItem>
-                <MenuItem onClick={() => handleMenuItemClick("/bidhistory")}>
-                  Bid History
-                </MenuItem>
+                {userData?.role === "Auctioneer" ? (
+                  <MenuItem onClick={() => handleMenuItemClick("/bidhistory")}>
+                    Bid History
+                  </MenuItem>
+                ) : (
+                  <MenuItem onClick={() => handleMenuItemClick("/auctionhistory")}>
+                    Auction History
+                  </MenuItem>
+                )}
                 <MenuItem onClick={() => handleMenuItemClick("/watchlists")}>
                   Watchlists
                 </MenuItem>

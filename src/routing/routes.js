@@ -11,6 +11,8 @@ import Register from "../components/register/Register";
 // import MyAccount from "../components/login/MyAccount";
 import AccountPage from "../features/Dashboard/userProfile/accountPage";
 import BidHistoryPage from "../features/Dashboard/userProfile/bidHistoryPage";
+import AuctionHistoryPage from "../features/Dashboard/userProfile/auctionHistoryPage";
+
 import WatchlistPage from "../features/Dashboard/userProfile/watchlistsPage";
 
 const routes = () => {
@@ -29,9 +31,8 @@ const routes = () => {
         <Route path="/sell" element={<Sell />} />
         <Route path="/account" element={<AccountPage />} />
         <Route path="/bidhistory" element={<BidHistoryPage />} />
+        <Route path="/auctionhistory" element={<AuctionHistoryPage />} />
         <Route path="/watchlists" element={<WatchlistPage />} />
-
-
       </Routes>
     </Router>
   );
