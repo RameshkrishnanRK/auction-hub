@@ -1,0 +1,51 @@
+import React, { useEffect, useState } from "react";
+import { bidderData } from "../../../components/login/data/dummyData";
+import { Box, Breadcrumbs } from "@mui/material";
+import { Link, useLocation } from "react-router-dom";
+import styles from "../../../components/login/myAccount.module.scss";
+
+const BidHistoryPage = () => {
+  const location = useLocation();
+  const storedRole = localStorage.getItem("role");
+  const [accountData, setAccountData] = useState({});
+
+  const role = location.state?.role || storedRole || "guest";
+
+  useEffect(() => {
+    if (role === "Bidder") {
+      setAccountData(bidderData);
+    } else {
+      setAccountData({});
+    }
+  }, [role]);
+
+  return (
+    <div>
+      <Box className={styles.box}>
+        <Breadcrumbs>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            Home
+          </Link>
+          <Link to="/bid-history" style={{ textDecoration: "none" }}>
+            Bid History
+          </Link>
+        </Breadcrumbs>
+      </Box>
+
+      <div style={{ paddingLeft: "55px", paddingTop: "10px" }}>
+        <h2>Bid History</h2>
+        {bidderData.previousBids?.length > 0 ? (
+          <ul>
+            {bidderData.previousBids.map((bid, index) => (
+              <li key={index}>{bid}</li>
+            ))}
+          </ul>
+        ) : (
+          <p>No bids available</p>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default BidHistoryPage;

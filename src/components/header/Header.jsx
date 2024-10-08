@@ -158,13 +158,13 @@ export default function Header({ setSearchTerm }) {
                   horizontal: "right",
                 }}
               >
-                <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>
+                <MenuItem onClick={() => handleMenuItemClick("/account")}>
                   Account
                 </MenuItem>
-                <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>
+                <MenuItem onClick={() => handleMenuItemClick("/bidhistory")}>
                   Bid History
                 </MenuItem>
-                <MenuItem onClick={() => handleMenuItemClick("/myaccount")}>
+                <MenuItem onClick={() => handleMenuItemClick("/watchlists")}>
                   Watchlists
                 </MenuItem>
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>

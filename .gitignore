@@ -4,8 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
-contactUs copy.jsx
-
+MyAccount.js
 
 # testing
 /coverage
