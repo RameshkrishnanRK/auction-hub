@@ -72,13 +72,13 @@ const ProductDetails = () => {
       setBidAmount(newValue);
     }
   };
-useEffect(()=>{
-  const storedRole = localStorage.getItem("role") || sessionStorage.getItem("role");
-  if(storedRole){
-    setRole(storedRole);
-  }
-}, []);
- 
+  useEffect(() => {
+    const storedRole =
+      localStorage.getItem("role") || sessionStorage.getItem("role");
+    if (storedRole) {
+      setRole(storedRole);
+    }
+  }, []);
 
   const handleOfferAmount = (event) => {
     const newValue = event.target.value;
@@ -144,7 +144,7 @@ useEffect(()=>{
       let offerAmountValue = Number(offerAmount);
 
       if (offerAmountValue <= formattedBidValue) {
-    toast.dismiss();
+        toast.dismiss();
 
         toast.error("Bid Amount Cannot be lesser than Current Bid", {
           position: "top-center",
@@ -197,12 +197,12 @@ useEffect(()=>{
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     const sortedBids = [...bids].sort((a, b) => b.amount - a.amount);
     if (sortedBids.length > 0) {
       setHighestBidder(sortedBids[0].bidderName);
     }
-  }, [])
+  }, []);
 
   const handleBidModalClose = () => {
     let formattedBid;
@@ -319,12 +319,14 @@ useEffect(()=>{
 
   const numberOfBids = bids.length;
   const handleAddToWatchList = () => {
-    const message = isInWatchlist ? "Removed from watch list" : "Added to watch list";
+    const message = isInWatchlist
+      ? "Removed from watch list"
+      : "Added to watch list";
     const backgroundColor = isInWatchlist ? "#DC2020" : "#009933";
     const toastFunction = isInWatchlist ? toast.error : toast.success;
-  
+
     toast.dismiss();
-  
+
     toastFunction(message, {
       position: "top-center",
       autoClose: 1000,
@@ -335,10 +337,10 @@ useEffect(()=>{
       },
       transition: Slide,
     });
-  
+
     setIsInWatchList(!isInWatchlist);
   };
- 
+
   return (
     <>
       <Layout />
@@ -389,11 +391,13 @@ useEffect(()=>{
                   color="primary"
                   className="{styles.addWatchListBtn"
                   onClick={handleAddToWatchList}
-                  style={{ textTransform: "none", backgroundColor: isInWatchlist ? '#DC2020' : '#1976d2', color:'#fff' }}
+                  style={{
+                    textTransform: "none",
+                    backgroundColor: isInWatchlist ? "#DC2020" : "#1976d2",
+                    color: "#fff",
+                  }}
                 >
-                  {isInWatchlist
-                    ? "Remove from Watchlist"
-                    : "Add to Watchlist"}
+                  {isInWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
                 </Button>
               </Typography>
               <Box className={Styles.productInfo}>
@@ -482,32 +486,53 @@ useEffect(()=>{
                       : `${product?.timeRemaining} ${product?.timeRemaining > 1 ? "Hrs" : "Hr"}`}
                   </Typography>
                 </Box>
-                {role === 'Auctioneer' && (
-                <Box className={Styles.productInfoRight}>
-                  <Box className={Styles.highBidderBox} >
-                    <Typography className={Styles.highBidder}>
-                      <div>High Bidder:</div> <div><b>{highestBidder}</b></div>
-                    </Typography>
-                    <Box className={Styles.highBidderSecond}
-                        sx={{display:"flex", alignItems:"center", gap:2 }}
-                        >
+                {role === "Auctioneer" && (
+                  <div
+                    className={Styles.productInfoRight}
+                  >
+                    <Box
+                      className={Styles.highBidderBox}
+                    >
                       <Typography
-                        variant="body2"
-                        style={{ fontSize: "18px", fontWeight: "bold", justifyContent:'center' }}
+                        className={Styles.highBidder}
                       >
-                        {numberOfBids} {numberOfBids > 1 ? "Bids" : "Bid"}
-                      </Typography>                     
+                        <div style={{ marginRight:'8px'}}>High Bidder : </div>{" "}
+                        <div>                         
+                          <span style={{fontWeight:'bold'}} > {highestBidder}</span>
+                        </div>
+                      </Typography>
+                      <Box
+                        className={Styles.highBidderSecond}
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          gap: 2,
+                        }}
+                      >
+                        <Typography
+                          variant="body2"
+                          style={{
+                            fontSize: "14px",
+                            fontWeight: "bold",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          {numberOfBids} {numberOfBids > 1 ? "Bids" : "Bid"}
+                        </Typography>
                         <Button
                           onClick={handleBidHistoryClick}
                           variant="contained"
+                          size="small"
                           className={Styles.addWatchListBtn}
-                          style={{ textTransform: "none" }}
+                          style={{ textTransform: "none", marginTop: "0" }}
                         >
                           Show Bid History
-                        </Button>                      
+                        </Button>
+                      </Box>
                     </Box>
-                  </Box>
-                </Box>
+                  </div>
                 )}
               </Box>
               <Box className={Styles.productExtraInfo}>
