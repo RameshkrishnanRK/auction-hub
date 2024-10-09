@@ -146,25 +146,22 @@ const Sell = () => {
   //   }
   // };
 
-  const handleCreateListig = () => {
-    // if (step === 2) {
-      if (title && description && price) {
-        setErrors({});
-        navigate(
-          `/view?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}&price=${encodeURIComponent(price)}`,
-        );
-      } else {
-        if (!title) {
-          setErrors((prevState) => ({ ...prevState, title: true }));
-        }
-
-        if (!price) {
-          setErrors((prevState) => ({ ...prevState, price: true }));
-        }
-        return;
-      }
-    // } else {
-    // }
+  const handleCreateListing = () => {
+    if (category && subCategory && listingType && region && title && description && price) {
+      setErrors({});
+      navigate(`/view?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}&price=${encodeURIComponent(price)}`);
+    } else {
+      setErrors((prevState) => ({
+        ...prevState,
+        category: !category,
+        subCategory: !subCategory,
+        listingType: !listingType,
+        region: !region,
+        title: !title,
+        description: !description,
+        price: !price,
+      }));
+    }
   };
 
   const handleFileChange = (e) => {
@@ -211,7 +208,7 @@ const Sell = () => {
               </Box>
 
               {/* {step === 1 && ( */}
-                <>
+                {/* <> */}
                   <FormSection mt={2} className={styles.categoryContainer}>
                     <Box className={styles.title}>
                       <Typography
@@ -454,11 +451,11 @@ const Sell = () => {
                       Next
                     </CustomButton> */}
                   </Box>
-                </>
+                {/* </> */}
               {/* )} */}
 
               {/* {step === 2 && ( */}
-                <>
+                {/* <> */}
                   <FormSection mt={2} className={styles.categoryContainer}>
                     <Box className={styles.title}>
                       <Typography
@@ -671,14 +668,14 @@ const Sell = () => {
                       <CustomButton
                         variant="contained"
                         color="primary"
-                        onClick={handleCreateListig}
+                        onClick={handleCreateListing}
                         className="jus"
                       >
                         Create Listing
                       </CustomButton>
                     </Box>
                   </Box>
-                </>
+                {/* </> */}
               {/* )} */}
             </div>
             <ToastContainer />
