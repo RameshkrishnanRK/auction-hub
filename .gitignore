@@ -5,6 +5,8 @@
 /.pnp
 .pnp.js
 MyAccount.js
+AboutUs copy.jsx
+AboutUs,module copy.scss
 
 # testing
 /coverage

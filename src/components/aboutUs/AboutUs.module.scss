@@ -1,26 +1,67 @@
 .box2 {
-    padding-left: 57px;
-    padding-top: 10px;
-}
-.title {
-    color:black;
-    background-color: #dfdfdf !important;
-    font-size:16px !important;
-    text-align: left !important;
-}
-.subTitle {
-    color: black !important;
-    text-align: left !important;
-    font-size: small;
+  padding-left: 57px;
+  padding-top: 10px;
 }
 .footer{
-    color:#828282 !important;
-    text-align: left !important;
-    margin:70px 0px 0px 50px !important
+  color:#828282 !important;
+  text-align: left !important;
+  margin:10px 0px 20px 55px !important
 }
-.mainContainer{
-    padding-left: 30px !important;
-    padding-right: 30px !important;
-    margin: 10px;
 
+.aboutUs {
+  padding: 0px;
+  margin-left:55px;
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .content {
+      flex: 1;
+      padding-right: 20px;
+      text-align: justify;
+    }
+
+    .image {
+      flex: 1;
+
+      img {
+        max-width: 90%;
+        height: auto;
+        margin-top: 20px;
+      }
+    }
+  }
+
+  .centerHeading {
+    text-align: center;
+    margin: 40px 0;
+  }
+
+  .features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    .feature {
+      flex: 1 1 30%;
+      text-align: center;
+      margin: 10px;
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      h3 {
+        margin-top: 10px;
+      }
+
+      p {
+        margin-top: 5px;
+      }
+    }
+  }
 }
