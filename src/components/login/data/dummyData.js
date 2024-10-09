@@ -48,7 +48,7 @@ export const bids = [
     status: "highest",
   },
   {
-    bidderName: "Anne",
+    bidderName: "Arun",
     time: "4:30 PM",
     date: "2024-09-21",
     amount: 70000,

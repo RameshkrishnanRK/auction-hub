@@ -42,7 +42,7 @@ const CustomButton = styled(Button)({
 
 const Sell = () => {
   const navigate = useNavigate();
-  const [step, setStep] = React.useState(1);
+  // const [step, setStep] = React.useState(1);
   const [category, setCategory] = React.useState("");
   const [subCategory, setSubCategory] = React.useState("");
   const [listingType, setListingType] = React.useState("");
@@ -123,31 +123,31 @@ const Sell = () => {
     }
   };
 
-  const handleNext = () => {
-    if (step === 1) {
-      if (category && subCategory && listingType && region) {
-        setStep(2);
-      } else {
-        if (!category) {
-          setErrors((prevState) => ({ ...prevState, category: true }));
-        }
-        if (!subCategory) {
-          setErrors((prevState) => ({ ...prevState, subCategory: true }));
-        }
-        if (!listingType) {
-          setErrors((prevState) => ({ ...prevState, listingType: true }));
-        }
-        if (!region) {
-          setErrors((prevState) => ({ ...prevState, region: true }));
-        }
-        return;
-      }
-    } else {
-    }
-  };
+  // const handleNext = () => {
+  //   if (step === 1) {
+  //     if (category && subCategory && listingType && region) {
+  //       setStep(2);
+  //     } else {
+  //       if (!category) {
+  //         setErrors((prevState) => ({ ...prevState, category: true }));
+  //       }
+  //       if (!subCategory) {
+  //         setErrors((prevState) => ({ ...prevState, subCategory: true }));
+  //       }
+  //       if (!listingType) {
+  //         setErrors((prevState) => ({ ...prevState, listingType: true }));
+  //       }
+  //       if (!region) {
+  //         setErrors((prevState) => ({ ...prevState, region: true }));
+  //       }
+  //       return;
+  //     }
+  //   } else {
+  //   }
+  // };
 
   const handleCreateListig = () => {
-    if (step === 2) {
+    // if (step === 2) {
       if (title && description && price) {
         setErrors({});
         navigate(
@@ -163,8 +163,8 @@ const Sell = () => {
         }
         return;
       }
-    } else {
-    }
+    // } else {
+    // }
   };
 
   const handleFileChange = (e) => {
@@ -204,13 +204,13 @@ const Sell = () => {
                 <Grid container justifyContent="center">
                   <Grid item>
                     <Typography variant="h5" textAlign="center" color="primary">
-                      Create Listing - Step {step} of 2
+                      Create Listing 
                     </Typography>
                   </Grid>
                 </Grid>
               </Box>
 
-              {step === 1 && (
+              {/* {step === 1 && ( */}
                 <>
                   <FormSection mt={2} className={styles.categoryContainer}>
                     <Box className={styles.title}>
@@ -446,18 +446,18 @@ const Sell = () => {
                   <Box
                     sx={{ display: "flex", justifyContent: "center" }}
                   >
-                    <CustomButton
+                    {/* <CustomButton
                       variant="contained"
                       color="primary"
                       onClick={handleNext}
                     >
                       Next
-                    </CustomButton>
+                    </CustomButton> */}
                   </Box>
                 </>
-              )}
+              {/* )} */}
 
-              {step === 2 && (
+              {/* {step === 2 && ( */}
                 <>
                   <FormSection mt={2} className={styles.categoryContainer}>
                     <Box className={styles.title}>
@@ -653,14 +653,14 @@ const Sell = () => {
                       mt: 2,
                     }}
                   >
-                    <Button
+                    {/* <Button
                       onClick={() => {
                         setStep(1);
                       }}
                       startIcon={<ChevronLeft />}
                     >
                       Back
-                    </Button>
+                    </Button> */}
                     <Box
                       sx={{
                         display: "flex",
@@ -679,7 +679,7 @@ const Sell = () => {
                     </Box>
                   </Box>
                 </>
-              )}
+              {/* )} */}
             </div>
             <ToastContainer />
           </MainContainer>

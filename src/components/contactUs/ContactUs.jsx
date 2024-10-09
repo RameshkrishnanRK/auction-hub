@@ -119,7 +119,7 @@ const ContactUs = () => {
           boxShadow: 3,
         }}
       >
-        <Typography variant="h5" mb={1} textAlign="center" color="primary">
+        <Typography variant="h5" mb={1} textAlign="center" color="#337ab7">
           Get in touch with us
         </Typography>
 
