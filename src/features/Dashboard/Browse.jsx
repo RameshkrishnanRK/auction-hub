@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Box, Breadcrumbs, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import Sidebar from "./Sidebar";
 import styles from "./Browse.module.scss";
 import { categoriesData, productsData, regionsData } from "../../jsonData";
 import ControlPanel from "./ControlPanel";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
   fetchSideBarStart,
@@ -25,7 +24,6 @@ const Browse = () => {
   const [filteredProducts, setFilteredProducts] = useState(productsData);
 
   const dispatch = useDispatch();
-
 
   useEffect(() => {
     const fetchCategories = () => {
@@ -58,20 +56,21 @@ const Browse = () => {
     <>
       <Layout setSearchTerm={setSearchTerm}>
         <Box className={styles.container}>
-          <Box className={styles.breadcrumbs}>
-            <Breadcrumbs className={styles.breadcrumb} arial-label="breadcrumb">
-              <Link to="/" style={{ textDecoration: "none" }}>
-                Home
-              </Link>
-              <Link style={{ textDecoration: "none" }}>Browse</Link>
-            </Breadcrumbs>
-          </Box>
-          <Grid container spacing={3}>
+          <Grid container spacing={3} paddingTop={"20px"}>
             <Grid item xs={3}>
-              <Sidebar  setSubCatData={setSubCatData}  setSubRegData={setSubRegData}/>
+              <Sidebar
+                setSubCatData={setSubCatData}
+                setSubRegData={setSubRegData}
+              />
             </Grid>
             <Grid item xs={9}>
-              <ControlPanel searchTerm={searchTerm} subCatData={subCatData} subRegData={subRegData} products={filteredProducts} setFilteredProducts={setFilteredProducts}/>
+              <ControlPanel
+                searchTerm={searchTerm}
+                subCatData={subCatData}
+                subRegData={subRegData}
+                products={filteredProducts}
+                setFilteredProducts={setFilteredProducts}
+              />
             </Grid>
           </Grid>
         </Box>

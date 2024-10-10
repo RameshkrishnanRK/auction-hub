@@ -3,7 +3,6 @@ import Styles from "./ProductDetails.module.scss";
 import {
   Alert,
   Box,
-  Breadcrumbs,
   Button,
   Card,
   CardContent,
@@ -11,7 +10,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Slide, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -345,16 +344,7 @@ const ProductDetails = () => {
     <>
       <Layout />
       <Box>
-        <Box className={styles.box}>
-          <Breadcrumbs>
-            <Link to="/" style={{ textDecoration: "none" }}>
-              Home
-            </Link>
-            <Link to="/view" style={{ textDecoration: "none" }}>
-              Browse
-            </Link>
-          </Breadcrumbs>
-        </Box>
+        <Box className={styles.box}></Box>
       </Box>
       <div className={Styles.ViewProductDetails}>
         <Card className={Styles.productDetailsWrapper}>
@@ -487,18 +477,15 @@ const ProductDetails = () => {
                   </Typography>
                 </Box>
                 {role === "Auctioneer" && (
-                  <div
-                    className={Styles.productInfoRight}
-                  >
-                    <Box
-                      className={Styles.highBidderBox}
-                    >
-                      <Typography
-                        className={Styles.highBidder}
-                      >
-                        <div style={{ marginRight:'8px'}}>High Bidder : </div>{" "}
-                        <div>                         
-                          <span style={{fontWeight:'bold'}} > {highestBidder}</span>
+                  <div className={Styles.productInfoRight}>
+                    <Box className={Styles.highBidderBox}>
+                      <Typography className={Styles.highBidder}>
+                        <div style={{ marginRight: "8px" }}>High Bidder : </div>{" "}
+                        <div>
+                          <span style={{ fontWeight: "bold" }}>
+                            {" "}
+                            {highestBidder}
+                          </span>
                         </div>
                       </Typography>
                       <Box
