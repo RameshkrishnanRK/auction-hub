@@ -171,7 +171,6 @@ const ControlPanel = ({
               value={filter}
               label="Filter By"
               onChange={handleFilterChange}
-              displayEmpty
               className={styles.controlPanelSelect}
               sx={{
                 backgroundColor: "#ffffff",
@@ -184,14 +183,13 @@ const ControlPanel = ({
               ))}
             </Select>
           </FormControl>
-          <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-            <InputLabel id="sort-by">Sort By</InputLabel>
+          <FormControl sx={{ m: 1, minWidth: 135 }} size="small">
+            <InputLabel id="sort-by" width='100%'>Sort By</InputLabel>
             <Select
               labelId="sort-by"
               value={sortData}
               label="Sort By"
               onChange={handleSortChange}
-              displayEmpty
               className={styles.controlPanelSelect}
               sx={{
                 backgroundColor: "#ffffff",
@@ -204,7 +202,7 @@ const ControlPanel = ({
               ))}
             </Select>
           </FormControl>
-          <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+          <FormControl sx={{ m: 1, minWidth: 80 }} size="small">
             <InputLabel id="currency-select">Currency</InputLabel>
             <Select
               labelId="currency-select"
