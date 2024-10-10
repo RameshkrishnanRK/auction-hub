@@ -11,7 +11,6 @@ import Register from "../components/register/Register";
 import AccountPage from "../features/Dashboard/userProfile/accountPage";
 import BidHistoryPage from "../features/Dashboard/userProfile/bidHistoryPage";
 import AuctionHistoryPage from "../features/Dashboard/userProfile/auctionHistoryPage";
-
 import WatchlistPage from "../features/Dashboard/userProfile/watchlistsPage";
 
 const routes = () => {

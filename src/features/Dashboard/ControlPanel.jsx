@@ -16,7 +16,6 @@ import styles from "./ControlPanel.scss";
 import { filterByOptions, sortOptions, currencyOptions } from "../../jsonData";
 import GridView from "./GridView";
 import ListView from "./ListView";
-import filteredProducts from "../Dashboard/Browse";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrency } from "../../redux/slices/currencySlice";
 
@@ -25,11 +24,10 @@ const ControlPanel = ({
   searchTerm,
   subRegData,
   products,
-  setFilteredProducts,
 }) => {
   const [view, setView] = useState("grid");
   const [status, setStatus] = useState("active");
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState("");
   const [sortData, setSortData] = useState("");
 
   const { currency, currencyRates } = useSelector((state) => state.currency);
@@ -168,7 +166,7 @@ const ControlPanel = ({
             <InputLabel id="filter-by">Filter By</InputLabel>
             <Select
               labelId="filter-by"
-              value={filter}
+              value={""}
               label="Filter By"
               onChange={handleFilterChange}
               displayEmpty
@@ -188,7 +186,7 @@ const ControlPanel = ({
             <InputLabel id="sort-by">Sort By</InputLabel>
             <Select
               labelId="sort-by"
-              value={sortData}
+              value={""}
               label="Sort By"
               onChange={handleSortChange}
               displayEmpty
@@ -208,7 +206,7 @@ const ControlPanel = ({
             <InputLabel id="currency-select">Currency</InputLabel>
             <Select
               labelId="currency-select"
-              value={currency}
+              value={""}
               label="Currency"
               onChange={handleCurrencyChange}
               sx={{
