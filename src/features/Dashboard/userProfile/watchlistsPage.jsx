@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { bidderData } from "../../../components/login/data/dummyData";
-import { Box, Breadcrumbs } from "@mui/material";
-import { Link, useLocation } from "react-router-dom";
-import styles from "../../../components/login/myAccount.module.scss";
+import { useLocation } from "react-router-dom";
+import Layout from "../../../routing/components/Layout";
 
 const WatchlistPage = () => {
   const location = useLocation();
@@ -21,6 +20,7 @@ const WatchlistPage = () => {
 
   return (
     <div>
+      <Layout>
       <div style={{ paddingLeft: "55px", paddingTop: "10px" }}>
         <h2>Watchlists</h2>
         {bidderData.savedBids?.length > 0 ? (
@@ -33,6 +33,7 @@ const WatchlistPage = () => {
           <p>No watchlists available</p>
         )}
       </div>
+      </Layout>
     </div>
   );
 };

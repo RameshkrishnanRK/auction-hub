@@ -10,7 +10,7 @@ import Browse from "../features/Dashboard/Browse";
 import Register from "../components/register/Register";
 import AccountPage from "../features/Dashboard/userProfile/accountPage";
 import BidHistoryPage from "../features/Dashboard/userProfile/bidHistoryPage";
-import AuctionHistoryPage from "../features/Dashboard/userProfile/AuctionHistoryPage";
+import AuctionHistoryPage from "../features/Dashboard/userProfile/auctionHistoryPage";
 import WatchlistPage from "../features/Dashboard/userProfile/watchlistsPage";
 import ProfilePage from "../components/login/ProfilePage";
 
@@ -30,7 +30,7 @@ const routes = () => {
         <Route path="/sell" element={<Sell />} />
         <Route path="/account" element={<AccountPage />} />
         <Route path="/bidhistory" element={<BidHistoryPage />} />
-        <Route path="/auctionhistory" element={<AuctionHistoryPage />} />
+        <Route path="/AuctionHistory" element={<AuctionHistoryPage />} />
         <Route path="/watchlists" element={<WatchlistPage />} />
       </Routes>
     </Router>

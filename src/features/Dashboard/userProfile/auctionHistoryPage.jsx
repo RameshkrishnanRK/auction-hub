@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { auctioneerData } from "../../../components/login/data/dummyData";
-import { Box, Breadcrumbs } from "@mui/material";
-import { Link, useLocation } from "react-router-dom";
-import styles from "../../../components/login/myAccount.module.scss";
+import { useLocation } from "react-router-dom";
+import Layout from "../../../routing/components/Layout";
 
-const auctionHistory = () => {
+const AuctionHistory = () => {
   const location = useLocation();
   const storedRole = localStorage.getItem("role");
   const [accountData, setAccountData] = useState({});
@@ -21,17 +20,7 @@ const auctionHistory = () => {
 
   return (
     <div>
-      <Box className={styles.box}>
-        <Breadcrumbs>
-          <Link to="/" style={{ textDecoration: "none" }}>
-            Home
-          </Link>
-          <Link to="/auctionhistory" style={{ textDecoration: "none" }}>
-            Auction History
-          </Link>
-        </Breadcrumbs>
-      </Box>
-
+      <Layout>
       <div style={{ paddingLeft: "55px", paddingTop: "10px" }}>
         <h2>Auction History</h2>
         {auctioneerData.previousAuctions?.length > 0 ? (
@@ -44,8 +33,9 @@ const auctionHistory = () => {
           <p>No auctions available</p>
         )}
       </div>
+      </Layout>
     </div>
   );
 };
 
-export default auctionHistory;
+export default AuctionHistory;
