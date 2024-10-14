@@ -21,17 +21,6 @@ const WatchlistPage = () => {
 
   return (
     <div>
-      <Box className={styles.box}>
-        <Breadcrumbs>
-          <Link to="/" style={{ textDecoration: "none" }}>
-            Home
-          </Link>
-          <Link to="/watchlist" style={{ textDecoration: "none" }}>
-            Watchlist
-          </Link>
-        </Breadcrumbs>
-      </Box>
-
       <div style={{ paddingLeft: "55px", paddingTop: "10px" }}>
         <h2>Watchlists</h2>
         {bidderData.savedBids?.length > 0 ? (

@@ -167,6 +167,9 @@ export default function Header({ setSearchTerm }) {
                     Auction History
                   </MenuItem>
                 )}
+                <MenuItem onClick={() => handleMenuItemClick("/ProfilePage")}>
+                  My Account
+                </MenuItem>
                 <MenuItem onClick={() => handleMenuItemClick("/watchlists")}>
                   Watchlists
                 </MenuItem>

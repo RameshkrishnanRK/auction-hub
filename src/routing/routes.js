@@ -10,8 +10,9 @@ import Browse from "../features/Dashboard/Browse";
 import Register from "../components/register/Register";
 import AccountPage from "../features/Dashboard/userProfile/accountPage";
 import BidHistoryPage from "../features/Dashboard/userProfile/bidHistoryPage";
-import AuctionHistoryPage from "../features/Dashboard/userProfile/auctionHistoryPage";
+import AuctionHistoryPage from "../features/Dashboard/userProfile/AuctionHistoryPage";
 import WatchlistPage from "../features/Dashboard/userProfile/watchlistsPage";
+import ProfilePage from "../components/login/ProfilePage";
 
 const routes = () => {
   return (
@@ -21,6 +22,7 @@ const routes = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/ProfilePage" element={<ProfilePage />} />
         <Route path="/view" element={<Browse />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/product-details" element={<ProductDetails />} />
