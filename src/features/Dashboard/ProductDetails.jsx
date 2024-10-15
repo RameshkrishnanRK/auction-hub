@@ -93,24 +93,40 @@ const ProductDetails = () => {
   const handleBidAmountSubmit = () => {
     let formattedBidValue = Number(cleanedFormattedBid) || 0;
     let bidAmountValue = Number(bidAmount) || 0;
-
+    const toastId = 'bid-toast';
+  
     if (bidAmountValue === 0 || bidAmountValue < formattedBidValue) {
-      toast.dismiss();
-      toast.error("Bid Amount Cannot be lesser than Current Bid", {
-        position: "top-center",
-        autoClose: 3000,
-        style: {
-          width: "430px",
-          backgroundColor: "#DC2020",
-          color: "#ffffff",
-        },
-        transition: Slide,
-      });
+      if (toast.isActive(toastId)) {
+        toast.update(toastId, {
+          render: "Bid Amount Cannot be lesser than Current Bid",
+          type: "error",
+          style: {
+            width: "430px",
+            backgroundColor: "#DC2020",
+            color: "#ffffff",
+          },
+          autoClose: 3000,
+          transition: Slide,
+        });
+      } else {
+        toast.error("Bid Amount Cannot be lesser than Current Bid", {
+          toastId,
+          position: "top-center",
+          autoClose: 3000,
+          style: {
+            width: "430px",
+            backgroundColor: "#DC2020",
+            color: "#ffffff",
+          },
+          transition: Slide,
+        });
+      }
     } else {
       setCleanedFormattedBid(bidAmountValue);
       setOpenBidModal(true);
     }
   };
+  
 
   const handleOfferAmountSubmit = () => {
     setOpenOfferModal(true);
@@ -120,81 +136,75 @@ const ProductDetails = () => {
     setOpenBidModal(true);
     setCleanedFormattedBid(formattedBid.replace(/,/g, ""));
   };
-
+  
   const handleBidModalSuccess = async () => {
+    const toastId = 'bid-toast-success';
+    
     setOpenBidModal(false);
-    toast.dismiss();
-
-    toast.success("Your Bid has been successfully Submitted", {
-      position: "top-center",
-      autoClose: 1000,
-      style: {
-        width: "430px",
-        backgroundColor: "#009933",
-        color: "#ffffff",
-      },
-      transition: Slide,
-    });
-  };
-
-  const handleOfferModalSuccess = async () => {
-    if (offerAmount.length > 0 && OfferMessage.length > 0) {
-      let formattedBidValue = Number(cleanedFormattedBid);
-      let offerAmountValue = Number(offerAmount);
-
-      if (offerAmountValue <= formattedBidValue) {
-        toast.dismiss();
-
-        toast.error("Bid Amount Cannot be lesser than Current Bid", {
-          position: "top-center",
-          autoClose: 3000,
-          style: {
-            width: "430px",
-            backgroundColor: "#DC2020",
-            color: "#ffffff",
-          },
-          transition: Slide,
-        });
-      } else if (offerAmountValue >= product.buyNow) {
-        toast.error("Offer Amount Cannot exceed the Buy Now Price", {
-          position: "top-center",
-          autoClose: 3000,
-          style: {
-            width: "430px",
-            backgroundColor: "#DC2020",
-            color: "#ffffff",
-          },
-          transition: Slide,
-        });
-      } else {
-        setCleanedFormattedBid(offerAmountValue);
-        setOpenOfferModal(false);
-
-        toast.success("Your Bid has been successfully Submitted", {
-          position: "top-center",
-          autoClose: 1000,
-          style: {
-            width: "430px",
-            backgroundColor: "#009933",
-            color: "#ffffff",
-          },
-
-          transition: Slide,
-        });
-      }
+    if (toast.isActive(toastId)) {
+      toast.update(toastId, {
+        render: "Your Bid has been successfully Submitted",
+        type: "success",
+        style: {
+          width: "430px",
+          backgroundColor: "#009933",
+          color: "#ffffff",
+        },
+        autoClose: 1000,
+        transition: Slide,
+      });
     } else {
-      toast.error("Please fill all the required fields", {
+      toast.success("Your Bid has been successfully Submitted", {
+        toastId,
         position: "top-center",
         autoClose: 1000,
         style: {
-          width: "400px",
-          backgroundColor: "#DC2020",
+          width: "430px",
+          backgroundColor: "#009933",
           color: "#ffffff",
         },
         transition: Slide,
       });
     }
   };
+  
+
+  const handleOfferModalSuccess = async () => {
+    const toastId = 'offer-toast';
+    const showToast = (message, type, width = "430px") => {
+      toast.isActive(toastId) ? toast.update(toastId, {
+        render: message,
+        type,
+        style: { width, backgroundColor: type === "success" ? "#009933" : "#DC2020", color: "#ffffff" },
+        autoClose: 3000,
+        transition: Slide,
+      }) : toast[type](message, {
+        toastId,
+        position: "top-center",
+        autoClose: 3000,
+        style: { width, backgroundColor: type === "success" ? "#009933" : "#DC2020", color: "#ffffff" },
+        transition: Slide,
+      });
+    };
+  
+    if (offerAmount.length > 0 && OfferMessage.length > 0) {
+      let formattedBidValue = Number(cleanedFormattedBid);
+      let offerAmountValue = Number(offerAmount);
+  
+      if (offerAmountValue <= formattedBidValue) {
+        showToast("Bid Amount Cannot be lesser than Current Bid", "error");
+      } else if (offerAmountValue >= product.buyNow) {
+        showToast("Offer Amount Cannot exceed the Buy Now Price", "error");
+      } else {
+        setCleanedFormattedBid(offerAmountValue);
+        setOpenOfferModal(false);
+        showToast("Your Bid has been successfully Submitted", "success");
+      }
+    } else {
+      showToast("Please fill all the required fields", "error", "400px");
+    }
+  };
+  
 
   useEffect(() => {
     const sortedBids = [...bids].sort((a, b) => b.amount - a.amount);
@@ -218,18 +228,26 @@ const ProductDetails = () => {
   };
 
   const handleBuyNow = () => {
-    toast.dismiss();
-    toast.success("Congratulations! We will react out to you soon.", {
-      position: "top-center",
-      autoClose: 1000,
-      style: {
-        width: "430px",
-        backgroundColor: "#009933",
-        color: "#ffffff",
-      },
-      transition: Slide,
-    });
+    const toastId = 'buy-now-toast';
+    const showToast = (message, type, width = "430px") => {
+      toast.isActive(toastId) ? toast.update(toastId, {
+        render: message,
+        type,
+        style: { width, backgroundColor: type === "success" ? "#009933" : "#DC2020", color: "#ffffff" },
+        autoClose: 1000,
+        transition: Slide,
+      }) : toast[type](message, {
+        toastId,
+        position: "top-center",
+        autoClose: 1000,
+        style: { width, backgroundColor: type === "success" ? "#009933" : "#DC2020", color: "#ffffff" },
+        transition: Slide,
+      });
+    };
+  
+    showToast("Congratulations! We will reach out to you soon.", "success");
   };
+  
   const modalBidContent = (
     <Box>
       <Typography
@@ -318,27 +336,39 @@ const ProductDetails = () => {
 
   const numberOfBids = bids.length;
   const handleAddToWatchList = () => {
-    const message = isInWatchlist
-      ? "Removed from watch list"
-      : "Added to watch list";
+    const message = isInWatchlist ? "Removed from watch list" : "Added to watch list";
     const backgroundColor = isInWatchlist ? "#DC2020" : "#009933";
-    const toastFunction = isInWatchlist ? toast.error : toast.success;
-
-    toast.dismiss();
-
-    toastFunction(message, {
-      position: "top-center",
-      autoClose: 1000,
-      style: {
-        width: "430px",
-        backgroundColor,
-        color: "#ffffff",
-      },
-      transition: Slide,
-    });
-
+    const toastId = 'watchlist-toast';
+  
+    if (toast.isActive(toastId)) {
+      toast.update(toastId, {
+        render: message,
+        type: isInWatchlist ? "error" : "success",
+        style: {
+          width: "430px",
+          backgroundColor,
+          color: "#ffffff",
+        },
+        autoClose: 1000,
+        transition: Slide,
+      });
+    } else {
+      toast(message, {
+        toastId,
+        position: "top-center",
+        autoClose: 1000,
+        style: {
+          width: "430px",
+          backgroundColor,
+          color: "#ffffff",
+        },
+        transition: Slide,
+      });
+    }
+  
     setIsInWatchList(!isInWatchlist);
   };
+  
 
   return (
     <>
